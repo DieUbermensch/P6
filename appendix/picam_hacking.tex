@@ -5,12 +5,12 @@ Unfortunately, there is currently no complete documentation available for the ca
 
 The schematic for the camera module is not being provided by the Raspberry Pi Foundation, so the first step is to determine the pinout of the camera. Most of it can be found in the schematic for the Raspberry Pi, see \autoref{pi_cam_connector}
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.85\textwidth]{figures/picam_pinout.png}
-	\caption{Pinout of the Raspberry Pi camera connector [source: \url{http://www.rs-online.com/designspark/electronics/knowledge-item/r-pi-ffc-connectors}]}
-	\label{pi_cam_connector}
-\end{figure}
+%\begin{figure}[H]
+%	\centering
+%	\includegraphics[width=0.85\textwidth]{figures/picam_pinout.png}
+%	\caption{Pinout of the Raspberry Pi camera connector [source: \url{http://www.rs-online.com/designspark/electronics/knowledge-item/r-pi-ffc-connectors}]}
+%	\label{pi_cam_connector}
+%\end{figure}
 
 The majority of these connections can be recognized from the CSI-2 specifications, and a preliminary table can be put together of the camera pinout. Only two connections remains unknown, see \autoref{csi_pinout}.
 \begin{table}[H]
@@ -40,44 +40,44 @@ As the pinout is now known, a breakout board can be made to connect between the 
 
 The PCB can be seen on \autoref{camerabreakout}.
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.60\textwidth]{figures/pihack_board.jpg}
-	\caption{Breakout board for monitoring camera signals.}
-	\label{camerabreakout}
-\end{figure}
+%\begin{figure}[H]
+%	\centering
+%	\includegraphics[width=0.60\textwidth]{figures/pihack_board.jpg}
+%	\caption{Breakout board for monitoring camera signals.}
+%	\label{camerabreakout}
+%\end{figure}
 
 Now step two can begin, the actual reverse engineering. The Raspberry Pi will be commanded to take pictures in various resolution, while the \iic bus is monitored with an oscilloscope, a Rigol DS1102E. This oscilloscope provides a "Deep memory"-Mode, where up to a million samples can be captured, and afterwards saved as a .csv file. The test setup can be seen on \autoref{hack_setup}
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.60\textwidth]{figures/testsetup_pihack.jpg}
-	\caption{Test setup for monitoring the \iic bus}
-	\label{hack_setup}
-\end{figure}
+%\begin{figure}[H]
+%	\centering
+%	\includegraphics[width=0.60\textwidth]{figures/testsetup_pihack.jpg}
+%	\caption{Test setup for monitoring the \iic bus}
+%	\label{hack_setup}
+%\end{figure}
 
 A screenshot of a capture can be seen on \autoref{i2ccap}. As seen on the screenshot, the Raspberry Pi sends a few short data burst, followed by a long burst. The short bursts contains very little data, and are easily decoded manually, by watching the waveforms.
 
 A zoomed in view of the initial short burst can be seen on \autoref{i2czoom}.
 
-\begin{figure}[H]
-	\centering
-	\begin{subfigure}{.45\textwidth}
-		\centering
-		\includegraphics[width=\linewidth]{longburst.png}
-		\caption{Captured \iic data}
-		\label{i2ccap}
-	\end{subfigure}
-	\hfill
-	\begin{subfigure}{.45\textwidth}
-		\centering
-		\includegraphics[width=\linewidth]{zoomedburst.png}
-		\caption{Zoomed in short burst}
-		\label{i2czoom}
-	\end{subfigure}\\
-	\caption{Image captures containing \iic burst from the setup on \autoref{hack_setup}}
-	\label{I2C_burst}
-\end{figure}
+%\begin{figure}[H]
+%	\centering
+%	\begin{subfigure}{.45\textwidth}
+%		\centering
+%		\includegraphics[width=\linewidth]{longburst.png}
+%		\caption{Captured \iic data}
+%		\label{i2ccap}
+%	\end{subfigure}
+%	\hfill
+%	\begin{subfigure}{.45\textwidth}
+%		\centering
+%		\includegraphics[width=\linewidth]{zoomedburst.png}
+%		\caption{Zoomed in short burst}
+%		\label{i2czoom}
+%	\end{subfigure}\\
+%	\caption{Image captures containing \iic burst from the setup on \autoref{hack_setup}}
+%	\label{I2C_burst}
+%\end{figure}
 
 Decoding a couple of transfers in this data results in the following bit sequences:
 
@@ -157,12 +157,12 @@ Now Sigrok, an open source signal analysis software suite will be used (\url{htt
 
 The oscilloscope saves the captured data as the voltages of the two channels, together with a timestamp. Sigrok expects only 1's and 0's. The conversion from voltages to binary values is easily done using Matlab. The data is imported, and the clock and data channels identified, see \autoref{matlab1}
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.7\textwidth]{figures/matlab1.png}
-	\caption{Importing oscilloscope data.}
-	\label{matlab1}
-\end{figure}
+%\begin{figure}[H]
+%	\centering
+%	\includegraphics[width=0.7\textwidth]{figures/matlab1.png}
+%	\caption{Importing oscilloscope data.}
+%	\label{matlab1}
+%\end{figure}
 \clearpage
 The voltages can now be converted to 1's and 0's, and saved as a new .csv file using the following commands:
 \begin{lstlisting}[caption={Matlab commands}, language=Matlab, label=matlab2]
@@ -179,24 +179,24 @@ The generated .csv file can now be processed by Sigrok. This will analyse the da
 Now that the actual \iic data has been obtained, it has to be converted to a format that can be easily included in the microcontroller software. To do this, a small C program is written, that takes the sigrok data in and outputs a C header file, containing an array with the data to be written to the camera, see \autoref{i2c2}
 
 
-\begin{figure}[H]
-	\centering
-	\begin{subfigure}{.45\textwidth}
-		\centering
-		\includegraphics[width=\linewidth]{i2c1.png}
-		\caption{Sigrok output data}
-		\label{i2c1}
-	\end{subfigure}
-	\hfill
-	\begin{subfigure}{.45\textwidth}
-		\centering
-		\includegraphics[width=\linewidth]{i2c2.png}
-		\caption{Generated C header file}
-		\label{i2c2}
-	\end{subfigure}\\
-		\caption{Screenshots describing output data and the generated C header file}
-	\label{screenshot_computer}
-\end{figure}
+%\begin{figure}[H]
+%	\centering
+%	\begin{subfigure}{.45\textwidth}
+%		\centering
+%		\includegraphics[width=\linewidth]{i2c1.png}
+%		\caption{Sigrok output data}
+%		\label{i2c1}
+%	\end{subfigure}
+%	\hfill
+%	\begin{subfigure}{.45\textwidth}
+%		\centering
+%		\includegraphics[width=\linewidth]{i2c2.png}
+%		\caption{Generated C header file}
+%		\label{i2c2}
+%	\end{subfigure}\\
+%		\caption{Screenshots describing output data and the generated C header file}
+%	\label{screenshot_computer}
+%\end{figure}
 
 
 
