@@ -1,0 +1,105 @@
+\input{setup/preamble.tex}% package inclusion and set up of the document
+
+\input{setup/macros.tex}% my new macros
+\input{setup/glossaries.tex} % glossaries stuff
+\usepackage{lastpage}
+\usepackage{epstopdf}
+%\usepackage[table]{xcolor}
+\setlength{\headheight}{21pt}
+%\bibliography{setup/mybib.bib}
+\hfuzz=\maxdimen
+\tolerance=10000
+\hbadness=10000
+
+\usepackage{siunitx}
+
+
+
+\graphicspath{{./figures/}}
+
+\begin{document}
+%% prærapport %%
+\setlength\cftaftertoctitleskip{2pt}
+\setlength\cftafterloftitleskip{6pt}
+\setlength\cftafterlottitleskip{6pt}
+
+
+%\include{laesevejledning}
+
+\selectlanguage{english}
+\title{AAUSAT 6}
+
+\pagestyle{empty} %disable headers and footers
+\pagenumbering{roman} %use roman page numbering in the frontmatter I II...
+\fancyfoot[RE,LO]{14gr413} %page number on all pages
+\fancyfoot[LE,RO]{\thepage}
+\fancyhead[LE,LO,RE,RO]{}
+\fancyhead[RO,LE]{\includegraphics[height=16pt]{logo_only.pdf}}
+%% indledende formalia %%
+
+
+\include{formalia/forside}
+\pagestyle{fancy}
+\include{formalia/kolofon}
+\include{formalia/titelblad}
+\cleardoublepage
+\pdfbookmark[0]{Indholdsfortegnelse}{label:Indhold}
+\tableofcontents
+\printglossary[title=List of Terms,toctitle=Terms and abbreviations,type=\acronymtype]
+\cleardoublepage
+
+\listoftodos
+
+\include{formalia/forord}
+\cleardoublepage
+
+%% problemanalysen %%
+\pagenumbering{arabic} %use arabic page numbering in the mainmatter
+\fancyfoot[RO,LE]{\thepage \text{ of} \pageref{LastPage}}
+\fancyfoot[LO,RE]{15gr412}
+\fancyhead[RE,LO]{}
+\fancyhead[RE,LO]{\color{aaublue}\small\nouppercase\leftmark} %even page - chapter title
+
+\fancyhead[RO,LE]{\includegraphics[height=16pt]{logo_only.pdf}}
+
+
+\pagestyle{fancy}
+
+% \include{kapitler/indledning}
+
+%% %% DEL 1 %%
+\part{Preanalysis}
+%\include{Preanalysis/Satellite}
+
+%%
+
+\include{Chapters/krav}
+%\part{Design \& implementation}
+%\include{chapters/accepttest}
+
+
+\part{Test \& conclusion}
+%\include{Test/accepttest}
+
+
+%% literaturliste og bilag %%
+\bookmarksetup{startatroot}% this is it
+\addtocontents{toc}{\bigskip}% perhaps as well
+\bibliography{setup/mybib}
+\label{bib:mybiblio}
+ 
+ \newpage
+ \fancyhead[RO]{\color{aaublue}\small Appendix \nouppercase\rightmark} %even page - chapter title
+ \fancyhead[LE]{\color{aaublue}\small Appendix \nouppercase\rightmark} %uneven page - sectionhttps://88df6ea0630aed8027ff-0caf779119a6537399728d4d80523795.ssl.cf5.rackcdn.com/tcgyzshtzfpq/page/7cd587cdbc0ae962c2755c91cf17670aac438f1c.jpeg title
+\fancyhead[RE,LO]{}
+ \titleformat{\section}[hang]{\Large\bfseries}{\thesection\hsp\textcolor{aaublue}{|}\hsp}{0pt}{\Large\bfseries}
+
+ \renewcommand{\thesection}{\Alph{section}}
+ \setcounter{section}{0}
+ \chapter*{Appendix}
+ \addcontentsline{toc}{chapter}{Appendix}
+ \input{Appendix/picam_hacking.tex}
+ \include{Appendix/induction}
+% \input{appendix/koleplade.tex} %skal være input for at undgå den skifter 
+
+\end{document}
