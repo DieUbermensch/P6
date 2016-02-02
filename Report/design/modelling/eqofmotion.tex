@@ -1,0 +1,135 @@
+\subsection{Equations of motion}
+-Why have a model \\
+- what our model shall describe\\
+- Aim of the chapter and the procedure\\
+
+
+- open loop , what does it describe concerning our system\\
+- closed loop, what does it describe concerning our system\\
+
+Equations of motion, verifying model, linearization, verifying model\\
+Compare to real life measurements\\
+Approval of model\\
+Block diagram and open and closed loop - analysis \\
+Transferfunction and the different unit throughout the system\\
+Step response, overshoot, peak time, settling time and steady state error\\
+Bodeplot, phase and gain margins and how they affect the system\\
+Combinning the two models\\
+-\\
+-\\
+Design the controller in relation to model analysis\\
+Simulation of model with controller\\
+Test and adjustments\\
+
+Implementation of controller\\
+Test concerning requirements and analysis from vicon data\\\\\\\\
+
+
+A mathematical model is designed to identify a systems dynamics with the purpose of analysis which shall lead to the design of a controller. A model  shall be as true to reality as needed for the specific control purpose.
+The derived model will be nonlinear, as the world is nonlinear. The model will should be verified in relation to the real world, whereafter the model can be linearised. Linearisation of the model eases the design of an effective controller.\\\\%&Therefore it is necessary to make some assumptions. These assumptions will make the model more inaccurate, thus this should be done with careful consideration.
+%Based on the system's model, the behaviour of the system can be analyzed and therefore controlled.\\
+This section first derives the inverted pendulum dynamics expressed in the equations of motion, which is subsequently verified and afterwards linearized and a transferfunction will be derived. From the transferfunction the system's stability and behaviour can be extracted by analysis of the system's step response and bodeplots. 
+\\\\
+The model of the inverted pendulum shall describe how the two masses, the cart and the pendulum, behave when a force is exerted by the surroundings. Note that the rod is assumed massless, and will therefore not be modelled. The inverted pendulum is shown in\autoref{fig:mecmodinvpen}.
+\begin{figure}[H]
+\centering
+\scalebox{3}{\input{figures/invpenmec.ralf}}
+\caption{Mechanical model of the inverted pendulum.}
+\label{fig:mecmodinvpen}
+\end{figure}
+In \autoref{fig:mecmodinvpen} the mass at the end of the rod is M1, the variable $\theta$ describes the angle of the pendulum/rod from a vertical line at the center of the cart. Note, that the angle is positive in the counterclockwise direction. This angle can be described in relation to both the y and x direction. The force $F_B$ is a friction force exerting upon the mass M2. The force applied to move the minisegway is labelled $F_F$. \\\\
+From \autoref{fig:mecmodinvpen} free body diagrams can be determined. A free body diagram has the purpose to depict the forces acting upon an object. In this case the pendulum's free body diagrams is representing the forces acting upon the mass at the end of the pendulum and the cart while the minisegway is in a upright position. From the free body diagrams equations of motion can be derived, which shall lead to a transfer function that describes the system's behaviour.\\
+The free body diagram of the mass at the end of the assumed massless rod is shown in \autoref{fig:fbdm1}.
+\begin{figure}[H]
+\centering
+\scalebox{0.9}{\input{figures/invpen_M1_FBD.ralf}}
+\caption{Free body diagram of the mass at the end of the massless rod.}
+\label{fig:fbdm1}
+\end{figure}
+The forces exerted on the the mass, M1, is the gravitationalforce, $F_g$. The force $F_t$ is the tension in the rod between the pendulum and the cart. The magnitude of this force depends on the angle, $\theta$.\\\\
+The free body diagram of the mini segways cart is shown in \autoref{fig:fbdm2}.
+\begin{figure}[H]
+\centering
+\scalebox{1.3}{\input{figures/invpen_M2_FBD.ralf}}
+\caption{Free body diagram of the cart.}
+\label{fig:fbdm2}
+\end{figure}
+\autoref{fig:fbdm2} shows the free body diagram of the mini segways cart. The force $F_g$ is the gravitational force and $F_N$ is the force pushing upwards from the ground. The force $F_B$ is the force acting in the opposite direction of the applied force $F_F$ due to friction. The force $F_t$ is the tension of the rod between the pendulum and the cart. Note that its magnitude is equal to the force acting upon the pendulum, but opposite in direction. The angle $\theta$ determines the magnitude of the force $F_t$.
+
+
+
+%\begin{figure}
+%\centering
+%\input{Report/figures/invpenmec.ralf}
+%\caption{Inverted pendulum.} \label{fig:pen_mek_overview}
+%\end{figure}
+%
+%\begin{figure}
+%\centering
+%\input{Report/figures/invpen_M1_FBD.ralf}
+%\caption{Free body diagram for the mass at the pendulum.} \label{fig:fbdm1}
+%\end{figure}
+%
+%\begin{figure}
+%\centering
+%\input{Report/figures/invpen_M2_FBD.ralf}
+%\caption{Free body diagram for cart.} \label{fig:fbdm2}
+%\end{figure}
+From the free body diagrams it is now possible to express the dynamics of these in equations of motion. \\\\
+For the pendulum:
+\begin{align}
+m_1 \cdot \ddot x_1 &= F_t \cdot \sin(\theta) \label{eom1}\\
+m_1 \cdot \ddot y_1 &= -F_g -F_t \cdot \cos(\theta) \label{eom2}
+\end{align}
+For the chart:
+\begin{align}
+m_2 \cdot \ddot x_2 = -B\cdot \dot x_2 - F_t \cdot \sin(\theta)+F_F \label{eom3}
+\end{align}
+Kinematics:
+\begin{align}
+\vv{a_1} = L\cdot \ddot \theta\cdot \vv{\epsilon_\theta} + L \cdot \dot \theta ^2 \cdot \vv{\epsilon_r} + \ddot x_2 = \vv{a_{1/2}}+\vv{a_2} \label{eom4}
+\end{align}
+\begin{align}
+\ddot x_1&=\vv{a_{x1}}= -L \cdot \ddot\theta\cdot \cos(\theta) + L \cdot \dot \theta^2 \cdot \sin(\theta)+\ddot x_2  \label{eom5} \\
+\ddot y_1&=\vv{a_{1y}}=-L\cdot \ddot\theta\cdot\sin(\theta) - L \cdot \dot \theta^2 \cos(\theta)\label{eom6}
+\end{align}
+----------\\
+
+\autoref{eom5} into \autoref{eom1}:
+\begin{align}
+-m_1\cdot L\cdot \ddot \theta \cdot \cos(\theta)+m_1 \cdot L\cdot \dot \theta^2 \cdot \sin(\theta)+m_1\cdot \ddot x_2 = F_t \cdot \sin(\theta) \label{eom7}
+\end{align}
+\autoref{eom6} into \autoref{eom2}:
+\begin{align}
+-m_1 \cdot L \cdot \ddot \theta\cdot\sin(\theta) - m_1 \cdot L\cdot \dot \theta^2\cdot \cos(\theta)=-m_1\cdot g - F_t \cdot \cos(\theta)\label{eom8}
+\end{align}
+%Multiply with $\cos(\theta)$ on both sides in  \autoref{eom7}:
+%\begin{align}
+%-m_1\cdot L \cdot \ddot \theta \cdot \cos^2 (\theta)+m_1\cdot L \cdot \dot \theta^2 \cdot \sin(\theta)\cdot \cos(\theta)+m_1\cdot \ddot x_2 \cdot \cos(\theta)=F_t\cdot \cos(\theta)\cdot \sin(\theta)\label{eom9}
+%\end{align}
+%Multiplying with sine on both $\sin(\theta)$ in \autoref{eom8}:
+%\begin{align}
+%-m_1\cdot L\cdot \ddot \theta\cdot \sin^2 (\theta) - m_1\cdot L\cdot \dot \theta^2 \cdot \cos(\theta)\cdot \sin(\theta)=-m_1\cdot g\cdot \sin(\theta)-F_t \cdot \cos(\theta)\cdot \sin(\theta) \label{eom10}
+%\end{align}
+%Adding the two \autoref{eom8} and \autoref{eom9}:
+Multiplying with $\cos(\theta)$ and $\sin(\theta)$ and adding the two equations together gives:
+\begin{align}
+-m_1\cdot L \cdot \ddot \theta + m_1\cdot \ddot x_2 \cdot \cos(\theta)=-m_1\cdot g\cdot \sin(\theta)
+\end{align}
+-\\
+-\\
+-\\
+-\\
+\begin{align}
+(m_1+m_2)\cdot \ddot x_2=m_1\cdot L\cdot \ddot \theta \cdot \cos(\theta)-m_1\cdot L\cdot \dot \theta^2 \cdot \sin(\theta)+F_F
+\end{align}
+\begin{align}
+\ddot \theta(L\cdot (m_1 + m_2)-m_1 \cdot L \cdot \cos^2(\theta))&+\dot\theta^2 \cdot (m_1\cdot L\cdot \sin(\theta)\cdot \cos(\theta))\\
+&= \nonumber \\
+\cos(\theta)\cdot (F_f-B\cdot \dot x_2)&+g\cdot \sin(\theta)\cdot (m_1+m_2)
+\end{align}
+
+%changed due to mistak where L was not included.
+%\begin{align}
+%\ddot \theta (-m_1\cdot L \cdot \cos^2(\theta)+(m_1+m_2)\cdot L)+\dot \theta^2(m_1\cdot \sin(\theta)\cdot \cos(\theta))=F_F+(m_1+m_2)\cdot g\cdot \sin(\theta)
+%\end{align}

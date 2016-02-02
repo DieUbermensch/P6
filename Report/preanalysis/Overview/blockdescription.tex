@@ -1,0 +1,36 @@
+\subsection{Minisegway block description}
+\todo{remove headlines, and reduce text. Move to previous page}
+\todo{replace Remote Controller with RC}
+\subsubsection{Transducers}
+The transducers are needed to determine the tilt of the segway, and possibly also the velocity if this is desired to control. These can be measured using a gyroscope and accelerometer mounted on the segway. The gyroscope uses earth's gravity to determine its relative position, while the accelerometer measures the changes in acceleration \citep{acc_vs_gyro} \todo{more deep going explanation needed}. Furthermore, encoders can be used to monitor the movement of the motors. 
+
+\subsubsection{Data Acquisition}
+This block converts analogue transducer inputs to a digital number representing the measured data. The input is typically filtered and scaled to a floating point number representing the measured input signal such as the tilt and position of the segway. This data is then made available for the system controller. It is typically the data acquisition that handles calibration of the transducers, determining the scaling factors etc.
+
+
+%This block converts analogue transducer inputs to a digital number representing the measured data. Based on inputs from the accelerometer and gyroscope, the tilting degree of the segway can be calculated and made available for the controller unit. Also, the inputs from the encoders can be used to see if the motors controlling the wheels are synchronous or if one is actuating more than the other. It is desired that the motors are syncronized, since the segway would otherwise not be able to drive straight forward.
+\subsubsection{Remote controller}
+A remote controller provides a simple interface between the segway and the user, thus allowing the user to steer the segway. The remote controller is ideally wireless, due to the problems related to having a wired connection to the moving segway, together with the fact that it is not practical to have to push buttons on the segway itself.
+
+\subsubsection{System controller}
+There are two ways to control the segway. On method is to have the control algorithm in the remote controller which might be able to have a better microcontroller or another type of data processing unit than what can be mounted on the segway. The second which \autoref{fig:seg_over} is referring to, is a system where the control is done on board the segway. No matter where the controller is implemented, this functional block keeps the balance of the segway based on the tilt, while the direction and speed is controlled based on inputs from or to the remote controller. 
+All the inputs from the data acquisition unit and the remote controller is fed through a control algorithm and an output is generated which is then passed on to the motor controller.
+
+%The synchronization of the motors can be changed to turn the segway. From these inputs, an output is generated, which is used to control the motors.
+
+\subsubsection{Motor controller}
+The motors can be controlled in regards to speed and direction, depending on the output from the system controller, and typically a PWM signal is generated and sent through an H-bridge to power the motors. However, other means of control signal can be used, depending on the motors. A potential problem to be handled by the motor controller is a lack of synchronization between the motors, meaning the segway will not drive straight even though the same control signal is applied to both motors. This occurs if the motors used do not have the same torque, friction etc., despite being identical on paper.
+
+\subsubsection{Motors}
+The motors are the system's actuators. Different types of motors can be used, but because the segway might need to react quickly and drive distances longer than a few wheel circumferences, typically AC or DC motors are used. Since AC and DC motors are not made for precision, encoders can be used to measure the precise rotation.\\\\
+
+%Each of the two wheels on the segway is controlled by its own motor. These are the systems actuators. The motors are of the same model, but there might be inconsistencies between them, thus the motors are to be synchronized as previously mentioned.
+
+Based on the block diagram in \autoref{fig:seg_over},it is identified that the system controller is to have several functionalities. These functionalities are balancing, driving, turning and transceiving. Each of these are described in further detail in the next section.
+
+
+
+
+
+
+

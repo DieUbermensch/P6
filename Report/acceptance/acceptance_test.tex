@@ -1,0 +1,196 @@
+\chapter{Acceptance test}
+
+To ensure the segway complies with the functional requirements, see the requirements in \autoref{requirements}, it is necessary to perform an acceptance test of the developed system. The purpose of the chapter is therefore to do validation and verification of the system. To do so, an acceptance test procedure will be developed and used to test the segway. The acceptance test will only concern the functionality requirements since the performance requirements already have been verificated in \autoref{ch:Controller}.
+\section{Functionality overview}
+The segway has been developed through the design chapters.\\
+%Basic functions of the segway should capable of are for instance the ability to stabilize itself in an upright position and drive and turn.
+From the requirement section the design of the segway should ensure that following functionalities are met:
+\begin{enumerate}
+\item The segway must be able to stabilise itself in an upright equilibrium state.
+\item The segway must be able to drive forward and backwards without causing the segway to fall over.
+\item The segway must be able to turn without causing the segway to fall over.
+\item The segway may not fall over when pushed lightly.
+\item The user must be able to make the segway drive by a wireless controller.
+\item The user must be able to make the segway turn by a wireless controller.
+\item The user must be able to receive data from the segway on a wireless controller.
+\end{enumerate}
+The turning feature has not been implemented in the system, due to time constrains. It is therefore not possible to fulfill requirement 3 and 6.
+
+\section{Pass/fail criterias}
+There are three assessment degrees on how the developed system satisfies the requirements. The degrees are \ding{51} for a pass, (\ding{51}) for a partial pass and \ding{55} for a fail. 
+\begin{enumerate}
+\item The segway must be able to stabilise itself in an upright equilibrium state.
+	\begin{description}
+	\item[ \ding{51} ]The segway stabilises itself in an upright position.
+	\item[(\ding{51})]The segway stabilises itself in an upright position, but falls over at rare occasions. A rare occasions is set to be max 1 fail every 10 test.
+	\item[ \ding{55} \phantom{)}]The segway does not stabilise itself and falls down.
+	\end{description}
+\item The segway must be able to drive forward or backwards without causing the segway to fall over.
+	\begin{description}
+	\item[ \ding{51} ]The segway drives forward or backwards without causing the segway to fall over.
+	\item[(\ding{51})]The segway drives forward or backwards, but falls over at rare occasions. A rare occasions is set to be max 1 fail every 10 test.
+	\item[ \ding{55} \phantom{)}]The segway falls over when driving forward or backwards.
+	\end{description}
+\item The segway must be able to turn without causing the segway to fall over.
+	\begin{description}
+	\item[ \ding{51} ]The segway turns without causing the segway to fall over.
+	\item[(\ding{51})]The segway turns but falls over at rare occasions.
+	\item[ \ding{55} \phantom{)}]The segway falls over when turning.
+	\end{description}
+\item The segway may not fall over when pushed lightly. 
+	\begin{description}
+	\item[ \ding{51} ]The segway do not fall over when pushed.
+	\item[(\ding{51})]The segway do not fall over when pushed, but falls over at rare occasions. A rare occasions is set to be max 1 fail every 10 test.
+	\item[ \ding{55} \phantom{)}]The segway falls over when pushed.
+	\end{description}
+\item The user must be able to make the segway drive by a wireless controller.
+	\begin{description}
+	\item[ \ding{51} ]The remote controller is able to control of the segway wirelessly. It is possible drive forward and backwards.
+	\item[(\ding{51})]The remote controller sends a request to make the segway drive, but the segway does not perform the request action.
+	\item[ \ding{55} \phantom{)}]The remote controller is unable to control of the segway wirelessly.
+	\end{description}
+\item The user must be able to make the segway turn by a wireless controller.
+	\begin{description}
+	\item[ \ding{51} ]The remote controller is able to control of the segway wirelessly. It is possible to turn the segway.
+	\item[(\ding{51})]The remote controller sends a request to make the segway turn, but the segway does not perform the requested action.
+	\item[ \ding{55} \phantom{)}]The remote controller is unable to control of the segway wirelessly.
+	\end{description}
+\item The user must be able to receive data from the segway on a wireless controller.
+	\begin{description}
+	\item[ \ding{51} ]The remote controller is able to receive different types of data from the segway wirelessly.
+	\item[(\ding{51})]The remote controller only able to receive one type of data from the segway wirelessly.
+	\item[ \ding{55} \phantom{)}]The remote controller is unable to receive data from the segway wirelessly.
+	\end{description}
+\end{enumerate} 
+
+\section{Test}
+Setup of the acceptance test and how it is carried out, are described in this section. Each functional requirement is tested individually.
+\subsection{Date and location}
+The acceptance test was performed the 10. December 2015 at Aalborg University, Fredrik Bajers Vej 7, Aalborg Øst.
+\subsection{Equipment}
+To perform the tests, following test equipments are needed:
+\begin{table}[H] \centering
+\begin{tabular}{|l|l|} 
+\hline 
+\textbf{Equipment} & \textbf{Version} \\ 
+\hline 
+Segway & AAU 3061 \\ 
+\hline 
+Arduino Uno & Rev. 3 \\ 
+\hline 
+Arduino IDE & 1.6.0 \\ 
+\hline 
+APC220 - 2 devices & 1 \\ 
+\hline 
+Computer & - \\ 
+\hline 
+\end{tabular} 
+\caption{Test equipment used for the acceptance test.}
+\label{tab:test_equipment}
+\end{table}
+The Arduino Uno is used as the segway's remote controller and is programmed and monitored through Arduino's IDE. Through the serial monitor it is possible to transmit user inputs and receive data from the segway.
+In the following section, the test procedures for the acceptance are explained. 
+
+\subsection{Procedure for requirement 1}
+For the first requirement, the reference angle for the segway is set to 0. When set to 0, the segway will try to stabilise itself and hold its position. When the segway is turned on, the reference angle is set to 0 per default. The starting position of the segway should be in upright position. Observe the segway, and determine if the segway is stable or unstable over a period of 10 minutes.
+
+\subsection{Procedure for requirement 2}
+The second requirement is the segway driving forward and backwards. Like the previous test, the default reference angle is set to 0. The reference angle for the segway can be set to a positive angle if it is desired to make the segway drive forward, and a negative value if the segway should drive backwards. Therefore, the remote controller is used to change the reference angle to the desired one, to make the segway drive. For the second test, the following test procedure is used:
+\begin{enumerate}
+\item Put the segway in an upright position and turn the segway on.
+\item After the segway is stabilised, change the reference angle to 0.02 by using the RC to transmit a request to the segway. 
+\item Observe if the segway drives forward.
+\item Change the reference angle to -0.02.
+\item Observe if the segway drives backwards.
+\item Stop the segway by changing the reference angle to 0.
+\end{enumerate}
+Because the second bullet requires that it is possible to transmit and receive data between the segway and the RC, the 5'th requirement, regarding the RC, should be tested before proceeding to this requirement.
+
+\subsection{Procedure for requirement 3}
+The third requirement is the segway turning. Like the previous test, the default reference angle is set to 0. For the second test, the following test procedure is used:
+\begin{enumerate}
+\item Put the segway in an upright position and turn the segway on.
+\item After the segway is stabilised, change the turning angle to 90 degrees by using the remote controller.
+\item Observe if the segway turns in the counter clockwise direction.
+\item Change the reference angle to -90 degrees.
+\item Observe if the segway turns in the clockwise direction.
+\end{enumerate}
+Because the second bullet requires that it is possible to transmit and receive data between the segway and the RC, the 6'th requirement, regarding the RC, should be tested before proceeding to this requirement.
+
+
+\subsection{Procedure for requirement 4}
+In this test, the segway is pushed lightly and should afterwards recover from the push by stabilising itself. 
+\begin{enumerate}
+\item Put the segway in an upright position and turn the segway on.
+\item After the segway is stabilised push the segway lightly to one direction.
+\item Observe if the segway stabilises itself, in its upright position.
+\end{enumerate}
+
+\subsection{Procedure for requirement 5}
+The fifth test is to verify, if it is possible to control the driving of the segway from an RC.
+\begin{enumerate}
+\item Put the segway in an upright position and turn the segway on.
+\item After the segway is stabilised, change the reference angle of the segway to 0.02, by using the RC.
+\item Observe if the segway moves forward.
+\item Set the reference angle to 0.
+\end{enumerate}
+
+\subsection{Procedure for requirement 6}
+The sixth test is to verify if it is possible to turn the segway from a RC.
+\begin{enumerate}
+\item Put the segway in an upright position and turn the segway on.
+\item After the segway is stabilised, change the turning angle of the segway to 90 degrees by using the RC.
+\item Observe if the segway turns.
+\end{enumerate}
+
+\subsection{Procedure for requirement 7}
+The seventh test is to verify if it is possible to control the segway from a RC. From the RC, it should be possible to change the reference angle, and get informed about the measured angle, angular velocity and speed of the segway.
+\begin{enumerate}
+\item Try to independently request the angle, angular velocity and the speed of the segway.
+\item Observe if the segway replies by transmitting the data back.
+\end{enumerate}
+\newpage
+\section{Results}
+The results of the tests are listed in \autoref{tab:acceptance_test_results}.
+\begin{table}[H] \centering
+\begin{tabular}{|l|c|}
+\hline 
+\textbf{Requirement} & \textbf{Result} \\ 
+\hline 
+The segway stabilises itself in an upright equilibrium state. & \ding{51} \\ 
+\hline
+The segway drives forward and backwards without the segway falls over. & (\ding{51}) \\ 
+\hline 
+The segway turns without the segway falls over. & \ding{55} \\ 
+\hline 
+The segway does not fall over when pushed. & \ding{51} \\ 
+\hline 
+The segway is able to drive from being remote controlled wirelessly. & \ding{51} \\ 
+\hline  
+The segway is able to turn from being remote controlled wirelessly. & (\ding{51}) \\ 
+\hline  
+The user is able to receive data from the segway on a wireless controller. & \ding{51} \\ 
+\hline  
+\end{tabular} 
+\caption{Acceptance results.}
+\label{tab:acceptance_test_results}
+\end{table}
+The segway is able to stabilise itself in an upright position and hold the position for 10 minutes. The segway is also capable of driving forward and backwards successfully, but falls over when the segway is set to drive forward or backwards after a period. The segway falls over because it needs to hold its tilting angle and therefore needs to accelerate in the tilting direction in order to hold the angle. At some point the segway cannot accelerate more and falls over. When pushed lightly, the segway stabilises itself successfully without falling over. Also, the segway is able to be remote controlled wirelessly by the user from a computer, and the user can receive data from the segway wirelessly. However, the turning functionality has not been implemented.
+
+Based on this, it is concluded that the segway partially fulfills the requirements set for it.
+%\section{Test conclusion}
+
+
+%\subsection*{Performance requirements}
+%\begin{itemize}
+%\item Steady state error: < 2 \%
+%\item Rise time: < 1 s
+%\item Settling time: < 3 s
+%\item Overshoot: < 5 \% 
+%\item Forward and backward error: < $1\degree/m$
+%\end{itemize}
+%The following list describes the desired stability margins of the balance, driving and turning.
+%\begin{itemize}
+%\item Phase margin: $\geq 45\degree$
+%\item Gain margin: $\geq$ 6 dB
+%\end{itemize}

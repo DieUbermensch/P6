@@ -1,0 +1,18 @@
+\chapter{Segway Presentation}
+In the following chapter, an overview of how a segway works is presented. This includes a block description of the system, and a description of the functionalities	 it is to have.
+The segway provided by Aalborg University is also described, in regards to the mechanical frame and the provided hardware.
+
+\section{Generalized Segway Description}
+A segway can be seen as a typical control system, as shown in \autoref{fig:seg_over}.
+Here, the controlled parameters are acquired using various transducers, processed by the system controller and then a control signal is outputted to the actuator(s) through. Apart from the control system, a \gls{RC} is added to the system, which can also be seen in \autoref{fig:seg_over}. The reason for this will be described later on. In the case of the segway, the transducers are sensors, providing information on the movement of the segway, and the actuators are motors, which are driving the wheels. 
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{figures/segwayOverview.pdf}
+\caption{Generalized block diagram of a segway control system.}
+\label{fig:seg_over}
+\end{figure}
+
+It is decided that the segway is to have four main functionalities to function as desired. These functionalities are \textit{balancing, driving, turning and the ability to be remote controlled}. Each of these are described in further detail in the following section.
+
+\input{preanalysis/Overview/functionalities.tex}
