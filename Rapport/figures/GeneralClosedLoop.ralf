@@ -1,0 +1,24 @@
+
+\begin{tikzpicture}[auto, node distance=3cm,>=latex']
+    % We start by placing the blocks
+    \node [input, name=input] {};
+    \node [sum, right of=input, node distance=2cm] (sum) {};
+    \node [blockbig, right of=sum] (controller) {$D(s)$};
+    \node [blockbig, right of=controller,
+            node distance=5cm] (system) {$G(s)$};
+    % We draw an edge between the controller and system block to 
+    % calculate the coordinate u. We need it to place the measurement block. 
+    \draw [->] (controller) -- node[name=u] {$U(s)$} (system);
+    \node [output, right of=system] (output) {};
+    \node [blockbig, below of=u] (measurements) {$H(s)$};
+
+    % Once the nodes are placed, connecting them is easy. 
+    \draw [draw,->] (input) -- node {$R(s)$} (sum);
+    \draw [->] (sum) -- node {$E(s)$} (controller);
+    \draw [->] (system) -- node [name=y] {$Y(s)$}(output);
+    \draw [->] (y) |- (measurements);
+    \draw [->] (measurements) -| node[pos=0.95] {$-$} 
+        node [near end] {} (sum);
+    \draw [] (measurements) -| node[pos=1.15] {$+$} 
+        node [near end] {} (sum);
+\end{tikzpicture}

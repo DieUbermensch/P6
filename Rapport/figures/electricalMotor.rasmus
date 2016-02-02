@@ -1,0 +1,32 @@
+\begin{tikzpicture}[auto, node distance=2cm,>=latex']
+    % We start by placing the blocks
+    \node [input, name=input] {};
+    \node [sum, right of=input, node distance=2cm] (sum) {};
+    \node [block, right of=sum] (circuit) {$\frac{1}{R_a}$};
+    \node [block, right of=circuit,
+            node distance=2.8cm] (kt) {$K_t$};
+    \node [block, right of=kt,  node distance=3cm, align = center] (system) {Mechanical\\ system};
+  %  \node [block, right of=gear,  node distance=2.5cm] (AngularVelocity) {Wheel};
+    % We draw an edge between the controller and system block to 
+    % calculate the coordinate u. We need it to place the measurement block. 
+    \node [output, right of=system, node distance=3cm] (gear) {Gear};
+   % \node [output, right of=gear, node distance=2.5cm] (output) {};
+
+    % Once the nodes are placed, connecting them is easy. 
+    \draw [draw,->] (input) -- node {$V_a(t)$} (sum);
+    \draw [->] (sum) -- node {} (circuit);
+    \draw [->] (circuit) -- node [name=i] {$I_a(t)$}(kt);
+    \draw [->] (kt) -- node[name=t] {$\tau_m(t)$} (system);
+    \draw [->] (system) -- node[name=wm] {$\omega_m(t)$} (gear);
+   % \node [block, below of=t] (feedback) {Gear};
+    \node [block, below of=kt] (motorkonstant) {$K_e$};
+  %  \draw [->] (gear) -- node[name=w2] {$\omega_w(s)$} (output);
+   % \draw [->] (AngularVelocity) -- node[name=F] {$\F_F$} (output);
+   % \draw [->] (feedback) -- node[name=fb] {$\omega_m(s)$} (motorkonstant);
+    \draw [->] (wm) |- node[name=fb2] {} (motorkonstant);
+    \draw [->] (motorkonstant) -| node[] {$V_e(t)$} (sum);
+    \draw [->] (motorkonstant) -| node[pos=0.95] {$-$} 
+        node [near end] {} (sum);
+    \draw [] (motorkonstant) -| node[pos=1.25] {$+$} 
+        node [near end] {} (sum);
+\end{tikzpicture}

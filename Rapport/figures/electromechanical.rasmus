@@ -1,0 +1,37 @@
+\begin{tikzpicture}[auto, node distance=2cm,>=latex']
+    % We start by placing the blocks
+    \node [input, name=input] {};
+    \node [sum, right of=input, node distance=2cm] (sum) {};
+    \node [block, right of=sum] (circuit) {$\frac{1}{L_a s + R_a}$};
+    \node [block, right of=circuit,
+            node distance=2.8cm] (kt) {$K_t$};
+    \node [block, right of=kt,  node distance=2.5cm] (system) {$\frac{1}{s J_T + B_T }$};
+    \node [block, right of=system, node distance=3cm] (gear) {$N_{ms}N_{sw}$};
+    \node [block, right of=gear,  node distance=3cm] (force) {$2 s r_w m_c$};
+  %  \node [block, right of=gear,  node distance=2.5cm] (AngularVelocity) {Wheel};
+    % We draw an edge between the controller and system block to 
+    % calculate the coordinate u. We need it to place the measurement block. 
+    \node [output, right of=force, node distance=2.3cm] (output) {};
+
+    % Once the nodes are placed, connecting them is easy. 
+    \draw [draw,->] (input) -- node {$V_a(s)$} (sum);
+    \draw [->] (sum) -- node {} (circuit);
+    \draw [->] (circuit) -- node [name=i] {$I_a(s)$}(kt);
+    \draw [->] (kt) -- node[name=t] {$\tau_m(s)$} (system);
+    \draw [->] (system) -- node[name=wm] {$\omega_m(s)$} (gear);
+ %   \node [block, below of=gear] (gearFB) {$\frac{1}{N_{sw}}$};
+ %   \node [block, left of=gearFB, node distance=3cm] (feedback) {$\frac{1}{N_{ms}}$};
+    \node [block, below of=kt] (motorkonstant) {$K_e$};
+    \draw [->] (gear) -- node[name=w2] {$\omega_w(s)$} (force);
+   % \draw [->] (AngularVelocity) -- node[name=F] {$\F_F$} (output);
+   % \draw [->] (feedback) -- node[name=fb] {$\omega_m(s)$} (motorkonstant);
+    \draw [->] (wm) |- node[name=fb2] {} (motorkonstant);
+   % \draw [->] (gearFB) -- node[] {$\omega_s(s)$} (feedback);
+    \draw [->] (motorkonstant) -| node[] {$V_e(s)$} (sum);
+    \draw [->] (motorkonstant) -| node[pos=0.95] {$-$} 
+        node [near end] {} (sum);
+    \draw [] (motorkonstant) -| node[pos=1.25] {$+$} 
+        node [near end] {} (sum);
+    \draw [draw,->] (gear) -- node {} (force);
+    \draw [draw,->] (force) -- node {$F_F(s)$} (output);
+\end{tikzpicture}

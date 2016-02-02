@@ -1,0 +1,50 @@
+\chapter{Requirements}
+This chapter has the purpose of presenting considerations concerning setting up requirements for the the segway. Firstly, the considerations will be made upon a list of requirements set from the preanalysis as well as common sense, for those requirements which has to be set by choice rather than theory. These considerations will result in a list of specific requirements, from which the modelling and controller design of the segway will be designed upon. \\
+The requirement considerations follows in the next section.
+\section{Requirements Considerations}
+The most important functionality of a segway is for it to keep its balance. For this to be achieved, the segway must be able to obtain a stable position after being given an impulse, such as a push. \\
+It is preferable to set requirements for the system's step response, as this is a typical measure for a system's dynamic behaviour that is rather easy to measure and set requirements for. In the following, the system's step response's parameters will be described. Afterwards the relation of the system's stability and the phase margin and gain margin will be presented. 
+
+\subsection{Functional Requirements}
+For the system, there are some requirements for the overall functionalities of the system. These requirements are derived from intuition, based on what a segway should be able to do.
+This includes that the segway has to stabilize itself and balance in an upright position, as well as being able to drive and turn, without falling over. Also, the segway should be able to withstand a light push, without falling over. A "light push" is not defined further, but the push needs to be so big that it makes the segway move in order to stabilize. 
+It is also decided that it should also be possible to remote control the segway wirelessly, by means of making the segway drive and turn. The user should also be able to wirelessly receive information from the segway, such as the pendulum angle, $\theta_p$. 
+
+\input{preanalysis/req_step}
+
+\input{preanalysis/PmGm}
+
+\input{preanalysis/List_of_req}
+
+
+
+%\section{Acceptance test description}
+%Another title.\\
+
+%\subsection{Performance requirements}
+%Based on these principles requirements will be set as follows:
+%\begin{enumerate}
+%\item 
+%\end{enumerate}
+%
+%\begin{enumerate}
+%	\item Segway must be able to balance
+%	\begin{itemize}
+%		\item Rise time
+%		\item Settling time
+%		\item (Overshoot)
+%		\item Phase margin - rule of thumb
+%		\item Gain margin - rule of thumb
+%	\end{itemize}
+%	\item Segway must be able to drive
+%	\begin{itemize}
+%		\item Forward/Backward
+%		\item Turning
+%	\end{itemize}
+%	\item It must be possible to remote control the segway wirelessly
+%	\begin{itemize}
+%		\item Zigbee
+%		\item remote control drive elements
+%	\end{itemize}
+%	
+%\end{enumerate}

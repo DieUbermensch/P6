@@ -1,0 +1,241 @@
+\section{Linearisation with Taylor expansion}\label{appTaylor}
+In this section the second and third governing equations are linearised, through the use of Taylor expansion, around the operating point $\bar{\theta}_p(t) = 0$. This method of linearisation is described in \autoref{subsec:Linearization}.
+
+The Taylor expansion is shown in \autoref{eq:appTaylor}, where each term has been designated a letter. The reason for this is that these letters will be used for traceability during the linearisation of \autoref{eq:appModel} and \autoref{eq:appModel2}.
+
+
+\begin{align}
+T = \underbrace{f(\bar{\theta}_p(t),\bar{\dot \theta}_p(t),\bar{\ddot \theta}_p(t))\rule[-12pt]{0pt}{5pt}}_{\mbox{A}} + \underbrace{\frac{\partial f(\bar{\theta}_p(t))}{\partial\theta_p(t)}\cdot \hat{\theta}_p(t)\rule[-12pt]{0pt}{5pt}}_{\mbox{B}} + \underbrace{\frac{\partial f(\bar{\dot \theta}_p(t))}{\partial \dot \theta(t)_p}\cdot \hat{\dot \theta}_p(t)\rule[-12pt]{0pt}{5pt}}_{\mbox{C}} + \underbrace{\frac{\partial f(\bar{\ddot \theta}_p(t))}{\partial \ddot \theta(t)_p}\cdot \hat{\ddot \theta}_p(t)\rule[-12pt]{0pt}{5pt}}_{\mbox{D}}
+\label{eq:appTaylor}
+\end{align}
+
+\subsection*{Second governing equation}
+The second governing equation, where the terms that are to be linearised are marked:
+\begin{align}
+m_c \cdot r_w \cdot \ddot \theta_w(t) = F_F(V_a(t)) - m_p\Big(\ddot \theta_w(t) \cdot r_w + \underbrace{l \cdot \sin(\theta_p(t))\cdot \dot\theta_p^2(t)\rule[-12pt]{0pt}{5pt}}_{\mbox{T1}} - \underbrace{l \cdot \cos(\theta_p(t))\cdot \ddot\theta_p(t)\rule[-12pt]{0pt}{5pt}}_{\mbox{T2}}\Big)\label{eq:appModel2}
+\end{align}
+Applying the Taylor expansion to each of the non-linear terms yields:
+
+\textbf{Term 1 linearised:}
+\begin{align}
+\underbrace{l \cdot \sin(\bar{\theta}_p(t))\cdot \bar{\dot\theta}_p^2(t)\rule[-12pt]{0pt}{5pt}}_{\mbox{A}} + \underbrace{l \cdot \cos(\bar{\theta}_p(t))\cdot \bar{\dot\theta}_p^2(t) \cdot \hat{\theta}_p(t)\rule[-12pt]{0pt}{5pt}}_{\mbox{B}} + \underbrace{2 \cdot l \cdot \sin(\bar{\theta}_p(t))\cdot \bar{\dot\theta}_p^2(t) \cdot \hat{\dot \theta}_p(t)\rule[-12pt]{0pt}{5pt}}_{\mbox{C}} = 0
+\end{align}
+
+\textbf{Term 2 linearised:}
+\begin{align}
+\underbrace{l \cdot \cos(\bar{\theta}_p(t))\cdot \bar{\ddot\theta}_p(t)\rule[-12pt]{0pt}{5pt}}_{\mbox{A}} - \underbrace{l \cdot \sin(\bar{\theta}_p(t)) \cdot \bar{\ddot \theta}_p(t) \cdot \hat{\theta}_p(t)\rule[-12pt]{0pt}{5pt}}_{\mbox{B}} + \underbrace{l \cdot \cos(\bar{\theta}_p(t))\cdot \hat{\ddot \theta}_p(t)\rule[-12pt]{0pt}{5pt}}_{\mbox{D}} = l \cdot \hat{\ddot \theta}_p(t)
+\end{align}
+
+\textbf{Linearised second governing equation:}
+\begin{equation}
+m_c \cdot r_w \cdot \ddot \theta_w(t) = F_F(V_a(t)) - m_p \cdot \ddot \theta_w(t) \cdot r_w + \underbrace{l \cdot \hat{\ddot \theta}_p(t)\rule[-12pt]{0pt}{5pt}}_{\mbox{T2}}
+\end{equation}
+Which is rearranged into:
+\begin{equation}
+(m_p + m_c)r_w \cdot \ddot \theta_p(t) = F_F(V_a(t)) + \underbrace{l \cdot \hat{\ddot \theta}_p(t)\rule[-12pt]{0pt}{5pt}}_{\mbox{T2}}
+\end{equation}
+\subsection*{Third governing equation}
+The third governing equation, where the terms that are to be linearised are marked:
+\begin{align}
+\underbrace{(J_p+m_p\cdot l^2)\cdot \ddot \theta_p(t)\rule[-12pt]{0pt}{5pt}}_{\mbox{T1}} = m_p \cdot l \cdot \Big(\underbrace{\sin(\theta_p(t)) \cdot g\rule[-12pt]{0pt}{5pt}}_{\mbox{T2}} + \underbrace{\cos(\theta_p(t)) \cdot r_w \cdot \ddot \theta_w(t)\rule[-12pt]{0pt}{5pt}}_{\mbox{T3}}\Big)
+\label{eq:appModel}
+\end{align}
+
+Applying the Taylor expansion to each of the non-linear terms yields:
+
+\textbf{Term 1 linearised:}
+\begin{align*}
+\underbrace{(J_p + m_p \cdot l^2)\bar{\ddot \theta}_p(t)\rule[-12pt]{0pt}{5pt}}_{\mbox{A}} + \underbrace{(J_p + m_p \cdot l^2)\hat{\ddot \theta}_p(t)\rule[-12pt]{0pt}{5pt}}_{\mbox{D}} = (J_p + m_p \cdot l^2)\hat{\ddot \theta}_p(t)
+\end{align*}
+
+\textbf{Term 2 linearised:}
+\begin{align*}
+\underbrace{\sin(\bar{\theta}_p(t)) \cdot g\rule[-12pt]{0pt}{5pt}}_{\mbox{A}} + \underbrace{\cos(\bar{\theta}_p(t)) \cdot g \cdot \hat{\theta}_p(t)\rule[-12pt]{0pt}{5pt}}_{\mbox{B}} = g \cdot \hat{\theta}_p(t)
+\end{align*}
+
+\textbf{Term 3 linearised:}
+\begin{align*}
+\underbrace{\cos(\bar{\theta}_p(t)) \cdot r_w \ddot \theta_w(t)\rule[-12pt]{0pt}{5pt}}_{\mbox{A}} - \underbrace{\sin(\bar{\theta}_p(t)) \cdot r_w \cdot \ddot \theta_w(t)) \cdot \hat{\theta}_p(t)\rule[-12pt]{0pt}{5pt}}_{\mbox{B}} = r_w \cdot \ddot \theta_w(t)
+\end{align*}
+
+\textbf{Linearised third governing equation:}
+\begin{align}
+\underbrace{(J_p+m_p\cdot l^2)\cdot \hat{\ddot \theta}_p(t)\rule[-12pt]{0pt}{5pt}}_{\mbox{T1}} = m_p \cdot l \Big(\underbrace{g \cdot \hat{\theta}_p(t)\rule[-12pt]{0pt}{5pt}}_{\mbox{T2}} + \underbrace{r_w \cdot \ddot \theta_w(t)\rule[-12pt]{0pt}{5pt}}_{\mbox{T3}}   
+\Big)
+\end{align}
+
+%%
+%\subsubsection{Load force linearisation}
+%In these sections the two model equations for the inverted pendulum and the relation between the motors and the pendulum respectively is linearised, through the use of Taylor expansion. This method of linearisation is described in \autoref{subsec:Linearization}.
+%
+%In this section the second governing equation, \autoref{eq:model2W}, is linearised 
+%
+%\begin{align}
+%m_c \cdot r_w \cdot \ddot \theta_w(t) = F_F(V_a(t)) - m_p\left(\ddot \theta_w(t) \cdot r_w + l \cdot \sin(\theta_p(t))\cdot \dot\theta_p^2(t) - l \cdot \cos(\theta_p(t))\cdot \ddot\theta_p(t)\right)\label{eq:appModel2}
+%\end{align}
+%
+%
+%
+%
+%
+%\subsection{The pendulum model} \label{app:firstModel}
+%The expression for the load torque is:
+%%\begin{align*}
+%%\tau_L(t) = m_p\left(\ddot \theta_w(t) \cdot r_w + l \cdot \sin(\theta_p(t))\cdot \dot\theta_p^2(t) - l \cdot \cos(\theta_p(t))\cdot \ddot\theta_p(t)\right)\\
+%%m_p\left(\underbrace{\ddot \theta_w(t) \cdot r_w}_{\mbox{1}} \underbrace{l \cdot \sin(\theta_p(t))\cdot \dot\theta_p^2(t)}_{\mbox{2}} - \underbrace{l \cdot \cos(\theta_p(t))\cdot \ddot\theta_p(t)}_{\mbox{3}}\right)
+%%\end{align*}
+%
+%
+%\textbf{Linearised term 1:}
+%\begin{align}
+%l \cdot \left(\bar{\dot \theta}_p^2(t) \cdot sin(\bar{\theta}_p(t)) + cos(\bar{\theta}_p(t)) \cdot \bar{\dot \theta}_p^2(t) \cdot \hat{\theta}_p(t) + 2 \cdot sin(\bar{\theta}_p(t)) \cdot \hat{\dot \theta}_p(t)\right)\nonumber
+%\\ = 0 \nonumber
+%\end{align}
+%
+%
+%\textbf{Linearised term 2:}
+%\begin{align}
+%l \cdot \left(\bar{\dot \theta}_p^2(t) \cdot sin(\bar{\theta}_p(t)) + cos(\bar{\theta}_p(t)) \cdot \bar{\dot \theta}_p^2(t) \cdot \hat{\theta}_p(t) + 2 \cdot sin(\bar{\theta}_p(t)) \cdot \hat{\dot \theta}_p(t)\right)\nonumber
+%\\ = 0 \nonumber
+%\end{align}
+%
+%\textbf{Linearised term 3:}
+%\begin{align}
+%l \cdot \left(\bar{\dot \theta}_p^2(t) \cdot sin(\bar{\theta}_p(t)) + cos(\bar{\theta}_p(t)) \cdot \bar{\dot \theta}_p^2(t) \cdot \hat{\theta}_p(t) + 2 \cdot sin(\bar{\theta}_p(t)) \cdot \hat{\dot \theta}_p(t)\right)\nonumber
+%\\ = 0 \nonumber
+%\end{align}
+
+
+
+
+
+
+%
+%Each of the four terms are linearised separately after which the linearised expression of each term is combined to form the linearised expression for the inverted pendulum in time domain. The value of $\bar{\theta}_p(t)$ is zero as the operating point is zero, this is used to shorten the linearised terms.
+%
+%\textbf{Linearised term 1:}
+%\begin{align}
+%(J_p + m_p \cdot l^2)(m_p + m_c) \cdot \hat{\ddot \theta}_p(t)\nonumber
+%\end{align}
+%\textbf{Linearised term 2:}
+%\begin{align}
+%(m_p^2 + m_c \cdot m_p)l \cdot g\left(sin(\bar{\theta}_p(t)) + cos(\bar{\theta}_p(t))\cdot \hat{\theta}_p(t)\right) \nonumber
+%\\= (m_p^2 + m_c \cdot m_p)l \cdot g \cdot cos(\bar{\theta}_p(t)) \cdot \hat{\theta}_p(t)\nonumber
+%\\= (m_p^2 + m_c \cdot m_p)l \cdot g \cdot \hat{\theta}_p(t)\nonumber
+%\end{align}
+%\textbf{Linearised term 3:}
+%\begin{align}
+%m_p^2 \cdot l^2 \cdot \left(cos^2(\bar{\theta}_p(t)) \cdot \bar{\ddot \theta}_p(t) -2\cdot sin(\bar{\theta}_p(t))\cdot cos(\bar{\theta}_p(t)) \cdot \bar{\ddot \theta}_p(t) \cdot \hat{\theta}_p(t) + cos^2(\bar{\theta}_p(t))\cdot \hat{\ddot \theta}_p(t)\right) \nonumber
+%\\= m_p^2 \cdot l^2 \cdot cos^2(\bar{\theta}_p(t))\cdot \hat{\ddot \theta}_p(t)\nonumber
+%\\= m_p^2 \cdot l^2 \cdot \hat{\ddot \theta}_p(t)\nonumber
+%\end{align}
+%
+%Since the term including $F_F(\theta_p(t))$ is linear the linearised model can now be formed from the linearised terms, note that the fourth term is not included as it equals zero:
+%\begin{align*}
+%\underbrace{(J_p + m_p \cdot l^2)(m_p + m_c) \cdot \hat{\ddot \theta}_p(t)\rule[-12pt]{0pt}{5pt}}_{\mbox{1}} = \underbrace{(m_p^2 + m_c \cdot m_p)l \cdot g \cdot \hat{\theta}_p(t)\rule[-12pt]{0pt}{5pt}}_{\mbox{2}} + \underbrace{m_p^2 \cdot l^2 \cdot \hat{\ddot \theta}_p(t)\rule[-12pt]{0pt}{5pt}}_{\mbox{3}} + 2 \cdot F_F(\theta(t))
+%\end{align*}
+%
+%\subsection{Model for relation between motor and pendulum}\label{app:secondModel}
+%The model describing the relation between the motors and the pendulum is:
+%
+%\begin{align*}
+%\ddot \theta_m(t) = \underbrace{\frac{(J_p + m_p\cdot l^2)\ddot \theta_p(t)}{m_p \cdot l \cdot \cos(\theta_p(t))\cdot r_w \cdot N_{ms} \cdot N_{sw}}\rule[-12pt]{0pt}{5pt}}_{\mbox{1}} - \underbrace{\frac{g \cdot sin(\theta_p(t)}{cos(\theta_p(t))\cdot r_w \cdot N_{ms} \cdot N_{sw}}\rule[-12pt]{0pt}{5pt}}_{\mbox{2}}
+%\end{align*}
+%
+%Each of the two terms are linearised separately after which the linearised expression of each term is combined to form the linearised expression for the relation between the motor and the pendulum in time domain. The value of $\bar{\theta}_p(t)$ is zero as the operating point is zero, this is used to shorten the linearised terms.
+%
+%\textbf{Linearised term 1:}
+%\begin{align}
+%\frac{(J_p + m_p \cdot l^2)\bar{\ddot \theta}_p(t)}{m_p \cdot l \cdot cos(\bar{\theta}_p(t)) \cdot r_w \cdot N_{ms} \cdot N_{sw}} + \frac{(J_p + m_p \cdot l^2)\bar{\ddot \theta}_p(t) \cdot sin(\bar{\theta}_p(t))}{m_p \cdot l \cdot cos(\bar{\theta}_p(t)) \cdot r_w \cdot N_{ms} \cdot N_{sw}} \cdot \hat{\theta}_p(t) \nonumber
+%\\+ \frac{(J_p + m_p \cdot l^2)}{m_p \cdot l \cdot cos(\bar{\theta}_p(t)) \cdot r_w \cdot N_{ms} \cdot N_{sw}}\hat{\ddot \theta}_p(t)\nonumber
+%\\ = \frac{(J_p + m_p \cdot l^2)}{m_p \cdot l \cdot r_w \cdot N_{ms} \cdot N_{sw}}\hat{\ddot \theta}_p(t)\nonumber
+%\end{align}
+%\textbf{Linearised term 2:}
+%\begin{align}
+%\frac{g \cdot sin(\bar{\theta}_p(t))}{cos(\bar{\theta}_p(t))} + \left(\frac{g \cdot sin^2(\bar{\theta}_p(t))}{cos^2(\bar{\theta}_p(t))} + \frac{g}{r_w \cdot N_{ms} \cdot N_{sw}}\right)\hat{\theta}_p(t)\nonumber
+%\\ = \frac{g}{r_w \cdot N_{ms} \cdot N_{sw}}\hat{\theta}_p(t)\nonumber
+%\end{align}
+%$\ddot \theta_p(t)$ is in itself linear. The linearised model for the relation between motors and the inverted pendulum is thus:
+%\begin{align*}
+%\ddot \theta_m(t) = \underbrace{\frac{(J_p + m_p \cdot l^2)}{m_p \cdot l \cdot r_w \cdot N_{ms} \cdot N_{sw}}\hat{\ddot \theta}_p(t)\rule[-12pt]{0pt}{5pt}}_{\mbox{1}} - \underbrace{\frac{g}{r_w \cdot N_{ms} \cdot N_{sw}} \hat{\theta}_p(t)\rule[-12pt]{0pt}{5pt}}_{\mbox{2}}\nonumber
+%\end{align*}
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%%\section{Taylor expansion}
+%\begin{align*}
+%\underbrace{\ddot \theta_p(t) \cdot l(m_p + m_c)\rule[-12pt]{0pt}{5pt}}_{\mbox{1}}
+%\underbrace{- \ddot \theta_p(t) \cdot l \cdot \cos^2(\theta(t)) \rule[-12pt]{0pt}{5pt}}_{\mbox{2}}&
+%\underbrace{+\dot \theta_p(t)^2 \cdot m_p \cdot l \cdot \sin(\theta_p(t))\cdot \cos(\theta)  \rule[-12pt]{0pt}{5pt}}_{\mbox{3}} \nonumber 
+%\end{align*}
+%\vspace{-1.1 cm}
+%\begin{align*}
+%=
+%\end{align*}
+%\vspace{-1.1 cm}
+%\begin{align}
+%\underbrace{\cos(\theta_p(t))\cdot F_F(t)\rule[-12pt]{0pt}{5pt}}_{\mbox{4}}
+%\underbrace{+ g \cdot \sin(\theta_p(t))\cdot m_p \rule[-12pt]{0pt}{5pt}}_{\mbox{5}}
+%\underbrace{+ g\cdot \sin(\theta(t))\cdot m_c \rule[-12pt]{0pt}{5pt}}_{\mbox{6}} \label{app:model_pen}
+%\end{align}
+%The terms in \autoref{app:model_pen} will be linearized individually before gathered in the final linearized expression for the system's model. \\
+%Term 1: \\ 
+%Is already a linear term.\newpar
+%Term 2:
+%\begin{align}
+%\bar{\ddot \theta}(t)\cdot m_p\cdot \cos(\bar{\theta}(t))+m_p\cdot l \cdot \bar{\ddot \theta}(t) \cdot (-2) \cos(\bar{\theta}(t))\cdot \sin(\bar{\theta}(t))\cdot \hat{\theta}(t)+m_p\cdot l \cdot \cos^2(\bar{\theta}(t))\cdot \hat{\ddot \theta}(t)\nonumber\\
+%=m_p\cdot l \cdot \cos^2(\bar{\theta}(t))\cdot \hat{\ddot \theta}(t)
+%\end{align}
+%Term 3:
+%\begin{align}
+%\bar{\dot \theta}(t)^2 \cdot m_p \cdot \sin(\bar{\theta}(t))\cdot \cos(\bar{\theta}(t))+\bar{\dot \theta}(t)^2 \cdot m_p \cdot (\cos^2(\bar{\theta}(t))-\sin^2(\bar{\theta}(t)))\cdot \hat{\theta}(t)+2\bar{\dot \theta}(t) \cdot m_p \cdot \sin(\bar{\theta}(t))\cdot \cos(\bar{\theta}(t))\nonumber \\ 
+%=0
+%\end{align}
+%Term 4:
+%\begin{align}
+%\cos(\bar{\theta}(t))\cdot F_F-\sin(\bar{\theta}(t))\cdot F_F\cdot \hat{\theta}(t)=F_F(\cos(\bar{\theta}(t))-\sin(\bar{\theta}(t))\cdot \hat{\theta}(t)
+%\end{align}
+%Term 5:
+%\begin{align}
+%g \cdot \sin(\bar{\theta}(t))\cdot m_p+g\cdot \cos(\bar{\theta}(t))\cdot m_p\cdot \hat{\theta}(t)=g\cdot m_p(\sin(\bar{\theta}(t))+\cos(\bar{\theta}(t))\cdot \hat{\theta}(t))
+%\end{align}
+%Term 6: 
+%\begin{align}
+%g\cdot \sin(\bar{\theta}(t))\cdot m_c+g\cdot \cos(\bar{\theta}(t))\cdot m_c \cdot \hat{\theta}(t)=g\cdot m_c(\sin(\bar{\theta}(t))+\cos(\bar{\theta}(t))\cdot \hat{\theta}(t))
+%\end{align}
+%
+%\begin{align*}
+%\underbrace{\hat{\ddot \theta}_p(t) \cdot l(m_p + m_c)\rule[-12pt]{0pt}{5pt}}_{\mbox{1}}&\underbrace{-m_p\cdot l \cdot \cos^2(\bar{\theta}_p(t))\cdot \hat{\ddot \theta}_p(t)\rule[-12pt]{0pt}{5pt}}_{\mbox{2}}
+%\end{align*}
+%\vspace{-1.1 cm}
+%\begin{align*}
+%=
+%\end{align*}
+%\vspace{-1.1 cm}
+%\begin{align}
+%\underbrace{F_F(t)(\cos(\bar{\theta}_p(t))-\sin(\bar{\theta}_p(t))\rule[-12pt]{0pt}{5pt}}_{\mbox{4}}+\underbrace{g\cdot m_p(\sin(\bar{\theta}_p(t))+\cos(\bar{\theta}_p(t))\cdot \hat{\theta}_p(t)) \hat{\theta}_p(t)\rule[-12pt]{0pt}{5pt}}_{\mbox{5}}+&\underbrace{g\cdot m_c(\sin(\bar{\theta}_p(t))+\cos(\bar{\theta}_p(t))\cdot \hat{\theta}_p(t))\rule[-12pt]{0pt}{5pt}}_{\mbox{6}}\label{app:eq:linear_pen_final}
+%\end{align}

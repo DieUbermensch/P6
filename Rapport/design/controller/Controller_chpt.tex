@@ -1,0 +1,16 @@
+\chapter{Controller Design}\label{ch:Controller}
+The previous chapter had the purpose of deriving a model for the segway's behaviour to allow a controller to be designed. The control system can be an open or closed loop depending on which type of system that is to be controlled. The difference is whether or not the output of the controller is fed back and affects the input of the controller block. As the segway has to be able to balance in an upright position, it is necessary to feedback control it, see \autoref{fig:controllerBlock.andrea}, as the system model can never be perfect. In this chapter, a controller for the system is to be designed.\vspace{-0.5 cm}
+\begin{figure}[H]
+\centering
+\scalebox{0.8}{
+\input{figures/controllerBlock.andrea}}
+\caption{Feedback loop of the system, with the controller, $D$, highlighted.}
+\label{fig:controllerBlock.andrea}
+\end{figure}
+\vspace{-0.7 cm}
+\autoref{fig:controllerBlock.andrea} shows the feedback loop of the system. It is a negative feedback loop, meaning the output signal, $Y$, of the plant, $G$, is fed back through the sensors block, $H$. This feedback signal is then subtracted from the reference signal, $R$, yielding an error signal, $E$, which is the input to the controller block, $D$. This will result in the signal, $U$, between the controller and plant block. As described in Section \ref{controlLoopOverview}, the sensor block is assumed equal to 1, and will therefore not be seen in the transfer function for the controller.
+%First the model of the system is analysed with the purpose of determining how it behaves without a controller to obtain knowledge about what the controller shall do. Afterwards controller types are presented with the purpose of selecting one. This leads to the actual design of a controller for the system. Lastly the designed controller shall be verified by simulations and implemented in the segway. An overview of the system's model and requirements is presented in the following section.
+\\In the following sections, requirements for the controller and choice of controller design is presented. The controller is the designed and verified by simulations and lastly implemented in the segway.
+\input{design/controller/overview.tex}
+\input{design/controller/designcontrollersec.tex}
+%\input{design/controller/verificationcontroller.tex}

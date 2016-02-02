@@ -1,0 +1,36 @@
+\section{List of Requirements \label{requirements}}
+Based upon the previous considerations, requirements for the segway can be determined. The requirements are as follows:
+
+\subsection*{Functional Requirements}
+\begin{enumerate}
+\item The segway must be able to stabilise itself in an upright equilibrium state.\label{funcReqBalance}
+\item The segway must be able to drive forward and backwards without causing the segway to fall over.
+\item The segway must be able to turn without causing the segway to fall over.
+\item The segway may not fall over when pushed lightly.
+\item The user must be able to make the segway drive by a wireless controller.
+\item The user must be able to make the segway turn by a wireless controller.
+\item The user must be able to receive data from the segway on a wireless controller.
+\end{enumerate}
+\subsection*{Performance Requirements}
+The following requirements describes the desired performance of the segway. The first list of requirements is for the time domain, determining the dynamic behaviour of the segway. %Note that these requirements are made based on choices made by the project group and therefore chosen.
+\begin{itemize}
+\item Steady state error: 0 \%
+\item Rise time: $\leq$ 1 s
+\item Settling time: $\leq$ 3 s
+\item Overshoot: $\leq$ 10 \% 
+\end{itemize}
+The following list describes the desired stability margins, i.e. the frequency domain requirements:
+\begin{itemize}
+\item Phase margin: $\geq 80\degree$
+\item Gain margin: $\geq$ 6 dB
+\end{itemize}
+
+Now that the requirements are set, the development of the system can begin. This includes designing the controller which is to stabilize the system, together with a filter design and the design of the remote controller and the communication protocol. In the following section, a model of the system is derived, as this is needed to make a controller for the system.
+%\begin{itemize}
+%\item Rise time: TBD
+%\item Settling time: TBD
+%\item Overshoot: TBD
+%\item Steady state error: TBD
+%\item 
+%
+%\end{itemize}
