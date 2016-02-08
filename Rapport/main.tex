@@ -2,6 +2,7 @@
 \input{00setup/preamble.tex}% package inclusion and set up of the document
 \input{00setup/macros.tex}% my new macros
 \input{00setup/glossaries.tex} % glossaries stuff
+\input{00setup/Tikz.tex}
 \usepackage{lastpage}
 \usepackage{epstopdf}
 \usepackage{graphicx} %Matlab figures
@@ -87,31 +88,33 @@
 
 % %% PART 1 %%
 
-%\part{Preanalysis}
+\part{Preanalysis}
 
 \include{1Chapters/1Preanalysis/PreanalysisMAIN}
 
 
+\part{Design \& implementation}
+
+\include{1Chapters/2Requirements/RequirementsMAIN}
+
+\include{1Chapters/3SystemOverview/SystemOverviewMAIN}
+
+\include{1Chapters/Gate/GateMAIN}
+
+\include{1Chapters/Equalizer/EqualizerMAIN}
+
+\include{1Chapters/Limiter/LimiterMAIN}
+
+\part{Acceptance Test \& Conclusion}
 
 
+\include{1Chapters/EndFormalia/Conclusion}
 
-%\include{preanalysis/Overview/Segway_overview}
-%\input{preanalysis/systemPresentation.tex}
-%\include{design/system_overview}
-%\include{preanalysis/requirements}
-%\include{design/hal-functions}
-%\part{Design \& implementation}
-%\include{design/modelling/introduction_modelling}
-%
-%\input{design/modelling/system_verification.tex}
-%\input{design/controller/Controller_chpt.tex}
-%\input{design/digital_filters}
-%\include{design/communication}
-%
-%\include{acceptance/acceptance_test}
-%
-%\include{0formalia/conclusion}
-%\include{0formalia/discussion}
+\include{1Chapters/EndFormalia/Optimization}
+
+\include{1Chapters/EndFormalia/Perspectivation}
+
+\include{1Chapters/EndFormalia/Discussion}
 
 %% literaturliste og bilag %%
 \bookmarksetup{startatroot}% this is it
@@ -128,7 +131,8 @@
  \renewcommand{\thesection}{\Alph{section}}
  \setcounter{section}{0}
  \part{Appendix}
- \addcontentsline{toc}{chapter}{Appendix}
+ \appendix
+% \addcontentsline{toc}{chapter}{Appendix}
 \include{2Appendix/Appendix}
 
 
