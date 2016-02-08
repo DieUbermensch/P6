@@ -1,0 +1,15 @@
+\section{Transfer function terms}
+When combining the three models and rearranging to obtain a transfer funtion with the voltage as input and the angle as output. 
+The transferfunction is the following:
+\begin{equation}
+\frac{\Theta_p}{V_a}=\frac{k_t\cdot s}{R_a(s^3\cdot A + s^2 \cdot B + s(C_D)-E)}
+\end{equation}
+
+Where the terms are:
+\begin{align}
+A=((J_p+m_p\cdot l^2)(m_p+m_c)-m_p^2\cdot l^2 + 2\frac{(J_p+m_p\cdot l^2)J_T}{m_p\cdot l\cdot r_w \cdot N_{ms}\cdot N_{sw}})\\
+B=s\cdot 2(\frac{k_t\cdot k_e}{R_a}+B_T)(\frac{(J_p+m_p\cdot l^2)J_T}{m_p\cdot l\cdot r_w \cdot N_{ms}\cdot N_{sw}})\\
+C=2\cdot \frac{g\cdot J_T}{r_w\cdot N_{ms}\cdot N_{sw}}\\
+D=(m_p^2+m_c\cdot m_p)l\cdot g\\
+E=\frac{2}{s}(\frac{k_t\cdot k_e}{R_a}+B_T)\cdot \frac{g}{r_w\cdot N_{ms}\cdot N_{sw}}
+\end{align}

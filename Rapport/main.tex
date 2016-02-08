@@ -1,7 +1,7 @@
 
-\input{setup/preamble.tex}% package inclusion and set up of the document
-\input{setup/macros.tex}% my new macros
-\input{setup/glossaries.tex} % glossaries stuff
+\input{00setup/preamble.tex}% package inclusion and set up of the document
+\input{00setup/macros.tex}% my new macros
+\input{00setup/glossaries.tex} % glossaries stuff
 \usepackage{lastpage}
 \usepackage{epstopdf}
 \usepackage{graphicx} %Matlab figures
@@ -39,15 +39,15 @@
 
 %\includepdf[pages={1}]{forside.pdf}
 \newgeometry{left = 0 cm, right = 0 cm, bottom=1cm}
-\include{formalia/frontpage}
+\include{0formalia/frontpage}
 \restoregeometry
 
 \pagestyle{fancy}
-\include{formalia/colophon}
+\include{0formalia/colophon}
 
 \newgeometry{left = 2.5 cm, right = 2.5 cm, bottom=2.5cm}
 %\newgeometry{bottom=2.5cm}
-\include{formalia/titlepage}
+\include{0formalia/titlepage}
 \restoregeometry
 
 %\restoregeometry
@@ -66,7 +66,7 @@
 
 \cleardoublepage
 
-\include{formalia/preface}
+\include{0formalia/preface}
 \cleardoublepage
 
 
@@ -89,35 +89,34 @@
 
 %\part{Preanalysis}
 
-%\include{preanalysis/introduction}
+\include{1Chapters/1Preanalysis/PreanalysisMAIN}
+
+
+
+
+
 %\include{preanalysis/Overview/Segway_overview}
 %\input{preanalysis/systemPresentation.tex}
 %\include{design/system_overview}
 %\include{preanalysis/requirements}
 %\include{design/hal-functions}
-\include{preanalysis/introduction}
-\include{preanalysis/Overview/Segway_overview}
-\input{preanalysis/systemPresentation.tex}
-\include{design/system_overview}
-\include{preanalysis/requirements}
-\include{design/hal-functions}
 %\part{Design \& implementation}
-\include{design/modelling/introduction_modelling}
-
-\input{design/modelling/system_verification.tex}
-\input{design/controller/Controller_chpt.tex}
-\input{design/digital_filters}
-\include{design/communication}
-
-\include{acceptance/acceptance_test}
-
-\include{formalia/conclusion}
-\include{formalia/discussion}
+%\include{design/modelling/introduction_modelling}
+%
+%\input{design/modelling/system_verification.tex}
+%\input{design/controller/Controller_chpt.tex}
+%\input{design/digital_filters}
+%\include{design/communication}
+%
+%\include{acceptance/acceptance_test}
+%
+%\include{0formalia/conclusion}
+%\include{0formalia/discussion}
 
 %% literaturliste og bilag %%
 \bookmarksetup{startatroot}% this is it
 \addtocontents{toc}{\bigskip}% perhaps as well
-\bibliography{setup/mybib}
+\bibliography{00setup/mybib}
 \label{bib:mybiblio}
  
  \newpage
@@ -130,9 +129,7 @@
  \setcounter{section}{0}
  \chapter*{Appendix}
  \addcontentsline{toc}{chapter}{Appendix}
-\input{appendix/segwayParameters.tex}
-\include{appendix/motorMeasurements}
-\input{appendix/apptaylor.tex}
+\include{2Appendix/motorMeasurements}
 
 
 \end{document}
