@@ -26,3 +26,11 @@
 *.xdy
 *.thm
 *.tdo
+*.auxlock
+*.dpth
+*.md5
+
+
+# Specific files
+
+main.pdf

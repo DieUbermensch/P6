@@ -26,3 +26,8 @@
 *.xdy
 *.thm
 *.tdo
+*.auxlock
+*.dpth
+*.md5
+
+main.pdf
