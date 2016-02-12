@@ -7,7 +7,8 @@
 
 \usetikzlibrary{external}
 \tikzexternalize[prefix=tikz/]
-
+\pgfdeclarelayer{bg}    % declare background layer
+\pgfsetlayers{bg,main}
 %\usepackage{silence}
 %\WarningsOff[pgfplots]
 %\WarningFilter{latex}{Marginpar on page}
@@ -15,9 +16,9 @@
 
 
 %%% Tikz Magic %%%
-\tikzstyle{block} = [draw, fill=blue!20, rectangle, minimum height=3em, minimum width=6em]
+\tikzstyle{block} = [draw,rounded corners , rectangle, minimum height=3em, minimum width=6em]
 \tikzstyle{Integrator} = [draw, fill=blue!20, rectangle, minimum height=5mm, minimum width=5mm]
-\tikzstyle{Twolineblock} = [draw, fill=blue!20, rectangle, minimum height=3em, minimum width=6em, text width = 6em, align=center]       
+\tikzstyle{Twolineblock} = [draw,rounded corners , rectangle, minimum height=3em, minimum width=6em, text width = 6em, align=center]     
 \tikzstyle{sum} = [draw, fill=blue!20, circle, node distance=1cm]
 \tikzstyle{input} = [coordinate]
 \tikzstyle{output} = [coordinate]
