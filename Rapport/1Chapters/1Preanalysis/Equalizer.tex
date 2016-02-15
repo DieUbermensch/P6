@@ -1,9 +1,15 @@
-\section{Equalizing sound}
+\section{Manipulating sound}
+
+It is a generally accepted fact that sound is perceived differently from person to person. As a result, many products concerning sound is equipped with options to manipulate the sound produced in speaker system. In 1933 Harvey Fletcher and Wilden A. Munson conducted an experiment concerning the perception on sound based on subjective measurements from a diverse group of people. This experiment was later used to support the creation of IS0 226:2003 and the Fletcher-Munson equal-loudness contours, depicted on \figref{fig:SoundPerceived}, which is accepted as the human perception of sound.
 
 \begin{figure}[H]
 \centering
 \tikzsetnextfilename{FletcherMunson}
 \input{figures/FletcherMunson.tex}
-\caption{Fletcher-Munson sound perceived }
+\caption{Equal-loudness contours curves from ISO 226:2003, showing how sound is perceived}
 \label{fig:SoundPerceived}
 \end{figure}
+
+\figref{fig:SoundPerceived} shows how sound in general is perceived. Without dwelling too much on the psychoacoustics behind the curves, it gives the designer of a speaker a guideline for what to aim for in frequency response. The curves show how lower frequency sound is naturally attenuated. From the contours it is possible to show how speech is located in the area enhanced by the ear. It all makes sense from a evolutionary perspective since our hearing is optimized for hearing/talking with other people. \\
+To compensate for this perception in speaker systems an equalizer is usually implemented. The equalizer is used for attenuating and amplifying different areas in the frequency response. 
+
