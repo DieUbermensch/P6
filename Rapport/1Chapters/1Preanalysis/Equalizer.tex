@@ -24,6 +24,24 @@ Since the perception of sound is non linear, there is need for equalization of t
 
 \subsection{Distortion}
 
+$A_4$ note at 440 Hz
 
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.47\textwidth}
+	\tikzsetnextfilename{EvenTHD}
+	\input{figures/EvenTHD.tex}
+	\caption{A 1 kHz sinusoid with an amplitude of 1.5.}
+	\label{fig:EvenTHD}
+\end{subfigure}
+\hspace{6mm} 
+\begin{subfigure}[t]{0.47\textwidth}
+	\tikzsetnextfilename{OddTHD}
+	\input{figures/OddTHD.tex}
+	\caption{A 1 kHz Hz clipped sinusoid.}
+	\label{fig:OddTHD}
+\end{subfigure}
+\caption{The difference between a unaffected signal and a clipped signal. As the maximum output is 1, the signal is hard clipped because of the limitation.}
+\end{figure}
 
 
