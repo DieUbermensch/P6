@@ -1,40 +1,42 @@
 \section{Audio clipping}
 
-Audio clipping is a 
+Audio clipping is a situation that occurs when output signal has a greater signal level than the device is capable of producing. If the signal level is beyond the limitation of the device, the device will cut the signal to its maximum level. This kind of clipping is called hard clipping and is often undesirable. In \autoref{fig:audioclipping} an example of how hard clipping affects a 1 kHz sinusoid with a peak amplitude of 1.5. The maximum level of a device is simulated to be 1.
 
 \begin{figure}[H]
 \centering
 \begin{subfigure}[t]{0.47\textwidth}
 	\tikzsetnextfilename{clippingClean}
 	\input{figures/clippingClean.tex}
-	\caption{A 1 kHz sinusoid with an amplitude of 1.5.}
+	\caption{A 1 kHz sinusoid with a peak amplitude on 1.5.}
 	\label{fig:clippingClean}
 \end{subfigure}
 \hspace{6mm} 
 \begin{subfigure}[t]{0.47\textwidth}
 	\tikzsetnextfilename{clippingDist}
 	\input{figures/clippingDist.tex}
-	\caption{A 1 kHz Hz clipped sinusoid.}
+	\caption{A 1 kHz clipped sinusoid.}
 	\label{fig:clippingDist}
 \end{subfigure}
 \caption{The difference between a unaffected signal and a clipped signal. As the maximum output is 1, the signal is hard clipped because of the limitation.}
+\label{fig:audioclipping}
 \end{figure}
 
+Hard clipping lowers the sound quality if the clipping was not intended. Hard clipping will create wave distortions with a sharp edge at the limit
 
 \begin{figure}[H]
 \centering
 \begin{subfigure}[t]{0.47\textwidth}
 	\tikzsetnextfilename{clippingCleanFFT}
 	\input{figures/clippingCleanFFT.tex}
-	\caption{A 1 kHz sinusoid with an amplitude of 1.5.}
+	\caption{FFT of a 1 kHz sinusoid without clipping.}
 	\label{fig:clippingCleanFFT}
 \end{subfigure}
 \hspace{6mm} 
 \begin{subfigure}[t]{0.47\textwidth}
 	\tikzsetnextfilename{clippingDistFFT}
 	\input{figures/clippingDistFFT.tex}
-	\caption{A 1 kHz Hz clipped sinusoid.}
+	\caption{FFT of a 1 kHz sinusoid with clipping.}
 	\label{fig:clippingDistFFT}
 \end{subfigure}
-\caption{The difference between a unaffected signal and a clipped signal. As the maximum output is 1, the signal is hard clipped because of the limitation.}
+\caption{The Fast Fourier Transformation(FFT) of the 1 kHz sinusoid with a peak amplitude on 1.5. The sampling frequency is 48 kHz and a Kaiser-window function with a $\beta$-value of 38 is applied to both signal.}
 \end{figure}
