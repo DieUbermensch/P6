@@ -22,16 +22,15 @@ Audio clipping is a situation that occurs when the output signal has a greater s
 \end{figure}
 
 Hard clipping lowers the sound quality if the clipping is not intended, and should therefore be avoided. The wave distortion created by the sharp edge results in a square-wave-like signal. This creates additional uneven harmonics to the signal i.e. 3rd, 5th, 7th and 9th, which are unpleasant to listen to as previously stated. Since the clipping creates the square-wave-like signal, the generation of the additional uneven harmonics can be described as the Fourier series of a square-wave. The Fourier series of a square-wave is given as:
-\begin{align}
+\begin{align}\label{eq:fourier_series_square}
 f(t) &= \frac{4}{\pi} \sum_{n=1}^{\infty} \frac{\sin (\omega_0 t \cdot (2n-1))}{(2n-1)} \\
 	 &= \frac{4}{\pi} (\sin(\omega_0 t) + \frac{1}{3}\sin(3 \omega_0 t) + \frac{1}{5}\sin(5 \omega_0 t) + \, ... \,)
 \end{align}
 \begin{where}
-\va{$\omega_0$}{is square-wave frequency}{rad/s}\\
+\va{$\omega_0$}{is the fundamental frequency of the square-wave.}{rad/s}\\
 \end{where}
 
-
-The spectrum of the 1 kHz unclipped and clipped sinusoid from \autoref{fig:audioclipping} is shown in \autoref{fig:audioclippingFFT}.
+As seen in \autoref{eq:fourier_series_square}, the function of a square-wave signal consists of a fundamental frequency $\omega_0$ and uneven harmonics to the fundamental frequency. This can also be shown in a spectrum analysis of the 1 kHz clipped sinusoid from \autoref{fig:audioclipping} in \autoref{fig:audioclippingFFT}.
 
 \begin{figure}[H]
 \centering
@@ -48,11 +47,12 @@ The spectrum of the 1 kHz unclipped and clipped sinusoid from \autoref{fig:audio
 	\caption{FFT of a 1 kHz sinusoid with clipping.}
 	\label{fig:clippingDistFFT}
 \end{subfigure}
-\caption{The Fast Fourier Transformation(FFT) of the 1 kHz sinusoid with a peak amplitude on 1.5. The sampling frequency is 48 kHz and a Kaiser-window function with a $\beta$-value of 38 is applied to both signal.}
+\caption{The Fast Fourier Transformation(FFT) of the 1 kHz sinusoid with a peak amplitude on 1.5. }
 \label{fig:audioclippingFFT}
 \end{figure}
 
-The amplitude difference between the fundamental frequency on 1 kHz and the 3rd harmonic frequency is 16 dB and is noticeable. 
+%The sampling frequency is 48 kHz and a Kaiser-window function with a $\beta$-value of 38 is applied to both signal.
+The amplitude difference between the fundamental frequency on 1 kHz and the 3rd harmonic frequency is 16 dB, which is approximately a factor of 6.3 in linear scale. 
 
 
 
