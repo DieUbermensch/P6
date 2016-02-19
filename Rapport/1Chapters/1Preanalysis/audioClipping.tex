@@ -21,7 +21,17 @@ Audio clipping is a situation that occurs when the output signal has a greater s
 \label{fig:audioclipping}
 \end{figure}
 
-Hard clipping lowers the sound quality if the clipping is not intended, and should therefore be avoided. The wave distortion created by the sharp edge results in a square-wave-like signal. This creates additional uneven harmonics to the signal i.e. 3rd, 5th, 7th and 9th, which are unpleasant to listen to as previously stated. The spectrum of the 1 kHz unclipped and clipped sinusoid from \autoref{fig:audioclipping} is shown in \autoref{fig:audioclippingFFT}.
+Hard clipping lowers the sound quality if the clipping is not intended, and should therefore be avoided. The wave distortion created by the sharp edge results in a square-wave-like signal. This creates additional uneven harmonics to the signal i.e. 3rd, 5th, 7th and 9th, which are unpleasant to listen to as previously stated. Since the clipping creates the square-wave-like signal, the generation of the additional uneven harmonics can be described as the Fourier series of a square-wave. The Fourier series of a square-wave is given as:
+\begin{align}
+f(t) &= \frac{4}{\pi} \sum_{n=1}^{\infty} \frac{\sin (\omega_0 t \cdot (2n-1))}{(2n-1)} \\
+	 &= \frac{4}{\pi} (\sin(\omega_0 t) + \frac{1}{3}\sin(3 \omega_0 t) + \frac{1}{5}\sin(5 \omega_0 t) + \, ... \,)
+\end{align}
+\begin{where}
+\va{$\omega_0$}{is square-wave frequency}{rad/s}\\
+\end{where}
+
+
+The spectrum of the 1 kHz unclipped and clipped sinusoid from \autoref{fig:audioclipping} is shown in \autoref{fig:audioclippingFFT}.
 
 \begin{figure}[H]
 \centering
