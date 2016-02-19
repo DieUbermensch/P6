@@ -18,12 +18,31 @@ It is a generally accepted fact that sound is perceived differently from person 
 
 Further investigation shows that frequency spectrum needed for understanding speech lies in 300 Hz to 3.4 Khz \citep{sou:VoiceFundamentals}. From the evolutionary perspective it makes sense that human hearing is optimized for hearing other humans talk. The main conclusion from ISO 223:2003 is that people will have a tendency to wanting more gain in lower frequency sound. This problem is resolved by equalization.
 
-\subsection{Equalization}
+\subsection{The need for equalizing}
 
-Since the perception of sound is non linear, there is need for equalization of the different frequencies in order to hear the lower sound just as much as the midrange and high frequency spectrum. By implementing an equalizer it is possible to manipulate different areas of the frequency. Conforming with \autoref{fig:SoundPerceived}, it can be seen that an increase in bass could be needed if played at a low \gls{SPL} 
+Since the perception of sound is non linear, there is need for equalization of the different frequencies in order to hear the lower sound just as much as the midrange and high frequency spectrum. By implementing an equalizer it is possible to manipulate different areas of the frequency. Conforming with \autoref{fig:SoundPerceived}, it can be seen that an increase in bass could be needed if played at a low \gls{SPL}.
 
+Played at the lowest audible sound, $2\cdot 10^{-5}$ Pa, it shows a need of 20 dB amplification to hear a 100 Hz tone just as loud as a 1 kHz tone. But having this amplification in the midrange frequencies will create very loud tones since it is naturally amplified by almost 10 dB. 
+
+The variations create a larger demand on the speaker system and there are different ways of solving it. Some of the solutions could consist of:
+
+\begin{itemize}
+\item Turning the speaker systems volume up to flatten out the curves.
+\item Create amplifications at specific static frequencies which would the be gained or attenuated respectively.
+\item Create the desired frequency response of the entire 20 - 20.000 Hz spectrum and send the signal through that system.
+\end{itemize} 
+
+Disregarding the first option, the second and third options is what is known as a \textit{Band Equalizer} and \textit{Parametric Equalizer}. These will be further described in \autoref{sec:tech_equalizer}.
 
 \subsection{Distortion}
+
+Lastly it is important to know what type of sound is wanted in the system. What is desirable and what is unwanted. This is known as distortion. This section covers only the fundamentals of distortion, particular harmonic distortion, and describes what this project will be trying to achieve and avoid. Harmonic distortion is usually negative and unwanted. Distortion however, comes in two categories:
+\begin{itemize}
+\item Odd Distortion
+\item Even Distortion
+\end{itemize}
+These are classified by looking at the fundamental frequency. 
+
 
 $A_4$ note at 440 Hz
 
@@ -32,17 +51,17 @@ $A_4$ note at 440 Hz
 \begin{subfigure}[t]{0.47\textwidth}
 	\tikzsetnextfilename{EvenTHD}
 	\input{figures/EvenTHD.tex}
-	\caption{A 1 kHz sinusoid with an amplitude of 1.5.}
+	\caption{A signal consisting of multiple even harmonics}
 	\label{fig:EvenTHD}
 \end{subfigure}
 \hspace{6mm} 
 \begin{subfigure}[t]{0.47\textwidth}
 	\tikzsetnextfilename{OddTHD}
 	\input{figures/OddTHD.tex}
-	\caption{A 1 kHz Hz clipped sinusoid.}
+	\caption{A signal consisting of multiple odd harmonics}
 	\label{fig:OddTHD}
 \end{subfigure}
-\caption{The difference between a unaffected signal and a clipped signal. As the maximum output is 1, the signal is hard clipped because of the limitation.}
+\caption{A Spectrum}
 \end{figure}
 
 
