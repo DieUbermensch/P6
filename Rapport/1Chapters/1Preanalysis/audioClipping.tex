@@ -1,6 +1,6 @@
 \section{Audio clipping}
 
-Audio clipping is a situation that occurs when the output signal has a greater signal level than the device is capable of producing. If the signal level is beyond the limitation of the device, the device will cut the signal to its maximum level. This kind of clipping is called hard clipping and is often undesirable. In \autoref{fig:audioclipping} an example of how hard clipping affects a 1 kHz sinusoid with a peak amplitude of 1.5. The maximum output level of the device is simulated to be 1.
+Audio clipping is a situation that occurs when the output signal has a greater signal level than the device is capable of producing. If the signal level is beyond the limitation of the device, the device will cut the signal to its maximum level. This type of clipping is called hard clipping and is often undesirable. In \autoref{fig:audioclipping} an example of how hard clipping affects a 1 kHz sinusoid with a peak amplitude of 1.5. The maximum output level of the device is simulated to be 1.
 
 \begin{figure}[H]
 \centering
@@ -21,7 +21,7 @@ Audio clipping is a situation that occurs when the output signal has a greater s
 \label{fig:audioclipping}
 \end{figure}
 
-Hard clipping lowers the sound quality if the clipping is not intended, and should therefore be avoided. The wave distortion created by the sharp edge results in a square-wave-like signal. This creates additional uneven harmonics to the signal i.e. 3rd, 5th, 7th and 9th, which are unpleasant to listen to as previously stated. Since the clipping creates the square-wave-like signal, the generation of the additional uneven harmonics can be described as the Fourier series of a square-wave. The Fourier series of a square-wave is given as:
+Hard clipping lowers the sound quality if the clipping is not intended, and should therefore be avoided. The wave distortion created by the sharp edge results in a square-wave-like signal. This creates additional uneven harmonics to the signal i.e. 3rd, 5th, 7th and 9th, which are unpleasant to listen to as previously stated. Since the clipping creates the square-wave-like signal, the generation of the additional uneven harmonics can be described in the Fourier series of a square-wave. The Fourier series of a square-wave is given as:
 \begin{align}\label{eq:fourier_series_square}
 f(t) &= \frac{4}{\pi} \sum_{n=1}^{\infty} \frac{\sin (\omega_0 t \cdot (2n-1))}{(2n-1)} \\
 	 &= \frac{4}{\pi} (\sin(\omega_0 t) + \frac{1}{3}\sin(3 \omega_0 t) + \frac{1}{5}\sin(5 \omega_0 t) + \, ... \,)
@@ -52,7 +52,7 @@ As seen in \autoref{eq:fourier_series_square}, the function of a square-wave sig
 \end{figure}
 
 %The sampling frequency is 48 kHz and a Kaiser-window function with a $\beta$-value of 38 is applied to both signal.
-The amplitude difference between the fundamental frequency on 1 kHz and the 3rd harmonic frequency is 16 dB, which is approximately a factor of 6.3 in linear scale. 
+The amplitude difference between the fundamental frequency on 1 kHz and the 3rd harmonic frequency is 16 dB, which is approximately a factor of 6.3 in linear scale. If the signal is clipped even more, the amplitude difference between the fundamental frequency and uneven harmonics decreases thus making it even more unpleasant. Therefore audio clipping should be avoided or minimized.
 
 
 
