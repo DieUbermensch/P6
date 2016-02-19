@@ -1,6 +1,6 @@
 \section{Sound Perception}
 
-It is a generally accepted fact that sound is perceived differently from person to person. As a result, many products concerning sound is equipped with options to manipulate the sound produced in speaker system. In 1933 Harvey Fletcher and Wilden A. Munson conducted an experiment concerning the perception on sound based on subjective measurements from a diverse group of people. This experiment was later used to support the creation of IS0 226:2003 and the Fletcher-Munson equal-loudness contours, depicted on \autoref{fig:SoundPerceived}, which is accepted as the human perception of sound.
+It is a generally accepted fact that sound is perceived differently from person to person. As a result, many products concerning sound is equipped with options to manipulate the sound produced in speaker system. But the main issue still lies in how we perceive sound and what do we really want to hear. In 1933 Harvey Fletcher and Wilden A. Munson conducted an experiment concerning the perception on sound based on subjective measurements from a diverse group of people. This experiment was later used to support the creation of IS0 226:2003 and the Fletcher-Munson equal-loudness contours, depicted on \autoref{fig:SoundPerceived}, which is accepted as the human perception of sound.
 
 \begin{figure}[H]
 \centering
@@ -16,7 +16,7 @@ It is a generally accepted fact that sound is perceived differently from person 
 \item High frequency, $ 5.5 \text{ kHz} < $, sound are again attenuated.
 \end{itemize}
 
-Further investigation shows that frequency spectrum needed for understanding speech lies in 300 Hz to 3.4 Khz \citep{sou:VoiceFundamentals}. From the evolutionary perspective it makes sense that human hearing is optimized for hearing other humans talk. 
+Further investigation shows that frequency spectrum needed for understanding speech lies in 300 Hz to 3.4 Khz \citep{sou:VoiceFundamentals}. From the evolutionary perspective it makes sense that human hearing is optimized for hearing other humans talk. The main conclusion from ISO 223:2003 is that people are worse at 
 
 \subsection{Equalization}
 Since the perception of sound is non linear, there is need for equalization of the different frequencies in order to hear the lower sound just as much as the midrange and high frequency spectrum. With   
@@ -43,5 +43,24 @@ $A_4$ note at 440 Hz
 \end{subfigure}
 \caption{The difference between a unaffected signal and a clipped signal. As the maximum output is 1, the signal is hard clipped because of the limitation.}
 \end{figure}
+
+
+\begin{table}[H]
+\centering
+\ra{1.3}
+\begin{tabular}{S[table-format=1]ccccccc} \toprule
+    {Harmonic} & {$A_2$} & {$A_3$} & {$A_4$} & {$A_5$} & {$A_6$} & {$A_7$} & {$A_8$} \\ \midrule 
+    $F_o$  & 110  & 220  & \textcolor{red}{440}   & \textcolor{red}{880}  & \textcolor{red}{1760}  & \textcolor{red}{3520}   & 7040   \\ \bottomrule
+    2      & 220  & 440  & \textcolor{red}{880}   & 1760 & 3520   & 7040   & 14080  \\ 
+    3      & 330  & 660  & 1320  & 2640 & 5280   & 10560  & 21120  \\
+    4      & 440  & 880  & \textcolor{red}{1760}  & 3520 & 7040   & 14080  & 28160  \\ 
+    5      & 550  & 1100 & 2200  & 4400 & 8800   & 17600  & 35200  \\ \midrule
+    6      & 660  & 1320 & 2640  & 5280 & 10560  & 21120  & 42240  \\
+    7      & 770  & 1540 & 3080  & 6160 & 12320  & 24640  & 49280  \\
+    8      & 880  & 1760 & \textcolor{red}{3520}  & 7040 & 14080  & 28160  & 56320  \\ 
+    9      & 990  & 1980 & 3960  & 7920 & 15840  & 31680  & 63360  \\ \bottomrule
+\end{tabular}
+\caption{Table of A-note, $F_o$ , harmonics in accordance with their fundamental tone frequency. Every unit is in [Hz].\citep{sou:NoteA}}
+\end{table}
 
 
