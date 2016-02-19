@@ -1,8 +1,8 @@
 \chapter{Introduction}
 
-The market for wireless loudspeakers has been growing considerably the last few years. According to \gls{CTA} the revenue of wireless loudspeakers has been growing 69\% between 2013 and 2014 \cite{sou:CTA}. The high growth is partly due to the increasing usage of smartphones and music streaming services, such as Spotify. As a result it is now more desirable for some users to wirelessly connect the smartphone to an audio system through for instance Bluetooth. By doing so, the user can use the smartphone to remote control his or her audio system. 
+The market for Bluetooth loudspeakers has been growing considerably the last few years. According to \gls{CTA} the revenue of wireless loudspeakers has been growing 69 \% between 2013 and 2014 \cite{sou:CTA}. The high growth is partly due to the increasing usage of smartphones and music streaming services, such as Spotify. As a result it is now more desirable for some users to wirelessly connect the smartphone to an audio system through for instance Bluetooth. By doing so, the user can use the smartphone to remote control his or her audio system. 
 
-Wireless loudspeakers are primarily active loudspeakers and are usually small. As a result the loudspeaker may not play very loud and the performance of the loudspeaker in the bass region is limited. To compensate for the lack of bass the user may want to boost the bass in order to achieve a more rich sound. However because of the limited size, increasing the bass can potentially lead to sound distortions caused by clipping or enclosure vibrations. The measurements in \autoref{fig:introduction} shows how a boost in the bass region can distort the sound.
+Wireless loudspeakers are primarily active loudspeakers and are usually small. As a result of the physical limitations the loudspeaker may not play very loud and the performance of the loudspeaker in the bass region is limited. To compensate for the lack of bass the user may want to boost the bass in order to achieve a more rich sound. However because of the limited size, increasing the bass can potentially lead to sound distortions caused by clipping or enclosure vibrations. The measurements in \autoref{fig:introduction} shows how a boost in the bass region can distort the sound.
 
 \begin{figure}[H]
 \centering
@@ -11,27 +11,28 @@ Wireless loudspeakers are primarily active loudspeakers and are usually small. A
 \caption{Comparison between two recorded 100 Hz sinusoid by a microphone. Increasing the gain by 12 dB at 100 Hz distorts the signal significantly. The used loudspeaker is an active Music Angel Best Friendz.}
 \label{fig:introduction}
 \end{figure}
+% The measurements are recorded by a microphone and shows the distorted sound created by a small active loudspeaker. The loudspeaker is set to playback a 100 Hz sinusoid with two different amplitudes. 
+As shown in \autoref{fig:introduction}, pushing the loudspeaker too much will create distorted sound caused by the vibrations created by the speaker enclosure. This results in an unpleasant sound which is undesirable for the user. The purpose of this project is therefore to improve the maximum output of a speaker while not changing the physical limitation or breaking it. 
+% The purpose of this project is therefore to develop an real-time embedded system to an wireless active loudspeaker which can both improve the sound and avoid distortion created by enclosure vibration and clipping.
 
-The measurements are recorded by a microphone and shows the distorted sound created by a small active loudspeaker. The loudspeaker is set to playback a 100 Hz sinusoid with two different amplitudes. As shown in \autoref{fig:introduction}, pushing the loudspeaker too much will create distorted sound caused by the vibrations created by the speaker enclosure. This results in an unpleasant sound which is undesirable for the user. The purpose of this project is therefore to develop an real-time embedded system to an wireless active loudspeaker which can both improve the sound and avoid distortion created by enclosure vibration and clipping.
 
+% \section{Cooperation with DALI}
 
-\section{Cooperation with DALI}
+% This project will be developed in cooperation with Danish Audiophile Loudspeaker Industries (DALI). DALI is a loudspeaker manufacture from Denmark and mainly produces and develops high quality passive and active loudspeakers. An advantages of cooperating with DALI is their many years of experience in developing high quality loudspeakers. Because of this, they can help with stressing out actual problems in wireless loudspeakers.
 
-This project will be developed in cooperation with Danish Audiophile Loudspeaker Industries (DALI). DALI is a loudspeaker manufacture from Denmark and mainly produces and develops high quality passive and active loudspeakers. An advantages of cooperating with DALI is their many years of experience in developing high quality loudspeakers. Because of this, they can help with stressing out actual problems in wireless loudspeakers.
+% Among their products, they have recently introduced a new version of their DALI Zensor-series, which is the DALI Zensor 1 AX and DALI Zensor 5 AX. The  new versions include a amplification stage with a Bluetooth module, so the user can interface to the loudspeakers wirelessly. The amplification stage includes a pre-amplifier with a embedded system included. The purpose of the embedded system is to process the audio signal to achieve a better sound.
+% As this project primarily concerns improving the sound of small wireless loudspeakers without changing the physical dimensions of the loudspeaker, the starting point will be to develop a embedded system based upon one of their loudspeaker system. In this project the system will be developed upon the DALI Zensor 1 AX.
 
-Among their products, they have recently introduced a new version of their DALI Zensor-series, which is the DALI Zensor 1 AX and DALI Zensor 5 AX. The  new versions include a amplification stage with a bluetooth module, so the user can interface to the loudspeakers wirelessly. The amplification stage includes a pre-amplifier with a embedded system included. The purpose of the embedded system is to process the audio signal to achieve a better sound.
-As this project primarily concerns improving the sound of small wireless loudspeakers without changing the physical dimensions of the loudspeaker, the starting point will be to develop a embedded system based upon one of their loudspeaker system. In this project the system will be developed upon the DALI Zensor 1 AX.
+% \begin{figure}[H]
+% \centering
+% \includegraphics[width=0.5\textwidth]{figures/dali_zensor_1_ax.jpg}
+% \caption{The system will be developed upon the DALI Zensor 1 AX.}
+% \label{fig:dali_zensor}
+% \end{figure}
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.5\textwidth]{figures/dali_zensor_1_ax.jpg}
-\caption{The system will be developed upon the DALI Zensor 1 AX.}
-\label{fig:dali_zensor}
-\end{figure}
+% In the following sections, there will be an analysis on how the sound can be improved.
 
-In the following sections, there will be an analysis on how the sound can be improved.
-
-\todo[inline]{Ikke gennemlæst}
+% \todo[inline]{Ikke gennemlæst}
 
 
 

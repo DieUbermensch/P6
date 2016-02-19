@@ -1,6 +1,6 @@
 \section{Audio clipping}
 
-Audio clipping is a situation that occurs when output signal has a greater signal level than the device is capable of producing. If the signal level is beyond the limitation of the device, the device will cut the signal to its maximum level. This kind of clipping is called hard clipping and is often undesirable. In \autoref{fig:audioclipping} an example of how hard clipping affects a 1 kHz sinusoid with a peak amplitude of 1.5. The maximum level of a device is simulated to be 1.
+Audio clipping is a situation that occurs when the output signal has a greater signal level than the device is capable of producing. If the signal level is beyond the limitation of the device, the device will cut the signal to its maximum level. This kind of clipping is called hard clipping and is often undesirable. In \autoref{fig:audioclipping} an example of how hard clipping affects a 1 kHz sinusoid with a peak amplitude of 1.5. The maximum output level of the device is simulated to be 1.
 
 \begin{figure}[H]
 \centering
@@ -21,7 +21,17 @@ Audio clipping is a situation that occurs when output signal has a greater signa
 \label{fig:audioclipping}
 \end{figure}
 
-Hard clipping lowers the sound quality if the clipping was not intended. Hard clipping will create wave distortions with a sharp edge at the limit
+Hard clipping lowers the sound quality if the clipping is not intended, and should therefore be avoided. The wave distortion created by the sharp edge results in a square-wave-like signal. This creates additional uneven harmonics to the signal i.e. 3rd, 5th, 7th and 9th, which are unpleasant to listen to as previously stated. Since the clipping creates the square-wave-like signal, the generation of the additional uneven harmonics can be described as the Fourier series of a square-wave. The Fourier series of a square-wave is given as:
+\begin{align}
+f(t) &= \frac{4}{\pi} \sum_{n=1}^{\infty} \frac{\sin (\omega_0 t \cdot (2n-1))}{(2n-1)} \\
+	 &= \frac{4}{\pi} (\sin(\omega_0 t) + \frac{1}{3}\sin(3 \omega_0 t) + \frac{1}{5}\sin(5 \omega_0 t) + \, ... \,)
+\end{align}
+\begin{where}
+\va{$\omega_0$}{is square-wave frequency}{rad/s}\\
+\end{where}
+
+
+The spectrum of the 1 kHz unclipped and clipped sinusoid from \autoref{fig:audioclipping} is shown in \autoref{fig:audioclippingFFT}.
 
 \begin{figure}[H]
 \centering
@@ -39,4 +49,17 @@ Hard clipping lowers the sound quality if the clipping was not intended. Hard cl
 	\label{fig:clippingDistFFT}
 \end{subfigure}
 \caption{The Fast Fourier Transformation(FFT) of the 1 kHz sinusoid with a peak amplitude on 1.5. The sampling frequency is 48 kHz and a Kaiser-window function with a $\beta$-value of 38 is applied to both signal.}
+\label{fig:audioclippingFFT}
 \end{figure}
+
+The amplitude difference between the fundamental frequency on 1 kHz and the 3rd harmonic frequency is 16 dB and is noticeable. 
+
+
+
+
+
+
+
+
+
+
