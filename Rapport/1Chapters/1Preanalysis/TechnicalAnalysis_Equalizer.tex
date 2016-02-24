@@ -1,1 +1,16 @@
 \section{Equalizer}\label{sec:tech_equalizer}
+\subsection{The need for equalizing}
+
+Since the perception of sound is non linear, there is need for equalization of the different frequencies in order to hear the lower sound just as much as the midrange and high frequency spectrum. By implementing an equalizer it is possible to manipulate different areas of the frequency. Conforming with \autoref{fig:SoundPerceived}, it can be seen that an increase in bass could be needed if played at a low \gls{SPL}.
+
+Played at the lowest audible sound, $2\cdot 10^{-5}$ Pa, it shows a need of 20 dB amplification to hear a 100 Hz tone just as loud as a 1 kHz tone. But having this amplification in the midrange frequencies will create very loud tones since it is naturally amplified by almost 10 dB. 
+
+The variations create a larger demand on the speaker system and there are different ways of solving it. Some of the solutions could consist of:
+
+\begin{itemize}
+\item Turning the speaker systems volume up to flatten out the curves.
+\item Create amplifications at specific static frequencies which would the be gained or attenuated respectively.
+\item Create the desired frequency response of the entire 20 - 20.000 Hz spectrum and send the signal through that system.
+\end{itemize} 
+
+Disregarding the first option, the second and third options is what is known as a \textit{Band Equalizer} and \textit{Parametric Equalizer}. These will be further described in \autoref{sec:tech_equalizer}.
