@@ -1,5 +1,10 @@
 \section{Sound Perception}
 
+\begin{itemize}
+\item There shall be a reason for implementing an Equalizer.
+\end{itemize}
+
+
 It is a generally accepted fact that sound is perceived differently from person to person. As a result, many products concerning sound is equipped with options to manipulate the sound produced in speaker system. But the main issue still lies in how we perceive sound and what do we really want to hear. In 1933 Harvey Fletcher and Wilden A. Munson conducted an experiment concerning the perception on sound based on subjective measurements from a diverse group of people. This experiment was later used to support the creation of IS0 226:2003 and the Fletcher-Munson equal-loudness contours, depicted on \autoref{fig:SoundPerceived}, which is accepted as the human perception of sound.
 
 \begin{figure}[H]
@@ -18,21 +23,7 @@ It is a generally accepted fact that sound is perceived differently from person 
 
 Further investigation shows that frequency spectrum needed for understanding speech lies in 300 Hz to 3.4 Khz \citep{sou:VoiceFundamentals}. From the evolutionary perspective it makes sense that human hearing is optimized for hearing other humans talk. The main conclusion from ISO 223:2003 is that people will have a tendency to wanting more gain in lower frequency sound. This problem is resolved by equalization.
 
-\subsection{The need for equalizing}
 
-Since the perception of sound is non linear, there is need for equalization of the different frequencies in order to hear the lower sound just as much as the midrange and high frequency spectrum. By implementing an equalizer it is possible to manipulate different areas of the frequency. Conforming with \autoref{fig:SoundPerceived}, it can be seen that an increase in bass could be needed if played at a low \gls{SPL}.
-
-Played at the lowest audible sound, $2\cdot 10^{-5}$ Pa, it shows a need of 20 dB amplification to hear a 100 Hz tone just as loud as a 1 kHz tone. But having this amplification in the midrange frequencies will create very loud tones since it is naturally amplified by almost 10 dB. 
-
-The variations create a larger demand on the speaker system and there are different ways of solving it. Some of the solutions could consist of:
-
-\begin{itemize}
-\item Turning the speaker systems volume up to flatten out the curves.
-\item Create amplifications at specific static frequencies which would the be gained or attenuated respectively.
-\item Create the desired frequency response of the entire 20 - 20.000 Hz spectrum and send the signal through that system.
-\end{itemize} 
-
-Disregarding the first option, the second and third options is what is known as a \textit{Band Equalizer} and \textit{Parametric Equalizer}. These will be further described in \autoref{sec:tech_equalizer}.
 
 \subsection{Distortion}
 
