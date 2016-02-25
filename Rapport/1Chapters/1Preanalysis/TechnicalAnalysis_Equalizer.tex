@@ -1,4 +1,26 @@
 \section{Equalizer}\label{sec:tech_equalizer}
+
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.47\textwidth}
+	\tikzsetnextfilename{parametric_eq_preanalysis_Q}
+	\input{figures/parametric_eq_preanalysis_Q.tex}
+	\caption{A 1 kHz sinusoid with a peak amplitude on 1.5.}
+	\label{fig:parametric_q}
+\end{subfigure}
+\hspace{6mm} 
+\begin{subfigure}[t]{0.47\textwidth}
+	\tikzsetnextfilename{parametric_eq_preanalysis_db}
+	\input{figures/parametric_eq_preanalysis_db.tex}
+	\caption{A 1 kHz clipped sinusoid.}
+	\label{fig:parametric_db}
+\end{subfigure}
+\caption{The difference between a unaffected signal and a clipped signal. As the maximum output is 1, the signal is hard clipped because of the limitation.}
+\label{fig:audioclipping}
+\end{figure}
+
+
 \subsection{The need for equalizing}
 
 Since the perception of sound is non linear, there is need for equalization of the different frequencies in order to hear the lower sound just as much as the midrange and high frequency spectrum. By implementing an equalizer it is possible to manipulate different areas of the frequency. Conforming with \autoref{fig:SoundPerceived}, it can be seen that an increase in bass could be needed if played at a low \gls{SPL}.
