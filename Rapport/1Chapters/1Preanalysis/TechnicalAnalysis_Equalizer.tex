@@ -3,20 +3,28 @@
 
 \begin{figure}[H]
 \centering
-\begin{subfigure}[t]{0.47\textwidth}
+\hspace*{-5mm}
+\begin{subfigure}[t]{0.3\textwidth}
 	\tikzsetnextfilename{parametric_eq_preanalysis_Q}
 	\input{figures/parametric_eq_preanalysis_Q.tex}
-	\caption{A 1 kHz sinusoid with a peak amplitude on 1.5.}
+	\caption{Q-value.}
 	\label{fig:parametric_q}
 \end{subfigure}
-\hspace{6mm} 
-\begin{subfigure}[t]{0.47\textwidth}
+\hspace{2mm} 
+\begin{subfigure}[t]{0.3\textwidth}
 	\tikzsetnextfilename{parametric_eq_preanalysis_db}
 	\input{figures/parametric_eq_preanalysis_db.tex}
-	\caption{A 1 kHz clipped sinusoid.}
+	\caption{Gain.}
 	\label{fig:parametric_db}
 \end{subfigure}
-\caption{The difference between a unaffected signal and a clipped signal. As the maximum output is 1, the signal is hard clipped because of the limitation.}
+\hspace{2mm}
+\begin{subfigure}[t]{0.3\textwidth}
+	\tikzsetnextfilename{parametric_eq_preanalysis_fc}
+	\input{figures/parametric_eq_preanalysis_fc.tex}
+	\caption{Center frequency.}
+	\label{fig:parametric_fc}
+\end{subfigure}
+\caption{There are three parameters that can be changed for a parametric equalizer.}
 \label{fig:audioclipping}
 \end{figure}
 
