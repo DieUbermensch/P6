@@ -28,9 +28,7 @@ The platform must be able to interface with an ADC and DAC with the bus type \gl
 The 32 bit resolution is prefered by DALI over a 24 bit resolution because it would give a increased \gls{SNR} of 48 dB. These demands lead to the analyzation of which platform would be the most optimal.   
 
 \subsection*{Choice of processor platform}
-For the choice of processor platform different types of platforms could be used, such as a microcontroller or a \gls{DSP}. These two types of processors have different advantage and disadvantages which needs to be analyzed to find the most optimal platform for the demands above.
-
-The basic difference between a microcontroller and a \gls{DSP} is that the \gls{DSP} is designed for fast calculating and moving data while the microcontroller is designed to be more flexible in its use and have more features.
+For the choice of processor platform different types of platforms could be used, such as an ASIC chip, an \gls{FPGA}, a microcontroller ($\mu$C) or a \gls{DSP}. These types of processors have different advantage and disadvantages which needs to be analyzed to find the most optimal platform for the demands above. The basic difference between the types of platforms is given in \autoref{tb:summary_DSP_hardware_implementation}. 
 
 \begin{table}[H]
 \centering
@@ -48,8 +46,11 @@ The basic difference between a microcontroller and a \gls{DSP} is that the \gls{
 \label{tb:summary_DSP_hardware_implementation}
 \end{table}
 
-Because the need for filtering in an equalizer is needed and the high performance demands from above the natural choice of platform would be a \gls{DSP} without further consideration.     
 
+Because filtering is needed in an equalizer and the high performance demands from above the natural choice of platform would be a \gls{DSP}. An asic chip would not be viable as a prototype platform because it does not have any flexibility. The FPGA lacks flexibility, has an increased design time and is not good at signal processing. The microcontroller has       
+
+
+a microcontroller and a \gls{DSP} is that the \gls{DSP} is designed for fast calculating and moving data while the microcontroller is designed to be more flexible in its use and have more features.
 
 
 
