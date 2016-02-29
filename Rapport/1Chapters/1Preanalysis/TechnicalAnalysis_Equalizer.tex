@@ -1,7 +1,20 @@
 \section{Equalizer}\label{sec:tech_equalizer}
 Since the perception of sound is non linear, there is need for equalization of the different frequencies in order to hear the lower sound just as much as the midrange and high frequency spectrum. By implementing an equalizer it is possible to manipulate different areas of the frequency.
 
-Generally speaking, there are two common types of equalizer designs. The first type of equalizer is the graphic equalizer. The graphic equalizer consist of multiple bandpass filters with a center frequency 
+Generally speaking, there are two common types of equalizer designs used in audio. The first type of equalizer is the graphic equalizer. The graphic equalizer consist of multiple bandpass filters each with a fixed center frequency as seen in \autoref{fig:graphic_eq}.
+
+\begin{figure}[H]
+\centering
+\tikzsetnextfilename{graphic_eq}
+\input{figures/graphic_eq.tex}
+\caption{Illustration of a 6-band graphic equalizer.}
+\label{fig:graphic_eq}
+\end{figure}
+
+To achieve the desired frequency response of the filter, a gain is applied to the desired bands. Typically a graphic equalizer will have one slider available for each band of the equalizer, the user can to increase or decrease to change the frequency response.
+
+An alternative to the graphic equalizer is the parametric equalizer. The parametric does not have a fixed center frequency and bandwidth contrary the graphic equalizer, thus giving the user more flexibility, to achieve the desired frequency response. Implementing the parametric equalizer gives the user, besides changing the gain, the possibility to change the bandwidth and center frequency as shown in \autoref{fig:parametric_equalizer}.
+
 
 \begin{figure}[H]
 \centering
@@ -27,7 +40,7 @@ Generally speaking, there are two common types of equalizer designs. The first t
 	\label{fig:parametric_fc}
 \end{subfigure}
 \caption{There are three parameters that can be changed for a parametric equalizer.}
-\label{fig:audioclipping}
+\label{fig:parametric_equalizer}
 \end{figure}
 
 
@@ -38,6 +51,7 @@ Generally speaking, there are two common types of equalizer designs. The first t
 \caption{Combining all three parameters.}
 \label{fig:parametric_eq_preanalysis_comb}
 \end{figure}
+
 
 
 
