@@ -1,9 +1,24 @@
 \section{Equalizer}\label{sec:tech_equalizer}
+Since the perception of sound is non linear, there is need for equalization of the different frequencies in order to hear the lower sound just as much as the midrange and high frequency spectrum. By implementing an equalizer it is possible to manipulate different areas of the frequency.
+
+Generally speaking, there are two common types of equalizer designs used in audio. The first type of equalizer is the graphic equalizer. The graphic equalizer consist of multiple bandpass filters each with a fixed center frequency as seen in \autoref{fig:graphic_eq}.
+
+\begin{figure}[H]
+\centering
+\tikzsetnextfilename{graphic_eq}
+\input{figures/graphic_eq.tex}
+\caption{Illustration of a 6-band graphic equalizer.}
+\label{fig:graphic_eq}
+\end{figure}
+
+To achieve the desired frequency response of the filter, a gain is applied to the desired bands. Typically a graphic equalizer will have one slider available for each band of the equalizer, the user can to increase or decrease to change the frequency response.
+
+An alternative to the graphic equalizer is the parametric equalizer. The parametric does not have a fixed center frequency and bandwidth contrary the graphic equalizer, thus giving the user more flexibility, to achieve the desired frequency response. Implementing the parametric equalizer gives the user, besides changing the gain, the possibility to change the bandwidth and center frequency as shown in \autoref{fig:parametric_equalizer}.
 
 
 \begin{figure}[H]
 \centering
-\hspace*{-5mm}
+\hspace*{-1cm}
 \begin{subfigure}[t]{0.3\textwidth}
 	\tikzsetnextfilename{parametric_eq_preanalysis_Q}
 	\input{figures/parametric_eq_preanalysis_Q.tex}
@@ -25,22 +40,33 @@
 	\label{fig:parametric_fc}
 \end{subfigure}
 \caption{There are three parameters that can be changed for a parametric equalizer.}
-\label{fig:audioclipping}
+\label{fig:parametric_equalizer}
 \end{figure}
 
 
-\subsection{The need for equalizing}
+\begin{figure}[H]
+\centering
+\tikzsetnextfilename{parametric_eq_preanalysis_comb}
+\input{figures/parametric_eq_preanalysis_comb.tex}
+\caption{Combining all three parameters.}
+\label{fig:parametric_eq_preanalysis_comb}
+\end{figure}
 
-Since the perception of sound is non linear, there is need for equalization of the different frequencies in order to hear the lower sound just as much as the midrange and high frequency spectrum. By implementing an equalizer it is possible to manipulate different areas of the frequency. Conforming with \autoref{fig:SoundPerceived}, it can be seen that an increase in bass could be needed if played at a low \gls{SPL}.
 
-Played at the lowest audible sound, $2\cdot 10^{-5}$ Pa, it shows a need of 20 dB amplification to hear a 100 Hz tone just as loud as a 1 kHz tone. But having this amplification in the midrange frequencies will create very loud tones since it is naturally amplified by almost 10 dB. 
 
-The variations create a larger demand on the speaker system and there are different ways of solving it. Some of the solutions could consist of:
 
-\begin{itemize}
-\item Turning the speaker systems volume up to flatten out the curves.
-\item Create amplifications at specific static frequencies which would the be gained or attenuated respectively.
-\item Create the desired frequency response of the entire 20 - 20.000 Hz spectrum and send the signal through that system.
-\end{itemize} 
+%\subsection{The need for equalizing}
 
-Disregarding the first option, the second and third options is what is known as a \textit{Band Equalizer} and \textit{Parametric Equalizer}. These will be further described in \autoref{sec:tech_equalizer}.
+%Since the perception of sound is non linear, there is need for equalization of the different frequencies in order to hear the lower sound just as much as the midrange and high frequency spectrum. By implementing an equalizer it is possible to manipulate different areas of the frequency. Conforming with \autoref{fig:SoundPerceived}, it can be seen that an increase in bass could be needed if played at a low \gls{SPL}.
+
+%Played at the lowest audible sound, $2\cdot 10^{-5}$ Pa, it shows a need of 20 dB amplification to hear a 100 Hz tone just as loud as a 1 kHz tone. But having this amplification in the midrange frequencies will create very loud tones since it is naturally amplified by almost 10 dB. 
+
+%The variations create a larger demand on the speaker system and there are different ways of solving it. Some of the solutions could consist of:
+
+%\begin{itemize}
+%\item Turning the speaker systems volume up to flatten out the curves.
+%\item Create amplifications at specific static frequencies which would the be gained or attenuated respectively.
+%\item Create the desired frequency response of the entire 20 - 20.000 Hz spectrum and send the signal through that system.
+%\end{itemize} 
+
+%Disregarding the first option, the second and third options is what is known as a \textit{Band Equalizer} and \textit{Parametric Equalizer}. These will be further described in \autoref{sec:tech_equalizer}.

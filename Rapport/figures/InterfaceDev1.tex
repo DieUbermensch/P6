@@ -1,0 +1,29 @@
+\begin{tikzpicture}
+\draw[thick] (2,0) circle [radius=0.5] node at (-1,-0) {Q - value};
+\draw[thick] (2,1.5) circle [radius=0.5] node at (-1,1.5) {Gain};
+\draw[thick] (2,3) circle [radius=0.5] node at (-1,3) {Center frequency};
+\draw node at (-1,4.5)[font=\LARGE]{Band};
+\draw[thick][fill=green, draw=black](1.5,4) rectangle(2.5,5) node at (2,4.5)[font=\LARGE]{1};
+
+\draw[thick] (4,0) circle [radius=0.5];
+\draw[thick] (4,1.5) circle [radius=0.5];
+\draw[thick] (4,3) circle [radius=0.5];
+\draw[thick][fill=red, draw=black](1.5+2,4) rectangle(2.5+2,5) node at (2+2,4.5)[font=\LARGE]{2};
+
+\draw[thick] (6,0) circle [radius=0.5];
+\draw[thick] (6,1.5) circle [radius=0.5];
+\draw[thick] (6,3) circle [radius=0.5];
+\draw[thick][fill=red, draw=black](1.5+4,4) rectangle(2.5+4,5) node at (2+4,4.5)[font=\LARGE]{3};
+
+\draw[thick](6,0) -- (6.5,0);
+\draw[thick](6,1.5) -- (6.5,1.5);
+\draw[thick](6,3) -- (6.5,3);
+
+\draw[thick](4,0) -- (4.5,0);
+\draw[thick](4,1.5) -- (4.5,1.5);
+\draw[thick](4,3) -- (4.5,3);
+
+\draw[thick](2,0) -- (2.5,0);
+\draw[thick](2,1.5) -- (2.5,1.5);
+\draw[thick](2,3) -- (2.5,3);
+\end{tikzpicture}
