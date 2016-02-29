@@ -1,22 +1,6 @@
 \section{Processor Platform}
 This section will reference the demands for the processor platform given by DALI and analyse which processor platform will be optimal for these condition. 
 
-\begin{table}[H]
-\centering
-\ra{1.3}
-\begin{tabular}{S[table-format=1]ccccccc} \toprule
-    {Harmonic} & {$A_2$} & {$A_3$} & {$A_4$} & {$A_5$} & {$A_6$} & {$A_7$} & {$A_8$} \\ \midrule 
-    $F_o$  & 110  & 220  & 440   & 880  & 1760   & 3520   & 7040   \\ \bottomrule
-    2      & 220  & 440  & 880   & 1760 & 3520   & 7040   & 14080  \\ 
-    3      & 330  & 660  & 1320  & 2640 & 5280   & 10560  & 21120  \\
-    4      & 440  & 880  & 1760  & 3520 & 7040   & 14080  & 28160  \\ 
-    5      & 550  & 1100 & 2200  & 4400 & 8800   & 17600  & 35200  \\ \bottomrule 
-\end{tabular}
-\caption{her kommer til at være en tabel omkring DSP og sammenligning med andre platforme. Fra Signal Processing bogen (Wiley, 3rd)}
-\end{table}
-
-
-
 \subsection*{Demands for the platform}
 The demands for the processor platform have been derived in a mail corresodance with DALI 
 \todo[inline]{Reference til CD}
@@ -47,6 +31,22 @@ The 32 bit resolution is prefered by DALI over a 24 bit resolution because it wo
 For the choice of processor platform different types of platforms could be used, such as a microcontroller or a \gls{DSP}. These two types of processors have different advantage and disadvantages which needs to be analyzed to find the most optimal platform for the demands above.
 
 The basic difference between a microcontroller and a \gls{DSP} is that the \gls{DSP} is designed for fast calculating and moving data while the microcontroller is designed to be more flexible in its use and have more features.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{lllll}
+\toprule
+ & \multicolumn{1}{c}{ASIC} & \multicolumn{1}{c}{FPGA} & \multicolumn{1}{c}{$\mu$P/$\mu$C} & \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}}Digital signal\\ processor\end{tabular}} \\ \hline
+\textbf{Flexibility} & None & Limited & High & High \\
+\textbf{Design time} & Medium & Medium & Short & Short \\
+\textbf{Power consumption} & Low-medium & Medium-high & Medium high & Low-medium \\
+\textbf{Performance} & High & Low-medium & Low-medium & Medium-high \\
+\textbf{Development cost} & Medium & Low & Low & Low \\ 
+\textbf{Production cost} & Low-medium & Medium-high & Medium-high & Low-medium \\ \bottomrule 
+\end{tabular}
+\caption{Summary of DSP hardware implementations \citep{WileyDSP}.}
+\label{tb:summary_DSP_hardware_implementation}
+\end{table}
 
 Because the need for filtering in an equalizer is needed and the high performance demands from above the natural choice of platform would be a \gls{DSP} without further consideration.     
 
