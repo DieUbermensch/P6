@@ -1,0 +1,26 @@
+\section{Human Hearing}
+
+\begin{itemize}
+\item There shall be a reason for implementing an Equalizer.
+\end{itemize}
+
+
+It is a generally accepted fact that sound is perceived differently from person to person. As a result, many products concerning sound is equipped with options to manipulate the sound produced in speaker system. But the main issue still lies in how we perceive sound and what do we really want to hear. In 1933 Harvey Fletcher and Wilden A. Munson conducted an experiment concerning the perception on sound based on subjective measurements from a diverse group of people. This experiment was later used to support the creation of IS0 226:2003 and the Fletcher-Munson equal-loudness contours, depicted on \autoref{fig:SoundPerceived}, which is accepted as the human perception of sound.
+
+\begin{figure}[H]
+\centering
+\tikzsetnextfilename{FletcherMunson}
+\input{figures/FletcherMunson.tex}
+\caption{Equal-loudness contours curves from ISO 226:2003, showing how sound is perceived. The curves shows the perception at specific SPL(phon) at 1Khz. The range of the curves span 0 - 90 dB SPL with an 10 dB interval \citepalias{ISO226}.}
+\label{fig:SoundPerceived}
+\end{figure}
+\autoref{fig:SoundPerceived} shows how sound in general is perceived. Without dwelling too much on the psychoacoustics behind the curves, it gives the designer of a speaker a guideline for what to aim for in frequency response. From the curves, the following perceptions can be deducted:
+\begin{itemize}
+\item Lower frequency, $ < 700$ Hz, sound are attenuated.
+\item Midrange frequency, $700 \text{ Hz} < $ and $ > 5.5$ kHz, sound are enhanced/amplified.
+\item High frequency, $ 5.5 \text{ kHz} < $, sound are again attenuated.
+\end{itemize}
+
+Further investigation shows that frequency spectrum needed for understanding speech lies in 300 Hz to 3.4 Khz \citep{sou:VoiceFundamentals}. From the evolutionary perspective it makes sense that human hearing is optimized for hearing other humans talk. The main conclusion from ISO 223:2003 is that people will have a tendency to wanting more gain in lower frequency sound. This problem is resolved by equalization.
+
+

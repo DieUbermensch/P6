@@ -1,0 +1,50 @@
+\section{Distortion}
+
+Lastly it is important to know what type of sound is wanted in the system. What is desirable and what is unwanted. This is known as distortion. This section covers only the fundamentals of distortion, particular harmonic distortion, and describes what this project will be trying to achieve and avoid. Harmonic distortion is usually negative and unwanted. Distortion however, comes in two categories:
+\begin{itemize}
+\item Odd Distortion
+\item Even Distortion
+\end{itemize}
+These are classified by looking at the fundamental frequency and is then categorized by how far away, indexed by whole integers, they are from the fundamental frequency. Looking at an ordinary tone, such as $A_4$ which is a tone at 440 Hz the concept is easier to describe. This tone is usually used to tune audio equipment such as guitars and alike. Conforming \autoref{fig:ODDevenTHD} a spectral analysis of $A_4$ tone is shown. \autoref{fig:EvenTHD} shows the 440 Hz tone with even harmonics and \autoref{fig:OddTHD} with odd harmonics. 
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.47\textwidth}
+	\tikzsetnextfilename{EvenTHD}
+	\input{figures/EvenTHD.tex}
+	\caption{$A_4$ consisting of multiple even harmonics}
+	\label{fig:EvenTHD}
+\end{subfigure}
+\hspace{6mm} 
+\begin{subfigure}[t]{0.47\textwidth}
+	\tikzsetnextfilename{OddTHD}
+	\input{figures/OddTHD.tex}
+	\caption{$A_4$ consisting of multiple odd harmonics}
+	\label{fig:OddTHD}
+\end{subfigure}
+\caption{A Spectral analysis of $A_4$, a 440 Hz tone.}
+\label{fig:ODDevenTHD}
+\end{figure}
+
+Generally speaking it is desirable to have even harmonics since they are perceived as "warm and full" sound. Odd harmonics are perceived as "cold and metallic". The reason why it usually is most desirable, is due to the fact that all even harmonics represent the same tone but at one octave higher in frequency. This can be seen in \autoref{tab:NoteA4}, where the tones $A_5$, $A_6$, $A_7$ corresponds to the second, fourth and eight harmonic.
+
+\begin{table}[H]
+\centering
+\ra{1.3}
+\begin{tabular}{S[table-format=1]ccccccc} \toprule
+    {Harmonic} & {$A_2$} & {$A_3$} & {$A_4$} & {$A_5$} & {$A_6$} & {$A_7$} & {$A_8$} \\ \midrule 
+    $F_o$  & 110  & 220  & \textcolor{red}{440}   & \textcolor{red}{880}  & \textcolor{red}{1760}  & \textcolor{red}{3520}   & 7040   \\ \bottomrule
+    2      & 220  & 440  & \textcolor{red}{880}   & 1760 & 3520   & 7040   & 14080  \\ 
+    3      & 330  & 660  & 1320  & 2640 & 5280   & 10560  & 21120  \\
+    4      & 440  & 880  & \textcolor{red}{1760}  & 3520 & 7040   & 14080  & 28160  \\ 
+    5      & 550  & 1100 & 2200  & 4400 & 8800   & 17600  & 35200  \\ \midrule
+    6      & 660  & 1320 & 2640  & 5280 & 10560  & 21120  & 42240  \\
+    7      & 770  & 1540 & 3080  & 6160 & 12320  & 24640  & 49280  \\
+    8      & 880  & 1760 & \textcolor{red}{3520}  & 7040 & 14080  & 28160  & 56320  \\ 
+    9      & 990  & 1980 & 3960  & 7920 & 15840  & 31680  & 63360  \\ \bottomrule
+\end{tabular}
+\caption{Table of A-note, $F_o$ , harmonics in accordance with their fundamental tone frequency. Every unit is in [Hz].\citep{sou:NoteA}}
+\label{tab:NoteA4}
+\end{table}
+
+Looking at \autoref{fig:OddTHD} where a lot of odd harmonics have been introduced there are no direct connection. Should a odd harmonic be of equal magnitude to the fundamental a entirely  new tone will be introduced. This is usually not desirable, but can in certain musics genres still be the goal. This is why you can not directly say you want even or odd harmonics, but in most cases the goal is even harmonics if any.
