@@ -3,8 +3,22 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%% Problem analyse %%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{The Active Speaker and limitations}
-
-This chapter will enlighten the problems concerning distortion in a loudspeaker and what creates distortion. How is sound perceived, what is heard as warm sound and what is heard as distortion. 
+This chapter will analyze an active speaker, analyze how a human percieves sound and investigate problems concerning distortion in a loudspeaker. An active loudspeaker is a passive loudspeaker with a build in amplifier as seen on \autoref{fig:speaker_block}. \\
+\begin{figure}[H]
+\centering
+\tikzsetnextfilename{SpeakerBlock}
+\input{figures/SpeakerBlock.tex}
+\caption{Block diagram of an active speaker.}
+\label{fig:speaker_block}
+\end{figure}
+The amplifier gives the active loudspeaker more flexibility than a passive loudspeaker because an active loudspeaker can be incorporated with for example a wireless module for streaming, which makes the only wiring the 230 V connector. An example of the backside of an active speaker is seen on \autoref{fig:dali_zensor_ax}, which shows the Zensor 1 AX's from DALI.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\textwidth]{figures/dali_zensor_1_ax.jpg}
+\caption{DALI Zensor 1 AX.}
+\label{fig:dali_zensor_ax}
+\end{figure}
+On this loudspeaker you are able to connect via cable or via Bluetooth and change volume and source directly on the speaker itself which makes it very flexible in its use. With this very general description a more detailed analysis of how an active loudspeaker is build and how its performance can create distortion will now follow. 
 
 \input{1Chapters/1Preanalysis/Amplifier.tex}
 

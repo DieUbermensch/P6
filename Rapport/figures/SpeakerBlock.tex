@@ -1,0 +1,20 @@
+\begin{tikzpicture}
+%% Kasser %%
+\node [block, fill=white] (AudioSource) at (0,0) {Audio Source};
+
+%% DSP %%
+\node [block, fill=white] (Amplifier) at ($(AudioSource)+(3.5,0)$) {Amplifier};
+\node [block, fill=white] (Driver) at ($(Amplifier)+(3.5,0)$) {Driver};
+
+%% Store Blokke %%
+\begin{pgfonlayer}{bg}
+\draw[thick, fill=black!20] ($(-1.50,1)+(Amplifier)$) -- ($(1.750,1)+(Driver)$) -- ($(1.750,-1.25)+(Driver)$) -- ($(-1.50,-1.25)+(Amplifier)$) -- ($(-1.50,1)+(Amplifier)$); {\textbf{Speaker Enclosure}};
+\end{pgfonlayer}
+
+%% Forbindelse %%
+\draw[->] (AudioSource) -- (Amplifier);
+\draw[->] (Amplifier) -- (Driver);
+
+%\draw[->] ($(EnclosureDriver)+(-1.375,0.3)$) -- ($(EnclosureDriver)+(-1.75,0.3)$) -- ($(EnclosureDriver)+(-1.75,1)$) -- ($(EnclosureDriver)+(-5.5,1)$) |- ($(SpectralAnalysis)+(1.375,0.3)$);
+
+\end{tikzpicture}
