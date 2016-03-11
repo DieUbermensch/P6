@@ -31,6 +31,17 @@ On this loudspeaker you are able to connect via cable or via Bluetooth and chang
 Der er et stort problem
 %%%%%%%%%%%%%%%%%%%%%%%% Teknisk Analyse %%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Technical Analysis}
+The concept for a solution is seen on \autoref{fig:Concept}. It shows a feedback system which filters or limits a signal based on the output of sensor located in the speaker. Besides the feedback system which should protect the speaker, a user should be able to use an equalizer to change the settings of the frequency response.  
+\begin{figure}[H]
+\centering
+\tikzsetnextfilename{Concept}
+\scalebox{0.8}{
+\input{figures/Concept.tex}}
+\caption{Block diagram of the concept.}
+\label{fig:Concept}
+\end{figure}
+
+The concept consist of a filtering or limitation block, which will be analyzed to understand which solution is best for the problem stated, a sensor which will be analyzed to determine which sensor should be used and where it should be placed, a signal analysis block and decision block which will not be analysed furhter in this chapter, a user interface which will be analyzed to determine how the user interface should be designed and lastly the processor block which will be analyzed to detemine which type of processor that should be used. 
 
 \input{1Chapters/1Preanalysis/TechnicalAnalysis_Equalizer.tex}
 

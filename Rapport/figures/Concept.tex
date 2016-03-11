@@ -1,0 +1,43 @@
+\begin{tikzpicture}
+%% Kasser %%
+\node [block, fill=white] (AudioSource) at (0,0) {Audio Source};
+
+%% DSP %%
+\node [block, fill=white] (Equalizer) at ($(AudioSource)+(5,0)$) {Filtering or limitation};
+\node [Twolineblock, fill=white] (Decisionblock) at ($(Equalizer)+(-1,-2)$) {Decision block};
+\node [Twolineblock, fill=white] (SpectralAnalysis) at ($(Decisionblock)+(3.5,0)$) {Signal analysis};
+
+
+%% External %%
+\node [block, fill=white] (UserInterface) at ($(Equalizer)+(-2,2)$) {User interface};
+
+%% Speaker Enclosure %%
+\node [Twolineblock, fill=black!80,text=white] (Amplifier) at ($(SpectralAnalysis)+(4,+2)$) {Amplification stage};
+\node [Twolineblock, fill=black!80,text=white] (Driver) at ($(Amplifier)+(3.5,0)$) {Speaker driver};
+
+\node [Twolineblock, fill=white] (SensorDriver) at ($(Amplifier)+(0,-2)$) {Sensor};
+
+\node (User) at ($(-2.5,0)+(UserInterface)$) {\textbf{User}};
+\draw[->] (User) -- (UserInterface);
+
+%% Store Blokke %%
+\begin{pgfonlayer}{bg}
+\draw[thick, fill=black!20] ($(-2.50,1)+(Equalizer)$) -- ($(2.5+1.750,1)+(Equalizer)$) -- ($(1.75,-1.25)+(SpectralAnalysis)$) -- ($(-1.53,-1.25)+(Decisionblock)$) -- ($(-2.50,1)+(Equalizer)$);
+\node (DSPtag) at ($(0.5,-1)+(SpectralAnalysis)$) {\textbf{Processor}};
+
+\draw[thick, fill=black!20] ($(-1.50,1)+(Amplifier)$) -- ($(1.750,1)+(Driver)$) -- ($(1.750,-3.25)+(Driver)$) -- ($(-1.50,-1.25)+(SensorDriver)$) -- ($(-1.50,1)+(Amplifier)$);
+\node (DSPtag) at ($(3,-1)+(SensorDriver)$) {\textbf{Speaker Enclosure}};
+\end{pgfonlayer}
+
+%% Forbindelse %%
+\draw[->] (AudioSource) -- (Equalizer);
+\draw[->] (Equalizer) -- (Amplifier);
+\draw[->] (Amplifier) -- (Driver);
+
+\draw[->] (UserInterface) -| ($(Equalizer)+(-.25,.6)$);
+
+\draw[->] ($(SensorDriver)+(-1.375,-0.3)$) -- ($(SpectralAnalysis)+(1.375,-0.3)$);
+
+\draw[->] (SpectralAnalysis) -- (Decisionblock);
+\draw[->] (Decisionblock) |- (Equalizer);
+\end{tikzpicture}
