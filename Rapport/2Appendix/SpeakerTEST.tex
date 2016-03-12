@@ -1,36 +1,34 @@
-\chapter{Speaker vibration test} \label{app:journal_speaker_test}
+\chapter{Speaker Vibration Lab Tests} \label{app:journal_speaker_test}
 
-\section{Purpose}
+\section{Speaker Vibration Frequency Response (Linear Frequency Sweep)}
 
-This experiment is conducted in order to establish proof of a correlation between the vibration in a speaker an a increase in distortion. The Distortion level is to be viewable by spectral estimation of accelerometers placed inside the speaker enclosure. It is desirable to find the situation where the woofer hits its coil, since the is the least wanted situation of a playing speaker. The distortion or vibration measured from the speaker can later be used to regulate the input and prevent further distortion to appear. The purpose is expressly formulated as:
+The purpose of this test is to examine if there is a correlation between the amount of vibration of a speaker and an increased amount of harmonic distortion. Another issue to be examined is, if it possible to detect a signal that indicates the woofer is hitting its coil. The scope of this test is:
+
+%The distortion level is to be viewable by spectral estimation of accelerometers placed inside the speaker enclosure. 
+
+%It is desirable to find the situation where the woofer hits its coil, since the is the least wanted situation of a playing speaker. The distortion or vibration measured from the speaker can later be used to regulate the input and prevent further distortion to appear. The purpose is expressly formulated as:
+
 \begin{itemize}
-\item Measure the correlation between distortion and the vibration in the enclosure
-\item Find the situation where the woofer hits the coil. That is at;
-\begin{itemize}
-\item What frequency 
-\item What Amplitude
-\end{itemize}
-\item [] It occurs 
+\item Measure the correlation between distortion and the vibration in the enclosure.
+\item Determine the vibration frequency response of the enclosure and driver.
+\item Find the situation where the woofer hits the coil. That is at what frequency and amplitude.
 \end{itemize}
 
-\section{Set-up}
+\subsection{Setup}
 
-The set-up of this experiment are depicted on Figure \ref{figure:SpeakertestSetup} and described as follows:
+The setup of this experiment are depicted in Figure \ref{figure:SpeakertestSetup} and described as follows:
 \begin{itemize}
 \item Distortion will be measured by a microphone at a distance 1 meter
 \item Vibration will be measured by a Brüel \& Kjear Type \textbf{TBD}, placed at:
 \begin{itemize}
-\item Both Woofers
+\item The lower woofer
 \item Centrally inside the enclosure 
-\item The PCB of the crossover
 \end{itemize}
-\item \textit{A microphone will be placed centrally inside the speaker to measure distortion}
-\item The speaker will be driven by a \textbf{TBD} Amplifier.
+\item The speaker will be driven by a \textbf{TBD} amplifier.
 \item A computer will be logging data with a \textbf{TBD} soundcard
 \end{itemize}
 
-Furthermore the speaker will be placed in the anechoic room to eliminate any external disturbances. 
-
+Furthermore the speaker will be placed in the anechoic room to eliminate any external disturbances.
 
 \begin{figure}[H]
 \centering
@@ -61,18 +59,125 @@ Furthermore the speaker will be placed in the anechoic room to eliminate any ext
 
 The producer for this experiment is described as follows:
 \begin{enumerate}
-\item Adjust volume on pre-amplifier.
-\item Capture a sinusoidal sweep from 2.4 Khz to 10 Hz.
-\item If the speaker could handle it, increase the volume with 3 dB.
-\item Repeat on the woofer hits coil. 
+\item Adjust volume on the amplifier.
+\item Playback a sinusoidal sweep from 2.4 Khz to 10 Hz. The duration of the sweep is 30 seconds and the sweep is linear.
+\item If the speaker could handle it, increase the volume with 1 dB.
+\item Repeat until the woofer hits coil. 
 \end{enumerate}
+
+
+\begin{figure}[H]
+\centering
+\tikzsetnextfilename{linear_freq_sweep}
+\input{figures/linear_freq_sweep.tex}
+\caption{}
+\label{fig:linear_freq_sweep}
+\end{figure}
 
 All of the accelerometers have beforehand been calibrated to have the same sensitivity within the frequency test range.
 
 
 \section{Data Extraction}
 
-The information captured by the use of procedure in \autoref{sec:SpeakerTestProcedure} is graphed in this section
+It was possible to increase the volume by 19 dB until the loudspeaker unit got damaged. As seen in \autoref{fig:test_relative_gain} the gain was linear increased by 1 dB until the 20th test were the loudspeaker unit failed.
+
+\begin{figure}[H]
+\centering
+\tikzsetnextfilename{test_relative_gain}
+\input{figures/test_relative_gain.tex}
+\caption{}
+\label{fig:test_relative_gain}
+\end{figure}
+
+For each of the test four measurements was taken. These are the accelerometer placed on the driver and enclosure, the microphone and a reference to synchronize the measurements. 
+
+
+To determine the frequency response of the vibration from the driver, enclosure and the speaker frequency response a Fast Fourier Transformation (FFT) is applied to all three measurements.
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.37\textwidth}
+	\tikzsetnextfilename{FFT_driver1}
+	\input{figures/FFT_driver1.tex}
+	\caption{Driver.}
+	\label{fig:FFT_driver1}
+\end{subfigure}
+\begin{subfigure}[t]{0.28\textwidth}
+	\tikzsetnextfilename{FFT_enclosure1}
+	\input{figures/FFT_enclosure1.tex}
+	\caption{Enclosure.}
+	\label{fig:FFT_enclosure1}
+\end{subfigure}
+\begin{subfigure}[t]{0.32\textwidth}
+	\tikzsetnextfilename{FFT_mic1}
+	\input{figures/FFT_mic1.tex}
+	\caption{Microphone.}
+	\label{fig:FFT_mic1}
+\end{subfigure}
+\caption{Frequency response of (a) the vibration on the driver, (b) the vibration on the enclosure, and (c) the speaker. Test 1.}
+\label{fig:FFT1}
+\end{figure}
+
+From \autoref{fig:FFT_driver1} it is seen that the driver has a resonance frequency located at approximately 390 Hz and a dip at 1290 Hz. The enclosure also has a peak located at 390 Hz, but also has another peak located at 1290 Hz which is the opposite to the frequency response of the driver. The speaker frequency response measured by the microphone, shows that the response is flat compared to the two other responses from 10 Hz to 2.4 kHz.
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.37\textwidth}
+	\tikzsetnextfilename{FFT_driver10}
+	\input{figures/FFT_driver10.tex}
+	\caption{Driver.}
+	\label{fig:FFT_driver10}
+\end{subfigure}
+\begin{subfigure}[t]{0.28\textwidth}
+	\tikzsetnextfilename{FFT_enclosure10}
+	\input{figures/FFT_enclosure10.tex}
+	\caption{Enclosure.}
+	\label{fig:FFT_enclosure10}
+\end{subfigure}
+\begin{subfigure}[t]{0.32\textwidth}
+	\tikzsetnextfilename{FFT_mic10}
+	\input{figures/FFT_mic10.tex}
+	\caption{Microphone.}
+	\label{fig:FFT_mic10}
+\end{subfigure}
+\caption{Frequency response of (a) the vibration on the driver, (b) the vibration on the enclosure, and (c) the speaker. Test 2.}
+\label{fig:FFT1}
+\end{figure}
+
+The frequency response for all three measurements in test 10 is very similar to the frequency response found in test 1. The same applies to all the test from 1 to 10. No noticeable difference between the test is observed.
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.37\textwidth}
+	\tikzsetnextfilename{FFT_driver19}
+	\input{figures/FFT_driver19.tex}
+	\caption{Driver.}
+	\label{fig:FFT_driver10}
+\end{subfigure}
+\begin{subfigure}[t]{0.28\textwidth}
+	\tikzsetnextfilename{FFT_enclosure19}
+	\input{figures/FFT_enclosure19.tex}
+	\caption{Enclosure.}
+	\label{fig:FFT_enclosure19}
+\end{subfigure}
+\begin{subfigure}[t]{0.32\textwidth}
+	\tikzsetnextfilename{FFT_mic19}
+	\input{figures/FFT_mic19.tex}
+	\caption{Microphone.}
+	\label{fig:FFT_mic19}
+\end{subfigure}
+\caption{Frequency response of (a) the vibration on the driver, (b) the vibration on the enclosure, and (c) the speaker. Test 2.}
+\label{fig:FFT1}
+\end{figure} 
+
+
+%The information captured by the use of procedure in \autoref{sec:SpeakerTestProcedure} is graphed in this section
+
+
+
+
+
+
 
 
 \section{Analysis}

@@ -1,0 +1,48 @@
+% This file was created by matlab2tikz.
+%
+%The latest updates can be retrieved from
+%  http://www.mathworks.com/matlabcentral/fileexchange/22022-matlab2tikz-matlab2tikz
+%where you can also make suggestions and rate matlab2tikz.
+%
+\begin{tikzpicture}
+
+\begin{axis}[%
+width=2.5in,
+height=2in,
+at={(1.011in,0.642in)},
+scale only axis,
+xmin=0,
+xmax=20,
+xlabel={Measurement number},
+xmajorgrids,
+ymin=0,
+ymax=20,
+ylabel={Relative gain [dB]},
+ymajorgrids,
+axis background/.style={fill=white}
+]
+\addplot [color=black,solid,line width=1.5pt,mark=o,mark options={solid},forget plot]
+  table[row sep=crcr]{%
+0	0\\
+1	1\\
+2	2\\
+3	3\\
+4	4\\
+5	5\\
+6	6\\
+7	7\\
+8	8\\
+9	9\\
+10	10\\
+11	11\\
+12	12\\
+13	13\\
+14	14\\
+15	15\\
+16	16\\
+17	17\\
+18	18\\
+19	19\\
+};
+\end{axis}
+\end{tikzpicture}%
