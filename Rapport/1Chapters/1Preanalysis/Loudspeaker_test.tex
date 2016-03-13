@@ -35,7 +35,7 @@ For measuring the vibrations inside the enclosure two accelometers have been pla
 The loudspeaker is set to play a sinesweep from the crossover frequency of the speaker which is 2400 Hz to 10 Hz. The sine sweep is then repeated from the lowest volume setting of an power amplifier until the loudspeaker breaks. This resulted in 20 sine sweep measurements from all three sensors which can be seen in the full test jounal in \autoref{app:journal_speaker_test}.    
 
 
-\section{Analysis of the DALI Zensor AX 5 Tests}
+\section{Analysis of the DALI Zensor AX 5 measurements}
 
 In this section an analysis of the data extracted from the test DALI Zensor 5 AX will be presented. The purpose of this analysis is to examine if it possible to tell the current performance of the loudspeaker from the accelerometer placed on the loudspeaker. There are many different approaches in analysing the measured data, and the extent of the analysis will be analysing the frequency response of the loudspeaker vibration, harmonic distortion, and detection of the coil hitting the back plate of the driver. The structure of the following part of this section will be:
 
@@ -69,11 +69,11 @@ As previously stated there are in total 20 datasets each containing four measure
 	\caption{Sound pressure from microphone.}
 	\label{fig:raw_microphone1}
 \end{subfigure}
-\caption{The measured data of (a) the vibration on the driver, (b) the vibration on the enclosure, and (c) the sound pressure from the microphone. Test 1.}
+\caption{The measured data of (a) the vibration on the driver, (b) the vibration on the enclosure, and (c) the sound pressure from the microphone. Dataset 1.}
 \label{fig:raw1}
 \end{figure} 
 
-Looking at the first dataset reveals that there are mechanical issues with the loudspeaker. In \autoref{fig:raw_driver1} there is a strong indication of a resonance frequency at 25 seconds with a peak amplitude on approximately 0.02. A similar observation can be found in \autoref{fig:raw_enclosure1} which shows the vibration measured by the accelerometer placed on the enclosure where a resonance frequency appears after 25 seconds. Another mechanical resonance frequency can be found located after 14 seconds for the enclosure. The sound pressure level measured by the microphone is in contrast fairly linear compared to the measured vibrations.
+Looking at the first dataset reveals that there are mechanical issues with the loudspeaker. In \autoref{fig:raw_driver1} there is a strong indication of a resonance frequency at 25 seconds with a peak amplitude on approximately 0.02. A similar observation can be found in \autoref{fig:raw_enclosure1} which shows the vibration measured by the accelerometer placed on the enclosure where a resonance frequency appears after 25 seconds. Another mechanical resonance frequency can be found located after 14 seconds for the enclosure. The sound pressure level measured by the microphone is in contrast fairly linear compared to the measured vibrations. Dataset 10 is shown in \autoref{fig:raw10} where the gain is increased by 10 dB.
 
 \begin{figure}[H]
 \centering
@@ -92,13 +92,11 @@ Looking at the first dataset reveals that there are mechanical issues with the l
 	\caption{Sound pressure from microphone.}
 	\label{fig:raw_microphone10}
 \end{subfigure}
-\caption{The measured data of (a) the vibration on the driver, (b) the vibration on the enclosure, and (c) the sound pressure from the microphone. Test 10.}
+\caption{The measured data of (a) the vibration on the driver, (b) the vibration on the enclosure, and (c) the sound pressure from the microphone. Dataset 10.}
 \label{fig:raw10}
 \end{figure} 
 
-
-
-
+The measurements from dataset 10 is very similar to the measurements seen in dataset 1. Since no particular change is happening between dataset 1 to 10 it is assumed that the performance of the loudspeaker remains good. A further analysis of the performance speaker will be done in the analysis of the harmonic distortion section to examine the amount of harmonic distortion present. Dataset 14 is shown in \autoref{fig:raw14}. 
 
 \begin{figure}[H]
 \centering
@@ -117,10 +115,11 @@ Looking at the first dataset reveals that there are mechanical issues with the l
 	\caption{Sound pressure from microphone.}
 	\label{fig:raw_microphone14}
 \end{subfigure}
-\caption{The measured data of (a) the vibration on the driver, (b) the vibration on the enclosure, and (c) the sound pressure from the microphone. Test 14.}
+\caption{The measured data of (a) the vibration on the driver, (b) the vibration on the enclosure, and (c) the sound pressure from the microphone. Dataset 14.}
 \label{fig:raw14}
 \end{figure} 
 
+While most of the measurements show the exact same characteristics as previous datasets, a slight change occurs in the end of the vibration measured on the driver in \autoref{fig:raw_driver14} and the sound pressure level in \autoref{fig:raw_microphone14}. After approximately 29 seconds a peak is observed in \autoref{fig:raw_driver14} which could indicate that the coil at that point hit the back plate of the driver. A further examination will be made in a later section. The measurements from the microphone, also show that a peak occurs at the same point, which most likely will cause the amount of harmonic distortion to increase. Dataset 19, which is the last dataset before the loudspeaker break down, is shown in \autoref{fig:raw19}.
 
 \begin{figure}[H]
 \centering
@@ -139,10 +138,11 @@ Looking at the first dataset reveals that there are mechanical issues with the l
 	\caption{Sound pressure from microphone.}
 	\label{fig:raw_microphone19}
 \end{subfigure}
-\caption{The measured data of (a) the vibration on the driver, (b) the vibration on the enclosure, and (c) the sound pressure from the microphone. Test 19.}
+\caption{The measured data of (a) the vibration on the driver, (b) the vibration on the enclosure, and (c) the sound pressure from the microphone. Dataset 19.}
 \label{fig:raw19}
 \end{figure} 
 
+Dataset 19 has the same characteristics as dataset 14, though with a more noticeable peak at 29 seconds for both the measurements from the driver and the microphone. In the last dataset shown in \autoref{fig:raw20}, the loudspeaker breaks down.
 
 
 \begin{figure}[H]
@@ -162,9 +162,14 @@ Looking at the first dataset reveals that there are mechanical issues with the l
 	\caption{Sound pressure from microphone.}
 	\label{fig:raw_microphone20}
 \end{subfigure}
-\caption{The measured data of (a) the vibration on the driver, (b) the vibration on the enclosure, and (c) the sound pressure from the microphone. Test 20.}
+\caption{The measured data of (a) the vibration on the driver, (b) the vibration on the enclosure, and (c) the sound pressure from the microphone. Dataset 20.}
 \label{fig:raw20}
 \end{figure} 
+
+As seen in \autoref{fig:raw_driver20} the loudspeaker unit breaks down at the mechanical resonance frequency for the driver. The reason to why vibrations on the enclosure and sound pressure are still measured after 25 seconds is because the other loudspeaker unit did not entirely break down. Since the loudspeaker unit broke down at the mechanical driver resonance frequency, it would be relevant to examine if there is any correlation as such.
+
+
+
 
 % Formål
 
