@@ -1,6 +1,6 @@
 \section{Test of DALI Zensor 5}
-This section will go through a test of a loudspeaker to understand how vibrations in the loudspeaker affect the distortion of the loudspeaker.
-The loudspeaker which will be the basis for the test is the Zensor 5 (as seen on \autoref{fig:dali_zensor5}) given by DALI. A passive speaker has been choosen for the test because the amplifiers in DALI's active speakers are designed not to pressure the loudspeaker to its limits and beyond, and to be able to test how the vibrations affect distortion the loudspeaker must be tested to its limits and beyond.
+This section will go through a test of a loudspeaker to understand if any vibrations in the loudspeaker affect the distortion of the loudspeaker.
+The loudspeaker which will be the basis for the test is the Zensor 5 (as seen on \autoref{fig:dali_zensor5}) given by DALI. A passive speaker has been choosen for the test because the amplifiers in DALI's active speakers are designed not to stress the loudspeaker to its limits and beyond, and to be able to test how the vibrations affect distortion, the loudspeaker must be tested to its limits and beyond.
 
 \begin{figure}[H]
 \centering
@@ -34,6 +34,164 @@ For measuring the vibrations inside the enclosure two accelometers have been pla
 
 The loudspeaker is set to play a sinesweep from the crossover frequency of the speaker which is 2400 Hz to 10 Hz. The sine sweep is then repeated from the lowest volume setting of an power amplifier until the loudspeaker breaks. This resulted in 20 sine sweep measurements from all three sensors which can be seen in the full test jounal in \autoref{app:journal_speaker_test}.    
 
+
+\section{Analysis of the DALI Zensor AX 5 Tests}
+
+In this section an analysis of the data extracted from the test DALI Zensor 5 AX will be presented. The purpose of this analysis is to examine if it possible to tell the current performance of the loudspeaker from the accelerometer placed on the loudspeaker. There are many different approaches in analysing the measured data, and the extent of the analysis will be analysing the frequency response of the loudspeaker vibration, harmonic distortion, and detection of the coil hitting the back plate of the driver. The structure of the following part of this section will be:
+
+\begin{itemize}
+\item Presentation of the measured data.
+\item Frequency response of the measured vibrations.
+\item Harmonic distortion measured by the microphone and accelerometers.
+\item Back plate hit detection.
+\end{itemize}
+
+Before analysing the measured the measured data will be presented.
+
+\subsection{Introduction to Measured Data}
+
+As previously stated there are in total 20 datasets each containing four measurements, namely the vibrations from the enclosure and driver, the sound pressure from the microphone, and lastly a reference signal to synchronize all data. The amount of data is therefore large and only relevant datasets will be presented. The remaining data are available on the CD. The first dataset from the test is shown in \autoref{fig:raw1}.
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.335\textwidth}
+	\includegraphics[width=1\textwidth]{figures/raw_driver1.pdf}
+	\caption{Vibration from driver.}
+	\label{fig:raw_driver1}
+\end{subfigure}
+\begin{subfigure}[t]{0.3\textwidth}
+	\includegraphics[width=1\textwidth]{figures/raw_enclosure1.pdf}
+	\caption{Vibration from enclosure.}
+	\label{fig:raw_enclosure1}
+\end{subfigure}
+\begin{subfigure}[t]{0.3\textwidth}
+	\includegraphics[width=1\textwidth]{figures/raw_microphone1.pdf}
+	\caption{Sound pressure from microphone.}
+	\label{fig:raw_microphone1}
+\end{subfigure}
+\caption{The measured data of (a) the vibration on the driver, (b) the vibration on the enclosure, and (c) the sound pressure from the microphone. Test 1.}
+\label{fig:raw1}
+\end{figure} 
+
+Looking at the first dataset reveals that there are mechanical issues with the loudspeaker. In \autoref{fig:raw_driver1} there is a strong indication of a resonance frequency at 25 seconds with a peak amplitude on approximately 0.02. A similar observation can be found in \autoref{fig:raw_enclosure1} which shows the vibration measured by the accelerometer placed on the enclosure where a resonance frequency appears after 25 seconds. Another mechanical resonance frequency can be found located after 14 seconds for the enclosure. The sound pressure level measured by the microphone is in contrast fairly linear compared to the measured vibrations.
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.335\textwidth}
+	\includegraphics[width=1\textwidth]{figures/raw_driver10.pdf}
+	\caption{Vibration from driver.}
+	\label{fig:raw_driver10}
+\end{subfigure}
+\begin{subfigure}[t]{0.3\textwidth}
+	\includegraphics[width=1\textwidth]{figures/raw_enclosure10.pdf}
+	\caption{Vibration from enclosure.}
+	\label{fig:raw_enclosure10}
+\end{subfigure}
+\begin{subfigure}[t]{0.3\textwidth}
+	\includegraphics[width=1\textwidth]{figures/raw_microphone10.pdf}
+	\caption{Sound pressure from microphone.}
+	\label{fig:raw_microphone10}
+\end{subfigure}
+\caption{The measured data of (a) the vibration on the driver, (b) the vibration on the enclosure, and (c) the sound pressure from the microphone. Test 10.}
+\label{fig:raw10}
+\end{figure} 
+
+
+
+
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.335\textwidth}
+	\includegraphics[width=1\textwidth]{figures/raw_driver14.pdf}
+	\caption{Vibration from driver.}
+	\label{fig:raw_driver14}
+\end{subfigure}
+\begin{subfigure}[t]{0.3\textwidth}
+	\includegraphics[width=1\textwidth]{figures/raw_enclosure14.pdf}
+	\caption{Vibration from enclosure.}
+	\label{fig:raw_enclosure14}
+\end{subfigure}
+\begin{subfigure}[t]{0.3\textwidth}
+	\includegraphics[width=1\textwidth]{figures/raw_microphone14.pdf}
+	\caption{Sound pressure from microphone.}
+	\label{fig:raw_microphone14}
+\end{subfigure}
+\caption{The measured data of (a) the vibration on the driver, (b) the vibration on the enclosure, and (c) the sound pressure from the microphone. Test 14.}
+\label{fig:raw14}
+\end{figure} 
+
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.335\textwidth}
+	\includegraphics[width=1\textwidth]{figures/raw_driver19.pdf}
+	\caption{Vibration from driver.}
+	\label{fig:raw_driver19}
+\end{subfigure}
+\begin{subfigure}[t]{0.3\textwidth}
+	\includegraphics[width=1\textwidth]{figures/raw_enclosure19.pdf}
+	\caption{Vibration from enclosure.}
+	\label{fig:raw_enclosure19}
+\end{subfigure}
+\begin{subfigure}[t]{0.3\textwidth}
+	\includegraphics[width=1\textwidth]{figures/raw_microphone19.pdf}
+	\caption{Sound pressure from microphone.}
+	\label{fig:raw_microphone19}
+\end{subfigure}
+\caption{The measured data of (a) the vibration on the driver, (b) the vibration on the enclosure, and (c) the sound pressure from the microphone. Test 19.}
+\label{fig:raw19}
+\end{figure} 
+
+
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.335\textwidth}
+	\includegraphics[width=1\textwidth]{figures/raw_driver20.pdf}
+	\caption{Vibration from driver.}
+	\label{fig:raw_driver20}
+\end{subfigure}
+\begin{subfigure}[t]{0.3\textwidth}
+	\includegraphics[width=1\textwidth]{figures/raw_enclosure20.pdf}
+	\caption{Vibration from enclosure.}
+	\label{fig:raw_enclosure20}
+\end{subfigure}
+\begin{subfigure}[t]{0.3\textwidth}
+	\includegraphics[width=1\textwidth]{figures/raw_microphone20.pdf}
+	\caption{Sound pressure from microphone.}
+	\label{fig:raw_microphone20}
+\end{subfigure}
+\caption{The measured data of (a) the vibration on the driver, (b) the vibration on the enclosure, and (c) the sound pressure from the microphone. Test 20.}
+\label{fig:raw20}
+\end{figure} 
+
+% Formål
+
+% Råt Data
+
+% Frekvensrespons
+% - Konklusion: Ikke muligt at detektere tegn på at højtaleren har nået grænsen
+% - Accelerometeret kan bruges til at estimere lydtrykket
+
+% Harmonisk forvrængning
+% - Der er tydelige tegn på øget harmonisk forvrængning, når lydstyrken øges.
+% - Det er dog ikke muligt at måle harmonisk forvrængning, når der er tale om musik og derfor er det ikke muligt at udvinde information om harmonisk forvrængning
+
+% Slag detektering
+% - Undersøger et givet punkt i målingerne, der ligner slag mod driveren.
+% - Spektralanalyser i området viser at der sker en betydelig energinieauet i lave frekvensen.
+% - Da amplitude forøgelsen ikke er forbeholdt harmoniske frekvenser, må det antages at udslagene har er i impulser der 
+
+
+% Conclusion: 
+% - The vibration do not affect the distortion
+% - The vibration can however be used as a tool to determine the sound pressure level since there is a strong correlation between the amount of vibration and sound pressure.
+% - The analysis of the hits suggest that it is possible to detect these hits by measurering very low frequenct frequencies and determine the energy increase
+
+% Further investigation
+% - Investigate the impulse response of the loudspeaker
+% - Investigate if there is a if the break of the loudspeaker unit was due to the amount of vibration at the resonance frequency.
 
 
 
