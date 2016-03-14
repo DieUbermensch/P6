@@ -24,7 +24,7 @@ The 112 dB in \autoref{eq:speaker_sensitivty} is added to the sensitivity since 
 
 
 
-\subsection{Distortion from vibration}
+\subsection{Distortion from vibration and impulses}
 
 A common problem when designing loudspeakers is the vibrations from the enclosure. If the vibrations are strong, they will become audible and distort the overall sound. The sound radiation from the enclosure will become greater when the \gls{SPL} from the speaker increase. This problem is solved with different techniques but yield more or less the same outcome, which is stiffening of the enclosure. Some of the techniques for removing vibrations from the enclosure could be:
 \begin{itemize}
@@ -57,6 +57,50 @@ Looking further into the speaker driver itself, it shows in \autoref{fig:Speaker
 When this signal has a large amplitude, read overload, the membrane reaches physical capacity. In \autoref{fig:badspeaker} it shows that when a membrane is pushed to its maximum capacity the suspension will affect the membrane causing unwanted distortion. This will be one of the major problems if the membrane is assumed sufficiently stiff to with stand the high \gls{SPL} and not twist during playback. 
 
 Another notice is the membrane hitting the coil connected to the magnet. This would again result in distortion since the membrane is now again hitting the absolute furthest position possible. This situation can however be resolve be moving the magnet further back. This would make the suspension determine how far the membrane can be pushed.
+
+% \begin{figure}[H]
+% \centering
+% \tikzsetnextfilename{Impulse1}
+% \scalebox{0.7}{
+% \input{figures/Impulse1.tex}
+% }
+% \caption{An impulse }
+% \label{fig:impulse1}
+% \end{figure}
+
+% \begin{figure}[H]
+% \centering
+% \tikzsetnextfilename{Impulse2}
+% \scalebox{0.7}{
+% \input{figures/Impulse2.tex}}
+% \caption{An impulse}
+% \label{fig:impulse2}
+% \end{figure}
+
+If the membrane hits the coil it will create an impulse which will give a energy spike in a larger frequency area dependent on the impulse and the speaker itself as seen on \autoref{fig:impulse}. The shorter the impulse the larger the frequency area as seen on the differences seen between \autoref{fig:impulse1} and \autoref{fig:impulse2}.  
+
+\begin{figure}[H]
+\begin{subfigure}[t]{0.47\textwidth}
+\centering
+\tikzsetnextfilename{Impulse1}
+\scalebox{0.6}{
+\input{figures/Impulse1.tex}}
+\caption{Impulse 1}
+\label{fig:impulse1}
+\end{subfigure}
+\hspace{6mm} 
+\begin{subfigure}[t]{0.47\textwidth}
+\centering
+\tikzsetnextfilename{Impulse2}
+\scalebox{0.6}{
+\input{figures/Impulse2.tex}}
+\caption{Impulse 2}
+\label{fig:impulse2}
+\end{subfigure}
+\caption{Two different impulses and there frequency response.}
+\label{fig:impulse}
+\end{figure}
+Besides the characteristics of the impulse the speaker will act as a low pass filter so the frequency response of an impulse will always resemble the frequency response of \autoref{fig:impulse2} of some sort.   
 
 
 %that occurs at playback. The vibrations occurs because the  If the vibration. the sound radiated from the loudspeaker enclosure
