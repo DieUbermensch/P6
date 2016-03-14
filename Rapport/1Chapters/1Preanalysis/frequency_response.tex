@@ -1,3 +1,65 @@
-\subsection{Frequency response of measured data}
+\section{Frequency Response of Measured Data}
 
-In this section the frequency response of the measured data will be analysed to examine if there is any correlation between the frequency responses and the performance of the loudspeaker.
+In this section the frequency response of the measured data will be analysed to examine if there is any correlation between the frequency responses and the performance of the loudspeaker. From previous section the presented data showed that minimal changes occurred between the datasets. Therefore the expectation is that the frequency response of the measurements will mostly likewise remain almost identical between the datasets. In \autoref{fig:freq_response1} the frequency response of the data measured from the accelerometers and microphone is shown for dataset 1.
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.37\textwidth}
+	\tikzsetnextfilename{FFT_driver1}
+	\input{figures/FFT_driver1.tex}
+	\caption{Driver}
+	\label{fig:freq_responsedriver1}
+\end{subfigure}
+\begin{subfigure}[t]{0.28\textwidth}
+	\tikzsetnextfilename{FFT_enclosure1}
+	\input{figures/FFT_enclosure1.tex}
+	\caption{Enclosure}
+	\label{fig:freq_responseenc1}
+\end{subfigure}
+\begin{subfigure}[t]{0.32\textwidth}
+	\tikzsetnextfilename{FFT_mic1}
+	\input{figures/FFT_mic1.tex}
+	\caption{Microphone}
+	\label{fig:freq_responsemic1}
+\end{subfigure}
+\caption{Frequency response of (a) the vibration on the driver, (b) the vibration on the enclosure, and (c) the speaker. Test 1.}
+\label{fig:freq_response1}
+\end{figure}
+
+As expected, it is seen in \autoref{fig:freq_responsedriver1} that there is a mechanical resonance frequency for the driver located at approximately 390 Hz, which likewise also occurs in the measurements for the enclosure. An interesting observation is that the enclosure has another resonance frequency at 1290 Hz, where driver has a antiresonance frequency. An explanation could be destructive interference between the enclosure and driver. The observation is not further examined since it is assessed that it do not have relevance to the project. In \autoref{fig:freq_response_comb} the frequency response for dataset 1, 10, and 19 is plotted.
+
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.37\textwidth}
+	\tikzsetnextfilename{FFT_driver_comb}
+	\input{figures/FFT_driver_comb.tex}
+	\caption{Driver tests.}
+	\label{fig:freq_responsedrivercomb}
+\end{subfigure}
+\begin{subfigure}[t]{0.28\textwidth}
+	\tikzsetnextfilename{FFT_enclosure_comb}
+	\input{figures/FFT_enclosure_comb.tex}
+	\caption{Enclosure tests.}
+	\label{fig:freq_responsecomb}
+\end{subfigure}
+\begin{subfigure}[t]{0.32\textwidth}
+	\tikzsetnextfilename{FFT_mic_comb}
+	\input{figures/FFT_mic_comb.tex}
+	\caption{Microphone tests.}
+	\label{fig:freq_responsecomb1}
+\end{subfigure}
+\caption{Frequency response of (a) the vibration on the driver, (b) the vibration on the enclosure, and (c) the speaker. The black graph is frequency response for dataset 1, the blue for the dataset 10, and the red dataset 19. }
+\label{fig:freq_response_comb}
+\end{figure}
+
+It can be concluded that the frequency response of between all datasets in each measurement remains almost unchanged, thus it is not possible to derive any indication of the current performance of the loudspeaker. The analysis shows that the gain ratio between the amount of vibration and the sound pressure is linear. Therefore it might be possible to use the accelerometer as a tool to estimate the sound pressure level from the amount of vibration.
+
+
+
+
+
+
+
+
+
