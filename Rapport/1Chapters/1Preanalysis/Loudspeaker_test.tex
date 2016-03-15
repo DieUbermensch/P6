@@ -9,9 +9,10 @@ The loudspeaker which will be the basis for the test is the Zensor 5 (as seen on
 \label{fig:dali_zensor5}
 \end{figure}
 
-\todo[inline]{Reference http://www.dali-speakers.com/loudspeakers/zensor/zensor-5/}
+%\todo[inline]{Reference http://www.dali-speakers.com/loudspeakers/zensor/zensor-5/}
 
-For measuring the vibrations inside the enclosure two accelometers have been placed inside the enclosure, one on the back of bottom driver and one on the top back of the enclosure. For measuring distortion a microphone has been placed 1 m from the speaker. To limit any reflection from a room for example, the test is perfomed in the Anechoic room at \gls{AAU} see \ref{fig:test_setup_R}.  \todo[inline]{Reference (09.03.2016) http://doc.es.aau.dk/labs/acoustics/facilities/anechoic_room_large/} 
+For measuring the vibrations inside the enclosure two accelometers have been placed inside the enclosure, one on the back of bottom driver and one on the top back of the enclosure. For measuring distortion a microphone has been placed 1 m from the speaker. To limit any reflection from a room for example, the test is perfomed in the Anechoic room at \gls{AAU} see \ref{fig:test_setup_R}.  
+%\todo[inline]{Reference (09.03.2016) http://doc.es.aau.dk/labs/acoustics/facilities/anechoic_room_large/} 
 
 \begin{figure}[H]
 \centering
@@ -48,6 +49,13 @@ In this section an analysis of the data extracted from the test DALI Zensor 5 AX
 
 Before analysing the measured the measured data will be presented.
 
+All of the raw data sample and scripts used can be found on:\\
+\scalebox{0.7}{
+\path{CD://Maalinger/Maalinger030316 - Loudspeaker test}}\\
+\scalebox{0.7}{
+\path{CD://Maalinger/Maalinger030316 - Loudspeaker test/Measurements030316/MeasurementAnalysis.m}}
+
+
 \section{Introduction to Measured Data}
 
 As previously stated there are in total 20 datasets each containing four measurements, namely the vibrations from the enclosure and driver, the sound pressure from the microphone, and lastly a reference signal to synchronize all data. The amount of data is therefore large and only relevant datasets will be presented. The remaining data are available on the CD. The first dataset from the test is shown in \autoref{fig:raw1}.
@@ -72,6 +80,7 @@ As previously stated there are in total 20 datasets each containing four measure
 \caption{The measured data of (a) the vibration on the driver, (b) the vibration on the enclosure, and (c) the sound pressure from the microphone. Dataset 1.}
 \label{fig:raw1}
 \end{figure} 
+
 
 Looking at the first dataset reveals that there are mechanical issues with the loudspeaker. In \autoref{fig:raw_driver1} there is a strong indication of a resonance frequency at 25 seconds with a peak amplitude on approximately 0.02. A similar observation can be found in \autoref{fig:raw_enclosure1} which shows the vibration measured by the accelerometer placed on the enclosure where a resonance frequency appears after 25 seconds. Another mechanical resonance frequency can be found located after 14 seconds for the enclosure. The sound pressure level measured by the microphone is in contrast fairly linear compared to the measured vibrations. Dataset 10 is shown in \autoref{fig:raw10} where the gain is increased by 10 dB.
 
