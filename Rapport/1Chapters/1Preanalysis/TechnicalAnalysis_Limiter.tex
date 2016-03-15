@@ -4,7 +4,8 @@ Instead of equalizing the signal it is possible to limit the signal instead by u
 y(n) = g(n)\cdot x(x-D)
 \end{equation}
 
-Where an input $x(n)$ is delayed by $D$ and multiplied by a weigthing $g(n)$ to give $y(n)$ which is also seen in more detail on \autoref{fig:limiter_block}.   
+Where an input $x(n)$ is delayed by $D$ and multiplied by a weigthing $g(n)$ to give $y(n)$ which is also seen in more detail on \autoref{fig:limiter_block}.
+  
 
 \begin{figure}[H]
 \centering
@@ -13,7 +14,7 @@ Where an input $x(n)$ is delayed by $D$ and multiplied by a weigthing $g(n)$ to 
 \label{fig:limiter_block}
 \end{figure}   
 
-\todo[inline]{referencen Digital_Audio_Signal_Processing bogen kapitel 7}
+\todo[inline]{Ref til Digital Audio Signal Processing bogen kapitel syv} 
 
 The level measurement block measures the RMS or peak value of the signal, the static curve applies the gain and the Attack/Release time determines when the limiter should apply and stop applying. The static curve more detailed described the curve which determines at which thresholds noise gate threshold (NT), expander threshold (ET), compressor threshold (CT) and limiter threshold (LT) should apply as seen on \autoref{fig:limiter_static}.
 
