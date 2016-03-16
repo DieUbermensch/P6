@@ -18,21 +18,22 @@ The purpose of this test is to examine if there is a correlation between the amo
 
 The setup of this experiment are depicted in Figure \ref{figure:SpeakertestSetup} and described as follows:
 \begin{itemize}
-\item Distortion will be measured by a microphone at a distance 1 meter
-\item Vibration will be measured by a Brüel \& Kjear Type \textbf{TBD}, placed at:
+\item Distortion and \gls{SPL} will be measured by a microphone at a distance 1 meter in accordance with IEC \textbf{TBD}
+\item Vibration will be measured by a Brüel \& Kjear Type 4344 accelerometer, placed at:
 \begin{itemize}
 \item The lower woofer
 \item Centrally inside the enclosure 
 \end{itemize}
-\item The speaker will be driven by a \textbf{TBD} amplifier.
+\item The speaker will be driven by a Crown Studio Reference I amplifier, supplying a linear response from 10 Hz to 2.4 kHz with up \textbf{TBD} watt.
 \item A computer will be logging data with a \textbf{TBD} soundcard
 \end{itemize}
 
-Furthermore the speaker will be placed in the anechoic room to eliminate any external disturbances.
+Furthermore the speaker will be placed in the anechoic room to eliminate any external disturbances corresponding to the requirements demanded in IEC \textbf{TBD}
 
 \begin{figure}[H]
 \centering
-\missingfigure{Picture of setup}
+\tikzsetnextfilename{TestSetup1}
+\input{figures/TestSetup1.tex}
 \caption{test setup}
 \label{figure:SpeakertestSetup}
 \end{figure}
@@ -44,11 +45,17 @@ Furthermore the speaker will be placed in the anechoic room to eliminate any ext
 \ra{1.3}
 \begin{tabular}{S[table-format=1]ccc} \toprule
     {Item} & {Description} & {AAU-no} \\ \bottomrule 
-    1      &  B\& K Accelerometer Type 4344  & 64659   \\ 
-    2      &  B\& K Accelerometer Type 4344  & 64660   \\ 
-    3      & YY  & XX   \\
-    4      & YY  & XX   \\ 
-    5      & YY  & XX  \\ \bottomrule 
+    1      &  B \& K Accelerometer Type 4344  & 64659   \\ 
+    2      &  B \& K Accelerometer Type 4344  & 64660   \\ 
+    3      &  B \& K 2-channel Accelerometer Pre-amp Type XX  & 07013   \\
+    4      &  B \& K Microphone Type 4165  & 08132   \\
+    5      &  Gras - 26AK Pre-amp & 52665   \\
+    6      &  B \& K Microphone Power supply Type 2804  & 07304   \\
+    7      &  Crown Studio Reference I Amplifier & 52614   \\
+    8      &  BEHRINGER digital A/D \& D/A Converter - Model ADA8000   & 56545   \\
+    9      &  B \& K Accelerometer calibrator 4294 & 08023   \\
+    10     &  B \& K Microphone calibrator 4294 & XX   \\
+    11     & Soundcard  & XX  \\ \bottomrule 
 \end{tabular}
 \caption{Table over used equipment}
 \end{table}
