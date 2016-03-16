@@ -1,3 +1,45 @@
-\section{Back Plate Hit Detection}
+\section{Back Plate Hit Detection}\label{sec:hit_detect}
 
-\textit{This section is not written yet.}
+As previously stated, it is possible that the loudspeaker coil hits the back plate of the driver if the coil moves too far back. In the long run this will damage the loudspeaker, and should therefore be avoided. In this section an analysis on how to detect these hits, will be provided. 
+
+From \autoref{subsec:impulses} the frequency response of a mechanical frame of a loudspeaker has the same characteristics as a low-pass filter. This means, if the coil is hitting the back plate of the driver, it will result in a increase in power in the low frequency spectrum. As most music and loudspeakers have some sort of a high-pass filter implemented to remove almost non-audible sound, it can be assumed that only a back plate hit will generate vibrations at very low frequencies between, for instance, 0 Hz to 20 Hz. To examine if this is true, a section of the dataset 19 of the driver, where a hit is suspected to have occurred, is analysed. The analysed section is seen in \autoref{fig:raw_driver19_windows}.
+
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.55\textwidth}
+	\tikzsetnextfilename{raw_driver19_window}
+	\input{figures/raw_driver19_window.tex}
+	\caption{Raw dataset 19 for driver. }
+	\label{fig:raw_driver19_window}
+\end{subfigure}
+%\hspace{6mm} 
+\begin{subfigure}[t]{0.43\textwidth}
+	\tikzsetnextfilename{raw_driver19_window_zoom}
+	\input{figures/raw_driver19_window_zoom.tex}
+	\caption{The grey area zoomed in.}
+	\label{fig:raw_driver19_window_zoom}
+\end{subfigure}
+\caption{The greyed area is analysed to examine if there are any signs of an impulse.}
+\label{fig:raw_driver19_windows}
+\end{figure}
+
+The same window is applied to all datasets for the driver and afterwards spectrum analysed to reveal any increase in low frequent power.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
