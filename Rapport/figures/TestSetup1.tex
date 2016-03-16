@@ -74,18 +74,18 @@
 
 \draw[->] ($(0,0.75)+(AMP)$) -- ($(-2,0.75)+(AMP)$) -- ($(-2,1.25)+(AMP)$) -- ($(-1,1.25)+(AMP)$);
 
-\draw[thick, dashed] ($(-2,1)+(SpeakerCorner)$) -- ($(4,1)+(SpeakerCorner)$) -- ($(4,-7)+(SpeakerCorner)$) -- ($(-2,-7)+(SpeakerCorner)$) -- ($(-2,1)+(SpeakerCorner)$);
+\draw[thick, dashed] ($(-2,1)+(SpeakerCorner)$) -- ($(10.5,1)+(SpeakerCorner)$) -- ($(10.5,-7)+(SpeakerCorner)$) -- ($(-2,-7)+(SpeakerCorner)$) -- ($(-2,1)+(SpeakerCorner)$);
 \draw node [black, above=0.05] at ($(-0.25,-7)+(SpeakerCorner)$) {Anechoic room};
 
 
 %% To Computer %%
 \begin{pgfonlayer}{bg}
-\node[input] (PC) at (12,-1) {};
+\node[input] (PC) at (13,-1) {};
 \draw[thick, fill=black!20] (PC) -- ($(2,0)+(PC)$) -- ($(2,-2)+(PC)$) -- ($(0,-2)+(PC)$) -- (PC);
 \end{pgfonlayer}{bg}
 
 
-\draw[<->] ($(-2,-1)+(PC)$) -- node[above] {Optical} ($(0,-1)+(PC)$) ;
+\draw[<->] ($(-3,-1)+(PC)$) -- node[above] {SPDIF} ($(0,-1)+(PC)$) ;
 \node[] (PC1) at ($(1,-1)+(PC)$) {Computer};
 
 \end{tikzpicture}

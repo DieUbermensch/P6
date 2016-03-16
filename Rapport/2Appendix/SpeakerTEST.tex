@@ -1,40 +1,47 @@
-\chapter{Speaker Vibration Lab Tests} \label{app:journal_speaker_test}
+\chapter{Speaker Vibration \& Frequency Response}\label{app:journal_speaker_test}
 
-\section{Speaker Vibration Frequency Response (Linear Frequency Sweep)}
-
-The purpose of this test is to examine if there is a correlation between the amount of vibration of a speaker and an increased amount of harmonic distortion. Another issue to be examined is, if it possible to detect a signal that indicates the woofer is hitting its coil. The scope of this test is:
+The purpose of this test is to examine if there is a correlation between the amount of vibration of a speaker and an increased amount of harmonic distortion. The purpose is also to examined if it is possible to detect when the coil hits the backplate. 
 
 %The distortion level is to be viewable by spectral estimation of accelerometers placed inside the speaker enclosure. 
 
 %It is desirable to find the situation where the woofer hits its coil, since the is the least wanted situation of a playing speaker. The distortion or vibration measured from the speaker can later be used to regulate the input and prevent further distortion to appear. The purpose is expressly formulated as:
 
-\begin{itemize}
-\item Measure the correlation between distortion and the vibration in the enclosure.
-\item Determine the vibration frequency response of the enclosure and driver.
-\item Find the situation where the woofer hits the coil. That is at what frequency and amplitude.
-\end{itemize}
+%\begin{itemize}
+%\item Measure the correlation between distortion and the vibration in the enclosure.
+%\item Determine the vibration frequency response of the enclosure and driver.
+%\item Find the situation where the woofer hits the coil. That is at what frequency and amplitude.
+%\end{itemize}
 
-\subsection{Setup}
+\section{Setup}
 
-The setup of this experiment are depicted in Figure \ref{figure:SpeakertestSetup} and described as follows:
+The setup of this experiment are depicted in Figure \ref{figure:SpeakertestSetup}, where the equipment is catalogued in \autoref{tab:UsedEquipment1}, and described as follows:
+
 \begin{itemize}
-\item Distortion and \gls{SPL} will be measured by a microphone at a distance 1 meter in accordance with IEC \textbf{TBD}
+\item Distortion and \gls{SPL} will be measured by a microphone at a distance 1 meter in accordance with IEC 60268-5 Sound System Equipment - Part 5: Loudspeaker
 \item Vibration will be measured by a Brüel \& Kjear Type 4344 accelerometer, placed at:
 \begin{itemize}
-\item The lower woofer
-\item Centrally inside the enclosure 
+\item The backplate of the lowest woofer
+\item High, inside and on the back of the enclosure 
 \end{itemize}
-\item The speaker will be driven by a Crown Studio Reference I amplifier, supplying a linear response from 10 Hz to 2.4 kHz with up \textbf{TBD} watt.
-\item A computer will be logging data with a \textbf{TBD} soundcard
+\item The speaker will be driven by a Crown Studio Reference I amplifier.
+\item The ADC/DAC will convert measurements from accelerometers and microphone and relay to a computer via SPDIF.
+\begin{itemize}
+\item Both Accelerometer and Microphone is calibrated into outputting -37 dB at respectively 1 G and 94 dB \gls{SPL}.
+\item All recordings are synchronised and timestamped with by looping the test file back into the converter.
+\end{itemize}
+\item The computer will be logging data with a RME HammerFall DIGI 96-PDST sound card and Adobe Audition.
 \end{itemize}
 
-Furthermore the speaker will be placed in the anechoic room to eliminate any external disturbances corresponding to the requirements demanded in IEC \textbf{TBD}
+Furthermore the speaker will be placed in the anechoic room to eliminate any external disturbances corresponding to the requirements demanded in the 
+IEC 60268-5 standard.
+
+\subsection*{Test Setup}
 
 \begin{figure}[H]
 \centering
 \tikzsetnextfilename{TestSetup1}
 \input{figures/TestSetup1.tex}
-\caption{test setup}
+\caption{Test setup}
 \label{figure:SpeakertestSetup}
 \end{figure}
 
@@ -47,17 +54,19 @@ Furthermore the speaker will be placed in the anechoic room to eliminate any ext
     {Item} & {Description} & {AAU-no} \\ \bottomrule 
     1      &  B \& K Accelerometer Type 4344  & 64659   \\ 
     2      &  B \& K Accelerometer Type 4344  & 64660   \\ 
-    3      &  B \& K 2-channel Accelerometer Pre-amp Type XX  & 07013   \\
+    3      &  B \& K 2-channel Accelerometer Pre-amp Type 2622  & 07013   \\
     4      &  B \& K Microphone Type 4165  & 08132   \\
     5      &  Gras - 26AK Pre-amp & 52665   \\
     6      &  B \& K Microphone Power supply Type 2804  & 07304   \\
     7      &  Crown Studio Reference I Amplifier & 52614   \\
     8      &  BEHRINGER digital A/D \& D/A Converter - Model ADA8000   & 56545   \\
     9      &  B \& K Accelerometer calibrator 4294 & 08023   \\
-    10     &  B \& K Microphone calibrator 4294 & XX   \\
-    11     & Soundcard  & XX  \\ \bottomrule 
+    10     &  B \& K Microphone calibrator 4294 & 78301   \\
+    11     &  RME HammerFall DIGI 96-PDST sound card & 60919  \\
+    11     &  Passive Dali Zensor 5 AX & NaN  \\ \bottomrule 
 \end{tabular}
-\caption{Table over used equipment}
+\caption{Table over equipment used in test}
+\label{tab:UsedEquipment1}
 \end{table}
 
 
@@ -66,27 +75,48 @@ Furthermore the speaker will be placed in the anechoic room to eliminate any ext
 
 The producer for this experiment is described as follows:
 \begin{enumerate}
-\item Adjust volume on the amplifier.
-\item Playback a sinusoidal sweep from 2.4 Khz to 10 Hz. The duration of the sweep is 30 seconds and the sweep is linear.
-\item If the speaker could handle it, increase the volume with 1 dB.
-\item Repeat until the woofer hits coil. 
+\item Adjust volume on the amplifier to +3 dB gain.
+\item Vacate the anechoic room and seal the room.
+\item Start recording in Adobe Audition for:
+\begin{itemize}
+\item Driver and enclosure accelerometer
+\item Microphone and playback loop
+\end{itemize}
+\item Playback file \path{chirp.wav}, which is a sinusoidal sweep from 2.4 kHz to 10 Hz. The duration of the sweep is 30 seconds and the sweep is linear. The amplitude is 0 dBFS.
+\item After playback, stop recording all channels
+\item Save recordings as \path{.wav} file
+\item Enter room and adjust amplifier by +1 dB
+\item Repeat step 2 through 7 until the speaker breaks.
 \end{enumerate}
 
+The \path{chirp.wav} can be found on:\\
+\scalebox{0.7}{
+\path{CD://Maalinger/Maalinger030316 - Loudspeaker test/Measurements030316/chirp.wav}}\\
 
-\begin{figure}[H]
-\centering
-\tikzsetnextfilename{linear_freq_sweep}
-\input{figures/linear_freq_sweep.tex}
-\caption{}
-\label{fig:linear_freq_sweep}
-\end{figure}
+%\begin{figure}[H]
+%\centering
+%\tikzsetnextfilename{linear_freq_sweep}
+%\input{figures/linear_freq_sweep.tex}
+%\caption{}
+%\label{fig:linear_freq_sweep}
+%\end{figure}
 
-All of the accelerometers have beforehand been calibrated to have the same sensitivity within the frequency test range.
 
 
 \section{Data Extraction}
 
 It was possible to increase the volume by 19 dB until the loudspeaker unit got damaged. As seen in \autoref{fig:test_relative_gain} the gain was linear increased by 1 dB until the 20th test were the loudspeaker unit failed.
+
+The recordings can be found on:\\
+\scalebox{0.7}{
+\path{CD://Maalinger/Maalinger030316 - Loudspeaker test/Measurements030316/}}
+And is indexed in folders \scalebox{0.8}{\path{Measure_X}}, where X corresponds to the test number. Every measurements is denoted as:
+\begin{itemize}
+\item Accelerometer on driver: \scalebox{0.8}{\path{Acc driver_0XX}}
+\item Accelerometer in enclosure: \scalebox{0.8}{\path{Acc enclosure_0XX}}
+\item Microphone: \scalebox{0.8}{\path{Mic_0XX}}
+\item Playback loop: \scalebox{0.8}{\path{Reference_0XX}}
+\end{itemize}
 
 \begin{figure}[H]
 \centering
