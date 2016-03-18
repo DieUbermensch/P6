@@ -2,7 +2,7 @@
 
 As previously stated, it is possible that the loudspeaker coil hits the back plate of the driver if the coil moves too far back. In the long run this will damage the loudspeaker, and should therefore be avoided. In this section an analysis on how to detect these hits, will be provided. 
 
-From \autoref{subsec:impulses} the frequency response of a mechanical frame of a loudspeaker has the same characteristics as a low-pass filter. This means, if the coil is hitting the back plate of the driver, it will result in a increase in power in the low frequency spectrum. As most music and loudspeakers have some sort of a high-pass filter implemented to remove almost non-audible sound, it can be assumed that only a back plate hit will generate vibrations at very low frequencies between, for instance, 0 Hz to 20 Hz. To examine if this is true, a section of the dataset 19 of the driver, where a hit is suspected to have occurred, is analysed. The analysed section is seen in \autoref{fig:raw_driver19_windows}.
+From \autoref{subsec:impulses} the frequency response of a mechanical frame of a loudspeaker has the same characteristics as a low-pass filter. This means, if the coil is hitting the back plate of the driver, it will result in a increase in energy in the low frequency spectrum. As most music and loudspeakers have some sort of a high-pass filter implemented to remove almost non-audible sound, it can be assumed that only a back plate hit will generate vibrations at very low frequencies between, for instance, 0 Hz to 20 Hz. To examine if this is true, a section of the dataset 19 of the driver, where a hit is suspected to have occurred, is analysed. The analysed section is seen in \autoref{fig:raw_driver19_windows}.
 
 
 \begin{figure}[H]
@@ -24,7 +24,20 @@ From \autoref{subsec:impulses} the frequency response of a mechanical frame of a
 \label{fig:raw_driver19_windows}
 \end{figure}
 
-The same window is applied to all datasets for the driver and afterwards spectrum analysed to reveal any increase in low frequent power.
+The same window is applied to all datasets for the driver and afterwards spectrum analysed to reveal any increase in low frequent energy. 
+
+\begin{figure}[H]
+\centering
+\tikzsetnextfilename{FFT_hit}
+\input{figures/FFT_hit.tex}
+\label{fig:FFT_hit}
+\caption{The spectrum of the window. The black graph is dataset 1, blue is 10 and red is 19.}
+\label{fig:FFT_hit}
+\end{figure}
+
+It is seen that the energy for non-harmonic frequencies is increased at very low frequencies as indicated with the arrow. The black graph is the first dataset and the blue is the tenth dataset. As no hit was observed in the window at dataset 1 and 10, the energy of lower part of the spectrum was not increased. However the suspected hit in dataset 19 has an energy increase in  the low frequency spectrum. Note that since the window is 0.25 seconds wide, frequencies below 4 Hz should be discarded.
+
+
 
 
 
