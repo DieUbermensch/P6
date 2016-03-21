@@ -37,13 +37,43 @@ IEC 60268-5 standard.
 
 \subsection*{Test Setup}
 
+%\begin{figure}[H]
+%\centering
+%\tikzsetnextfilename{TestSetup1}
+%\input{figures/TestSetup1.tex}
+%\caption{Test setup}
+%\label{figure:SpeakertestSetup}
+%\end{figure}
+
 \begin{figure}[H]
 \centering
-\tikzsetnextfilename{TestSetup1}
-\input{figures/TestSetup1.tex}
-\caption{Test setup}
-\label{figure:SpeakertestSetup}
+\begin{subfigure}[t]{0.47\textwidth}
+	\centering
+	\includegraphics[width=1\textwidth]{figures/Test_setup_behind.jpg}
+	\caption{Test setup (behind)}
+	\label{fig:test_setup_behind_R}
+\end{subfigure}
+\hspace{6mm} 
+\begin{subfigure}[t]{0.47\textwidth}
+	\centering
+	\includegraphics[width=1\textwidth]{figures/Test_setup_front.jpg}
+	\caption{Test setup (front)}
+	\label{fig:test_setup_front_R}
+\end{subfigure}
+\begin{subfigure}[b]{\textwidth}
+	\centering
+	\tikzsetnextfilename{TestSetup1}
+	\input{figures/TestSetup1.tex}
+	\caption{Schematic overview}
+	\label{figure:SpeakertestSetup}
+\end{subfigure}
+\caption{Test setup.}
+\label{fig:test_setup_R}
 \end{figure}
+
+
+
+
 
 \subsection*{Equipment used and AAU-no.}
 
@@ -89,9 +119,16 @@ The producer for this experiment is described as follows:
 \item Repeat step 2 through 7 until the speaker breaks.
 \end{enumerate}
 
-The \path{chirp.wav} can be found on:\\
+The \path{chirp.wav} are located at:\\
 \scalebox{0.7}{
 \path{CD://Maalinger/Maalinger030316 - Loudspeaker test/Measurements030316/chirp.wav}}\\
+Raw data sample are located at:\\
+\scalebox{0.7}{
+\path{CD://Maalinger/Maalinger030316 - Loudspeaker test}}\\
+Scripts used to create all graphs are located at:\\
+\scalebox{0.7}{
+\path{CD://Maalinger/Maalinger030316 - Loudspeaker test/Measurements030316/MeasurementAnalysis.m}}
+
 
 %\begin{figure}[H]
 %\centering
@@ -104,6 +141,7 @@ The \path{chirp.wav} can be found on:\\
 
 
 \section{Data Extraction}
+
 
 It was possible to increase the volume by 19 dB until the loudspeaker unit got damaged. As seen in \autoref{fig:test_relative_gain} the gain was linear increased by 1 dB until the 20th test were the loudspeaker unit failed.
 
@@ -118,16 +156,133 @@ And is indexed in folders \scalebox{0.8}{\path{Measure_X}}, where X corresponds 
 \item Playback loop: \scalebox{0.8}{\path{Reference_0XX}}
 \end{itemize}
 
-\begin{figure}[H]
-\centering
-\tikzsetnextfilename{test_relative_gain}
-\input{figures/test_relative_gain.tex}
-\caption{}
-\label{fig:test_relative_gain}
-\end{figure}
+\subsection{Raw Data}
 
 For each of the test four measurements was taken. These are the accelerometer placed on the driver and enclosure, the microphone and a reference to synchronize the measurements. 
 
+As previously stated there are in total 20 datasets each containing four measurements, namely the vibrations from the enclosure and driver, the sound pressure from the microphone, and lastly a reference signal to synchronize all data. The amount of data is therefore large and only relevant datasets will be presented. The first dataset from the test is shown in \autoref{fig:raw1}.
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.335\textwidth}
+	\includegraphics[width=1\textwidth]{figures/raw_driver1.pdf}
+	\caption{Vibration from driver.}
+	\label{fig:raw_driver1}
+\end{subfigure}
+\begin{subfigure}[t]{0.3\textwidth}
+	\includegraphics[width=1\textwidth]{figures/raw_enclosure1.pdf}
+	\caption{Vibration from enclosure.}
+	\label{fig:raw_enclosure1}
+\end{subfigure}
+\begin{subfigure}[t]{0.3\textwidth}
+	\includegraphics[width=1\textwidth]{figures/raw_microphone1.pdf}
+	\caption{Sound pressure from microphone.}
+	\label{fig:raw_microphone1}
+\end{subfigure}
+\caption{The measured data of (a) the vibration on the driver, (b) the vibration on the enclosure, and (c) the sound pressure from the microphone. Dataset 1.}
+\label{fig:raw1}
+\end{figure} 
+
+
+Looking at the first dataset reveals that there are mechanical issues with the loudspeaker. In \autoref{fig:raw_driver1} there is a strong indication of a resonance frequency at 25 seconds with a peak amplitude on approximately 0.02. A similar observation can be found in \autoref{fig:raw_enclosure1} which shows the vibration measured by the accelerometer placed on the enclosure where a resonance frequency appears after 25 seconds. Another mechanical resonance frequency can be found located after 14 seconds for the enclosure. The sound pressure level measured by the microphone is in contrast fairly linear compared to the measured vibrations. Dataset 10 is shown in \autoref{fig:raw10} where the gain is increased by 10 dB.
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.335\textwidth}
+	\includegraphics[width=1\textwidth]{figures/raw_driver10.pdf}
+	\caption{Vibration from driver.}
+	\label{fig:raw_driver10}
+\end{subfigure}
+\begin{subfigure}[t]{0.3\textwidth}
+	\includegraphics[width=1\textwidth]{figures/raw_enclosure10.pdf}
+	\caption{Vibration from enclosure.}
+	\label{fig:raw_enclosure10}
+\end{subfigure}
+\begin{subfigure}[t]{0.3\textwidth}
+	\includegraphics[width=1\textwidth]{figures/raw_microphone10.pdf}
+	\caption{Sound pressure from microphone.}
+	\label{fig:raw_microphone10}
+\end{subfigure}
+\caption{The measured data of (a) the vibration on the driver, (b) the vibration on the enclosure, and (c) the sound pressure from the microphone. Dataset 10.}
+\label{fig:raw10}
+\end{figure} 
+
+The measurements from dataset 10 is very similar to the measurements seen in dataset 1. Since no particular change is happening between dataset 1 to 10 it is assumed that the performance of the loudspeaker remains good. A further analysis of the performance speaker will be done in the analysis of the harmonic distortion section to examine the amount of harmonic distortion present. Dataset 14 is shown in \autoref{fig:raw14}. 
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.335\textwidth}
+	\includegraphics[width=1\textwidth]{figures/raw_driver14.pdf}
+	\caption{Vibration from driver.}
+	\label{fig:raw_driver14}
+\end{subfigure}
+\begin{subfigure}[t]{0.3\textwidth}
+	\includegraphics[width=1\textwidth]{figures/raw_enclosure14.pdf}
+	\caption{Vibration from enclosure.}
+	\label{fig:raw_enclosure14}
+\end{subfigure}
+\begin{subfigure}[t]{0.3\textwidth}
+	\includegraphics[width=1\textwidth]{figures/raw_microphone14.pdf}
+	\caption{Sound pressure from microphone.}
+	\label{fig:raw_microphone14}
+\end{subfigure}
+\caption{The measured data of (a) the vibration on the driver, (b) the vibration on the enclosure, and (c) the sound pressure from the microphone. Dataset 14.}
+\label{fig:raw14}
+\end{figure} 
+
+While most of the measurements show the exact same characteristics as previous datasets, a slight change occurs in the end of the vibration measured on the driver in \autoref{fig:raw_driver14} and the sound pressure level in \autoref{fig:raw_microphone14}. After approximately 29 seconds a peak is observed in \autoref{fig:raw_driver14} which could indicate that the coil at that point hit the back plate of the driver. A further examination will be made in a later section. The measurements from the microphone, also show that a peak occurs at the same point, which most likely will cause the amount of harmonic distortion to increase. Dataset 19, which is the last dataset before the loudspeaker break down, is shown in \autoref{fig:raw19}.
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.335\textwidth}
+	\includegraphics[width=1\textwidth]{figures/raw_driver19.pdf}
+	\caption{Vibration from driver.}
+	\label{fig:raw_driver19}
+\end{subfigure}
+\begin{subfigure}[t]{0.3\textwidth}
+	\includegraphics[width=1\textwidth]{figures/raw_enclosure19.pdf}
+	\caption{Vibration from enclosure.}
+	\label{fig:raw_enclosure19}
+\end{subfigure}
+\begin{subfigure}[t]{0.3\textwidth}
+	\includegraphics[width=1\textwidth]{figures/raw_microphone19.pdf}
+	\caption{Sound pressure from microphone.}
+	\label{fig:raw_microphone19}
+\end{subfigure}
+\caption{The measured data of (a) the vibration on the driver, (b) the vibration on the enclosure, and (c) the sound pressure from the microphone. Dataset 19.}
+\label{fig:raw19}
+\end{figure} 
+
+Dataset 19 has the same characteristics as dataset 14, though with a more noticeable peak at 29 seconds for both the measurements from the driver and the microphone. In the last dataset shown in \autoref{fig:raw20}, the loudspeaker breaks down.
+
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.335\textwidth}
+	\includegraphics[width=1\textwidth]{figures/raw_driver20.pdf}
+	\caption{Vibration from driver.}
+	\label{fig:raw_driver20}
+\end{subfigure}
+\begin{subfigure}[t]{0.3\textwidth}
+	\includegraphics[width=1\textwidth]{figures/raw_enclosure20.pdf}
+	\caption{Vibration from enclosure.}
+	\label{fig:raw_enclosure20}
+\end{subfigure}
+\begin{subfigure}[t]{0.3\textwidth}
+	\includegraphics[width=1\textwidth]{figures/raw_microphone20.pdf}
+	\caption{Sound pressure from microphone.}
+	\label{fig:raw_microphone20}
+\end{subfigure}
+\caption{The measured data of (a) the vibration on the driver, (b) the vibration on the enclosure, and (c) the sound pressure from the microphone. Dataset 20.}
+\label{fig:raw20}
+\end{figure} 
+
+As seen in \autoref{fig:raw_driver20} the loudspeaker unit breaks down at the mechanical resonance frequency for the driver. The reason to why vibrations on the enclosure and sound pressure are still presentthe  after 25 seconds is because the other loudspeaker unit did not entirely break down. Since the loudspeaker unit broke down at the mechanical driver resonance frequency, it would be relevant to examine if there is any correlation as such.
+
+
+
+
+\subsection{Frequency response}
 
 To determine the frequency response of the vibration from the driver, enclosure and the speaker frequency response a Fast Fourier Transformation (FFT) is applied to all three measurements.
 
