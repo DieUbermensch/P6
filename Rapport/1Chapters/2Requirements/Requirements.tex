@@ -1,1 +1,54 @@
 \chapter{Requirements}
+This chapter will post the requirements for the system described in \autoref{ch:overview}.  
+
+\begin{itemize}
+\item Functionality
+\begin{enumerate}
+\item The coil must never hit the backplate when the system is activated.
+\end{enumerate}
+\end{itemize}
+
+\begin{itemize}
+\item Overall system
+\begin{enumerate}
+\item The system must not have delay larger than \textbf{TBD}
+\item The system must not introduce more distortion.
+\end{enumerate}
+\end{itemize}
+
+\begin{itemize}
+\item DSP platform
+\begin{enumerate}
+\item The sample rate of the ADC/DAC must be 96 kHz.
+\item A bit resolution of 24 bit must supported by the ADC/DAC and the DSP.
+\item The DSP must interface with \gls{I2S} to the ADC/DAC.
+\item The DSP must have enough instructions to support both the system and a limiter build by DALI.  
+\end{enumerate}
+\end{itemize}
+
+\begin{itemize}
+\item Regulating equalizer
+\begin{enumerate}
+\item The equalizer must be able to regulate between 0 Hz - 100 Hz with a tolerance of $\pm$ 10 Hz. 
+\item The maximum gain of the user controlled equalizer must be minimum $\pm$ 12 dB SPL with a tolerance of $\pm$ 1 dB SPL.
+\item The resolution of the gain must be 1 dB with a tolerance of 0.1 dB.
+\end{enumerate}
+\end{itemize}
+
+
+\begin{itemize}
+\item User controlled equalizer
+\begin{enumerate}
+\item There must be \textbf{TBD} n bands in which the equalizer can be controlled with. 
+\item The bands of the equalizer must function between 50 Hz - 15000 Hz with a tolerance of \textbf{TBD}. 
+\item The maximum gain of the user controlled equalizer must be minimum $\pm$ 6 dB SPL with a tolerance of $\pm$ 1 dB SPL.
+\item The resolution of the gain must be 1 dB with a tolerance of 0.1 dB.
+\end{enumerate}
+\end{itemize}
+
+\begin{itemize}
+\item Interface
+\begin{enumerate}
+\item 
+\end{enumerate}
+\end{itemize}
