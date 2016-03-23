@@ -2,8 +2,11 @@
 \input{1Chapters/1Preanalysis/Introduction.tex}
 
 %%%%%%%%%%%%%%%%%%%%%%%% Problem analyse %%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{The Active Speaker and limitations}
-This chapter will analyze an active speaker, analyze how a human percieves sound and investigate problems concerning distortion in a loudspeaker. An active loudspeaker is a passive loudspeaker with a build in amplifier as seen on \autoref{fig:speaker_block}. \\
+\chapter{The Active Loudspeaker and its Limitations}
+Before developing a system which can improve the overall performance of an active loudspeaker an brief analysis on how an active loudspeaker works, is needed. The main topic of this chapter is to analyse how a human perceives sound and examine any issues concerning distortion in an active loudspeaker, since it is commonly known that distortion adds undesirable artefacts to the sound. The purpose of this chapter is therefore to examine if it is possible to increase the performance of an active loudspeaker without creating too much distortion. 
+
+The initial starting point for the analysis is the block diagram of an active loudspeaker as seen in \autoref{fig:speaker_block}. It is seen that the the active loudspeaker is a passive loudspeaker with an incorporated amplifier.
+
 \begin{figure}[H]
 \centering
 \tikzsetnextfilename{SpeakerBlock}
@@ -12,7 +15,7 @@ This chapter will analyze an active speaker, analyze how a human percieves sound
 \caption{Block diagram of an active speaker.}
 \label{fig:speaker_block}
 \end{figure}
-The amplifier gives the active loudspeaker more flexibility than a passive loudspeaker because an active loudspeaker can be incorporated with for example a wireless module for streaming, which makes the only wiring the 230 V connector. An example of the backside of an active speaker is seen on \autoref{fig:dali_zensor_ax}, which shows the Zensor 1 AX's from DALI.
+The amplifier gives the active loudspeaker more flexibility than a passive loudspeaker because an active loudspeaker is powered by its own power supply. can be incorporated with for example a wireless module for streaming, which makes the only wiring the 230 V connector. An example of the backside of an active speaker is seen on \autoref{fig:dali_zensor_ax}, which shows the Zensor 1 AX's from DALI.
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.6\textwidth]{figures/dali_zensor_1_ax.jpg}
