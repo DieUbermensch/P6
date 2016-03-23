@@ -37,14 +37,6 @@ IEC 60268-5 standard.
 
 \subsection*{Test Setup}
 
-%\begin{figure}[H]
-%\centering
-%\tikzsetnextfilename{TestSetup1}
-%\input{figures/TestSetup1.tex}
-%\caption{Test setup}
-%\label{figure:SpeakertestSetup}
-%\end{figure}
-
 \begin{figure}[H]
 \centering
 \begin{subfigure}[t]{0.47\textwidth}
@@ -67,12 +59,9 @@ IEC 60268-5 standard.
 	\caption{Schematic overview}
 	\label{figure:SpeakertestSetup}
 \end{subfigure}
-\caption{Test setup.}
+\caption{The entire test setup shown with photographs and a schematic overview}
 \label{fig:test_setup_R}
 \end{figure}
-
-
-
 
 
 \subsection*{Equipment used and AAU-no.}
@@ -95,15 +84,16 @@ IEC 60268-5 standard.
     11     &  RME HammerFall DIGI 96-PDST sound card & 60919  \\
     11     &  Passive Dali Zensor 5 AX & NaN  \\ \bottomrule 
 \end{tabular}
-\caption{Table over equipment used in test}
+\caption{Table over equipment used in the test}
 \label{tab:UsedEquipment1}
 \end{table}
-
+\vspace{-5mm}
 
 
 \section{Procedure}\label{sec:SpeakerTestProcedure1}
 
 The producer for this experiment is described as follows:
+\vspace{-5mm}
 \begin{enumerate}
 \item Adjust volume on the amplifier to +3 dB gain.
 \item Vacate the anechoic room and seal the room.
@@ -122,12 +112,6 @@ The producer for this experiment is described as follows:
 The \path{chirp.wav} are located at:\\
 \scalebox{0.7}{
 \path{CD://Maalinger/Maalinger030316 - Loudspeaker test/Measurements030316/chirp.wav}}\\
-Raw data sample are located at:\\
-\scalebox{0.7}{
-\path{CD://Maalinger/Maalinger030316 - Loudspeaker test}}\\
-Scripts used to create all graphs are located at:\\
-\scalebox{0.7}{
-\path{CD://Maalinger/Maalinger030316 - Loudspeaker test/Measurements030316/MeasurementAnalysis.m}}
 
 
 %\begin{figure}[H]
@@ -143,18 +127,22 @@ Scripts used to create all graphs are located at:\\
 \section{Data Extraction}
 
 
-It was possible to increase the volume by 19 dB until the loudspeaker unit got damaged. As seen in \autoref{fig:test_relative_gain} the gain was linear increased by 1 dB until the 20th test were the loudspeaker unit failed.
+It was possible to increase the volume by 19 dB until the loudspeaker unit got to damaged. The gain was linear increased by 1 dB, starting at 3 dB, until the 20th test were the loudspeaker unit failed. This results in 20 usable data sets.
 
 The recordings can be found on:\\
 \scalebox{0.7}{
 \path{CD://Maalinger/Maalinger030316 - Loudspeaker test/Measurements030316/}}
-And is indexed in folders \scalebox{0.8}{\path{Measure_X}}, where X corresponds to the test number. Every measurements is denoted as:
+And is indexed in folders \scalebox{0.8}{\path{Measure_X}}, where X corresponds to the test number. Every measurements inside is denoted as:
 \begin{itemize}
 \item Accelerometer on driver: \scalebox{0.8}{\path{Acc driver_0XX}}
 \item Accelerometer in enclosure: \scalebox{0.8}{\path{Acc enclosure_0XX}}
 \item Microphone: \scalebox{0.8}{\path{Mic_0XX}}
 \item Playback loop: \scalebox{0.8}{\path{Reference_0XX}}
 \end{itemize}
+
+Scripts used to create all graphs are located at:\\
+\scalebox{0.7}{
+\path{CD://Maalinger/Maalinger030316 - Loudspeaker test/Measurements030316/MeasurementAnalysis.m}}
 
 \subsection{Raw Data}
 
@@ -333,8 +321,8 @@ From \autoref{fig:FFT_driver1} it is seen that the driver has a resonance freque
 	\caption{Microphone.}
 	\label{fig:FFT_mic10}
 \end{subfigure}
-\caption{Frequency response of (a) the vibration on the driver, (b) the vibration on the enclosure, and (c) the speaker. Test 2.}
-\label{fig:FFT1}
+\caption{Frequency response of (a) the vibration on the driver, (b) the vibration on the enclosure, and (c) the speaker. Test 10.}
+\label{fig:FFT10}
 \end{figure}
 
 The frequency response for all three measurements in test 10 is very similar to the frequency response found in test 1. The same applies to all the test from 1 to 10. No noticeable difference between the test is observed.
@@ -345,7 +333,7 @@ The frequency response for all three measurements in test 10 is very similar to 
 	\tikzsetnextfilename{FFT_driver19}
 	\input{figures/FFT_driver19.tex}
 	\caption{Driver.}
-	\label{fig:FFT_driver10}
+	\label{fig:FFT_driver19}
 \end{subfigure}
 \begin{subfigure}[t]{0.28\textwidth}
 	\tikzsetnextfilename{FFT_enclosure19}
@@ -359,8 +347,8 @@ The frequency response for all three measurements in test 10 is very similar to 
 	\caption{Microphone.}
 	\label{fig:FFT_mic19}
 \end{subfigure}
-\caption{Frequency response of (a) the vibration on the driver, (b) the vibration on the enclosure, and (c) the speaker. Test 2.}
-\label{fig:FFT1}
+\caption{Frequency response of (a) the vibration on the driver, (b) the vibration on the enclosure, and (c) the speaker. Test 10.}
+\label{fig:FFT19}
 \end{figure} 
 
 The frequency responses test 19, which is the test before the loudspeaker got damaged, shows little signs of any changes in the frequency responses from the previous tests, thus is not possible to determine if the loudspeaker is close the being damaged alone from the frequency responses.
