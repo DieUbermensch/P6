@@ -1,21 +1,25 @@
 \begin{tikzpicture}
-%% Kasser %%
+%% Audio Source %%
 \node [block, fill=white] (AudioSource) at (0,0) {Audio Source};
 
-%% DSP %%
-\node [block, fill=white] (Amplifier) at ($(AudioSource)+(3.5,0)$) {Amplifier};
+%% Subsystems in enclosure %%
+\node [block, fill=white] (Signal processing system) at ($(AudioSource)+(4,0)$) {Processing system};
+\node [block, fill=white] (Amplifier) at ($(Signal processing system)+(4,0)$) {Amplifier};
+\node [block, fill=white] (PSU) at ($(Amplifier)+(0,2)$) {PSU};
 \node [block, fill=white] (Driver) at ($(Amplifier)+(3.5,0)$) {Driver};
 
 %% Store Blokke %%
 \begin{pgfonlayer}{bg}
-\draw[thick, fill=black!20] ($(-1.50,1)+(Amplifier)$) -- ($(1.750,1)+(Driver)$) -- ($(1.750,-1.25)+(Driver)$) -- ($(-1.50,-1.25)+(Amplifier)$) -- ($(-1.50,1)+(Amplifier)$); 
+\draw[thick, fill=black!20] ($(-6.2,3)+(Amplifier)$) -- ($(1.750,3)+(Driver)$) -- ($(1.750,-1.25)+(Driver)$) -- ($(-6.2,-1.25)+(Amplifier)$) -- ($(-6.2,3)+(Amplifier)$); 
 \node (Speakertag) at ($(-.25,-1)+(Driver)$) {\textbf{Speaker Enclosure}};
 \end{pgfonlayer}
 
 %% Forbindelse %%
-\draw[->] (AudioSource) -- (Amplifier);
-\draw[->] (Amplifier) -- (Driver);
-
+\draw[->,thick] (AudioSource) -- (Signal processing system);
+\draw[->,thick] (PSU) -- (Amplifier);
+\draw[->,thick] (Signal processing system) -- (Amplifier);
+\draw[->,thick] (Amplifier) -- (Driver);
+\draw[->, to path={-| (\tikztotarget)},thick] (PSU) edge (Signal processing system);
 %\draw[->] ($(EnclosureDriver)+(-1.375,0.3)$) -- ($(EnclosureDriver)+(-1.75,0.3)$) -- ($(EnclosureDriver)+(-1.75,1)$) -- ($(EnclosureDriver)+(-5.5,1)$) |- ($(SpectralAnalysis)+(1.375,0.3)$);
 
 \end{tikzpicture}

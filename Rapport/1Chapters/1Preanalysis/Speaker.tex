@@ -1,6 +1,6 @@
 \section{Loudspeaker topology}
 
-In order to understand where distortion could arrive from in a speaker it is necessary to understand the basic fundamentals and the topology of a loudspeaker. This section will consist of the basic topology and then glans over the topic of vibration induced in the speaker driver.
+As previously stated, distortion also occurs in the driver block in \autoref{fig:speaker_block}. In order to understand how the distortion occurs in a loudspeaker, it is necessary to understand the basic fundamentals and the topology of a loudspeaker. This section will consist of the basic topology and then glans over the topic of vibration induced in the speaker driver.
 
 \subsubsection*{The basics}
 The loudspeaker is a transducer which purpose is to convert the electrical energy into acoustical energy. This is done by sending the signal into the speaker which can consist of numerous driver. Each driver is made with a specific purpose for handling frequency. The drivers are designed to perform best within their frequency range, hence they are usually different sizes in diameter.
@@ -11,13 +11,21 @@ The loudspeaker is a transducer which purpose is to convert the electrical energ
 \end{itemize}
 The reason for different diameters in drivers is because of the wavelength the specific frequencies got. Should a woofer play frequencies at +4 kHz it would end in the driver physically not being able to move that fast. The limitations will end up in non-linear distortion in the diaphragm. Vice versa, should a tweeter reproduced low frequency sound at high \gls{SPL} it will end in distortion. The tweeter has a very low excursion range which limits it to the high frequency area.
 
-\subsubsection*{Sensitivity}
+\subsubsection*{Sensitivity and Sound Pressure Level}
 
 A speaker is supplied from the manufacture with a sensitivity rating. This tells how efficient a loudspeaker is. The sensitivity rating is rated in dB and tells what \gls{SPL} the speaker outputs when supplied with 1 watt using 2.86 volt and measured at 1 meter. This is done assuming an infinite baffle and no reflection from the room. The sensitivity is defined by \autoref{eq:speaker_sensitivty}.
 \begin{align}\label{eq:speaker_sensitivty}
-\text{dB}_\text{sensitivity}=112\text {dB} +10 \cdot log_{10}(\text{efficiency})
+\text{dB}_\text{sensitivity}=112\text {dB} +10 \cdot \log_{10}(\text{efficiency})
 \end{align}  
 The 112 dB in \autoref{eq:speaker_sensitivty} is added to the sensitivity since this 1 watt compared to the $10^{-12}$ watt which is the threshold for audible sound. At 1 watt it will yield 120 dB. The reason for 8 dB difference is due to the assumption of infinite baffle in a reflection free room. When the sound is dispersed at a radius of $2\pi=r^2$, where r is 1 meter it creates a reduction in \gls{SPL} by 8 dB.
+
+The sensitivity of a loudspeaker can be used to calculate the sound pressure level by the amount of dissipated power by following equation:
+
+\begin{align}\label{eq:sound_pressure_level}
+L_\text{p}(P)=\text{dB}_\text{sensitivity} + 10\cdot \log_{10} \left(\frac{P}{1 \text{W}}\right)
+\end{align} 
+
+By using \autoref{eq:sound_pressure_level} it is possible to calculate either the sound pressure level or the power. In later test the equation might prove useful to calculate the amount of dissipated power in an amplifier if the sound pressure level is measured from a microphone.
 
 \subsubsection*{Diaphragm excursion}
 
@@ -45,6 +53,8 @@ A common problem when designing loudspeakers is the vibrations from the enclosur
 \item Dampening material or complex structural design inside the cabinet to disperse the sound.
 \end{itemize}
 \todo[inline]{Skal nok lige skaffe nogle kilder på de udtagelser}
+
+Another possibility is to use the vibration measurement as an indicator to tell the current performance of the loudspeaker. Since the loudspeaker will vibrate more at higher volumes, a system can developed upon the amount of vibrations thus decreasing the volume when the loudspeaker vibrates too much for instance.
 
 
 Looking further into the speaker driver itself, it shows in \autoref{fig:SpeakerModelStress} that parts in the driver also creates unwanted vibrations. The goal of the speaker driver is to reproduce the electrical signal as an acoustical signal. This is done by using a membrane which is suspended in a very light and easy to move material. An Induction in the coil is created in a permanent magnet creating a a electro magnetic force resulting in the membrane moving. The goal will always be to loose as little as possible energy, giving the most perfect output. The driver simply needs to be as powerfull, light, stiff and efficient as possible.
