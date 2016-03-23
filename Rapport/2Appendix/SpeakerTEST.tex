@@ -281,6 +281,7 @@ As seen in \autoref{fig:raw_driver20} the loudspeaker unit breaks down at the me
 
 
 
+\section{Analysis}
 
 \subsection{Frequency response}
 
@@ -365,18 +366,110 @@ The frequency response for all three measurements in test 10 is very similar to 
 The frequency responses test 19, which is the test before the loudspeaker got damaged, shows little signs of any changes in the frequency responses from the previous tests, thus is not possible to determine if the loudspeaker is close the being damaged alone from the frequency responses.
 
 
-%The information captured by the use of procedure in \autoref{sec:SpeakerTestProcedure} is graphed in this section
+\subsection{Harmonic distortion}
+
+In this section the amount of harmonic distortion of the loudspeaker is analysed, to examine if it is possible to determine the performance of the loudspeaker from harmonics. To analyse the harmonic distortion a spectrogram is used. The spectrogram is a three dimensional plot which shows the frequency, time and magnitude. Basically the spectrogram is an array of multiple FFT each calculated at a given time with a given window.
+
+The advantages of using a spectrogram is that it gives a good overview of the spectral content in the signal at any given time. Since the harmonic frequencies depends on the fundamental frequency, it is better to use a spectrogram rather than a regular FFT, since the spectrogram will reveal all harmonic distortion for all fundamental frequency from 10 Hz to 2.4 kHz. The spectrograms for microphone in dataset 1 and 19 are shown in \autoref{fig:spec_mic}.
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.47\textwidth}
+	\includegraphics[width=1\textwidth]{figures/spectrogram_mic1.pdf}
+	\caption{Microphone dataset 1.}
+	\label{fig:spectrogram_mic1}
+\end{subfigure}
+\begin{subfigure}[t]{0.47\textwidth}
+	\includegraphics[width=1\textwidth]{figures/spectrogram_mic19.pdf}
+	\caption{Microphone dataset 19.}
+	\label{fig:spectrogram_mic19}
+\end{subfigure}
+\caption{The spectrograms of the microphone dataset 1 and 19. The prominent red line is the sine sweep from 2.4 kHz to 10 Hz while the yellow and blue lines along the red line are harmonic distortion.}
+\label{fig:spec_mic}
+\end{figure} 
+
+The spectrograms of dataset 1 and 19 for the microphone, seen in \autoref{fig:spectrogram_mic1} and \autoref{fig:spectrogram_mic1}, show a prominent red line and three weak blue lines above the red line. It is seen that the red line is a linear decreasing function from 2.4 kHz to 10 Hz where the frequency is a function of time. This indicates that the red line is the fundamental frequency of the sine sweep from 2.4 kHz to 10 Hz. The blue and yellow line are linear functions of the harmonic distortions. The spectrograms clearly show that increasing the gain will increase the amount of harmonic distortion as well. An interesting observation is the spectral frequency leak that occurs at lower frequencies revealing large amount of distortion at low frequency and high gain. Since the power of the spectrum other than the harmonic frequencies increase, it could indicate that the coil hit the back plate of the driver at this point. From the analysis it can be concluded that the large amount of distortion can indicate that the coil is hitting the back plate of the driver.
+
+The next part will be to analyse if similar observation can be found in the spectrogram for vibration measurements on the driver and the enclosure. 
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.47\textwidth}
+	\includegraphics[width=1\textwidth]{figures/spectrogram_driver1.pdf}
+	\caption{Driver dataset 1.}
+	\label{fig:spectrogram_driver1}
+\end{subfigure}
+\begin{subfigure}[t]{0.47\textwidth}
+	\includegraphics[width=1\textwidth]{figures/spectrogram_driver19.pdf}
+	\caption{Driver dataset 19.}
+	\label{fig:spectrogram_driver19}
+\end{subfigure}
+\caption{The spectrograms of the driver dataset 1 and 19. The prominent red line is the sine sweep from 2.4 kHz to 10 Hz while the yellow and blue lines along the red line are harmonic distortion.}
+\label{fig:spec_driver}
+\end{figure} 
+
+The spectrograms of dataset 1 and 19 of the driver are seen in \autoref{fig:spec_driver}. From the spectrograms it is seen that the harmonic distortion is also present in the driver measurements as well as the frequency leak at lower frequencies at high gain. Finally the spectrum of the enclosure measurements is examined in \autoref{fig:spec_driver}.
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.47\textwidth}
+	\includegraphics[width=1\textwidth]{figures/spectrogram_enclosure1.pdf}
+	\caption{Enclosure dataset 1.}
+	\label{fig:spectrogram_enclosure1}
+\end{subfigure}
+\begin{subfigure}[t]{0.47\textwidth}
+	\includegraphics[width=1\textwidth]{figures/spectrogram_enclosure19.pdf}
+	\caption{Enclosure dataset 1.}
+	\label{fig:spectrogram_enclosure19}
+\end{subfigure}
+\caption{The spectrograms of the enclosure dataset 1 and 19. The prominent red line is the sine sweep from 2.4 kHz to 10 Hz while the yellow and blue lines along the red line are harmonic distortion.}
+\label{fig:spec_enclosure}
+\end{figure} 
+
+It is seen that there is considerately more frequency leak throughout the whole spectrum compared to the spectrogram for the driver and microphone. However the measurements from the driver, enclosure, and microphone is the large amount of frequency leak at very low frequencies seen at after 29 seconds.
+
+This section concludes that amount of distortion increases significantly when the gain is increased too. Also, it can be concluded that there is a frequency leak at lower frequencies on both driver, enclosure, and microphone. 
 
 
 
+\section{Back Plate Hit Detection}\label{sec:hit_detect}
+
+As previously stated, it is possible that the loudspeaker coil hits the back plate of the driver if the coil moves too far back. In the long run this will damage the loudspeaker, and should therefore be avoided. In this section an analysis on how to detect these hits, will be provided. 
+
+From \autoref{subsec:impulses} the frequency response of a mechanical frame of a loudspeaker has the same characteristics as a low-pass filter. This means, if the coil is hitting the back plate of the driver, it will result in a increase in energy in the low frequency spectrum. As most music and loudspeakers have some sort of a high-pass filter implemented to remove almost non-audible sound, it can be assumed that only a back plate hit will generate vibrations at very low frequencies between, for instance, 0 Hz to 20 Hz. To examine if this is true, a section of the dataset 19 of the driver, where a hit is suspected to have occurred, is analysed. The analysed section is seen in \autoref{fig:raw_driver19_windows}.
 
 
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.55\textwidth}
+	\tikzsetnextfilename{raw_driver19_window}
+	\input{figures/raw_driver19_window.tex}
+	\caption{Raw dataset 19 for driver. }
+	\label{fig:raw_driver19_window}
+\end{subfigure}
+%\hspace{6mm} 
+\begin{subfigure}[t]{0.43\textwidth}
+	\tikzsetnextfilename{raw_driver19_window_zoom}
+	\input{figures/raw_driver19_window_zoom.tex}
+	\caption{The grey area zoomed in.}
+	\label{fig:raw_driver19_window_zoom}
+\end{subfigure}
+\caption{The greyed area is analysed to examine if there are any signs of an impulse.}
+\label{fig:raw_driver19_windows}
+\end{figure}
 
+The same window is applied to all datasets for the driver and afterwards spectrum analysed to reveal any increase in low frequent energy. 
 
+\begin{figure}[H]
+\centering
+\tikzsetnextfilename{FFT_hit}
+\input{figures/FFT_hit.tex}
+\label{fig:FFT_hit}
+\caption{The spectrum of the window. The black graph is dataset 1, blue is 10 and red is 19.}
+\label{fig:FFT_hit}
+\end{figure}
 
-\section{Analysis}
-
-Comments and potential further manipulation is documented in this section. 
+It is seen that the energy for non-harmonic frequencies is increased at very low frequencies as indicated with the arrow. The black graph is the first dataset and the blue is the tenth dataset. As no hit was observed in the window at dataset 1 and 10, the energy of lower part of the spectrum was not increased. However the suspected hit in dataset 19 has an energy increase in  the low frequency spectrum. Note that since the window is 0.25 seconds wide, frequencies below 4 Hz should be discarded.
 
 \section{Error sources}
 
