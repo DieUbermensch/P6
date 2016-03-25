@@ -140,30 +140,38 @@ And is indexed in folders \scalebox{0.8}{\path{Measure_X}}, where X corresponds 
 \item Playback loop: \scalebox{0.8}{\path{Reference_0XX}}
 \end{itemize}
 
-Scripts used to create all graphs are located at:\\
+The Script used to create all graphs are located at:\\
 \scalebox{0.7}{
-\path{CD://Maalinger/Maalinger030316 - Loudspeaker test/Measurements030316/MeasurementAnalysis.m}}
+\path{CD://Maalinger/Maalinger030316 - Loudspeaker test/Measurements030316/MeasurementAnalysis.m}}\\
+Figures used in the following \ref{subsec:Raw_data_1} and Dataset 1 though 20 can be found compiled in a combined file at:
+\scalebox{0.7}{
+\path{CD://Maalinger/Maalinger030316 - Loudspeaker test/Measurements030316/AlleSamlet.pdf}}
 
-\subsection{Raw Data}
+
+\subsection{Raw Data}\label{subsec:Raw_data_1}
 
 For each of the test four measurements was taken. These are the accelerometer placed on the driver and enclosure, the microphone and a reference to synchronize the measurements. 
 
 As previously stated there are in total 20 datasets each containing four measurements, namely the vibrations from the enclosure and driver, the sound pressure from the microphone, and lastly a reference signal to synchronize all data. The amount of data is therefore large and only relevant datasets will be presented. The first dataset from the test is shown in \autoref{fig:raw1}.
 
+
 \begin{figure}[H]
 \centering
 \begin{subfigure}[t]{0.335\textwidth}
-	\includegraphics[width=1\textwidth]{figures/raw_driver1.pdf}
+	\tikzsetnextfilename{Raw_Driver1}
+	\input{figures/Forsog1/Driver1.tex}
 	\caption{Vibration from driver.}
 	\label{fig:raw_driver1}
 \end{subfigure}
 \begin{subfigure}[t]{0.3\textwidth}
-	\includegraphics[width=1\textwidth]{figures/raw_enclosure1.pdf}
+	\tikzsetnextfilename{Raw_Enclosure1}
+	\input{figures/Forsog1/Enclosure1.tex}
 	\caption{Vibration from enclosure.}
 	\label{fig:raw_enclosure1}
 \end{subfigure}
 \begin{subfigure}[t]{0.3\textwidth}
-	\includegraphics[width=1\textwidth]{figures/raw_microphone1.pdf}
+	\tikzsetnextfilename{Raw_microphone1}
+	\input{figures/Forsog1/Microphone1.tex}
 	\caption{Sound pressure from microphone.}
 	\label{fig:raw_microphone1}
 \end{subfigure}
@@ -177,17 +185,20 @@ Looking at the first dataset reveals that there are mechanical issues with the l
 \begin{figure}[H]
 \centering
 \begin{subfigure}[t]{0.335\textwidth}
-	\includegraphics[width=1\textwidth]{figures/raw_driver10.pdf}
+	\tikzsetnextfilename{Raw_Driver10}
+	\input{figures/Forsog1/Driver10.tex}
 	\caption{Vibration from driver.}
 	\label{fig:raw_driver10}
 \end{subfigure}
 \begin{subfigure}[t]{0.3\textwidth}
-	\includegraphics[width=1\textwidth]{figures/raw_enclosure10.pdf}
+	\tikzsetnextfilename{Raw_Enclosure10}
+	\input{figures/Forsog1/Enclosure10.tex}
 	\caption{Vibration from enclosure.}
 	\label{fig:raw_enclosure10}
 \end{subfigure}
 \begin{subfigure}[t]{0.3\textwidth}
-	\includegraphics[width=1\textwidth]{figures/raw_microphone10.pdf}
+	\tikzsetnextfilename{Raw_microphone10}
+	\input{figures/Forsog1/Microphone10.tex}
 	\caption{Sound pressure from microphone.}
 	\label{fig:raw_microphone10}
 \end{subfigure}
@@ -200,17 +211,20 @@ The measurements from dataset 10 is very similar to the measurements seen in dat
 \begin{figure}[H]
 \centering
 \begin{subfigure}[t]{0.335\textwidth}
-	\includegraphics[width=1\textwidth]{figures/raw_driver14.pdf}
+	\tikzsetnextfilename{Raw_Driver14}
+	\input{figures/Forsog1/Driver14.tex}
 	\caption{Vibration from driver.}
 	\label{fig:raw_driver14}
 \end{subfigure}
 \begin{subfigure}[t]{0.3\textwidth}
-	\includegraphics[width=1\textwidth]{figures/raw_enclosure14.pdf}
+	\tikzsetnextfilename{Raw_Enclosure14}
+	\input{figures/Forsog1/Enclosure14.tex}
 	\caption{Vibration from enclosure.}
 	\label{fig:raw_enclosure14}
 \end{subfigure}
 \begin{subfigure}[t]{0.3\textwidth}
-	\includegraphics[width=1\textwidth]{figures/raw_microphone14.pdf}
+	\tikzsetnextfilename{Raw_microphone14}
+	\input{figures/Forsog1/Microphone14.tex}
 	\caption{Sound pressure from microphone.}
 	\label{fig:raw_microphone14}
 \end{subfigure}
@@ -223,17 +237,20 @@ While most of the measurements show the exact same characteristics as previous d
 \begin{figure}[H]
 \centering
 \begin{subfigure}[t]{0.335\textwidth}
-	\includegraphics[width=1\textwidth]{figures/raw_driver19.pdf}
+	\tikzsetnextfilename{Raw_Driver19}
+	\input{figures/Forsog1/Driver19.tex}
 	\caption{Vibration from driver.}
 	\label{fig:raw_driver19}
 \end{subfigure}
 \begin{subfigure}[t]{0.3\textwidth}
-	\includegraphics[width=1\textwidth]{figures/raw_enclosure19.pdf}
+	\tikzsetnextfilename{Raw_Enclosure19}
+	\input{figures/Forsog1/Enclosure19.tex}
 	\caption{Vibration from enclosure.}
 	\label{fig:raw_enclosure19}
 \end{subfigure}
 \begin{subfigure}[t]{0.3\textwidth}
-	\includegraphics[width=1\textwidth]{figures/raw_microphone19.pdf}
+	\tikzsetnextfilename{Raw_microphone19}
+	\input{figures/Forsog1/Microphone19.tex}
 	\caption{Sound pressure from microphone.}
 	\label{fig:raw_microphone19}
 \end{subfigure}
@@ -247,17 +264,20 @@ Dataset 19 has the same characteristics as dataset 14, though with a more notice
 \begin{figure}[H]
 \centering
 \begin{subfigure}[t]{0.335\textwidth}
-	\includegraphics[width=1\textwidth]{figures/raw_driver20.pdf}
+	\tikzsetnextfilename{Raw_Driver20}
+	\input{figures/Forsog1/Driver20.tex}
 	\caption{Vibration from driver.}
 	\label{fig:raw_driver20}
 \end{subfigure}
 \begin{subfigure}[t]{0.3\textwidth}
-	\includegraphics[width=1\textwidth]{figures/raw_enclosure20.pdf}
+	\tikzsetnextfilename{Raw_Enclosure20}
+	\input{figures/Forsog1/Enclosure20.tex}
 	\caption{Vibration from enclosure.}
 	\label{fig:raw_enclosure20}
 \end{subfigure}
 \begin{subfigure}[t]{0.3\textwidth}
-	\includegraphics[width=1\textwidth]{figures/raw_microphone20.pdf}
+	\tikzsetnextfilename{Raw_microphone20}
+	\input{figures/Forsog1/Microphone20.tex}
 	\caption{Sound pressure from microphone.}
 	\label{fig:raw_microphone20}
 \end{subfigure}
@@ -363,12 +383,13 @@ The advantages of using a spectrogram is that it gives a good overview of the sp
 \begin{figure}[H]
 \centering
 \begin{subfigure}[t]{0.47\textwidth}
-	\includegraphics[width=1\textwidth]{figures/spectrogram_mic1.pdf}
-	\caption{Microphone dataset 1.}
+	\tikzsetnextfilename{Microphone_spec1}
+	\input{figures/Forsog1/Microphone_spec1.tex}
 	\label{fig:spectrogram_mic1}
 \end{subfigure}
 \begin{subfigure}[t]{0.47\textwidth}
-	\includegraphics[width=1\textwidth]{figures/spectrogram_mic19.pdf}
+	\tikzsetnextfilename{Microphone_spec19}
+	\input{figures/Forsog1/Microphone_spec19.tex}
 	\caption{Microphone dataset 19.}
 	\label{fig:spectrogram_mic19}
 \end{subfigure}
@@ -383,12 +404,14 @@ The next part will be to analyse if similar observation can be found in the spec
 \begin{figure}[H]
 \centering
 \begin{subfigure}[t]{0.47\textwidth}
-	\includegraphics[width=1\textwidth]{figures/spectrogram_driver1.pdf}
+	\tikzsetnextfilename{Driver_spec1}
+	\input{figures/Forsog1/Driver_spec1.tex}
 	\caption{Driver dataset 1.}
 	\label{fig:spectrogram_driver1}
 \end{subfigure}
 \begin{subfigure}[t]{0.47\textwidth}
-	\includegraphics[width=1\textwidth]{figures/spectrogram_driver19.pdf}
+	\tikzsetnextfilename{Driver_spec19}
+	\input{figures/Forsog1/Driver_spec19.tex}
 	\caption{Driver dataset 19.}
 	\label{fig:spectrogram_driver19}
 \end{subfigure}
@@ -401,13 +424,15 @@ The spectrograms of dataset 1 and 19 of the driver are seen in \autoref{fig:spec
 \begin{figure}[H]
 \centering
 \begin{subfigure}[t]{0.47\textwidth}
-	\includegraphics[width=1\textwidth]{figures/spectrogram_enclosure1.pdf}
+	\tikzsetnextfilename{Enclosure_spec1}
+	\input{figures/Forsog1/Enclosure_spec1.tex}
 	\caption{Enclosure dataset 1.}
 	\label{fig:spectrogram_enclosure1}
 \end{subfigure}
 \begin{subfigure}[t]{0.47\textwidth}
-	\includegraphics[width=1\textwidth]{figures/spectrogram_enclosure19.pdf}
-	\caption{Enclosure dataset 1.}
+	\tikzsetnextfilename{Enclosure_spec19}
+	\input{figures/Forsog1/Enclosure_spec19.tex}
+	\caption{Enclosure dataset 19}
 	\label{fig:spectrogram_enclosure19}
 \end{subfigure}
 \caption{The spectrograms of the enclosure dataset 1 and 19. The prominent red line is the sine sweep from 2.4 kHz to 10 Hz while the yellow and blue lines along the red line are harmonic distortion.}
@@ -432,7 +457,7 @@ From \autoref{subsec:impulses} the frequency response of a mechanical frame of a
 \begin{subfigure}[t]{0.55\textwidth}
 	\tikzsetnextfilename{raw_driver19_window}
 	\input{figures/raw_driver19_window.tex}
-	\caption{Raw dataset 19 for driver. }
+	\caption{Raw dataset 19 for driver.}
 	\label{fig:raw_driver19_window}
 \end{subfigure}
 %\hspace{6mm} 
@@ -450,16 +475,14 @@ The same window is applied to all datasets for the driver and afterwards spectru
 
 \begin{figure}[H]
 \centering
-\tikzsetnextfilename{FFT_hit}
-\input{figures/FFT_hit.tex}
-\label{fig:FFT_hit}
-\caption{The spectrum of the window. The black graph is dataset 1, blue is 10 and red is 19.}
+\tikzsetnextfilename{FFTFinal}
+\input{figures/Forsog1/FFTFinal.tex}
+\caption{The spectrum of the window. The yellow graph is dataset 1, red is 10 and blue is 19.}
 \label{fig:FFT_hit}
 \end{figure}
 
-It is seen that the energy for non-harmonic frequencies is increased at very low frequencies as indicated with the arrow. The black graph is the first dataset and the blue is the tenth dataset. As no hit was observed in the window at dataset 1 and 10, the energy of lower part of the spectrum was not increased. However the suspected hit in dataset 19 has an energy increase in  the low frequency spectrum. Note that since the window is 0.25 seconds wide, frequencies below 4 Hz should be discarded.
+It is seen that the energy for non-harmonic frequencies is increased at very low frequencies as indicated with the arrow. The yellow graph is the first dataset and the red is the tenth dataset. As no hit was observed in the window at dataset 1 and 10, the energy of lower part of the spectrum was not increased. However the suspected hit in dataset 19 has an energy increase in the low frequency spectrum. Note that since the window is 0.25 seconds wide, frequencies below 4 Hz should be discarded.
 
 \section{Error sources}
 
-Potential Error sources are noted in the section
-
+Few errors could have occurred during trials, since then only variable adjusted during between measurements were the gain of the amplifier. There were however problems with moving the setup from the control room were it was calibrated and then moved into the anechoic room. The calibration was done using an visual equalizer where the output was shown with a bar chart Hence the data should bee seen with a tolerance of +/- 0.5 dB.

@@ -32,21 +32,22 @@ The DALI Zensor 1 enables you to connect your audio source via cable or via Blue
 
 \input{1Chapters/1Preanalysis/Loudspeaker_test.tex}
 
-\input{1Chapters/1Preanalysis/frequency_response.tex}
+%\input{1Chapters/1Preanalysis/frequency_response.tex}
 
-\input{1Chapters/1Preanalysis/harmonic_distortion.tex}
+%\input{1Chapters/1Preanalysis/harmonic_distortion.tex}
 
-\input{1Chapters/1Preanalysis/hit_detection.tex}
+%\input{1Chapters/1Preanalysis/hit_detection.tex}
 
 \section{Problem Statement}
 From the analysis above the following problem statement can be formulated
 
 \begin{center}
 \label{ProblemStatement}
-\textit{How can an electronic system be designed to absolve this crazy impossible problem}
+\textit{How can an real time signal processing system survey the on going performance of an active speaker system to stop it from "bottoming out"}
 \end{center}
-tekst tekst testk
-Besides the problem stated above, DALI whishes to have incorporated a user controlled equalizer for the commerical user and the developer because the developer should be able to change the frequency response of the speaker and because the commercial user should be able to change the frequency response of the speaker dependent of what room the speaker is located in. 
+Besides the problem stated above, DALI whishes to incorporated a user controlled equalizer for the commercial user so it will be able to function more optimal in different room sizes. Further more it should be fully customizable for ongoing adjustments during the development period.\todo{Tilføj kilde til mail fra DALI}
+
+
 %%%%%%%%%%%%%%%%%%%%%%%% Teknisk Analyse %%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Technical Analysis}
 The concept for a solution is seen on \autoref{fig:Concept}. It shows a feedback system which filters or limits a signal based on the output of sensor located in the speaker. Besides the feedback system which should protect the speaker, a user should be able to use an equalizer to change the settings of the frequency response.  
