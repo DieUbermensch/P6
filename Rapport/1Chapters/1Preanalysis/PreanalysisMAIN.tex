@@ -39,28 +39,43 @@ The DALI Zensor 1 enables you to connect your audio source via cable or via Blue
 %\input{1Chapters/1Preanalysis/hit_detection.tex}
 
 \section{Problem Statement}
-From the analysis above the following problem statement can be formulated
+The analysis so far has mainly concerned how the performance of a loudspeaker is influenced when increasing the volume of the audio signal. Based on previous analysis a processing system will be developed in the pre-amplifier stage. Following problem statement is thus formulated as:
 
 \begin{center}
 \label{ProblemStatement}
-\textit{How can an real time signal processing system survey the on going performance of an active speaker system to stop it from "bottoming out"}
+\textit{How can an real-time signal processing system survey the on going performance of an active speaker system to limit the amount of distortion and prevent the coil from hitting the back plate of the driver?"}
 \end{center}
-Besides the problem stated above, DALI whishes to incorporated a user controlled equalizer for the commercial user so it will be able to function more optimal in different room sizes. Further more it should be fully customizable for ongoing adjustments during the development period.\todo{Tilføj kilde til mail fra DALI}
+Besides the problem stated above, DALI desires to incorporated a user controlled equalizer for the commercial user so it will be able to function more optimal in different room sizes. Further more it should be fully customizable for ongoing adjustments during the development period.\todo{Tilføj kilde til mail fra DALI}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%% Teknisk Analyse %%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{Technical Analysis}
-The concept for a solution is seen on \autoref{fig:Concept}. It shows a feedback system which filters or limits a signal based on the output of sensor located in the speaker. Besides the feedback system which should protect the speaker, a user should be able to use an equalizer to change the settings of the frequency response.  
+\chapter{Design Concept}
+The purpose of this chapter is to give an outline of the design ideas considered for the system. As the problem statement pointed out, the system will mainly concern a real-time signal processing system as shown in \autoref{fig:speaker_block2}, where the greyed boxed will not be a part of the developed system. These subsystem of the active loudspeaker will at this point mostly be viewed as black boxes and not further examined, though with the exception of obtaining interface requirements from the subsystems.
+
 \begin{figure}[H]
 \centering
-\tikzsetnextfilename{Concept}
-\scalebox{0.8}{
-\input{figures/Concept.tex}}
-\caption{Block diagram of the concept.}
-\label{fig:Concept}
+\tikzsetnextfilename{SpeakerBlock2}
+\scalebox{0.9}{
+\input{figures/SpeakerBlock2.tex}}
+\caption{Block diagram of an active speaker.}
+\label{fig:speaker_block2}
 \end{figure}
-\todo[inline]{Fiks billede}
-The concept consist of a filtering or limitation block, which will be analyzed to understand which solution is best for the problem stated, a sensor which will be analyzed to determine which sensor should be used and where it should be placed, a signal analysis block and decision block which will not be analysed furhter in this chapter, a user interface which will be analyzed to determine how the user interface should be designed and lastly the processor block which will be analyzed to detemine which type of processor that should be used. 
+
+The starting point of the design concept is to determine what type of processing system that is going to be developed:
+
+%The concept for a solution is seen on \autoref{fig:Concept}. It shows a feedback system which filters or limits a signal based on the output of sensor located in the speaker. Besides the feedback system which should protect the speaker, a user should be able to use an equalizer to change the settings of the frequency response.  
+%\begin{figure}[H]
+%\centering
+%\tikzsetnextfilename{Concept}
+%\scalebox{0.8}{
+%\input{figures/Concept.tex}}
+%\caption{Block diagram of the concept.}
+%\label{fig:Concept}
+%\end{figure}
+%\todo[inline]{Fiks billede}
+%The concept consist of a filtering or limitation block, which will be analyzed to understand which solution is best for the problem stated, a sensor which will be analyzed to determine which sensor should be used and where it should be placed, a signal analysis block and decision block which will not be analysed furhter in this chapter, a user interface which will be analyzed to determine how the user interface should be designed and lastly the processor block which will be analyzed to detemine which type of processor that should be used. 
+
+\input{1Chapters/1Preanalysis/feedback_feedforward.tex}
 
 \input{1Chapters/1Preanalysis/TechnicalAnalysis_Equalizer.tex}
 
