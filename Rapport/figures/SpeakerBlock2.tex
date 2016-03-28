@@ -7,7 +7,6 @@
 \node [block, fill=black!80,text=white] (Amplifier) at ($(Signal processing system)+(4,0)$) {Amplifier};
 \node [block, fill=black!80,text=white] (PSU) at ($(Amplifier)+(0,2)$) {PSU};
 \node [block, fill=black!80,text=white] (Driver) at ($(Amplifier)+(3.5,0)$) {Driver};
-
 %% Store Blokke %%
 \begin{pgfonlayer}{bg}
 \draw[thick, fill=black!10] ($(-6.2,3)+(Amplifier)$) -- ($(1.750,3)+(Driver)$) -- ($(1.750,-1.25)+(Driver)$) -- ($(-6.2,-1.25)+(Amplifier)$) -- ($(-6.2,3)+(Amplifier)$); 
