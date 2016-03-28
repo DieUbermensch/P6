@@ -162,12 +162,85 @@ relevant datasets will be presented. The first dataset from the test is shown in
 \label{fig:raw1t2}
 \end{figure} 
 
-From the raw data the tones (50 Hz, 55 Hz, 60 Hz, 65 Hz, 70 Hz, 75 Hz, 80 Hz, 85 Hz, 90 Hz, 95 Hz, 100 Hz) can be cropped into seperate files so they can be analysed seperately. An example of this can be seen on 
+Looking at the first dataset it reveals that the outputs of the B\&K accelerometeres are very different from the SF accelerometers therefore for analyzing purposes the raw data the tones (50 Hz, 55 Hz, 60 Hz, 65 Hz, 70 Hz, 75 Hz, 80 Hz, 85 Hz, 90 Hz, 95 Hz, 100 Hz) is cropped into seperate files so they can be analysed seperately.
+
+By examining the raw data it was concluded that measurement three was not conducted correctly and is therefore not analyzable because no sound was played, therefore measurement three is not used further. 
 
 \section{Analysis}
-To determine if there is a correlation between the keynote and the second and third harmonic wave the maximum amplitude of the keynote, second harmonic and third harmonic must be identified. To identify the maximum amplitude an FFT is made to get the frequency response of the different frequencies and sound levels needs to be determined.   
+To analyze if there is a correlation between the keynote and the second and third harmonic the analyzis will consist of making a spectrum analyzis to locate the amplitude of the keynote, second harmonic and third harmonic, and examine if there is a correlation between the different amplitudes. An example of three different frequency spectrum plots for 50 Hz measured with the microphone at different amplitudes, respectively measurement 1, 6 and 12 is therefore given in \autoref{fig:FFT_mic1612}, to give an insight in how the second and third harmonic increases with the increase in amplitude.
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.37\textwidth}
+    \tikzsetnextfilename{FFT_mic1_50Hz}
+    \input{figures/FFT_mic1_50Hz.tex}
+    \caption{Measurement 1 (mic).}
+    \label{fig:FFT_mic1_50Hz}
+\end{subfigure}
+\begin{subfigure}[t]{0.28\textwidth}
+    \tikzsetnextfilename{FFT_mic6_50Hz}
+    \input{figures/FFT_mic6_50Hz.tex}
+    \caption{Measurement 6 (mic).}
+    \label{fig:FFT_mic6_50Hz}
+\end{subfigure}
+\begin{subfigure}[t]{0.32\textwidth}
+    \tikzsetnextfilename{FFT_mic12_50Hz}
+    \input{figures/FFT_mic12_50Hz.tex}
+    \caption{Measurement 12 (mic).}
+    \label{fig:FFT_mic1_50Hz}
+\end{subfigure}
+\caption{Frequency response of 50 Hz (a) measurement 1 from the microphone, (b) measurement 6 from the microphone, and (c) measurement 12 from the microphone. Test 2.}
+\label{fig:FFT_mic1612}
+\end{figure}   
+
+If the amplitudes of the keynote, second harmonic and third harmonic is located at every soundlevel a comparison can be made between the amplitude of:
+\begin{itemize}
+\item Keynote / Second harmonic
+\item Keynote / Third harmonic
+\end{itemize}
+This should be done for every frequency, but as an example the comparison for 50 Hz is shown in \autoref{fig:com_mic1213}.
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.45\textwidth}
+    \tikzsetnextfilename{comp_mic12}
+    \input{figures/comp_mic12.tex}
+    \caption{1.harmonic / 2.harmonic pr. measurement.}
+    \label{fig:comp_mic12}
+\end{subfigure}
+\begin{subfigure}[t]{0.45\textwidth}
+    \tikzsetnextfilename{comp_mic13}
+    \input{figures/comp_mic13.tex}
+    \caption{1.harmonic / 3.harmonic pr. measurement.}
+    \label{fig:comp_mic13}
+\end{subfigure}
+\caption{comparison of keynote (1.harmonic), second harmoni and third harmonic (a) 1.harmonic [mag] / 2.harmonic [mag] and (b) 1.harmonic [mag] / 3.harmonic [mag]. Test 2.}
+\label{fig:com_mic1213}
+\end{figure}   
+
+It can be derived from \autoref{fig:com_mic1213} that the relation between the keynote and the second harmonic as seen in \autoref{fig:comp_mic12} goes torward 1 at a slower pace than the keynote in relationship to the thirdharmonic as seen in \autoref{fig:comp_mic13} goes torward 1. This corresponds to the theory that when the loudspeaker starts to distort the third harmonic rises quicker than the second harmonic. To control that every frequency has the same pattern as 50 Hz they are all plotted into a singe figure as seen on \autoref{fig:com_mic12All} and \autoref{fig:com_mic13All}
+
+\begin{figure}[H]
+    \centering
+    \tikzsetnextfilename{comp_mic12All1}
+    \input{figures/comp_mic12All1.tex}
+    \caption{1.harmonic / 2.harmonic pr. measurement. comparison for all frequencies}
+\label{fig:com_mic12All}
+\end{figure}   
+\begin{figure}[H]
+    \centering
+    \tikzsetnextfilename{comp_mic13All1}
+    \input{figures/comp_mic13All1.tex}
+    \caption{1.harmonic / 3.harmonic pr. measurement. comparison for all frequencies}
+\label{fig:com_mic13All}
+\end{figure}  
+
+It can be seen on the figures that a pattern can be seen as in figure \autoref{fig:com_mic1213} which goes toward 1. An error in \autoref{fig:com_mic13All} can be seen where the 85 Hz measurement does not follow the pattern of the other frequency which is deemed an error. From \autoref{fig:com_mic12All} and \autoref{fig:com_mic13All} it can be derived that a model can be derived because there is a correlation between the keynote and the second and third harmonic in the frequency spectrum 50 Hz - 100 Hz. The figures shown in the analysis is only based on the microphone measurements. The derived data from the acceloremeters can be found on \textbf{TBD}. The reason for not showing them in this analysis is because they show approximately the same as the microphone but with larger error margin. 
+
 
 \section{Error sources}
+Few errors could have occurred during trials, since then only variable adjusted during between measurements were the gain of the amplifier. There were however problems with moving the setup from the control room were it was calibrated and then moved into the anechoic room. The
+calibration was done using an visual equalizer where the output was shown with a bar chart. Hence the data should bee seen with a tolerance of +/- 0.5 dB.
 
-Potential Error sources are noted in the section
+\section{Conclusion}
 

@@ -1,0 +1,42 @@
+% This file was created by matlab2tikz.
+%
+%The latest updates can be retrieved from
+%  http://www.mathworks.com/matlabcentral/fileexchange/22022-matlab2tikz-matlab2tikz
+%where you can also make suggestions and rate matlab2tikz.
+%
+\definecolor{mycolor1}{rgb}{0.00000,0.44700,0.74100}%
+%
+\begin{tikzpicture}
+
+\begin{axis}[%
+width=2.0in,
+height=1.5in,
+at={(0.758in,0.481in)},
+scale only axis,
+xmin=1,
+xmax=12,
+xmajorgrids,
+ymin=0,
+ymax=250,
+ymajorgrids,
+ylabel={1.harmonic / 3.harmonic},
+xlabel={Measurement nr.},
+axis background/.style={fill=white}
+]
+\addplot [color=black,solid,line width=0.7pt,forget plot]
+  table[row sep=crcr]{%
+1	215.719482689042\\
+2	137.375839651914\\
+3	73.491881974411\\
+4	55.8600092831965\\
+5	42.8578352198597\\
+6	33.4172800378876\\
+7	25.8045950665186\\
+8	19.6476489187032\\
+9	15.0203405516948\\
+10	11.4021105008808\\
+11	8.78151310064488\\
+12	6.80575125314477\\
+};
+\end{axis}
+\end{tikzpicture}%
