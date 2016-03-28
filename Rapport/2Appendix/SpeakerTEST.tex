@@ -37,14 +37,6 @@ IEC 60268-5 standard.
 
 \subsection*{Test Setup}
 
-%\begin{figure}[H]
-%\centering
-%\tikzsetnextfilename{TestSetup1}
-%\input{figures/TestSetup1.tex}
-%\caption{Test setup}
-%\label{figure:SpeakertestSetup}
-%\end{figure}
-
 \begin{figure}[H]
 \centering
 \begin{subfigure}[t]{0.47\textwidth}
@@ -67,12 +59,9 @@ IEC 60268-5 standard.
 	\caption{Schematic overview}
 	\label{figure:SpeakertestSetup}
 \end{subfigure}
-\caption{Test setup.}
+\caption{The entire test setup shown with photographs and a schematic overview}
 \label{fig:test_setup_R}
 \end{figure}
-
-
-
 
 
 \subsection*{Equipment used and AAU-no.}
@@ -95,15 +84,16 @@ IEC 60268-5 standard.
     11     &  RME HammerFall DIGI 96-PDST sound card & 60919  \\
     11     &  Passive Dali Zensor 5 AX & NaN  \\ \bottomrule 
 \end{tabular}
-\caption{Table over equipment used in test}
+\caption{Table over equipment used in the test}
 \label{tab:UsedEquipment1}
 \end{table}
-
+\vspace{-5mm}
 
 
 \section{Procedure}\label{sec:SpeakerTestProcedure1}
 
 The producer for this experiment is described as follows:
+\vspace{-5mm}
 \begin{enumerate}
 \item Adjust volume on the amplifier to +3 dB gain.
 \item Vacate the anechoic room and seal the room.
@@ -122,12 +112,6 @@ The producer for this experiment is described as follows:
 The \path{chirp.wav} are located at:\\
 \scalebox{0.7}{
 \path{CD://Maalinger/Maalinger030316 - Loudspeaker test/Measurements030316/chirp.wav}}\\
-Raw data sample are located at:\\
-\scalebox{0.7}{
-\path{CD://Maalinger/Maalinger030316 - Loudspeaker test}}\\
-Scripts used to create all graphs are located at:\\
-\scalebox{0.7}{
-\path{CD://Maalinger/Maalinger030316 - Loudspeaker test/Measurements030316/MeasurementAnalysis.m}}
 
 
 %\begin{figure}[H]
@@ -143,12 +127,12 @@ Scripts used to create all graphs are located at:\\
 \section{Data Extraction}
 
 
-It was possible to increase the volume by 19 dB until the loudspeaker unit got damaged. As seen in \autoref{fig:test_relative_gain} the gain was linear increased by 1 dB until the 20th test were the loudspeaker unit failed.
+It was possible to increase the volume by 19 dB until the loudspeaker unit got to damaged. The gain was linear increased by 1 dB, starting at 3 dB, until the 20th test were the loudspeaker unit failed. This results in 20 usable data sets.
 
 The recordings can be found on:\\
 \scalebox{0.7}{
 \path{CD://Maalinger/Maalinger030316 - Loudspeaker test/Measurements030316/}}
-And is indexed in folders \scalebox{0.8}{\path{Measure_X}}, where X corresponds to the test number. Every measurements is denoted as:
+And is indexed in folders \scalebox{0.8}{\path{Measure_X}}, where X corresponds to the test number. Every measurements inside is denoted as:
 \begin{itemize}
 \item Accelerometer on driver: \scalebox{0.8}{\path{Acc driver_0XX}}
 \item Accelerometer in enclosure: \scalebox{0.8}{\path{Acc enclosure_0XX}}
@@ -156,26 +140,38 @@ And is indexed in folders \scalebox{0.8}{\path{Measure_X}}, where X corresponds 
 \item Playback loop: \scalebox{0.8}{\path{Reference_0XX}}
 \end{itemize}
 
-\subsection{Raw Data}
+The Script used to create all graphs are located at:\\
+\scalebox{0.7}{
+\path{CD://Maalinger/Maalinger030316 - Loudspeaker test/Measurements030316/MeasurementAnalysis.m}}\\
+Figures used in the following \ref{subsec:Raw_data_1} and Dataset 1 though 20 can be found compiled in a combined file at:
+\scalebox{0.7}{
+\path{CD://Maalinger/Maalinger030316 - Loudspeaker test/Measurements030316/AlleSamlet.pdf}}
+
+
+\subsection{Raw Data}\label{subsec:Raw_data_1}
 
 For each of the test four measurements was taken. These are the accelerometer placed on the driver and enclosure, the microphone and a reference to synchronize the measurements. 
 
 As previously stated there are in total 20 datasets each containing four measurements, namely the vibrations from the enclosure and driver, the sound pressure from the microphone, and lastly a reference signal to synchronize all data. The amount of data is therefore large and only relevant datasets will be presented. The first dataset from the test is shown in \autoref{fig:raw1}.
 
+
 \begin{figure}[H]
 \centering
 \begin{subfigure}[t]{0.335\textwidth}
-	\includegraphics[width=1\textwidth]{figures/raw_driver1.pdf}
+	\tikzsetnextfilename{Raw_Driver1}
+	\input{figures/Forsog1/Driver1.tex}
 	\caption{Vibration from driver.}
 	\label{fig:raw_driver1}
 \end{subfigure}
 \begin{subfigure}[t]{0.3\textwidth}
-	\includegraphics[width=1\textwidth]{figures/raw_enclosure1.pdf}
+	\tikzsetnextfilename{Raw_Enclosure1}
+	\input{figures/Forsog1/Enclosure1.tex}
 	\caption{Vibration from enclosure.}
 	\label{fig:raw_enclosure1}
 \end{subfigure}
 \begin{subfigure}[t]{0.3\textwidth}
-	\includegraphics[width=1\textwidth]{figures/raw_microphone1.pdf}
+	\tikzsetnextfilename{Raw_microphone1}
+	\input{figures/Forsog1/Microphone1.tex}
 	\caption{Sound pressure from microphone.}
 	\label{fig:raw_microphone1}
 \end{subfigure}
@@ -189,17 +185,20 @@ Looking at the first dataset reveals that there are mechanical issues with the l
 \begin{figure}[H]
 \centering
 \begin{subfigure}[t]{0.335\textwidth}
-	\includegraphics[width=1\textwidth]{figures/raw_driver10.pdf}
+	\tikzsetnextfilename{Raw_Driver10}
+	\input{figures/Forsog1/Driver10.tex}
 	\caption{Vibration from driver.}
 	\label{fig:raw_driver10}
 \end{subfigure}
 \begin{subfigure}[t]{0.3\textwidth}
-	\includegraphics[width=1\textwidth]{figures/raw_enclosure10.pdf}
+	\tikzsetnextfilename{Raw_Enclosure10}
+	\input{figures/Forsog1/Enclosure10.tex}
 	\caption{Vibration from enclosure.}
 	\label{fig:raw_enclosure10}
 \end{subfigure}
 \begin{subfigure}[t]{0.3\textwidth}
-	\includegraphics[width=1\textwidth]{figures/raw_microphone10.pdf}
+	\tikzsetnextfilename{Raw_microphone10}
+	\input{figures/Forsog1/Microphone10.tex}
 	\caption{Sound pressure from microphone.}
 	\label{fig:raw_microphone10}
 \end{subfigure}
@@ -212,17 +211,20 @@ The measurements from dataset 10 is very similar to the measurements seen in dat
 \begin{figure}[H]
 \centering
 \begin{subfigure}[t]{0.335\textwidth}
-	\includegraphics[width=1\textwidth]{figures/raw_driver14.pdf}
+	\tikzsetnextfilename{Raw_Driver14}
+	\input{figures/Forsog1/Driver14.tex}
 	\caption{Vibration from driver.}
 	\label{fig:raw_driver14}
 \end{subfigure}
 \begin{subfigure}[t]{0.3\textwidth}
-	\includegraphics[width=1\textwidth]{figures/raw_enclosure14.pdf}
+	\tikzsetnextfilename{Raw_Enclosure14}
+	\input{figures/Forsog1/Enclosure14.tex}
 	\caption{Vibration from enclosure.}
 	\label{fig:raw_enclosure14}
 \end{subfigure}
 \begin{subfigure}[t]{0.3\textwidth}
-	\includegraphics[width=1\textwidth]{figures/raw_microphone14.pdf}
+	\tikzsetnextfilename{Raw_microphone14}
+	\input{figures/Forsog1/Microphone14.tex}
 	\caption{Sound pressure from microphone.}
 	\label{fig:raw_microphone14}
 \end{subfigure}
@@ -235,17 +237,20 @@ While most of the measurements show the exact same characteristics as previous d
 \begin{figure}[H]
 \centering
 \begin{subfigure}[t]{0.335\textwidth}
-	\includegraphics[width=1\textwidth]{figures/raw_driver19.pdf}
+	\tikzsetnextfilename{Raw_Driver19}
+	\input{figures/Forsog1/Driver19.tex}
 	\caption{Vibration from driver.}
 	\label{fig:raw_driver19}
 \end{subfigure}
 \begin{subfigure}[t]{0.3\textwidth}
-	\includegraphics[width=1\textwidth]{figures/raw_enclosure19.pdf}
+	\tikzsetnextfilename{Raw_Enclosure19}
+	\input{figures/Forsog1/Enclosure19.tex}
 	\caption{Vibration from enclosure.}
 	\label{fig:raw_enclosure19}
 \end{subfigure}
 \begin{subfigure}[t]{0.3\textwidth}
-	\includegraphics[width=1\textwidth]{figures/raw_microphone19.pdf}
+	\tikzsetnextfilename{Raw_microphone19}
+	\input{figures/Forsog1/Microphone19.tex}
 	\caption{Sound pressure from microphone.}
 	\label{fig:raw_microphone19}
 \end{subfigure}
@@ -259,17 +264,20 @@ Dataset 19 has the same characteristics as dataset 14, though with a more notice
 \begin{figure}[H]
 \centering
 \begin{subfigure}[t]{0.335\textwidth}
-	\includegraphics[width=1\textwidth]{figures/raw_driver20.pdf}
+	\tikzsetnextfilename{Raw_Driver20}
+	\input{figures/Forsog1/Driver20.tex}
 	\caption{Vibration from driver.}
 	\label{fig:raw_driver20}
 \end{subfigure}
 \begin{subfigure}[t]{0.3\textwidth}
-	\includegraphics[width=1\textwidth]{figures/raw_enclosure20.pdf}
+	\tikzsetnextfilename{Raw_Enclosure20}
+	\input{figures/Forsog1/Enclosure20.tex}
 	\caption{Vibration from enclosure.}
 	\label{fig:raw_enclosure20}
 \end{subfigure}
 \begin{subfigure}[t]{0.3\textwidth}
-	\includegraphics[width=1\textwidth]{figures/raw_microphone20.pdf}
+	\tikzsetnextfilename{Raw_microphone20}
+	\input{figures/Forsog1/Microphone20.tex}
 	\caption{Sound pressure from microphone.}
 	\label{fig:raw_microphone20}
 \end{subfigure}
@@ -281,6 +289,7 @@ As seen in \autoref{fig:raw_driver20} the loudspeaker unit breaks down at the me
 
 
 
+\section{Analysis}
 
 \subsection{Frequency response}
 
@@ -332,8 +341,8 @@ From \autoref{fig:FFT_driver1} it is seen that the driver has a resonance freque
 	\caption{Microphone.}
 	\label{fig:FFT_mic10}
 \end{subfigure}
-\caption{Frequency response of (a) the vibration on the driver, (b) the vibration on the enclosure, and (c) the speaker. Test 2.}
-\label{fig:FFT1}
+\caption{Frequency response of (a) the vibration on the driver, (b) the vibration on the enclosure, and (c) the speaker. Test 10.}
+\label{fig:FFT10}
 \end{figure}
 
 The frequency response for all three measurements in test 10 is very similar to the frequency response found in test 1. The same applies to all the test from 1 to 10. No noticeable difference between the test is observed.
@@ -344,7 +353,7 @@ The frequency response for all three measurements in test 10 is very similar to 
 	\tikzsetnextfilename{FFT_driver19}
 	\input{figures/FFT_driver19.tex}
 	\caption{Driver.}
-	\label{fig:FFT_driver10}
+	\label{fig:FFT_driver19}
 \end{subfigure}
 \begin{subfigure}[t]{0.28\textwidth}
 	\tikzsetnextfilename{FFT_enclosure19}
@@ -358,27 +367,122 @@ The frequency response for all three measurements in test 10 is very similar to 
 	\caption{Microphone.}
 	\label{fig:FFT_mic19}
 \end{subfigure}
-\caption{Frequency response of (a) the vibration on the driver, (b) the vibration on the enclosure, and (c) the speaker. Test 2.}
-\label{fig:FFT1}
+\caption{Frequency response of (a) the vibration on the driver, (b) the vibration on the enclosure, and (c) the speaker. Test 10.}
+\label{fig:FFT19}
 \end{figure} 
 
 The frequency responses test 19, which is the test before the loudspeaker got damaged, shows little signs of any changes in the frequency responses from the previous tests, thus is not possible to determine if the loudspeaker is close the being damaged alone from the frequency responses.
 
 
-%The information captured by the use of procedure in \autoref{sec:SpeakerTestProcedure} is graphed in this section
+\subsection{Harmonic distortion}
+
+In this section the amount of harmonic distortion of the loudspeaker is analysed, to examine if it is possible to determine the performance of the loudspeaker from harmonics. To analyse the harmonic distortion a spectrogram is used. The spectrogram is a three dimensional plot which shows the frequency, time and magnitude. Basically the spectrogram is an array of multiple FFT each calculated at a given time with a given window.
+
+The advantages of using a spectrogram is that it gives a good overview of the spectral content in the signal at any given time. Since the harmonic frequencies depends on the fundamental frequency, it is better to use a spectrogram rather than a regular FFT, since the spectrogram will reveal all harmonic distortion for all fundamental frequency from 10 Hz to 2.4 kHz. The spectrograms for microphone in dataset 1 and 19 are shown in \autoref{fig:spec_mic}.
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.47\textwidth}
+	\tikzsetnextfilename{Microphone_spec1}
+	\input{figures/Forsog1/Microphone_spec1.tex}
+	\label{fig:spectrogram_mic1}
+\end{subfigure}
+\begin{subfigure}[t]{0.47\textwidth}
+	\tikzsetnextfilename{Microphone_spec19}
+	\input{figures/Forsog1/Microphone_spec19.tex}
+	\caption{Microphone dataset 19.}
+	\label{fig:spectrogram_mic19}
+\end{subfigure}
+\caption{The spectrograms of the microphone dataset 1 and 19. The prominent red line is the sine sweep from 2.4 kHz to 10 Hz while the yellow and blue lines along the red line are harmonic distortion.}
+\label{fig:spec_mic}
+\end{figure} 
+
+The spectrograms of dataset 1 and 19 for the microphone, seen in \autoref{fig:spectrogram_mic1} and \autoref{fig:spectrogram_mic1}, show a prominent red line and three weak blue lines above the red line. It is seen that the red line is a linear decreasing function from 2.4 kHz to 10 Hz where the frequency is a function of time. This indicates that the red line is the fundamental frequency of the sine sweep from 2.4 kHz to 10 Hz. The blue and yellow line are linear functions of the harmonic distortions. The spectrograms clearly show that increasing the gain will increase the amount of harmonic distortion as well. An interesting observation is the spectral frequency leak that occurs at lower frequencies revealing large amount of distortion at low frequency and high gain. Since the power of the spectrum other than the harmonic frequencies increase, it could indicate that the coil hit the back plate of the driver at this point. From the analysis it can be concluded that the large amount of distortion can indicate that the coil is hitting the back plate of the driver.
+
+The next part will be to analyse if similar observation can be found in the spectrogram for vibration measurements on the driver and the enclosure. 
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.47\textwidth}
+	\tikzsetnextfilename{Driver_spec1}
+	\input{figures/Forsog1/Driver_spec1.tex}
+	\caption{Driver dataset 1.}
+	\label{fig:spectrogram_driver1}
+\end{subfigure}
+\begin{subfigure}[t]{0.47\textwidth}
+	\tikzsetnextfilename{Driver_spec19}
+	\input{figures/Forsog1/Driver_spec19.tex}
+	\caption{Driver dataset 19.}
+	\label{fig:spectrogram_driver19}
+\end{subfigure}
+\caption{The spectrograms of the driver dataset 1 and 19. The prominent red line is the sine sweep from 2.4 kHz to 10 Hz while the yellow and blue lines along the red line are harmonic distortion.}
+\label{fig:spec_driver}
+\end{figure} 
+
+The spectrograms of dataset 1 and 19 of the driver are seen in \autoref{fig:spec_driver}. From the spectrograms it is seen that the harmonic distortion is also present in the driver measurements as well as the frequency leak at lower frequencies at high gain. Finally the spectrum of the enclosure measurements is examined in \autoref{fig:spec_driver}.
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.47\textwidth}
+	\tikzsetnextfilename{Enclosure_spec1}
+	\input{figures/Forsog1/Enclosure_spec1.tex}
+	\caption{Enclosure dataset 1.}
+	\label{fig:spectrogram_enclosure1}
+\end{subfigure}
+\begin{subfigure}[t]{0.47\textwidth}
+	\tikzsetnextfilename{Enclosure_spec19}
+	\input{figures/Forsog1/Enclosure_spec19.tex}
+	\caption{Enclosure dataset 19}
+	\label{fig:spectrogram_enclosure19}
+\end{subfigure}
+\caption{The spectrograms of the enclosure dataset 1 and 19. The prominent red line is the sine sweep from 2.4 kHz to 10 Hz while the yellow and blue lines along the red line are harmonic distortion.}
+\label{fig:spec_enclosure}
+\end{figure} 
+
+It is seen that there is considerately more frequency leak throughout the whole spectrum compared to the spectrogram for the driver and microphone. However the measurements from the driver, enclosure, and microphone is the large amount of frequency leak at very low frequencies seen at after 29 seconds.
+
+This section concludes that amount of distortion increases significantly when the gain is increased too. Also, it can be concluded that there is a frequency leak at lower frequencies on both driver, enclosure, and microphone. 
 
 
 
+\section{Back Plate Hit Detection}\label{sec:hit_detect}
+
+As previously stated, it is possible that the loudspeaker coil hits the back plate of the driver if the coil moves too far back. In the long run this will damage the loudspeaker, and should therefore be avoided. In this section an analysis on how to detect these hits, will be provided. 
+
+From \autoref{subsec:impulses} the frequency response of a mechanical frame of a loudspeaker has the same characteristics as a low-pass filter. This means, if the coil is hitting the back plate of the driver, it will result in a increase in energy in the low frequency spectrum. As most music and loudspeakers have some sort of a high-pass filter implemented to remove almost non-audible sound, it can be assumed that only a back plate hit will generate vibrations at very low frequencies between, for instance, 0 Hz to 20 Hz. To examine if this is true, a section of the dataset 19 of the driver, where a hit is suspected to have occurred, is analysed. The analysed section is seen in \autoref{fig:raw_driver19_windows}.
 
 
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.55\textwidth}
+	\tikzsetnextfilename{raw_driver19_window}
+	\input{figures/raw_driver19_window.tex}
+	\caption{Raw dataset 19 for driver.}
+	\label{fig:raw_driver19_window}
+\end{subfigure}
+%\hspace{6mm} 
+\begin{subfigure}[t]{0.43\textwidth}
+	\tikzsetnextfilename{raw_driver19_window_zoom}
+	\input{figures/raw_driver19_window_zoom.tex}
+	\caption{The grey area zoomed in.}
+	\label{fig:raw_driver19_window_zoom}
+\end{subfigure}
+\caption{The greyed area is analysed to examine if there are any signs of an impulse.}
+\label{fig:raw_driver19_windows}
+\end{figure}
 
+The same window is applied to all datasets for the driver and afterwards spectrum analysed to reveal any increase in low frequent energy. 
 
+\begin{figure}[H]
+\centering
+\tikzsetnextfilename{FFTFinal}
+\input{figures/Forsog1/FFTFinal.tex}
+\caption{The spectrum of the window. The yellow graph is dataset 1, red is 10 and blue is 19.}
+\label{fig:FFT_hit}
+\end{figure}
 
-\section{Analysis}
-
-Comments and potential further manipulation is documented in this section. 
+It is seen that the energy for non-harmonic frequencies is increased at very low frequencies as indicated with the arrow. The yellow graph is the first dataset and the red is the tenth dataset. As no hit was observed in the window at dataset 1 and 10, the energy of lower part of the spectrum was not increased. However the suspected hit in dataset 19 has an energy increase in the low frequency spectrum. Note that since the window is 0.25 seconds wide, frequencies below 4 Hz should be discarded.
 
 \section{Error sources}
 
-Potential Error sources are noted in the section
-
+Few errors could have occurred during trials, since then only variable adjusted during between measurements were the gain of the amplifier. There were however problems with moving the setup from the control room were it was calibrated and then moved into the anechoic room. The calibration was done using an visual equalizer where the output was shown with a bar chart Hence the data should bee seen with a tolerance of +/- 0.5 dB.

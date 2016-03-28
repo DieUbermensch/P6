@@ -2,8 +2,11 @@
 \input{1Chapters/1Preanalysis/Introduction.tex}
 
 %%%%%%%%%%%%%%%%%%%%%%%% Problem analyse %%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{The Active Speaker and limitations}
-This chapter will analyze an active speaker, analyze how a human percieves sound and investigate problems concerning distortion in a loudspeaker. An active loudspeaker is a passive loudspeaker with a build in amplifier as seen on \autoref{fig:speaker_block}. \\
+\chapter{The Active Loudspeaker and its Limitations}
+Before developing a system which can improve the overall performance of an active loudspeaker an brief analysis on how an active loudspeaker works, is needed. The main topic of this chapter is to analyse how a human perceives sound and examine any issues concerning distortion in an active loudspeaker, since it is commonly known that distortion adds undesirable artefacts to the sound. The purpose of this chapter is therefore to examine if it is possible to increase the performance of an active loudspeaker without creating too much distortion. 
+
+The initial starting point for the analysis is the block diagram of an active loudspeaker as seen in \autoref{fig:speaker_block}. It is seen that the the active loudspeaker is a passive loudspeaker with an incorporated amplifier.
+
 \begin{figure}[H]
 \centering
 \tikzsetnextfilename{SpeakerBlock}
@@ -12,14 +15,14 @@ This chapter will analyze an active speaker, analyze how a human percieves sound
 \caption{Block diagram of an active speaker.}
 \label{fig:speaker_block}
 \end{figure}
-The amplifier gives the active loudspeaker more flexibility than a passive loudspeaker because an active loudspeaker can be incorporated with for example a wireless module for streaming, which makes the only wiring the 230 V connector. An example of the backside of an active speaker is seen on \autoref{fig:dali_zensor_ax}, which shows the Zensor 1 AX's from DALI.
+The active loudspeaker has more flexibility than a passive loudspeaker because an active loudspeaker is powered by its own power supply. The power supply adds the option for an built-in amplifier but also peripheral electronics in "Processing system" that can be incorporated for example a wireless transceiver for audio streaming, which reduces the amount of wiring to only a 230 V connector. An example of the backside of an active speaker is seen on \autoref{fig:dali_zensor_ax}, which shows the Zensor 1 AX's from DALI.
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.6\textwidth]{figures/dali_zensor_1_ax.jpg}
 \caption{DALI Zensor 1 AX.}
 \label{fig:dali_zensor_ax}
 \end{figure}
-On this loudspeaker you are able to connect via cable or via Bluetooth and change volume and source directly on the speaker itself which makes it very flexible in its use. With this very general description a more detailed analysis of how an active loudspeaker is build and how its performance can create distortion will now follow. 
+The DALI Zensor 1 enables you to connect your audio source via cable or via Bluetooth and change volume and source directly on the speaker itself which makes it very flexible in its use. With this very general description a more detailed analysis of how an active loudspeaker is build and since the distortion is mainly created in the amplifier and driver the analysis will be focused on the amplifier and driver.
 
 \input{1Chapters/1Preanalysis/Amplifier.tex}
 
@@ -29,40 +32,56 @@ On this loudspeaker you are able to connect via cable or via Bluetooth and chang
 
 \input{1Chapters/1Preanalysis/Loudspeaker_test.tex}
 
-\input{1Chapters/1Preanalysis/frequency_response.tex}
+%\input{1Chapters/1Preanalysis/frequency_response.tex}
 
-\input{1Chapters/1Preanalysis/harmonic_distortion.tex}
+%\input{1Chapters/1Preanalysis/harmonic_distortion.tex}
 
-\input{1Chapters/1Preanalysis/hit_detection.tex}
+%\input{1Chapters/1Preanalysis/hit_detection.tex}
 
 \section{Problem Statement}
-From the analysis above the following problem statement can be formulated
+The analysis so far has mainly concerned how the performance of a loudspeaker is influenced when increasing the volume of the audio signal. Based on previous analysis a processing system will be developed in the pre-amplifier stage. Following problem statement is thus formulated as:
 
 \begin{center}
 \label{ProblemStatement}
-\textit{How can an electronic system be designed to absolve this crazy impossible problem}
+\textit{How can an real-time signal processing system survey the on going performance of an active speaker system to limit the amount of distortion and prevent the coil from hitting the back plate of the driver?"}
 \end{center}
-tekst tekst testk
-Besides the problem stated above, DALI whishes to have incorporated a user controlled equalizer for the commerical user and the developer because the developer should be able to change the frequency response of the speaker and because the commercial user should be able to change the frequency response of the speaker dependent of what room the speaker is located in. 
+Besides the problem stated above, DALI desires to incorporated a user controlled equalizer for the commercial user so it will be able to function more optimal in different room sizes. Further more it should be fully customizable for ongoing adjustments during the development period.\todo{Tilføj kilde til mail fra DALI}
+
+
 %%%%%%%%%%%%%%%%%%%%%%%% Teknisk Analyse %%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{Technical Analysis}
-The concept for a solution is seen on \autoref{fig:Concept}. It shows a feedback system which filters or limits a signal based on the output of sensor located in the speaker. Besides the feedback system which should protect the speaker, a user should be able to use an equalizer to change the settings of the frequency response.  
+\chapter{Design Concept}
+The purpose of this chapter is to give an outline of the design ideas considered for the system. As the problem statement pointed out, the system will mainly concern a real-time signal processing system as shown in \autoref{fig:speaker_block2}, where the greyed boxed will not be a part of the developed system. These subsystem of the active loudspeaker will at this point mostly be viewed as black boxes and not further examined, though with the exception of obtaining interface requirements from the subsystems.
+
 \begin{figure}[H]
 \centering
-\tikzsetnextfilename{Concept}
-\scalebox{0.8}{
-\input{figures/Concept.tex}}
-\caption{Block diagram of the concept.}
-\label{fig:Concept}
+\tikzsetnextfilename{SpeakerBlock2}
+\scalebox{0.9}{
+\input{figures/SpeakerBlock2.tex}}
+\caption{Block diagram of an active speaker.}
+\label{fig:speaker_block2}
 \end{figure}
-\todo[inline]{Fiks billede}
-The concept consist of a filtering or limitation block, which will be analyzed to understand which solution is best for the problem stated, a sensor which will be analyzed to determine which sensor should be used and where it should be placed, a signal analysis block and decision block which will not be analysed furhter in this chapter, a user interface which will be analyzed to determine how the user interface should be designed and lastly the processor block which will be analyzed to detemine which type of processor that should be used. 
+
+The starting point of the design concept is to determine what type of processing system that is going to be developed:
+
+%The concept for a solution is seen on \autoref{fig:Concept}. It shows a feedback system which filters or limits a signal based on the output of sensor located in the speaker. Besides the feedback system which should protect the speaker, a user should be able to use an equalizer to change the settings of the frequency response.  
+%\begin{figure}[H]
+%\centering
+%\tikzsetnextfilename{Concept}
+%\scalebox{0.8}{
+%\input{figures/Concept.tex}}
+%\caption{Block diagram of the concept.}
+%\label{fig:Concept}
+%\end{figure}
+%\todo[inline]{Fiks billede}
+%The concept consist of a filtering or limitation block, which will be analyzed to understand which solution is best for the problem stated, a sensor which will be analyzed to determine which sensor should be used and where it should be placed, a signal analysis block and decision block which will not be analysed furhter in this chapter, a user interface which will be analyzed to determine how the user interface should be designed and lastly the processor block which will be analyzed to detemine which type of processor that should be used. 
+
+\input{1Chapters/1Preanalysis/feedback_feedforward.tex}
 
 \input{1Chapters/1Preanalysis/TechnicalAnalysis_Equalizer.tex}
 
 \input{1Chapters/1Preanalysis/TechnicalAnalysis_Limiter.tex}
 
-\input{1Chapters/1Preanalysis/TechnicalAnalysis_Sensor.tex}
+%\input{1Chapters/1Preanalysis/TechnicalAnalysis_Sensor.tex}
 
 \input{1Chapters/1Preanalysis/TechnicalAnalysis_DSP.tex}
 
