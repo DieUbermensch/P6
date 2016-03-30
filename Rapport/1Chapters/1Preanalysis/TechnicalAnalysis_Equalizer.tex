@@ -11,7 +11,6 @@ Generally speaking, there are two common types of equalizer designs used in audi
 \label{fig:graphic_eq}
 \end{figure}
 
-
 The input signal is passed through each band and then summed again at the output of the equalizer. This makes it possible to adjust every desired frequency band of the audio signal independently. To achieve the desired frequency response of the filter, a gain is applied to the desired bands.
 
 \begin{figure}[H]
@@ -21,11 +20,9 @@ The input signal is passed through each band and then summed again at the output
 \label{fig:graphic_eq_block}
 \end{figure}
 
-
 Typically a graphic equalizer will have one slider available for each band of the equalizer, of which the user can increase or decrease the gain of each band. The graphic equalizer should be designed very carefully if a flat frequency response should be obtained when no gain is applied to any bandpass filter.
 
 An alternative to the graphic equalizer is the parametric equalizer. The parametric does not have a fixed center frequency and bandwidth contrary the graphic equalizer, thus giving the user more flexibility to achieve the desired frequency response. Unlike the graphical equalizer the signal do not pass into bandpass filters in parallel. Instead, the signal is passed through each filter of the equalizer placed series as shown in \autoref{fig:parametric_eq}. \\
-
 
 \begin{figure}[H]
 \centering
@@ -35,7 +32,6 @@ An alternative to the graphic equalizer is the parametric equalizer. The paramet
 \end{figure}
 
 The parametric equalizer can be seen as a combined peak- and notch filter, where the peak-filter is used to boost and the notch to attenuate. Implementing the parametric equalizer gives the user, besides changing the gain, the possibility to change the bandwidth and center frequency as shown in \autoref{fig:parametric_equalizer}.
-
 
 \begin{figure}[H]
 \centering
