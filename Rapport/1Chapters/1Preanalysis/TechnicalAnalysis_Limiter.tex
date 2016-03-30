@@ -1,5 +1,5 @@
-\section{Limiter}
-Instead of equalizing the signal it is possible to limit the signal instead by using a limiter. A limiter limits the signal at a certain threshold to make sure that a signal does not clip or that a membrane does not hits its coil. A limiter system is a feedforward system which can be stated as:
+\subsection*{Limiter}
+Instead of equalizing the signal it is possible to limit the signal instead by using a limiter. A limiter limits the signal at a certain threshold to make sure that a signal does not clip. A limiter system is a feedforward system which can be stated as:
 \begin{equation}
 y(n) = g(n)\cdot x(x-D)
 \end{equation}
@@ -25,7 +25,7 @@ A limiter system is also seen in more detail on \autoref{fig:limiter_block}.
 
 \todo[inline]{Ref til Digital Audio Signal Processing bogen kapitel syv} 
 
-The level measurement block measures the RMS or peak value of the signal, the static curve applies the gain and the Attack/Release time determines when the limiter should apply and stop applying to the signal. The static curve more detailed described the curve which determines at which the noise gate threshold (NT), expander threshold (ET), compressor threshold (CT) and limiter threshold (LT) should apply as seen on \autoref{fig:limiter_static}. 
+The level measurement block measures the RMS or peak value of the signal, the static curve applies the gain and the Attack/Release time determines when the limiter should apply and stop applying to the signal. The static curve more detailed described is the curve which determines at which the noise gate threshold (NT), expander threshold (ET), compressor threshold (CT) and limiter threshold (LT) should apply as seen on \autoref{fig:limiter_static}. 
 
 When these different thresholds are surpassed a specific linear function will be applied to the signal to for example filter out noise (NT) or compress the signal to limit the output relative to the input as seen on \ref{fig:limiter_static}. 
 
@@ -36,6 +36,6 @@ When these different thresholds are surpassed a specific linear function will be
 \label{fig:limiter_static}
 \end{figure}  
 
-Because the focus will be on limiting the signal and not clipping it, which would introduce to much distortion, the focus should be on CT which compresses the signal. The compressor can be designed for hard compression which limits the output more than a soft compression but it also creates more distorted output. The compressor can either apply to all frequencies or be a multiband compressor which only applies to the frequency spectrum which needs compression, which gives a more flexible compressor but also increases the complexity of the system.    
+Because the focus will be on limiting the signal and not clipping it, which would introduce to much distortion, the focus should be on CT which compresses the signal. The compressor can be designed for hard compression which limits the output more than a soft compression but it also creates a more distorted output. The compressor can either apply to all frequencies or be a multiband compressor which only applies to the frequency spectrum which needs compression, which gives a more flexible compressor but also increases the complexity of the system. This leads to the analyzis of the automatic volume control.    
 
       
