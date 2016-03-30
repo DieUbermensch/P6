@@ -76,7 +76,25 @@ Another advantages of implementing a parametric equalizer is that any parametric
 
 A disadvantages of the parametric equalizer is however the ease of use. If the user is not experienced with using a parametric equalizer, it can be difficult to examine if the equalizer has the desired frequency response. The parametric equalizer may be flexible but should be interfaced to a display, so the user can see the frequency response of the equalizer.
 
-The choice of equalizer has been chosen to be the parametric equalizer because of the flexible features. To make it is easier for the user to examine the frequency response a graphical user interface should be designed as well.The number of parametric filters available for the equalizer is set to N-amounts.
+Another type of parametric equalizer is the high- and low-shelf filters. They have of the same characteristic as the regular parametric equalizer, but the low-shelf filter does not have a lower cut-off frequency and the high-shelf does not have a higher cut-off frequency. Likewise, other parameters that are changeable are the bandwidth (Q-value), cut-off frequency and gain. The frequency response of the high- and low-shelf filter is illustrated in \autoref{fig:shelf_filter}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.75\textwidth]{figures/shelf_filter.jpg}
+\caption{The filter cutting and boosting the lower frequency region is the low-shelf filter, while a high-shelf filter is used for higher frequency regions.}
+\label{fig:shelf_filter}
+\end{figure}
+
+One of the advantages of implementing shelf filters is they are good at apply a gain to a wide region. If the user for instance want to boost the bass, it may be more convient for the user to bass boost the whole bass region including the subbass region, rather than only apply a gain centered around a center frequency in the bass.
+
+\subsection{Choice of Equalizer}
+
+The choice of equalizer has been chosen to be the parametric equalizer because of the flexible features. To make it is easier for the user to examine the frequency response a graphical user interface should be designed as well. To design the parametric equalizer should comply with following requirements and specifications:
+\begin{enumerate}
+\item The equalizer will consist of 1 low and high shelf filter and 4 parametric filters. The number of filters should be sufficient to cover most of the bands between 20 Hz to 20 kHz. And if the user desires to only use 3 of the filters, then the non-used filters can be bypassed.
+\item Each filter will be able to gain the signal by $\pm$ 6 dB.
+\end{enumerate}
+
 
 
 %\subsection{The need for equalizing}
