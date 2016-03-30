@@ -3,10 +3,20 @@
 \node [block, fill=white] (AudioSource) at (0,0) {Audio Source};
 
 %% DSP %%
-\node [block, fill=white] (Equalizer) at ($(AudioSource)+(3.5,0)$) {Equalizer};
-\node [block, fill=gray,text=white] (Limiter) at ($(Equalizer)+(3.5,0)$) {Limiter};
-\node [Twolineblock, fill=white] (Decisionblock) at ($(Equalizer)+(0,-2)$) {Decision block};
-\node [Twolineblock, fill=white] (SpectralAnalysis) at ($(Decisionblock)+(3.5,0)$) {Spectral analysis};
+\node [Twolineblock, fill=white] (Equalizer) at ($(AudioSource)+(3.5,0)$) {User Equalizer};
+
+\node [Twolineblock, fill=white] (Decisionblock) at ($(Equalizer)+(0,-2)$) {Spectral Analysis};
+
+\node [block, fill=white] (Delay) at ($(Equalizer)+(3.25,0)$) {Delay};
+
+\node [block, fill=gray,text=white] (Limiter) at ($(Delay)+(6.5,0)$) {Limiter};
+
+\node [Twolineblock, fill=white] (AmplitudeDetect) at ($(Delay)+(0,-2)$) {Amplitude Detection};
+
+\node [Twolineblock, fill=white] (NewEQ) at ($(Delay)+(3.25,0)$) {Auto Equalizer};
+
+
+%\node [Twolineblock, fill=white] (SpectralAnalysis) at ($(Decisionblock)+(3.5,0)$) {Spectral analysis};
 
 
 %% External %%
@@ -15,10 +25,10 @@
 
 %% Speaker Enclosure %%
 \node [Twolineblock, fill=black!80,text=white] (Amplifier) at ($(Limiter)+(4,0)$) {Amplification stage};
-\node [Twolineblock, fill=black!80,text=white] (Driver) at ($(Amplifier)+(3.5,0)$) {Speaker driver};
+\node [Twolineblock, fill=black!80,text=white] (Driver) at ($(Amplifier)+(0,-2)$) {Speaker driver};
 
-\node [Twolineblock, fill=white] (SensorDriver) at ($(Amplifier)+(0,-2)$) {Sensor on driver};
-\node [Twolineblock, fill=gray,text=white] (EnclosureDriver) at ($(Driver)+(0,-2)$) {Sensor in enclosure};
+%\node [Twolineblock, fill=white] (SensorDriver) at ($(Amplifier)+(0,-2)$) {Sensor on driver};
+%\node [Twolineblock, fill=gray,text=white] (EnclosureDriver) at ($(Driver)+(0,-2)$) {Sensor in enclosure};
 
 \node (User) at ($(-2.5,0)+(UserInterface)$) {\textbf{User}};
 \draw[->] (User) -- (UserInterface);
@@ -28,26 +38,31 @@
 
 %% Store Blokke %%
 \begin{pgfonlayer}{bg}
-\draw[thick, fill=black!20] ($(-1.50,1)+(Equalizer)$) -- ($(1.750,1)+(Limiter)$) -- ($(1.750,-1.25)+(SpectralAnalysis)$) -- ($(-1.50,-1.25)+(Decisionblock)$) -- ($(-1.50,1)+(Equalizer)$);
-\node (DSPtag) at ($(1,-1)+(SpectralAnalysis)$) {\textbf{DSP}};
+\draw[thick, fill=black!20] ($(-1.50,1)+(Equalizer)$) -- ($(1.750,1)+(Limiter)$) |- ($(1.750,-1.25)+(Decisionblock)$) -- ($(-1.50,-1.25)+(Decisionblock)$) -- ($(-1.50,1)+(Equalizer)$);
+\node (DSPtag) at ($(1,-3)+(Limiter)$) {\textbf{DSP}};
 
-\draw[thick, fill=black!20] ($(-1.50,1)+(Amplifier)$) -- ($(1.750,1)+(Driver)$) -- ($(1.750,-1.25)+(EnclosureDriver)$) -- ($(-1.50,-1.25)+(SensorDriver)$) -- ($(-1.50,1)+(Amplifier)$);
-\node (DSPtag) at ($(-.25,-1)+(EnclosureDriver)$) {\textbf{Speaker Enclosure}};
+\draw[thick, fill=black!20] ($(-1.50,1)+(Amplifier)$) -| ($(1.750,1)+(Driver)$) |- ($(-1.50,-1.25)+(Driver)$) -| ($(-1.50,1)+(Amplifier)$);
+\node (DSPtag) at ($(0,-1)+(Driver)$) {\scalebox{0.7}{\textbf{Speaker Enclosure}}};
 \end{pgfonlayer}
 
 %% Forbindelse %%
 \draw[->] (AudioSource) -- (Equalizer);
-\draw[->] (Equalizer) -- (Limiter);
+\draw[->] (Equalizer) -- (Delay);
+\draw[->] (Delay) -- (NewEQ);
+\draw[->] (NewEQ) -- (Limiter);
+
 \draw[->] (Limiter) -- (Amplifier);
 \draw[->] (Amplifier) -- (Driver);
 
 \draw[->] (UserInterface) -| ($(Equalizer)+(-.25,.6)$);
 \draw[->] (EffectController) -| ($(Equalizer)+(.25,.6)$);
 
-\draw[->] ($(SensorDriver)+(-1.375,-0.3)$) -- ($(SpectralAnalysis)+(1.375,-0.3)$);
+%\draw[->] ($(SensorDriver)+(-1.375,-0.3)$) -- ($(SpectralAnalysis)+(1.375,-0.3)$);
 
-\draw[->] ($(EnclosureDriver)+(-1.375,0.3)$) -- ($(EnclosureDriver)+(-1.75,0.3)$) -- ($(EnclosureDriver)+(-1.75,1)$) -- ($(EnclosureDriver)+(-5.5,1)$) |- ($(SpectralAnalysis)+(1.375,0.3)$);
+%\draw[->] ($(EnclosureDriver)+(-1.375,0.3)$) -- ($(EnclosureDriver)+(-1.75,0.3)$) -- ($(EnclosureDriver)+(-1.75,1)$) -- ($(EnclosureDriver)+(-5.5,1)$) |- ($(SpectralAnalysis)+(1.375,0.3)$);
 
-\draw[->] (SpectralAnalysis) -- (Decisionblock);
-\draw[->] (Decisionblock) -- (Equalizer);
+%\draw[->] (SpectralAnalysis) -- (Decisionblock);
+\draw[<-] (Decisionblock) -- (Equalizer);
+\draw[->] (Decisionblock) -- (AmplitudeDetect);
+\draw[->] (AmplitudeDetect) -| (NewEQ);
 \end{tikzpicture}

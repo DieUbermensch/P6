@@ -1,7 +1,16 @@
-\section{Graphic and parametric equalizer}\label{sec:tech_equalizer}
-This section will cover the design possibilities of an equalizer and filter in an digital system. The perception of sound is non-linear. Equalization of the audio signal can help  of the different frequencies in order to hear the lower sound just as much as the midrange and high frequency spectrum. By implementing an equalizer it is possible to manipulate different areas of the frequency.
+\section{Signal processing}
+This section will examine the options for processing the signal so the limits of the loudspeaker never gets surpassed. Three ways for processing the signal is set up:  
+\begin{itemize}
+\item Equalizer.
+\item Limiter.    
+\item Automatic Volume Control. 
+\end{itemize}
+These ways of processing the signal will be analyzed to determine which way is the most optimal for the purpose of protecting the loudspeaker as described in \autoref{sec:problem_statement}.  
 
-Generally speaking, there are two common types of equalizer designs used in audio. The first type of equalizer is the graphic equalizer. The graphic equalizer consist of multiple bandpass filters each with a fixed center frequency as seen in \autoref{fig:graphic_eq}. The amount of bandpass filters can vary, but can commonly be seen with 10 bands or more. A high amount of bands gives greater flexibility to adjust the frequency response of the equalizer.
+\subsection*{Graphic and parametric equalizer}\label{sec:tech_equalizer}
+This section will cover the design possibilities of an equalizer and filter in an digital system. 
+%The perception of sound is non-linear. Equalization of the audio signal can help  of the different frequencies in order to hear the lower sound just as much as the midrange and high frequency spectrum. 
+By implementing an equalizer it is possible to manipulate different areas of the frequency. Generally speaking, there are two common types of equalizer designs used in audio. The first type of equalizer is the graphic equalizer. The graphic equalizer consist of multiple bandpass filters each with a fixed center frequency as seen in \autoref{fig:graphic_eq}. The amount of bandpass filters can vary, but can commonly be seen with 10 bands or more. A high amount of bands gives greater flexibility to adjust the frequency response of the equalizer.
 
 \begin{figure}[H]
 \centering
@@ -11,7 +20,7 @@ Generally speaking, there are two common types of equalizer designs used in audi
 \label{fig:graphic_eq}
 \end{figure}
 
-The input signal is passed through each band and then summed again at the output of the equalizer. This makes it possible to adjust every desired frequency band of the audio signal independently. To achieve the desired frequency response of the filter, a gain is applied to the desired bands.
+The input signal is passed through each band and then summed again at the output of the equalizer. This makes it possible to adjust every desired frequency band of the audio signal independently. To achieve the desired frequency response of the filter, a gain is applied to the desired bands. The graphic equalizer should be designed very carefully if a flat frequency response should be obtained when no gain is applied to any bandpass filter.
 
 \begin{figure}[H]
 \centering
@@ -20,9 +29,8 @@ The input signal is passed through each band and then summed again at the output
 \label{fig:graphic_eq_block}
 \end{figure}
 
-Typically a graphic equalizer will have one slider available for each band of the equalizer, of which the user can increase or decrease the gain of each band. The graphic equalizer should be designed very carefully if a flat frequency response should be obtained when no gain is applied to any bandpass filter.
-
-An alternative to the graphic equalizer is the parametric equalizer. The parametric does not have a fixed center frequency and bandwidth contrary the graphic equalizer, thus giving the user more flexibility to achieve the desired frequency response. Unlike the graphical equalizer the signal do not pass into bandpass filters in parallel. Instead, the signal is passed through each filter of the equalizer placed series as shown in \autoref{fig:parametric_eq}. \\
+%Typically a graphic equalizer will have one slider available for each band of the equalizer, of which the user can increase or decrease the gain of each band. 
+An alternative to the graphic equalizer is the parametric equalizer. The parametric does not have a fixed center frequency and bandwidth contrary the graphic equalizer, thus giving it more flexibility to achieve the desired frequency response. Unlike the graphical equalizer the signal do not pass into bandpass filters in parallel. Instead, the signal is passed through each filter of the equalizer placed series as shown in \autoref{fig:parametric_eq}. \\
 
 \begin{figure}[H]
 \centering
@@ -31,7 +39,7 @@ An alternative to the graphic equalizer is the parametric equalizer. The paramet
 \label{fig:parametric_eq}
 \end{figure}
 
-The parametric equalizer can be seen as a combined peak- and notch filter, where the peak-filter is used to boost and the notch to attenuate. Implementing the parametric equalizer gives the user, besides changing the gain, the possibility to change the bandwidth and center frequency as shown in \autoref{fig:parametric_equalizer}.
+The parametric equalizer can be seen as a combined peak- and notch filter, where the peak-filter is used to boost and the notch to attenuate. Implementing the parametric equalizer gives, besides changing the gain, the possibility to change the bandwidth and center frequency as shown in \autoref{fig:parametric_equalizer}.
 
 \begin{figure}[H]
 \centering
@@ -60,7 +68,7 @@ The parametric equalizer can be seen as a combined peak- and notch filter, where
 \label{fig:parametric_equalizer}
 \end{figure}
 
-Another advantages of implementing a parametric equalizer is that any parametric filter can be realized as a second order filter. This means the implementation can be done efficiently and without a high risk of the filters getting unstable, since it is only a second order filter. For instance, if a user desires a attenuation in the bass with a high bandwidth and boost at a high frequency with low bandwidth, this can easily be realized with a parametric equalizer, since the bandwidth of the parametric equalizer is variable. An illustration of frequency response of a parametric filter is shown in \autoref{fig:parametric_eq_preanalysis_comb}.
+Another advantages of implementing a parametric equalizer is that any parametric filter can be realized as a second order filter. This means the implementation can be done efficiently and without a high risk of the filters getting unstable, since it is only a second order filter. For instance, if an attenuation is desired in the bass with a high bandwidth and boost at a high frequency with low bandwidth, this can easily be realized with a parametric equalizer, since the bandwidth of the parametric equalizer is variable. An illustration of frequency response of a parametric filter is shown in \autoref{fig:parametric_eq_preanalysis_comb}.
 
 \begin{figure}[H]
 \centering
@@ -70,7 +78,7 @@ Another advantages of implementing a parametric equalizer is that any parametric
 \label{fig:parametric_eq_preanalysis_comb}
 \end{figure}
 
-A disadvantages of the parametric equalizer is however the ease of use. If the user is not experienced with using a parametric equalizer, it can be difficult to examine if the equalizer has the desired frequency response. The parametric equalizer may be flexible but should be interfaced to a display, so the user can see the frequency response of the equalizer.
+%A disadvantages of the parametric equalizer is however the ease of use. If the user is not experienced with using a parametric equalizer, it can be difficult to examine if the equalizer has the desired frequency response. The parametric equalizer may be flexible but should be interfaced to a display, so the user can see the frequency response of the equalizer.
 
 Another type of parametric equalizer is the high- and low-shelf filters. They have of the same characteristic as the regular parametric equalizer, but the low-shelf filter does not have a lower cut-off frequency and the high-shelf does not have a higher cut-off frequency. Likewise, other parameters that are changeable are the bandwidth (Q-value), cut-off frequency and gain. The frequency response of the high- and low-shelf filter is illustrated in \autoref{fig:shelf_filter}.
 
@@ -81,17 +89,15 @@ Another type of parametric equalizer is the high- and low-shelf filters. They ha
 \label{fig:shelf_filter}
 \end{figure}
 
-One of the advantages of implementing shelf filters is they are good at apply a gain to a wide region. If the user for instance want to boost the bass, it may be more convient for the user to bass boost the whole bass region including the subbass region, rather than only apply a gain centered around a center frequency in the bass.
+One of the advantages of implementing shelf filters is they are good at apply a gain to a wide region. For instance if a boost the bass region is desired, it may be more convient to bass boost the whole bass region including the subbass region, rather than only apply a gain centered around a center frequency in the bass.
 
-\subsection{Choice of Equalizer}
-
-The choice of equalizer has been chosen to be the parametric equalizer because of the flexible features. To make it is easier for the user to examine the frequency response a graphical user interface should be designed as well. To design the parametric equalizer should comply with following requirements and specifications:
+%\subsection*{Choice of Equalizer}
+The choice of equalizer has been chosen to be the parametric equalizer because of the flexible features. The parametric equalizer will be implemented as the equalizer which will be used by the users for the reasons mentioned above. To make it is easier for the user to examine the frequency response a graphical user interface should be designed as well. To design the parametric equalizer for the user the following requirements and specifications should apply:
 \begin{enumerate}
 \item The equalizer will consist of 1 low and high shelf filter and 4 parametric filters. The number of filters should be sufficient to cover most of the bands between 20 Hz to 20 kHz. And if the user desires to only use 3 of the filters, then the non-used filters can be bypassed.
 \item Each filter will be able to gain the signal by $\pm$ 6 dB.
 \end{enumerate}
-
-
+This leads to the analyzis of a limiter.
 
 %\subsection{The need for equalizing}
 
