@@ -6,10 +6,9 @@ This chapter will describe a of the sytem before the requirements of the system 
 \tikzsetnextfilename{SystemOverview}
 \scalebox{0.8}{
 \input{figures/SystemOverview.tex}}
-\caption{Overview of the system}
+\caption{Block overview of the entire system. Black boxes are not static non changeable variable. Grey boxes are also static but has to be taken into account.}
 \label{fig:SystemOverview}
 \end{figure}
-\todo[inline]{fiks Billede så den passer med det aktuelle system}
 A more detailed description of every block will now follow.
 
 \textbf{Audio source} \\
@@ -18,22 +17,26 @@ The audio source will in this project be an analog line input.
 \textbf{User} \\
 The user of the system will both be an commercial user and a developer as described in \autoref{sec:user_interface}. 
 
-\textbf{User controlled equalizer}\\
+\textbf{User interface}\\
 The user controlled equalizer will be an equalizer which can be controlled by different users for different purposes.
 
-\textbf{User interface} \\
+\textbf{User Effect controller} \\
 The interface is t 
 
-\textbf{Sensor} \\
-The sensor is the accelerometer located on the driver as described in \autoref{sec:Sensor}, which measures the vibration of the driver to give the signal analysis block data to analyze. 
+\textbf{Developer} \\
+The developer is
 
-\textbf{Signal analysis} \\
+\textbf{User Equalizer} \\
+
+\textbf{Delay} \\
+
+\textbf{Spectral Analysis} \\
 The signal analysis block is the part of the system which makes the signal analysis, this could for example be a FFT or anything else dependent on what is nescesarry for the decision block.
 
-\textbf{Decision block} \\
+\textbf{Amplitude Detection} \\
 The decision block decides how the regulating equalizer should regulate the input signal based on the input from the signal analysis block. 
 
-\textbf{Regulating equalizer} \\
+\textbf{Auto Equalizer} \\
 The regulating equalizer should dampen the input signal if the decision block 
 
 \textbf{Limiter} \\
