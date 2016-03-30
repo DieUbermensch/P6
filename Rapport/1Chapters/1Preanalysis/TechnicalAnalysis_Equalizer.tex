@@ -1,7 +1,16 @@
-\section{Graphic and parametric equalizer}\label{sec:tech_equalizer}
-This section will cover the design possibilities of an equalizer and filter in an digital system. The perception of sound is non-linear. Equalization of the audio signal can help  of the different frequencies in order to hear the lower sound just as much as the midrange and high frequency spectrum. By implementing an equalizer it is possible to manipulate different areas of the frequency.
+\section{Signal processing}
+This section will examine the options for processing the signal so the limits of the loudspeaker never gets surpassed. Three ways for processing the signal is set up:  
+\begin{itemize}
+\item Equalizer.
+\item Limiter.    
+\item Automatic Volume Control. 
+\end{itemize}
+These ways of processing the signal will be analyzed to determine which way is the most optimal for the purpose of protecting the loudspeaker as described in \autoref{sec:problem_statement}.  
 
-Generally speaking, there are two common types of equalizer designs used in audio. The first type of equalizer is the graphic equalizer. The graphic equalizer consist of multiple bandpass filters each with a fixed center frequency as seen in \autoref{fig:graphic_eq}. The amount of bandpass filters can vary, but can commonly be seen with 10 bands or more. A high amount of bands gives greater flexibility to adjust the frequency response of the equalizer.
+\section{Graphic and parametric equalizer}\label{sec:tech_equalizer}
+This section will cover the design possibilities of an equalizer and filter in an digital system. 
+%The perception of sound is non-linear. Equalization of the audio signal can help  of the different frequencies in order to hear the lower sound just as much as the midrange and high frequency spectrum. 
+By implementing an equalizer it is possible to manipulate different areas of the frequency. Generally speaking, there are two common types of equalizer designs used in audio. The first type of equalizer is the graphic equalizer. The graphic equalizer consist of multiple bandpass filters each with a fixed center frequency as seen in \autoref{fig:graphic_eq}. The amount of bandpass filters can vary, but can commonly be seen with 10 bands or more. A high amount of bands gives greater flexibility to adjust the frequency response of the equalizer.
 
 \begin{figure}[H]
 \centering
