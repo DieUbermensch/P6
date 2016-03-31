@@ -2,26 +2,36 @@
 
 After the signal has been processed in an equalizer, the signal will be analysed in the \textit{Signal Analysis}-block. The purpose of the signal analysis is to examine the content of the signal and afterwards send the parameters to the signal processing subsystem. Generally speaking, any signal can be analysed in time domain or frequency domain. If analysed in time domain, the analysis can for instance be extracting signal feature and calculating of the signal's RMS value. Analysing the signal in frequency domain will reveal the spectral content of the signal. So the following section will cover how different techniques for extracting information from the signal in both time and frequency domain.
 
-\begin{itemize}
-\item[•] Signal feature extraction.
-\item[•] Spectral analysis.
-\end{itemize}
+%\begin{itemize}
+%\item[•] Signal feature extraction.
+%\item[•] Spectral analysis.
+%\item[•] Modelling.
+%\end{itemize}
 
-\subsection{Signal feature extraction}
+%\subsection{Signal feature extraction}
 % Signal analysis in time domain
 
-For a continuous signal the RMS value is defined as:
-\begin{equation}
+\subsection*{Root-mean-square (RMS)}
+Root-mean-square is a can be used as a tool to estimate the "mean" value of a periodic signal. The problem with calculating a regular mean value for an audio signal is that the result will be 0 as the signal is approximately evenly distributed on both side of the amplitude axis. By using RMS this problem is avoided. The RMS is calculated as the square root of mean value of the signal squared as shown in following equation:
+\begin{equation}\label{eq:RMS_con}
 V_{\text{RMS}}(t) = \sqrt{\frac{1}{T}\int_0^T v(t)^2 dt}
 \end{equation}
-
-For a discrete signal:
+The definition of the RMS in \autoref{eq:RMS_con} is only defined for continuous signals. If the RMS value is to be calculated for discrete values then following equation is used:
 \begin{equation}
 V_{\text{RMS}}[n] = \sqrt{\frac{1}{N}\sum_{k=1}^{N} v[n-k]^2 dt}
 \end{equation}
+The RMS can be useful to estimate the power of the signal. For instance if the RMS value of the signal moves above a certain threshold, the system may warn that the signal will stress the loudspeaker too much.
+
+\subsection*{Signal threshold}
+A signal threshold can be use to detect whenever the amplitude of a signal is above a certain level. This can for instance help identify if the signal will result in a too loud playback.
+
+\subsection*{Envelope}
+A signal threshold can be use to detect whenever the amplitude of a signal is above a certain level. This can for instance help identify if the signal will result in a too loud playback. 
+
+\subsection*{Spectrum analysis}
+A spectral estimation 
 
 
-\subsection{Spectral analysis}
 % Signal analysis in frequency domain
 
 
