@@ -9,42 +9,50 @@ This chapter will describe an overview of the system before the needed requireme
 \caption{Block overview of the entire system. Black boxes are not static non changeable variable. Grey boxes are also static but has to be taken into account.}
 \label{fig:SystemOverview}
 \end{figure}
-A more detailed description of every block will now follow.
+A more detailed description of every block will now follow in the preceding section.
 
 \textbf{Audio source} \\
-The audio source will in this project be an analog line input. IEC 60268-15
+The audio source in this system will be based on the IEC 60268-15 specification. Meaning that it will in be limited to a analogue signal with a maximum peak voltage of 2 Volt RMS but otherwise nominal 0.5 Volt RMS. This input will handled by an onboard TLV320AIC3204 codec located on the eZdsp development board.
 
 \textbf{User} \\
-The user of the system will both be an commercial user and a developer as described in \autoref{sec:user_interface}. 
+The system will be able to be partially controlled by the end user. The user will be able to affect the entire system with the desired preference. The preference will be restricted to gain in the lower frequency as wished by DALI.
+\todo[inline]{Reference til Samtale med DALI}
 
 \textbf{User interface}\\
-The user controlled equalizer will be an equalizer which can be controlled by different users for different purposes.
+The user interface will be based on physical hardware. The hardware will be simple of construction. The user will be browsing through the different preset using a push down button. The different preset will be displayed on the on board LCD display.
 
-\textbf{User Effect controller} \\
-The interface is t 
+\textbf{Effect controller} \\
+The effect controller will be consisting of a graphical user interface in which the developer can adjust the entire frequency response according to the wanted output. The effect controller is thought as a fast prototyping function in which the developer can adjust on the fly when tuning the speaker system.
 
 \textbf{Developer} \\
-The developer is
+The developer is DALI or the specific engineer who wishes to tune and adjust the product.
 
 \textbf{User Equalizer} \\
+The user equalizers job is to compensate for any needed or unwanted adjustment in the system. This equalizer will only be changing whenever the user wants it or during the design period. The equalizer will consist of 4 Bi-quad bands an a high/low shelf which is to be spread equally across a frequency spectrum of 20 Hz trough 20 kHz.
 
 \textbf{Delay} \\
+The delay is created in order to give the monitoring system time for analysis. The delay will be adjusted accordingly to the analysis time needed in the feed forward system.
+
 
 \textbf{Spectral Analysis} \\
-The signal analysis block is the part of the system which makes the signal analysis, this could for example be a FFT or anything else dependent on what is nescesarry for the decision block.
+The spectral analysis block will be consisting of a spectral analysis and estimation of the incoming system. The system will evaluating the signal to achieve the frequency content and correlating amplitude.
 
-\textbf{Amplitude Detection} \\
-The decision block decides how the regulating equalizer should regulate the input signal based on the input from the signal analysis block. 
+\textbf{Decision and Model} \\
+The Decision and model block will consist of two parts:
+\begin{enumerate}
+\item Will be to determine by a model how much the current frequencies are going to produce a potential backplate hit. The frequencies are weighted and inspected when run through the model
+\item When the model shows fluctuations above a certain threshold it should determine which frequency area are in need of attenuation and adjust accordingly.
+\end{enumerate}
 
 \textbf{Auto Equalizer} \\
-The regulating equalizer should dampen the input signal if the decision block 
+This equalizer will receive filter constants released/updated by the Decision and Model block. If there is no need of adjustment it will simply adjust by a gain of 1 in the entire spectrum. The equalizer will be consisting of a shelf filter which will adjust attenuation, slope and frequency according the information given. 
 
 \textbf{Limiter} \\
-The limiter
+The limiter is greyed out and will not be discussed further on. It is noted that there should be room in the code for implementation of a multi band limiter wished by DALI.
 
-\textbf{Amplification stage} \\
-The amplification stage
+\textbf{Amplification stage and Speaker driver} \\
+The speaker is in this project seen as a black box which will not be tampered with. The black box will function as an actuator which is to be controlled by the DSP system. How ever it is assumed that the DSP system will prolong the life of the speaker driver when pushed to its limits.
 
-\textbf{Speaker driver} \\
-The speaker driver
 
+\vspace{5mm}
+The overall system has now been described in detail. The different functions placed in the boxes have been outlined and it is now possible to determine more specific requirements for the system.
