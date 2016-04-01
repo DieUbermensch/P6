@@ -7,6 +7,9 @@
 \node [block, fill=blue!15] (SpectralAnalysis) at ($(threshold)+(4.5,0)$) {Spectrum analysis};
 \node [block, fill=blue!15] (Model) at ($(SpectralAnalysis)+(4,0)$) {Model};
 \node [block, fill=white] (SignalProcessing) at ($(Model)+(4,0)$) {Signal Processing};
+\node (Bypass) at ($(SignalProcessing)+(0,1.75)$) {};
+\node (BypassTxt) at ($(SpectralAnalysis)+(2,2.25)$) {Bypass};
+
 
 %% Store Blokke %%
 \begin{pgfonlayer}{bg}
@@ -19,6 +22,7 @@
 %% Forbindelse %%
 \draw[->] (SignalSource) -- (threshold);
 \draw[->] (threshold) -- (SpectralAnalysis);
+\draw[->] (threshold) |- (Bypass);
 \draw[->] (SpectralAnalysis) -- (Model);
 \draw[->] (Model) -- (SignalProcessing);
 
