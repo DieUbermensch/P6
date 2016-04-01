@@ -1,19 +1,21 @@
 \section{Loudspeaker topology}
 
-As previously stated, distortion also occurs in the driver block in \autoref{fig:speaker_block}. In order to understand how the distortion occurs in a loudspeaker, it is necessary to understand the basic fundamentals and the topology of a loudspeaker. This section will consist of the basic topology and then glans over the topic of vibration induced in the speaker driver.
+As previously stated, distortion also occurs in the woofer block in \autoref{fig:speaker_block}. In order to understand how the distortion occurs in a loudspeaker, it is necessary to understand the basic fundamentals and the topology of a loudspeaker. This section will consist of the basic topology and then glans over the topic of vibration induced in the speaker woofer.
 
 \subsubsection*{The basics}
 The loudspeaker is a transducer which purpose is to convert the electrical energy into acoustical energy. This is done by sending the signal into the speaker which can consist of numerous driver. Each driver is made with a specific purpose for handling frequency. The drivers are designed to perform best within their frequency range, hence they are usually different sizes in diameter.
 \begin{itemize}
 \item[] For the high frequencies their is a tweeter, 1-2 inches in diameters, high frequencies is roughly 3-4 kHz and above.
-\item[] In the midrange their is a midrange driver which usually is around 5-6 inches. The midrange is roughly 3-4 kHz to 300 Hz. 
+\item[] In the midrange their is a midrange driver which usually is around 5-6 inches. The midrange is roughly 300 Hz to 3-4 kHz. 
 \item[] The lower frequencies, which is 300 and below, is then handled by the woofer. The woofer can is usually 5-6+ inches in diameter.
 \end{itemize}
 The reason for different diameters in drivers is because of the wavelength the specific frequencies got. Should a woofer play frequencies at +4 kHz it would end in the driver physically not being able to move that fast. The limitations will end up in non-linear distortion in the diaphragm. Vice versa, should a tweeter reproduced low frequency sound at high \gls{SPL} it will end in distortion. The tweeter has a very low excursion range which limits it to the high frequency area.
 
+\todo[inline]{Måske noget forklaring om det kun er nødvendigt at kigge på wooferen}
+
 \subsubsection*{Sensitivity and Sound Pressure Level}
 
-A speaker is supplied from the manufacture with a sensitivity rating. This tells how efficient a loudspeaker is. The sensitivity rating is rated in dB and tells what \gls{SPL} the speaker outputs when supplied with 1 watt using 2.86 volt and measured at 1 meter. This is done assuming an infinite baffle and no reflection from the room. The sensitivity is defined by \autoref{eq:speaker_sensitivty}.
+A speaker is supplied from the manufacture with a sensitivity rating. This tells how efficient a loudspeaker is. The sensitivity rating is rated in dB and tells what \gls{SPL} a speaker outputs when supplied with 1 watt using 2.86 volt and measured at 1 meter. This is done assuming an infinite baffle and no reflection from a room. The sensitivity is defined by \autoref{eq:speaker_sensitivty}.
 \begin{align}\label{eq:speaker_sensitivty}
 \text{dB}_\text{sensitivity}=112\text {dB} +10 \cdot \log_{10}(\text{efficiency})
 \end{align}  
@@ -25,13 +27,14 @@ The sensitivity of a loudspeaker can be used to calculate the sound pressure lev
 L_\text{p}(P)=\text{dB}_\text{sensitivity} + 10\cdot \log_{10} \left(\frac{P}{1 \text{W}}\right)
 \end{align} 
 
-By using \autoref{eq:sound_pressure_level} it is possible to calculate either the sound pressure level or the power. In later test the equation might prove useful to calculate the amount of dissipated power in an amplifier if the sound pressure level is measured from a microphone.
+By using \autoref{eq:sound_pressure_level} it is possible to calculate either the sound pressure level or the power. %In later test the equation might prove useful to calculate the amount of dissipated power in an amplifier if the sound pressure level is measured from a microphone.
 
 \subsubsection*{Diaphragm excursion}
 
-When the speaker play music it does so by moving the diaphragm in the driver. This difference in air pressure is then perceived as music. The sound have a specific wavelength according to the frequency. This means that trying to move the air with a speaker cone is more efficient in specific frequency area according to the diameter. If a speaker with a small diameter tries to generate a large wavelength the sound would bend and escape around the edges. Since a large wavelength require more air being pushed. Hence we need different sizes of speaker cones which is sized according to what area the are going to play.
+When the speaker plays sound it does so by moving the diaphragm in the woofer. This difference in air pressure is then perceived as sound. The sound have a specific wavelength according to the frequency. This means that trying to move the air with a speaker cone is more efficient in a specific frequency area according to the diameter. %If a speaker with a small diameter tries to generate a large wavelength the sound would bend and escape around the edges. 
+Since a large wavelength requires more air to be pushed. Hence we need different sizes of speaker cones which is sized according to what area they are going to play.
 
-Next, the driver needs to deliver a sufficient \gls{SPL}. This creates the need for a enough excursion of the diaphragm. Without dwelling to much on the speaker construction, the diaphragm is suspended in free air hold in place by the suspension, see \autoref{fig:regularspeaker}, and the spyder. The spyder holds is a membrane holding the voice coil more tightly in place. When the diaphragm moves it will have physical limits from the mechanical construction. At most, the diaphragm will move regular and linear. When pushed to the boundaries the limits of the mechanical construction will intervene and create non-linearities and distortion. This is discussed further in \autoref{subsec:impulses}.
+Next, the woofer needs to deliver a sufficient \gls{SPL}. This creates the need for a enough excursion of the diaphragm. Without dwelling to much on the speaker construction, the diaphragm is suspended in free air hold in place by the surround, see \autoref{fig:regularspeaker}, and the spyder. The spyder is a diaphragm holding the voice coil more tightly in place. When the diaphragm moves it will have physical limits from the mechanical construction. At most, the diaphragm will move regular and linear. When the diaphragm is pushed to the boundaries, the limits of the mechanical construction will intervene and create non-linearities and distortion. This is discussed further in \autoref{subsec:impulses}.
 
 \begin{figure}
 \centering
@@ -52,16 +55,16 @@ A common problem when designing loudspeakers are the vibrations from the enclosu
 \end{itemize}
 \todo[inline]{Skal nok lige skaffe nogle kilder på de udtagelser}
 
-Another possibility is to use the vibration measurement as an indicator to tell the current performance of the loudspeaker. Since the loudspeaker will vibrate more at higher volumes, a system can developed upon the amount of vibrations thus decreasing the volume when the loudspeaker vibrates too much for instance.
+Another possibility is to use the vibration measurement as an indicator to tell the current performance of the loudspeaker. Since the loudspeaker will vibrate more at higher volumes. %a system can developed upon the amount of vibrations thus decreasing the volume when the loudspeaker vibrates too much for instance.
 
 
-Looking further into the speaker driver itself, it shows in \autoref{fig:SpeakerModelStress} that parts in the driver also creates unwanted vibrations. The purpose of the speaker driver is to reproduce the electrical signal as an acoustical signal. This is done by using a membrane which is suspended in a very light and easy to move material. An Induction in the coil is created in a permanent magnet creating a a electro magnetic force resulting in the membrane moving. The goal will always be to loose as little as possible energy, giving the most perfect output. The driver simply needs to be as powerful, light, stiff and efficient as possible.
+Looking further into the woofer itself, it shows in \autoref{fig:SpeakerModelStress} that parts in the woofer also creates unwanted vibrations. The purpose of the woofer is to reproduce the electrical signal as an acoustical signal. This is done by using a diaphragm which is suspended in a very light and easy to move material. An Induction in the coil is created in a permanent magnet creating a a electro magnetic force resulting in the diaphragm moving. The goal will always be to loose as little as possible energy, giving the most perfect output. The woofer simply needs to be as powerful, light, stiff and efficient as possible.
 
 \begin{figure}[H]
 \centering
 \begin{subfigure}[t]{0.47\textwidth}
 \includegraphics[width=\linewidth]{SpeakerGOOD}
-	\caption{Regular speaker driver showing suspension, membrane and the driver magnet.}
+	\caption{Regular speaker driver showing surround, diaphragm and the magnet.}
 	\label{fig:regularspeaker}
 \end{subfigure}
 \hspace{6mm} 
@@ -73,10 +76,10 @@ Looking further into the speaker driver itself, it shows in \autoref{fig:Speaker
 \caption{A Speaker driver, where \ref{fig:badspeaker} shows the stress points outlined with red.}
 \label{fig:SpeakerModelStress}
 \end{figure}
+%When this signal has a large amplitude, read overload, the diaphragm reaches physical capacity. 
+In \autoref{fig:badspeaker} it shows that when a diaphragm is pushed to its maximum capacity the surround will affect the diaphragm causing unwanted distortion. This will be one of the major problems if the diaphragm is not sufficiently stiff to withstand the high \gls{SPL} and not twist during playback. 
 
-When this signal has a large amplitude, read overload, the membrane reaches physical capacity. In \autoref{fig:badspeaker} it shows that when a membrane is pushed to its maximum capacity the suspension will affect the membrane causing unwanted distortion. This will be one of the major problems if the membrane is assumed sufficiently stiff to with stand the high \gls{SPL} and not twist during playback. 
-
-Another notice is the membrane hitting the coil connected to the magnet. This would again result in distortion since the membrane is now again hitting the absolute furthest position possible. This situation can however be resolve be moving the magnet further back. This would make the suspension determine how far the membrane can be pushed.
+Another notice is the coil hitting the back plate. This would again result in distortion since the coil is now hitting the absolute furthest position possible. This situation can however be resolved by moving the back plate further back. This would make the surround determine how far the diaphragm can be pushed.
 
 % \begin{figure}[H]
 % \centering
@@ -97,7 +100,7 @@ Another notice is the membrane hitting the coil connected to the magnet. This wo
 % \label{fig:impulse2}
 % \end{figure}
 
-If the membrane hits the coil it will create an impulse which will give a energy spike in a larger frequency area dependent on the impulse and the speaker itself as seen on \autoref{fig:impulse}. The shorter the impulse the larger the frequency area as seen on the differences seen between \autoref{fig:impulse1} and \autoref{fig:impulse2}.  
+If the coil hits the back plate it will create an impulse which will give a energy spike in a wider frequency area dependent on the impulse and the speaker itself as seen on \autoref{fig:impulse}. The shorter the impulse the wider the frequency area as seen in the differences seen between \autoref{fig:impulse1} and \autoref{fig:impulse2}.  
 
 \begin{figure}[H]
 \begin{subfigure}[t]{0.47\textwidth}
@@ -120,7 +123,7 @@ If the membrane hits the coil it will create an impulse which will give a energy
 \caption{Two different impulses and there frequency response.}
 \label{fig:impulse}
 \end{figure}
-Besides the characteristics of the impulse the speaker will act as a low pass filter so the frequency response of an impulse will always resemble the frequency response of \autoref{fig:impulse2} of some sort.   
+Besides the characteristics of the impulse the speaker will act as a low pass filter so the frequency response of an impulse will always resemble the frequency response of \autoref{fig:impulse2} of some sort. However when playing music these impulses will be difficult to estimate through an spectrum analysis, because music in itself can consist of impulses.     
 
 
 %that occurs at playback. The vibrations occurs because the  If the vibration. the sound radiated from the loudspeaker enclosure
