@@ -5,13 +5,15 @@
 %% DSP %%
 \node [Twolineblock, fill=white] (Equalizer) at ($(AudioSource)+(3.5,0)$) {User Equalizer};
 
-\node [Twolineblock, fill=white] (Decisionblock) at ($(Equalizer)+(0,-2)$) {Spectral Analysis};
+\node [Twolineblock, fill=white] (Decisionblock) at ($(Equalizer)+(0,-2)$) {Peak Detection};
 
 \node [block, fill=white] (Delay) at ($(Equalizer)+(3.25,0)$) {Delay};
 
 \node [block, fill=gray,text=white] (Limiter) at ($(Delay)+(6.5,0)$) {Limiter};
 
-\node [Twolineblock, fill=white] (AmplitudeDetect) at ($(Delay)+(0,-2)$) {Decision and Model};
+\node [Twolineblock, fill=white] (AmplitudeDetect) at ($(Delay)+(0,-2)$) {Spectrum Analysis};
+
+\node [Twolineblock, fill=white] (Spectrum) at ($(AmplitudeDetect)+(3.25,0)$) {Decision};
 
 \node [Twolineblock, fill=white] (NewEQ) at ($(Delay)+(3.25,0)$) {Auto Equalizer};
 
@@ -64,5 +66,6 @@
 %\draw[->] (SpectralAnalysis) -- (Decisionblock);
 \draw[<-] (Decisionblock) -- (Equalizer);
 \draw[->] (Decisionblock) -- (AmplitudeDetect);
-\draw[->] (AmplitudeDetect) -| (NewEQ);
+\draw[->] (AmplitudeDetect) -- (Spectrum);
+\draw[->] (Spectrum) -- (NewEQ);
 \end{tikzpicture}
