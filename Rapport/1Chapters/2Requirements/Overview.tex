@@ -34,18 +34,20 @@ The user equalizers job is to compensate for any needed or unwanted adjustment i
 The delay is created in order to give the monitoring system time for analysis. The delay will be adjusted accordingly to the analysis time needed in the feed forward system.
 
 
-\textbf{Spectral Analysis} \\
-The spectral analysis block will be consisting of a spectral analysis and estimation of the incoming system. The system will evaluating the signal to achieve the frequency content and correlating amplitude.
+\textbf{Peak Detection} \\
+The Peak detection block will be consisting of a signal analysis and estimation of the incoming signal. The system will be checking all amplitudes of the signal in order to determine whether a signal is to large and it should be adjusted for. The samples will be measured and compared with a predetermined threshold to determine if further action should be done.
 
-\textbf{Decision and Model} \\
-The Decision and model block will consist of two parts:
-\begin{enumerate}
-\item Will be to determine by a model how much the current frequencies are going to produce a potential backplate hit. The frequencies are weighted and inspected when run through the model
-\item When the model shows fluctuations above a certain threshold it should determine which frequency area are in need of attenuation and adjust accordingly.
-\end{enumerate}
+\textbf{Spectrum Analysis} \\
+When the signal has been analysed for potential amplitude spikes further analysis is done to estimate at what frequency these spikes occur. A spectral estimation will locate at what frequency the high amplitude is happening.  
+
+
+\textbf{Decision} \\
+When the spectrum analysis shows fluctuations above a certain threshold it should determine what attenuation is needed and send information to the Auto equalizer to adjust accordingly. The decision block will be weighting all of the signal accordingly with a model for the speaker. The model should weight the problematic frequencies higher than the less problematic frequencies. A problematic is defined as a frequency which would create to large an excursion of the diaphragm. 
+
+
 
 \textbf{Auto Equalizer} \\
-This equalizer will receive filter constants released/updated by the Decision and Model block. If there is no need of adjustment it will simply adjust by a gain of 1 in the entire spectrum. The equalizer will be consisting of a shelf filter which will adjust attenuation, slope and frequency according the information given. 
+This equalizer will receive filter constants released/updated by the Decision and Model block. If there is no need of adjustment it will simply adjust by a gain of 1 in the entire spectrum. The equalizer will be consisting of a parametric equalizer which will then adjust according to the information given by the decision block.
 
 \textbf{Limiter} \\
 The limiter is greyed out and will not be discussed further on. It is noted that there should be room in the code for implementation of a multi band limiter wished by DALI.

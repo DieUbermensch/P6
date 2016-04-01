@@ -1,0 +1,26 @@
+\begin{tikzpicture}
+%% Kasser %%
+\node [block, fill=white] (SignalSource) at (0,0) {Equalizer};
+
+%% DSP %%
+\node [block, fill=blue!15] (threshold) at ($(SignalSource)+(4,0)$) {Peak lvl threshold};
+\node [block, fill=blue!15] (SpectralAnalysis) at ($(threshold)+(4.5,0)$) {Spectrum analysis};
+\node [block, fill=blue!15] (Model) at ($(SpectralAnalysis)+(4,0)$) {Model};
+\node [block, fill=white] (SignalProcessing) at ($(Model)+(4,0)$) {Signal Processing};
+
+
+%% Store Blokke %%
+\begin{pgfonlayer}{bg}
+\draw[thick, fill=black!10] ($(-2.25,1.2)+(threshold)$) -- ($(1.75,1.2)+(Model)$) -- ($(1.75,-1.5)+(Model)$) -- ($(-2.25,-1.5)+(threshold)$) -- ($(-2.25,1.2)+(threshold)$);
+
+\node (DSPtag) at ($(0,-1.1)+(SpectralAnalysis)$) {\textbf{Signal Analysis}};
+
+\end{pgfonlayer}
+
+%% Forbindelse %%
+\draw[->] (SignalSource) -- (threshold);
+\draw[->] (threshold) -- (SpectralAnalysis);
+\draw[->] (SpectralAnalysis) -- (Model);
+\draw[->] (Model) -- (SignalProcessing);
+
+\end{tikzpicture}
