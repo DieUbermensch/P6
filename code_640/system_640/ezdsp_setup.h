@@ -11,7 +11,7 @@ TMS320C5515 eZdsp USB Stick Setup and Initialization
 #define uint32  unsigned long
 #define uint16  unsigned short
 #define uint8   unsigned char
-#define int32   int
+#define int32   long
 #define int16   short
 #define int8    char
 
@@ -123,7 +123,7 @@ TMS320C5515 eZdsp USB Stick Setup and Initialization
 
 void wait(uint32 delay);
 void waitusec(uint32 usec);
-void system_init();
+void system_init(uint8 audioType, uint8 resolution, uint8 fs);
 
 int16 I2C_init();
 int16 I2C_close();
@@ -136,9 +136,9 @@ int16 GPIO_setDirection(uint16 number, uint16 direction);
 int16 GPIO_setOutput(uint16 number, uint16 output);
 int16 GPIO_getInput(uint16 number);
 
-void I2S_init();
+void I2S_init(uint8 Type);
 void TLV320AIC3204_set(uint16 regnum, uint16 regval);
-void TLV320AIC3204_init();
+void TLV320AIC3204_init(uint8 BCLK, uint8 PLLJ, uint16 HI_BYTE, uint16 LO_BYTE);
 
 
 

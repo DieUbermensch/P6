@@ -5,9 +5,9 @@ TMS320C5515 eZdsp USB Stick Setup and Initialization
 ------------------------------------------------------------------*/
 
 /*	TABLE OF CONTENT
-		0.1 TMS320C5515 Setup .............................. Page 0
-		1.1 I2C TMS320C5515 Setup .......................... Page 1
-		2.1 GPIO TMS320C5515 Setup ......................... Page 2
+		0.1 TMS320C5515 Setup .............................. 
+		1.1 I2C TMS320C5515 Setup .......................... 
+		2.1 GPIO TMS320C5515 Setup ......................... 
 		
 		
 */
@@ -29,21 +29,26 @@ void waitusec(uint32 usec){
     wait((uint32)usec * 8);
 }
 
-void system_init(){
-    SYS_PCGCR1 = 0x0000;     /* Enable clocks to all peripherals */
-    SYS_PCGCR2 = 0x0000;
-	SYS_EXBUSSEL = 0x6100;         // Enable I2S bus
-	I2C_init( );        // Initialize I2C
+void system_init(uint8 audioType, uint8 resolution, uint8 fs){
+    SYS_PCGCR1 	 = 0x0000;     		/* Enable clocks to all peripherals */
+    SYS_PCGCR2 	 = 0x0000;
+	SYS_EXBUSSEL = 0x6100;         	// Enable I2S bus
+	I2C_init();        				// Initialize I2C
 	
-	TLV320AIC3204_init();
-	wait(200);        // Wait
+	if 		(fs == 48 && resolution == 16) TLV320AIC3204_init(0x0d, 0x07, 0x06, 0x90);
+	else if (fs == 48 && resolution == 24) TLV320AIC3204_init(0x2d, 0x07, 0x06, 0x90);	
+	else if (fs == 96 && resolution == 16) TLV320AIC3204_init(0x0d, 0x0E, 0x0D, 0x20);	
+	else if	(fs == 96 && resolution == 24) TLV320AIC3204_init(0x2d, 0x0E, 0x0D, 0x20);
+	else TLV320AIC3204_init(0x0d, 0x07, 0x06, 0x90);	
 	
-	I2S_init();
+	wait(200);        				// Wait	
+	if 		(audioType == 0 && resolution == 16) I2S_init(0x9010);
+	else if (audioType == 0 && resolution == 24) I2S_init(0x901C);	
+	else if (audioType == 1 && resolution == 16) I2S_init(0x8010);	
+	else if	(audioType == 1 && resolution == 24) I2S_init(0x801C);
+	else I2S_init(0x9010);
+	
 }
-
-
-
-/*-------------------------- PAGE 1 ------------------------------*/
 
 
 /*------------------------------------------------------------------
@@ -119,11 +124,6 @@ int16 I2C_read( uint16 i2c_addr, uint8* data, uint16 len ){
 
 
 
-
-
-/*-------------------------- PAGE 2 ------------------------------*/
-
-
 /*------------------------------------------------------------------
 	2.1 GPIO TMS320C5515 Setup 
 ------------------------------------------------------------------*/
@@ -179,25 +179,15 @@ int16 GPIO_getInput( uint16 number ){
 }
 
 
-
-
-/*-------------------------- PAGE 3 ------------------------------*/
-
-
 /*------------------------------------------------------------------
 	2.1 I2S	TMS320C5515 Setup
 ------------------------------------------------------------------*/
 
-void I2S_init(){
+void I2S_init(uint8 Type){
 	I2S0_SRATE 		= 0x0;
-    I2S0_CTRL 		= 0x801C;    	// 16-bit word, slave, enable I2S (0x8010), stereo. 24-bit word, slave, enable I2S, mono (0x901C). 
+    I2S0_CTRL 		= Type;    	// 16-bit word, slave, enable I2S (0x8010), stereo. 24-bit word, slave, enable I2S, mono (0x901C). 
     I2S0_INTMASK 	= 0x3F;    		// Enable interrupts (Stereo 0x2B, Mono 0x17)
 }
-
-
-
-
-/*-------------------------- PAGE 4 ------------------------------*/
 
 
 /*------------------------------------------------------------------
@@ -211,7 +201,7 @@ void TLV320AIC3204_set(uint16 regnum, uint16 regval){
 	I2C_write(AIC3204_I2C_ADDR, cmd, 2);
 }
 
-void TLV320AIC3204_init(){
+void TLV320AIC3204_init(uint8 BCLK, uint8 PLLJ, uint16 HI_BYTE, uint16 LO_BYTE){
     /* Configure AIC3204 */
     TLV320AIC3204_set( 0, 0 );          // Select page 0
     TLV320AIC3204_set( 1, 1 );          // Reset codec
@@ -222,14 +212,14 @@ void TLV320AIC3204_init(){
 	
 	
     /* PLL and Clocks config and Power Up  */
-    TLV320AIC3204_set( 27, 0x0d );      // BCLK and WCLK is set as o/p to AIC3204(Master) (0x2D for 24-bit)
+    TLV320AIC3204_set( 27, BCLK );      // BCLK and WCLK is set as o/p to AIC3204(Master) (0x2D for 24-bit)
     TLV320AIC3204_set( 28, 0x00 );      // Data ofset = 0
     TLV320AIC3204_set( 4, 3 );          // PLL setting: PLLCLK <- MCLK, CODEC_CLKIN <-PLL CLK
-    TLV320AIC3204_set( 6, 7 );          // PLL setting: J=7	(J=14 for 96 kHz)
-    TLV320AIC3204_set( 7, 0x06 );       // PLL setting: HI_BYTE(D=1680)(0x06) (D=3360 for 96 kHz)(0x0D)
-    TLV320AIC3204_set( 8, 0x90 );       // PLL setting: LO_BYTE(D=1680)(0X90) (D=3360 for 96 kHz)(0x20)
+    TLV320AIC3204_set( 6, PLLJ );       // PLL setting: J=7	(J=14 for 96 kHz)
+    TLV320AIC3204_set( 7, HI_BYTE );    // PLL setting: HI_BYTE(D=1680)(0x06) (D=3360 for 96 kHz)(0x0D)
+    TLV320AIC3204_set( 8, LO_BYTE );    // PLL setting: LO_BYTE(D=1680)(0X90) (D=3360 for 96 kHz)(0x20)
     TLV320AIC3204_set( 30, 0x88 );      // For 32 bit clocks per frame in Master mode ONLY
-                                   // BCLK=DAC_CLK/N =(12288000/8) = 1.536MHz = 32*fs (0X88)(Power up and divide by 8) (12288000/4 when 96 kHz, data=0x84)
+                                   		// BCLK=DAC_CLK/N =(12288000/8) = 1.536MHz = 32*fs (0X88)(Power up and divide by 8) (12288000/4 when 96 kHz, data=0x84)
     TLV320AIC3204_set( 5, 0x91 );       // PLL setting: Power up PLL, P=1 and R=1
     TLV320AIC3204_set( 13, 0 );         // Hi_Byte(DOSR) for DOSR = 128 decimal or 0x0080 DAC oversamppling
     TLV320AIC3204_set( 14, 0x80 );      // Lo_Byte(DOSR) for DOSR = 128 decimal or 0x0080
@@ -259,7 +249,7 @@ void TLV320AIC3204_init(){
     /* ADC ROUTING and Power Up */
     TLV320AIC3204_set( 0, 1 );          // Select page 1
     TLV320AIC3204_set( 0x34, 0x30 );    // STEREO 1 Jack	(dec: 52 )
-		                           // IN2_L to LADC_P through 40 kohm
+		                           		// IN2_L to LADC_P through 40 kohm
     TLV320AIC3204_set( 0x37, 0x30 );    // IN2_R to RADC_P through 40 kohmm
     TLV320AIC3204_set( 0x36, 3 );       // CM_1 (common mode) to LADC_M through 40 kohm
     TLV320AIC3204_set( 0x39, 0xc0 );    // CM_1 (common mode) to RADC_M through 40 kohm
