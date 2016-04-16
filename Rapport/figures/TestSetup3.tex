@@ -1,0 +1,91 @@
+\begin{tikzpicture}
+\node[input] (SpeakerCorner) at (0,0) {};
+\node[PreAmpBox] (AMP0) at ($(6,-1.5)+(SpeakerCorner)$) {\scalebox{0.5}{Pre-amp}} ;
+%\node[PreAmpBox] (AMP1) at ($(0,-1)+(AMP0)$) {\scalebox{0.5}{Pre-amp}} ;
+%\node[PreAmpBox] (AMP2) at ($(0,-1)+(AMP1)$) {\scalebox{0.5}{Pre-amp}} ;
+%\node[PreAmpBox] (AMP3) at ($(0,-1)+(AMP2)$) {\scalebox{0.5}{Pre-amp}} ;
+%\node[PreAmpBox] (AMP4) at ($(0,-1)+(AMP3)$) {\scalebox{0.5}{Pre-amp}} ;
+%\node[PreAmpBox] (AMP5) at ($(0,-1)+(AMP4)$) {\scalebox{0.5}{Pre-amp}} ;
+
+
+%% Speaker Enclosure %%
+%% Speaker %%
+\draw[thick, fill=black!20] (SpeakerCorner) -- ($(2,0)+(SpeakerCorner)$) -- ($(2,-6)+(SpeakerCorner)$) -- ($(0,-6)+(SpeakerCorner)$) -- (SpeakerCorner);
+
+\node[input] (Tweeter) at ($(0,-0.5)+(SpeakerCorner)$) {};
+\draw[thick, fill=black!20] (Tweeter) -- ($(0,0.3)+(Tweeter)$) -- ($(0.5,0.25)+(Tweeter)$) -- ($(0.5,-0.25)+(Tweeter)$) -- ($(0,-0.3)+(Tweeter)$) -- (Tweeter);
+\draw[thick, fill=black!20] ($(0.51,-0.25)+(Tweeter)$) -- ($(0.75,-0.25)+(Tweeter)$) -- ($(0.75,0.25)+(Tweeter)$) -- ($(0.51,0.25)+(Tweeter)$);
+
+\node[input] (Speaker2) at ($(0,-2)+(SpeakerCorner)$) {};
+\draw[thick, fill=black!20] (Speaker2) -- ($(0,0.5)+(Speaker2)$) -- ($(0.5,0.25)+(Speaker2)$) -- ($(0.5,-0.25)+(Speaker2)$) -- ($(0,-0.5)+(Speaker2)$) -- (Speaker2);
+\draw[thick, fill=black!20] ($(0.51,-0.25)+(Speaker2)$) -- ($(0.75,-0.25)+(Speaker2)$) -- ($(0.75,0.25)+(Speaker2)$) -- ($(0.51,0.25)+(Speaker2)$);
+
+\node[input] (Speaker) at ($(0,-3.5)+(SpeakerCorner)$) {};
+\draw[thick, fill=black!20] (Speaker) -- ($(0,0.5)+(Speaker)$) -- ($(0.5,0.25)+(Speaker)$) -- ($(0.5,-0.25)+(Speaker)$) -- ($(0,-0.5)+(Speaker)$) -- (Speaker);
+\draw[thick, fill=black!20] ($(0.51,-0.25)+(Speaker)$) -- ($(0.75,-0.25)+(Speaker)$) -- ($(0.75,0.25)+(Speaker)$) -- ($(0.51,0.25)+(Speaker)$);
+
+\draw[thick, fill=black!20] ($(2,-5.5)+(SpeakerCorner)$) -- ($(1,-5.5)+(SpeakerCorner)$) -- ($(1,-5)+(SpeakerCorner)$) -- ($(2,-5)+(SpeakerCorner)$) -- ($(2,-5.5)+(SpeakerCorner)$);
+
+%% Computer + AMP %%
+\begin{pgfonlayer}{bg}
+\node[input] (ComputerCorner) at (8,-1) {};
+\draw[thick, fill=black!20] (ComputerCorner) -- ($(2,0)+(ComputerCorner)$) -- ($(2,-4)+(ComputerCorner)$) -- ($(0,-4)+(ComputerCorner)$) -- (ComputerCorner);
+\end{pgfonlayer}{bg}
+
+\node[] (Computer) at ($(1,-2)+(ComputerCorner)$) {ADC/DAC};
+
+\node[PreAmpBox] (AMP) at ($(1,-5)+(ComputerCorner)$) {\scalebox{0.5}{Amplifier}} ;
+
+%% Draw Lines %%
+
+%% Pre-amp to Speaker
+\draw[<-,mark=*] (AMP0) -- ($(-3,0)+(AMP0)$) |- ($(-1.5,0.5)+(SpeakerCorner)$) -- ($(-1.5,-2)+(SpeakerCorner)$) ;
+\draw [red,fill] ($(-1.5,-2)+(SpeakerCorner)$) circle [radius=0.1];
+
+%\draw[<-,mark=*] (AMP1) -| ($(-4.25,1.5)+(AMP1)$) ;
+%\draw [blue,fill] ($(-4.25,1.5)+(AMP1)$) circle [radius=0.1];
+
+%\draw[<-,mark=*] (AMP2) -- ($(-5.25,-0)+(AMP2)$) ;
+%\draw [blue,fill] ($(-5.25,-0)+(AMP2)$) circle [radius=0.1];
+
+%\draw[<-,mark=*] (AMP3) -- ($(-5.5,0)+(AMP3)$) ;
+%\draw [blue,fill] ($(-5.5,0)+(AMP3)$) circle [radius=0.1];
+
+%\draw[<-,mark=*] (AMP4) -- ($(-4.5,0)+(AMP4)$) ;
+%\draw [blue,fill] ($(-4.5,0)+(AMP4)$) circle [radius=0.1];
+
+%\draw[<-,mark=*] (AMP5) -| ($(-3.5,0.25)+(AMP5)$) -| ($(1.5,-5.25)+(SpeakerCorner)$) ;
+%\draw [blue,fill] ($(1.5,-5.25)+(SpeakerCorner)$) circle [radius=0.1];
+
+\draw[->,mark=*] (AMP) -| ($(2.25,-5.75)+(SpeakerCorner)$) |- ($(2,-5.4)+(SpeakerCorner)$) ;
+
+%% Amps to Computer
+
+\draw[<-,mark=*] (AMP) -- ($(1,-4)+(ComputerCorner)$) ;
+\draw[->] (AMP0) -| ($(-0.5,-0.5)+(ComputerCorner)$) -- ($(0,-0.5)+(ComputerCorner)$) ;
+%\draw[->] (AMP1) -- ($(0,-1.5)+(ComputerCorner)$) ;
+%\draw[->] (AMP2) -- ($(0,-2.5)+(ComputerCorner)$) ;
+%\draw[->] (AMP3) -| ($(-0.75,-2)+(ComputerCorner)$)  -- ($(0,-2)+(ComputerCorner)$) ;
+%\draw[->] (AMP4) -| ($(-0.75,-3)+(ComputerCorner)$)  -- ($(0,-3)+(ComputerCorner)$) ;
+%\draw[->] (AMP5) -| ($(-0.75,-3.75)+(ComputerCorner)$)  -- ($(0,-3.75)+(ComputerCorner)$) ;
+%\draw[->] (AMP5) -| ($(-0.75,-3.75)+(ComputerCorner)$)  -- ($(0,-3.75)+(ComputerCorner)$) ;
+%\draw[->] (AMP5) -| ($(-0.75,-3.75)+(ComputerCorner)$)  -- ($(0,-3.75)+(ComputerCorner)$) ;
+%% Rooms
+
+\draw[->] ($(0,0.75)+(AMP)$) -- ($(-2,0.75)+(AMP)$) -- ($(-2,1.25)+(AMP)$) -- ($(-1,1.25)+(AMP)$);
+
+\draw[thick, dashed] ($(-2,1)+(SpeakerCorner)$) -- ($(10.5,1)+(SpeakerCorner)$) -- ($(10.5,-7)+(SpeakerCorner)$) -- ($(-2,-7)+(SpeakerCorner)$) -- ($(-2,1)+(SpeakerCorner)$);
+\draw node [black, above=0.05] at ($(-0.25,-7)+(SpeakerCorner)$) {Anechoic room};
+
+
+%% To Computer %%
+\begin{pgfonlayer}{bg}
+\node[input] (PC) at (13,-1) {};
+\draw[thick, fill=black!20] (PC) -- ($(2,0)+(PC)$) -- ($(2,-2)+(PC)$) -- ($(0,-2)+(PC)$) -- (PC);
+\end{pgfonlayer}{bg}
+
+
+\draw[<->] ($(-3,-1)+(PC)$) -- node[above] {SPDIF} ($(0,-1)+(PC)$) ;
+\node[] (PC1) at ($(1,-1)+(PC)$) {Computer};
+
+\end{tikzpicture}
