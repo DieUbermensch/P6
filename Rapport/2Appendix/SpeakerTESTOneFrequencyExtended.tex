@@ -1,0 +1,190 @@
+\chapter{Speaker single frequency Lab test from 50 to 500 Hz} \label{app:journal_speaker_test3}
+
+This test is made as an extended of the test done in \autoref{app:journal_speaker_test2}. This test is done with a larger frequency interval and is made in order to create a reliable model for the compressor bands. The frequency range was determine from subjective analysis made from previous test.
+
+
+\section{Setup}
+
+The setup of this experiment are depicted in Figure \ref{figure:SpeakertestSetup}, where the equipment is catalogued in \autoref{tab:UsedEquipment3}, and described as follows:
+
+\begin{itemize}
+\item Distortion and \gls{SPL} will be measured by a microphone at a distance 1 meter in accordance with IEC 60268-5 Sound System Equipment - Part 5: Loudspeaker.
+\item The speaker will be driven by a Crown Studio Reference I amplifier.
+\item The ADC/DAC will convert measurements from accelerometers and microphone and relay to a computer via SPDIF.
+\begin{itemize}
+\item The Microphone is calibrated into outputting -37 dB at 94 dB \gls{SPL}.
+\item All recordings are synchronised and timestamped with by looping the test file back into the converter.
+\end{itemize}
+\item The computer will be logging data with a RME HammerFall DIGI 96-PDST sound card and Adobe Audition.
+\end{itemize}
+
+Furthermore the speaker will be placed in the anechoic room to eliminate any external disturbances corresponding to the requirements demanded in the 
+IEC 60268-5 standard.
+
+\subsection*{Test Setup}
+
+\begin{figure}[H]
+\centering
+\tikzsetnextfilename{TestSetup3}
+\scalebox{0.7}{
+\input{figures/TestSetup3.tex}
+}
+\caption{Test setup}
+\label{figure:SpeakertestSetup3}
+\end{figure}
+
+\subsection*{Equipment used and AAU-no.}
+
+\begin{table}[H]
+\centering
+\ra{1.3}
+\begin{tabular}{S[table-format=1]ccc} \toprule
+    {Item} & {Description} & {AAU-no} \\ \bottomrule 
+    1      &  B \& K Microphone Type 4165  & 08132   \\
+    2      &  Gras - 26AK Pre-amp & 52665   \\
+    3      &  B \& K Microphone Power supply Type 2804  & 07304   \\
+    4      &  Crown Studio Reference I Amplifier & 52614   \\
+    5      &  BEHRINGER digital A/D \& D/A Converter - Model ADA8000   & 56545   \\
+    6     &  B \& K Microphone calibrator 4231 & 78301   \\
+    7     &  RME HammerFall DIGI 96-PDST sound card & 60919  \\
+    8     &  Passive Dali Zensor 5 AX & NaN  \\ \bottomrule 
+\end{tabular}
+\caption{Table over equipment used in test}
+\label{tab:UsedEquipment3}
+\end{table}
+
+
+
+\section{Procedure}\label{sec:SpeakerTestProcedure3}
+
+The producer for this experiment is described as follows:
+\begin{enumerate}
+\item Adjust volume on the amplifier to +3 dB gain.
+\item Vacate the anechoic room and seal the room.
+\item Start recording in Adobe Audition for microphone and playback loop
+\item Playback file \path{SingleTone.wav}, which is 2 second sinusoidal tone at 50 Hz, then 2 seconds break, then a 2 second sinusoidal tone at 55 Hz which is continued until 100 Hz. The amplitude is 0 dBFS.
+\item After playback, stop recording all channels
+\item Save recordings as \path{.wav} file
+\item Enter room and adjust amplifier by +1 dB
+\item Repeat step 2 through 7 13 times.
+\end{enumerate}
+
+The \path{SingleTone.wav} can be found on:\\
+\scalebox{0.7}{
+\path{CD://Maalinger/XX/SingleTone.wav}}\\
+
+\todo[inline]{Fiks sti til fil}
+
+\section{Data Extraction}
+The volume was increase by 12 dB as it was concluded in \autoref{app:journal_speaker_test2} to be the maximum allowed gain.
+The recordings can be found on:\\
+\scalebox{0.7}{
+\path{CD://Maalinger/XX}}
+And is indexed in folders \scalebox{0.8}{\path{Measure_X}}, where X corresponds to the test number. Every measurements is denoted as:
+\begin{itemize}
+\item Microphone: \scalebox{0.8}{\path{Mic_0XX}}
+\item Playback loop: \scalebox{0.8}{\path{Reference_0XX}}
+\end{itemize}
+
+
+\section{Raw data}
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.45\textwidth}
+    \centering
+    \tikzsetnextfilename{raw_mic1}
+    \input{figures/raw_mic1.tex}
+    \caption{Sound pressure level from microphone.}
+    \label{fig:raw1t3_mic1}
+\end{subfigure}
+\begin{subfigure}[t]{0.45\textwidth}
+    \centering
+    \tikzsetnextfilename{raw_reference1}
+    \input{figures/raw_reference1.tex}
+    \caption{Reference signal.}
+    \label{fig:raw1t3_reference1}
+\end{subfigure}
+\caption{Raw data}
+\label{fig:raw1t3}
+\end{figure} 
+
+\todo[inline]{Lav nye billeder fra forsøget}
+
+\section{Analysis}
+To analyze if there is a correlation between the keynote and the second and third harmonic the analyzis will consist of making a spectrum analyzis to locate the amplitude of the keynote, second harmonic and third harmonic, and examine if there is a correlation between the different amplitudes. An example of three different frequency spectrum plots for 50 Hz measured with the microphone at different amplitudes, respectively measurement 1, 6 and 12 is therefore given in \autoref{fig:FFT_mic1612}, to give an insight in how the second and third harmonic increases with the increase in amplitude.
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.37\textwidth}
+    \tikzsetnextfilename{FFT_mic1_50Hz}
+    \input{figures/FFT_mic1_50Hz.tex}
+    \caption{Measurement 1 (mic).}
+    \label{fig:FFT_mic1_50Hz_3}
+\end{subfigure}
+\begin{subfigure}[t]{0.28\textwidth}
+    \tikzsetnextfilename{FFT_mic6_50Hz}
+    \input{figures/FFT_mic6_50Hz.tex}
+    \caption{Measurement 6 (mic).}
+    \label{fig:FFT_mic6_50Hz_3}
+\end{subfigure}
+\begin{subfigure}[t]{0.32\textwidth}
+    \tikzsetnextfilename{FFT_mic12_50Hz}
+    \input{figures/FFT_mic12_50Hz.tex}
+    \caption{Measurement 12 (mic).}
+    \label{fig:FFT_mic1_50Hz_3}
+\end{subfigure}
+\caption{Frequency response of 50 Hz (a) measurement 1 from the microphone, (b) measurement 6 from the microphone, and (c) measurement 12 from the microphone. Test 2.}
+\label{fig:FFT_mic1612}
+\end{figure}   
+
+\todo[inline]{Lav nye FFT'er eller THD målinger}
+
+If the amplitudes of the keynote, second harmonic and third harmonic is located at every soundlevel a comparison can be made between the amplitude of:
+\begin{itemize}
+\item Keynote / Second harmonic
+\item Keynote / Third harmonic
+\end{itemize}
+This should be done for every frequency, but as an example the comparison for 50 Hz is shown in \autoref{fig:com_mic1213}.
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.45\textwidth}
+    \tikzsetnextfilename{comp_mic12}
+    \input{figures/comp_mic12.tex}
+    \caption{1.harmonic / 2.harmonic pr. measurement.}
+    \label{fig:comp_mic12}
+\end{subfigure}
+\begin{subfigure}[t]{0.45\textwidth}
+    \tikzsetnextfilename{comp_mic13}
+    \input{figures/comp_mic13.tex}
+    \caption{1.harmonic / 3.harmonic pr. measurement.}
+    \label{fig:comp_mic13}
+\end{subfigure}
+\caption{comparison of keynote (1.harmonic), second harmoni and third harmonic (a) 1.harmonic [mag] / 2.harmonic [mag] and (b) 1.harmonic [mag] / 3.harmonic [mag]. Test 2.}
+\label{fig:com_mic1213}
+\end{figure}   
+
+
+\begin{figure}[H]
+    \centering
+    \tikzsetnextfilename{comp_mic12All1}
+    \input{figures/comp_mic12All1.tex}
+    \caption{1.harmonic / 2.harmonic pr. measurement. comparison for all frequencies}
+\label{fig:com_mic12All2}
+\end{figure}   
+\begin{figure}[H]
+    \centering
+    \tikzsetnextfilename{comp_mic13All1}
+    \input{figures/comp_mic13All1.tex}
+    \caption{1.harmonic / 3.harmonic pr. measurement. comparison for all frequencies}
+\label{fig:com_mic13All2}
+\end{figure}  
+
+
+\section{Error sources}
+Few errors could have occurred during trials, since then only variable adjusted during between measurements were the gain of the amplifier. There were however problems with moving the setup from the control room were it was calibrated and then moved into the anechoic room. The
+calibration was done using an visual equalizer where the output was shown with a bar chart. Hence the data should bee seen with a tolerance of +/- 0.5 dB.
+
+\section{Conclusion}
+
