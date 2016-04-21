@@ -1,1 +1,0 @@
-"./main.obj" "./ezdsp_setup.obj" -l"rts55x.lib" "../lnkx.cmd" 
