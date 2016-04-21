@@ -12,8 +12,7 @@ uint8 Rcv; // 0x002A49
 uint8 Xmit; 
 
 extern int16 FIR(int16 *DataIn, const int16 *b_coeffs, int16 i);
-extern int16 FIRNew(int16 *DataIn, const int16 *b_coeffs, int16 i);
-extern int16 IncrementCNT(int16 *i);
+extern int16 ADDNUM(int16 x, int16 y);
 void initialize(uint8 audioType, uint8 resolution, uint8 fs);
 
 int16 FIR1Out[45];
@@ -30,8 +29,6 @@ void playback(void){
     int16 D1 = 11;
     int16 B1 = 1;
     int16 temp = 0;
-    int16 temp2 = 0;
-    int16 temp3 = 0;
     
     while(1){
     	while((Rcv & I2S0_IR) == 0); 							// Wait for interrupt pending flag
@@ -42,9 +39,8 @@ void playback(void){
 	    D1++; if(D1 == 23) D1 = 0;
 	    FIR1Out[k] = FIR(AudioIn, COEFF, i1); 
 	    Band1[B1] = AudioIn[D1] - FIR1Out[k];
-	    temp2 = Band1[B1];
-	    temp3 = FIR1Out[k];
-	    temp = Band1[B1] + FIR1Out[k];   
+
+	    temp = ADDNUM(Band1[B1],FIR1Out[k]);   
 
 	    while((Xmit & I2S0_IR) == 0);  						// Wait for interrupt pending flag
 		k++; if(k == 45) k = 0;
@@ -69,7 +65,7 @@ void playback_test(void){
 	    AudioIn2[i_test] 	= I2S0_W0_MSW_R;  						// 16 bit left channel received audio data
 	    i_test++;
 	    if(i_test > 4) i_test = 0;
-	    AudioOut2 = FIRNew(AudioIn2, COEFF2, i_test);
+	    //AudioOut2 = FIRNew(AudioIn2, COEFF2, i_test);
 	        
 	    while((Xmit & I2S0_IR) == 0);  						// Wait for interrupt pending flag
 		I2S0_W0_MSW_W = AudioOut2;  						// 16 bit left channel transmit audio data
