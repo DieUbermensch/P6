@@ -1,1 +1,1 @@
-"../FIR.asm" "../ezdsp_setup.c" "../main.c" 
+"../delay1.asm" "../ezdsp_setup.c" "../main.c" "../mainDown1.asm" "../mainDown2.asm" "../mainUp1.asm" "../mainUp1v2.asm" 
