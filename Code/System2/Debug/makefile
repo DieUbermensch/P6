@@ -9,12 +9,13 @@ SPACE := $(EMPTY) $(EMPTY)
 
 ORDERED_OBJS += \
 $(GEN_CMDS_QUOTED) \
-"./mainUp1v2.obj" \
+"./mainUp2.obj" \
 "./mainUp1.obj" \
 "./mainDown2.obj" \
 "./mainDown1.obj" \
 "./main.obj" \
 "./ezdsp_setup.obj" \
+"./delay2.obj" \
 "./delay1.obj" \
 -l"rts55x.lib" \
 "../lnkx.cmd" \
@@ -121,8 +122,8 @@ System2.out: $(GEN_CMDS) $(CMD_SRCS) $(OBJS)
 # Other Targets
 clean:
 	-$(RM) $(C5500_EXECUTABLE_OUTPUTS__QTD) "System2.out"
-	-$(RM) ".\delay1.obj" ".\ezdsp_setup.obj" ".\main.obj" ".\mainDown1.obj" ".\mainDown2.obj" ".\mainUp1.obj" ".\mainUp1v2.obj" 
-	-$(RM) ".\delay1.pp" ".\mainDown1.pp" ".\mainDown2.pp" ".\mainUp1.pp" ".\mainUp1v2.pp" 
+	-$(RM) ".\delay1.obj" ".\delay2.obj" ".\ezdsp_setup.obj" ".\main.obj" ".\mainDown1.obj" ".\mainDown2.obj" ".\mainUp1.obj" ".\mainUp2.obj" 
+	-$(RM) ".\delay1.pp" ".\delay2.pp" ".\mainDown1.pp" ".\mainDown2.pp" ".\mainUp1.pp" ".\mainUp2.pp" 
 	-$(RM) ".\ezdsp_setup.pp" ".\main.pp" 
 	-@echo ' '
 

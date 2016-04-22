@@ -9,29 +9,32 @@ C_SRCS += \
 
 ASM_SRCS += \
 ../delay1.asm \
+../delay2.asm \
 ../mainDown1.asm \
 ../mainDown2.asm \
 ../mainUp1.asm \
-../mainUp1v2.asm 
+../mainUp2.asm 
 
 CMD_SRCS += \
 ../lnkx.cmd 
 
 ASM_DEPS += \
 ./delay1.pp \
+./delay2.pp \
 ./mainDown1.pp \
 ./mainDown2.pp \
 ./mainUp1.pp \
-./mainUp1v2.pp 
+./mainUp2.pp 
 
 OBJS += \
 ./delay1.obj \
+./delay2.obj \
 ./ezdsp_setup.obj \
 ./main.obj \
 ./mainDown1.obj \
 ./mainDown2.obj \
 ./mainUp1.obj \
-./mainUp1v2.obj 
+./mainUp2.obj 
 
 C_DEPS += \
 ./ezdsp_setup.pp \
@@ -39,19 +42,21 @@ C_DEPS += \
 
 OBJS__QTD += \
 ".\delay1.obj" \
+".\delay2.obj" \
 ".\ezdsp_setup.obj" \
 ".\main.obj" \
 ".\mainDown1.obj" \
 ".\mainDown2.obj" \
 ".\mainUp1.obj" \
-".\mainUp1v2.obj" 
+".\mainUp2.obj" 
 
 ASM_DEPS__QTD += \
 ".\delay1.pp" \
+".\delay2.pp" \
 ".\mainDown1.pp" \
 ".\mainDown2.pp" \
 ".\mainUp1.pp" \
-".\mainUp1v2.pp" 
+".\mainUp2.pp" 
 
 C_DEPS__QTD += \
 ".\ezdsp_setup.pp" \
@@ -59,10 +64,11 @@ C_DEPS__QTD += \
 
 ASM_SRCS_QUOTED += \
 "../delay1.asm" \
+"../delay2.asm" \
 "../mainDown1.asm" \
 "../mainDown2.asm" \
 "../mainUp1.asm" \
-"../mainUp1v2.asm" 
+"../mainUp2.asm" 
 
 C_SRCS_QUOTED += \
 "../ezdsp_setup.c" \
@@ -74,6 +80,13 @@ delay1.obj: ../delay1.asm $(GEN_OPTS)
 	@echo 'Building file: $<'
 	@echo 'Invoking: Compiler'
 	"C:/Program Files (x86)/Texas Instruments/ccsv4/tools/compiler/C5500 Code Generation Tools 4.3.9/bin/cl55" -v5515 -g --include_path="C:/Program Files (x86)/Texas Instruments/ccsv4/tools/compiler/C5500 Code Generation Tools 4.3.9/include" --diag_warning=225 --ptrdiff_size=16 --memory_model=large --preproc_with_compile --preproc_dependency="delay1.pp" $(GEN_OPTS_QUOTED) $(subst #,$(wildcard $(subst $(SPACE),\$(SPACE),$<)),"#")
+	@echo 'Finished building: $<'
+	@echo ' '
+
+delay2.obj: ../delay2.asm $(GEN_OPTS)
+	@echo 'Building file: $<'
+	@echo 'Invoking: Compiler'
+	"C:/Program Files (x86)/Texas Instruments/ccsv4/tools/compiler/C5500 Code Generation Tools 4.3.9/bin/cl55" -v5515 -g --include_path="C:/Program Files (x86)/Texas Instruments/ccsv4/tools/compiler/C5500 Code Generation Tools 4.3.9/include" --diag_warning=225 --ptrdiff_size=16 --memory_model=large --preproc_with_compile --preproc_dependency="delay2.pp" $(GEN_OPTS_QUOTED) $(subst #,$(wildcard $(subst $(SPACE),\$(SPACE),$<)),"#")
 	@echo 'Finished building: $<'
 	@echo ' '
 
@@ -112,10 +125,10 @@ mainUp1.obj: ../mainUp1.asm $(GEN_OPTS)
 	@echo 'Finished building: $<'
 	@echo ' '
 
-mainUp1v2.obj: ../mainUp1v2.asm $(GEN_OPTS)
+mainUp2.obj: ../mainUp2.asm $(GEN_OPTS)
 	@echo 'Building file: $<'
 	@echo 'Invoking: Compiler'
-	"C:/Program Files (x86)/Texas Instruments/ccsv4/tools/compiler/C5500 Code Generation Tools 4.3.9/bin/cl55" -v5515 -g --include_path="C:/Program Files (x86)/Texas Instruments/ccsv4/tools/compiler/C5500 Code Generation Tools 4.3.9/include" --diag_warning=225 --ptrdiff_size=16 --memory_model=large --preproc_with_compile --preproc_dependency="mainUp1v2.pp" $(GEN_OPTS_QUOTED) $(subst #,$(wildcard $(subst $(SPACE),\$(SPACE),$<)),"#")
+	"C:/Program Files (x86)/Texas Instruments/ccsv4/tools/compiler/C5500 Code Generation Tools 4.3.9/bin/cl55" -v5515 -g --include_path="C:/Program Files (x86)/Texas Instruments/ccsv4/tools/compiler/C5500 Code Generation Tools 4.3.9/include" --diag_warning=225 --ptrdiff_size=16 --memory_model=large --preproc_with_compile --preproc_dependency="mainUp2.pp" $(GEN_OPTS_QUOTED) $(subst #,$(wildcard $(subst $(SPACE),\$(SPACE),$<)),"#")
 	@echo 'Finished building: $<'
 	@echo ' '
 

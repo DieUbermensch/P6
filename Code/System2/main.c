@@ -8,20 +8,30 @@
 #define RESOLUTION 		16
 #define SAMPLINGRATE 	48
 #define startAddr		0x001860
-int16 array[10000];
+int16 array[20000];
 
 
 uint8 Rcv; // 0x002A49
 uint8 Xmit; 
-//1
-extern void downFunc1(int16 dataIn);
-extern int16 delayB1(int16 dataIn);
+//init
 extern void initArray1(void);
+
+//Down1
+extern void downFunc1(int16 dataIn);
+//Down2
+extern void downFunc2(int16 dataIn);
+
+//Buffer1
+extern int16 delayB1(int16 dataIn);
+//Buffer2
+extern int16 delayB2(int16 dataIn);
+
 
 //Up1
 extern int16 upFunc1(int16 dataIn,int16 band);
-//2
-extern void downFunc2(int16 dataIn);
+//Up2
+extern int16 upFunc2(int16 dataIn,int16 band);
+
 extern void initArray2(void);
 
 void initialize(uint8 audioType, uint8 resolution, uint8 fs);
@@ -35,44 +45,62 @@ void playback(void){
     
     
     //1
-    int16 sum1 = 0;
     int16 band1 = 0; 
     int16 down1 = 0;
     int16 up1	= 0;
     int16 delayVar1 = 0; 
+ 
     //2
     int16 band2 = 0; 
     int16 down2 = 0;
+    int16 up2	= 0;
     int16 cnt2  = 0; 
-    
-    //2
-    
+    int16 delayVar2 = 0;
      
     while(1){
     	while((Rcv & I2S0_IR) == 0); 							// Wait for interrupt pending flag
 	    audioIn = I2S0_W0_MSW_R;
-	    //down1
-	    downFunc1(audioIn); 
-		band1 = array[184];
-		down1 = array[185];
-		delayVar1 = delayB1(band1);
+	    
+/////////////////////////////////////* DOWNSAMPLING *//////////////////////////////////////////	    
+	    // BAND 1
+	    downFunc1(audioIn); 			// INPUT
+		band1 = array[184];				// OUTPUT
+		down1 = array[185];				// OUTPUT
+		delayVar1 = delayB1(band1);	
 		
-		//up1
-	    up1 = upFunc1(down1,delayVar1);
+		// BAND 2
+		downFunc2(down1);
+		band2 = array[284];				// OUTPUT
+		down2 = array[285];				// OUTPUT
+		delayVar2 = delayB2(band2);		
+		
+		up2 = upFunc2(down2,delayVar2);
+		up1 = upFunc1(up2,delayVar1);
+		
+		
 		//down2
-		if(cnt2 == 0){
-			downFunc2(down1); 
-			band2 = array[284];
-			down2 = array[285];
-			cnt2=1;
-		}
-		else{
-			cnt2 = 0;
-		}
+//		if(cnt2 == 1){
+//			downFunc2(down1); 
+//			band2 = array[284];
+//			delayVar2 = delayB2(band2);	
+//			down2 = array[285];
+//			cnt2=0;
+//		}
+//		else{
+//			cnt2 = 1;
+//			//up2
+//		 	up2 = upFunc1(down2,delayVar2);
+//		}
 		
+/////////////////////////////////////* UPSAMPLING *//////////////////////////////////////////
+		//Buffer2
+
+		//Buffer1
+
+				//up1
 		
 	    while((Xmit & I2S0_IR) == 0);  						// Wait for interrupt pending flag
-		I2S0_W0_MSW_W = up1;  						// 16 bit left channel transmit audio data
+		I2S0_W0_MSW_W = up2;  						// 16 bit left channel transmit audio data
     }
 }
 
