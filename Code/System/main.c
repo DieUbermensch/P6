@@ -24,59 +24,38 @@ int16 COEFF[23] = {14, 52, -53, -267, -23, 738, 557, -1404,
 int16 Band1[23];
 
 
-
 void playback(void){
     int16 i1 = 0; 
     int16 k = 0;
     int16 D1 = 11;
-    int16 B1 = 0;
+    int16 B1 = 1;
     int16 temp = 0;
-    //asm("MOV #23, BK47				; Set buffer size to filter order");
-	//MOV XAR0,XAR2				; CDP as coefficient pointer
-	//MOV mmap(AR0),BSA23        	; Set up base address for CDP
+    int16 temp2 = 0;
+    int16 temp3 = 0;
+    
     while(1){
     	while((Rcv & I2S0_IR) == 0); 							// Wait for interrupt pending flag
-	    AudioIn[i1] 	= I2S0_W0_MSW_R;  						// 16 bit left channel received audio data
-	    i1++; if(i1 > 22) i1 = 0;
-	    //D1++; if(D1 > 22) D1 = 0;
-	    //temp = FIR(AudioIn, COEFF, i1); 
-	    //Band1[B1] = AudioIn[D1] - FIR1Out[k];
-	        
-	        
+	    //AudioInVar 	= I2S0_W0_MSW_R;  						// 16 bit left channel received audio data
+	    AudioIn[i1] = I2S0_W0_MSW_R; 
+	    //temp = AudioIn[i1]; 
+	    i1++; if(i1 == 23) i1 = 0;
+	    D1++; if(D1 == 23) D1 = 0;
+	    FIR1Out[k] = FIR(AudioIn, COEFF, i1); 
+	    Band1[B1] = AudioIn[D1] - FIR1Out[k];
+	    temp2 = Band1[B1];
+	    temp3 = FIR1Out[k];
+	    temp = Band1[B1] + FIR1Out[k];   
+
 	    while((Xmit & I2S0_IR) == 0);  						// Wait for interrupt pending flag
-		I2S0_W0_MSW_W = AudioIn[i1];  						// 16 bit left channel transmit audio data
-		k++; if(k > 44) k = 0;
-		//B1++; if(B1 > 22) B1 = 0;
+		k++; if(k == 45) k = 0;
+		B1++; if(B1 == 23) B1 = 0;
+		I2S0_W0_MSW_W = temp;  						// 16 bit left channel transmit audio data
+		
+
     }
 
 }
 
-
-void playback2(void){
-    int16 i1=0;
-    int16 k = 0;
-    int16 D1 = 11;
-    int16 B1 = 0;
-    int16 temp = 0;
-    asm(" MOV #0,AC0");
-    while(1){
-    	while((Rcv & I2S0_IR) == 0); 							// Wait for interrupt pending flag
-	    AudioIn[i1] = I2S0_W0_MSW_R;  						// 16 bit left channel received audio data
-	    
-	    
-	    //D1++; if(D1 > 22) D1 = 0;
-	    temp = FIRNew(AudioIn, COEFF, i1); 
-	    //Band1[B1] = AudioIn[D1] - FIR1Out[k];
-	        
-	        
-	    while((Xmit & I2S0_IR) == 0);
-		I2S0_W0_MSW_W = AudioIn[i1];  						// 16 bit left channel transmit audio data
-		k++; if(k > 44) k = 0;
-		i1++; if(i1 > 22) i1 = 0;
-		//B1++; if(B1 > 22) B1 = 0;
-    }
-
-}
 
 
 int16 AudioIn2[5];
@@ -90,7 +69,7 @@ void playback_test(void){
 	    AudioIn2[i_test] 	= I2S0_W0_MSW_R;  						// 16 bit left channel received audio data
 	    i_test++;
 	    if(i_test > 4) i_test = 0;
-	    AudioOut2 = FIR(AudioIn2, COEFF2, i_test);
+	    AudioOut2 = FIRNew(AudioIn2, COEFF2, i_test);
 	        
 	    while((Xmit & I2S0_IR) == 0);  						// Wait for interrupt pending flag
 		I2S0_W0_MSW_W = AudioOut2;  						// 16 bit left channel transmit audio data
@@ -104,7 +83,7 @@ void main(){
 	
 	initialize(STEREO,RESOLUTION,SAMPLINGRATE); // MONO/STEREO, 16/24-bit, sampling rate (48 kHz or 96 kHz)
 	printf("\nPlayback Loop\n");
-	playback2();
+	playback();
 	
 	while(1);
 }

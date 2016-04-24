@@ -1,0 +1,1 @@
+"./mainUp2.obj" "./mainUp1.obj" "./mainDown2.obj" "./mainDown1.obj" "./main.obj" "./ezdsp_setup.obj" "./delay2.obj" "./delay1.obj" -l"rts55x.lib" "../lnkx.cmd" 

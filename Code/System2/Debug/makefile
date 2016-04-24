@@ -9,9 +9,14 @@ SPACE := $(EMPTY) $(EMPTY)
 
 ORDERED_OBJS += \
 $(GEN_CMDS_QUOTED) \
+"./mainUp2.obj" \
+"./mainUp1.obj" \
+"./mainDown2.obj" \
+"./mainDown1.obj" \
 "./main.obj" \
 "./ezdsp_setup.obj" \
-"./FIR.obj" \
+"./delay2.obj" \
+"./delay1.obj" \
 -l"rts55x.lib" \
 "../lnkx.cmd" \
 
@@ -104,21 +109,21 @@ endif
 # Add inputs and outputs from these tool invocations to the build variables 
 
 # All Target
-all: System.out
+all: System2.out
 
 # Tool invocations
-System.out: $(GEN_CMDS) $(CMD_SRCS) $(OBJS)
+System2.out: $(GEN_CMDS) $(CMD_SRCS) $(OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: Linker'
-	"C:/Program Files (x86)/Texas Instruments/ccsv4/tools/compiler/C5500 Code Generation Tools 4.3.9/bin/cl55" -v5515 -g --diag_warning=225 --ptrdiff_size=16 --memory_model=large -z -m"System.map" --warn_sections -i"C:/Program Files (x86)/Texas Instruments/ccsv4/tools/compiler/C5500 Code Generation Tools 4.3.9/lib" -i"C:/Program Files (x86)/Texas Instruments/ccsv4/tools/compiler/C5500 Code Generation Tools 4.3.9/include" --reread_libs --rom_model -o "System.out" $(ORDERED_OBJS)
+	"C:/Program Files (x86)/Texas Instruments/ccsv4/tools/compiler/C5500 Code Generation Tools 4.3.9/bin/cl55" -v5515 -g --diag_warning=225 --ptrdiff_size=16 --memory_model=large -z -m"System2.map" --warn_sections -i"C:/Program Files (x86)/Texas Instruments/ccsv4/tools/compiler/C5500 Code Generation Tools 4.3.9/lib" -i"C:/Program Files (x86)/Texas Instruments/ccsv4/tools/compiler/C5500 Code Generation Tools 4.3.9/include" --reread_libs --rom_model -o "System2.out" $(ORDERED_OBJS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) $(C5500_EXECUTABLE_OUTPUTS__QTD) "System.out"
-	-$(RM) ".\FIR.obj" ".\ezdsp_setup.obj" ".\main.obj" 
-	-$(RM) ".\FIR.pp" 
+	-$(RM) $(C5500_EXECUTABLE_OUTPUTS__QTD) "System2.out"
+	-$(RM) ".\delay1.obj" ".\delay2.obj" ".\ezdsp_setup.obj" ".\main.obj" ".\mainDown1.obj" ".\mainDown2.obj" ".\mainUp1.obj" ".\mainUp2.obj" 
+	-$(RM) ".\delay1.pp" ".\delay2.pp" ".\mainDown1.pp" ".\mainDown2.pp" ".\mainUp1.pp" ".\mainUp2.pp" 
 	-$(RM) ".\ezdsp_setup.pp" ".\main.pp" 
 	-@echo ' '
 
