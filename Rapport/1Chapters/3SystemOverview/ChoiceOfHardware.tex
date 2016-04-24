@@ -40,12 +40,17 @@ The TMDX5515EZDSP from Spectrum Digital is chosen as the development board. The 
 \label{fig:TMDX5515EZDSP_overview}
 \end{figure}
 
-The TMS320C5515 is interfaced to the audio codec through an $\text{I}^2$S bus and $\text{I}^2$C bus. The $\text{I}^2$S bus is used to transmit and receive serial audio data between each unit, while the $\text{I}^2$C is used by the DSP to control the audio codec. According to the datasheet for the TMS320C5515 the input
+The TMS320C5515 is interfaced to the audio codec through an $\text{I}^2$S bus and $\text{I}^2$C bus. The $\text{I}^2$S bus is used to transmit and receive serial audio data between each unit, while the $\text{I}^2$C is used by the DSP to control the audio codec. According to the datasheet for the TLV320AIC3204 the rated ADC and DAC input voltage is 0.5 $\text{V}_\text{RMS}$ or 0.7071 $\text{V}_\text{peak}$. If the input signal exceeds the voltage level, the audio codec will clip the signal. To avoid this, the audio source must not exceed a peak voltage on 0.7071 V.
+
+To setup the audio codec so it complies with the requirements on 24-bit and a sampling rate on 96 kHz, the $\text{I}^2$C bus between the dsp and audio codec is used to write to the control registers. 
 
 
-
-
-
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.98\textwidth]{i2c_aic3204}
+\caption{Setup of the TLV320AIC3204 with $\text{I}^2$C.}
+\label{fig:i2c_aic3204}
+\end{figure}  
 
 
 
