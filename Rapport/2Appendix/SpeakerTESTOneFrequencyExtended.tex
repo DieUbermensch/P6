@@ -111,7 +111,7 @@ And is indexed in folders \scalebox{0.8}{\path{Measure_X}}, where X corresponds 
 
 \section{Analysis}
 
-As in \autoref{app:journal_speaker_test2} an analysis of the data is performed. The trails of this experiment is plotted according to the THD in correlation with the input gain. The behaviour should resemble the same characteristic as on \autoref{fig:com_mic13All}. The Difference between the graphs lies in instead of measuring difference between the fundamental tone and the $\text{2}^{\text{nd}}$ harmonic, is \autoref{fig:THDComparisson} shows the total harmonic distortion according to the RMS value of the input. It should be noted that the RMS value is calculated based on 1 being at 
+As in \autoref{app:journal_speaker_test2} an analysis of the data is performed. The trails of this experiment is plotted according to the THD in correlation with the input gain. The behaviour should resemble the same characteristic as on \autoref{fig:com_mic13All}. The Difference between the graphs lies in instead of measuring difference between the fundamental tone and the $\text{2}^{\text{nd}}$ harmonic, is \autoref{fig:THDComparisson} shows the total harmonic distortion according to the RMS value of the input. It should be noted that the RMS value is calculated based on 1 being at 13 dBu from which is specified in the manual of the DAC.
 
 
 \begin{figure}[H]
@@ -147,6 +147,17 @@ As in \autoref{app:journal_speaker_test2} an analysis of the data is performed. 
 \caption{Raw data}
 \label{fig:THDComparisson}
 \end{figure} 
+
+
+\begin{figure}[H]
+    \centering
+    \tikzsetnextfilename{BandModelCombine}
+    \input{figures/BandModelCombine.tex}
+    \caption{4 Interpolated model describing the worst case THD in each band.}
+    \label{fig:CombinedModel}
+\end{figure}
+
+
 
 
 
