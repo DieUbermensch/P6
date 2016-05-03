@@ -1,0 +1,87 @@
+\begin{circuitikz}
+%% TOP BAND %% 
+\node[] (AudioIN) at (-0.5,0) {Audio in};
+\node[] (AudioIN) at (0,0) {};
+\node[summation] (Summation) at (12.5,0) {};
+\node[summation] (Summation2) at (12.5,-2) {};
+\node[summation] (Summation3) at (12.5,-4) {};
+\node[summation] (Summation4) at (12.5,-6) {};
+\node[] (AudioOUT) at (14.5,0) {Audio out};
+\draw[-] ($(AudioIN)+(1,0)$) -- ($(AudioIN)+(1,-8)$);
+\draw[-] ($(AudioIN)+(1,0)$) -- ($(AudioIN)+(0.5,0)$);
+
+%% Summation %%
+\draw [->] (Summation2) -- node[at end,yshift=2mm,xshift=0mm]{\scalebox{0.5}{+}} (Summation);
+\draw [->] (Summation) -- (AudioOUT);
+\draw [->] (Summation3) -- node[at end,yshift=2mm,xshift=0mm]{\scalebox{0.5}{+}} (Summation2);
+\draw [->] (Summation4) -- node[at end,yshift=2mm,xshift=0mm]{\scalebox{0.5}{+}} (Summation3);
+
+
+%%% GUI %%
+\node[gain] (GUI) at ($(7,1)+(AudioIN)$) {GUI};
+\draw[->,red] ($(GUI)+(0.5,0.25)$) -- ($(GUI)+(1,0.25)$);
+\draw[<-,blue] ($(GUI)+(0.5,-0.25)$) -- ($(GUI)+(1,-0.25)$);
+
+\draw [->,red] ($(4,.25)+(AudioIN)$) -- ($(4.5,.25)+(AudioIN)$); %% add (.5,.25) to the coordinate
+
+%% Second Band
+\draw [->,red] ($(4,-1.75)+(AudioIN)$) -- ($(4.5,-1.75)+(AudioIN)$);
+\draw [<-,blue] ($(7.7,-2.75)+(AudioIN)$) -- ($(8.2,-2.75)+(AudioIN)$);
+%% Third Band
+\draw [->,red] ($(4,-3.75)+(AudioIN)$) -- ($(4.5,-3.75)+(AudioIN)$);
+\draw [<-,blue] ($(7.7,-4.75)+(AudioIN)$) -- ($(8.2,-4.75)+(AudioIN)$);
+%% Fourth Band
+\draw [->,red] ($(4,-5.75)+(AudioIN)$) -- ($(4.5,-5.75)+(AudioIN)$);
+\draw [<-,blue] ($(7.7,-6.75)+(AudioIN)$) -- ($(8.2,-6.75)+(AudioIN)$);
+%% Fifth Band
+\draw [->,red] ($(4,-7.75)+(AudioIN)$) -- ($(4.5,-7.75)+(AudioIN)$);
+\draw [<-,blue] ($(7.7,-8.75)+(AudioIN)$) -- ($(8.2,-8.75)+(AudioIN)$);
+
+
+%% Box EQ %%
+\draw [-,dashed,thick] ($(1.25,1.25)+(AudioIN)$) -| ($(6,-9.75)+(AudioIN)$) -| ($(1.25,1.25)+(AudioIN)$);
+\node [] at ($(3.75,.9)+(AudioIN)$) {\textbf{Equalizer}};
+
+\draw [-,dashed,thick] ($(6.5,-0.75)+(AudioIN)$) -| ($(11.5,-9.75)+(AudioIN)$) -| ($(6.5,-0.75)+(AudioIN)$);
+\node [] at ($(9,-1)+(AudioIN)$) {\textbf{RMS Compressor}};
+
+
+%% Box Compressor %%
+
+
+
+
+
+%% First Band %% 
+\draw ($(1,0)+(AudioIN)$) to[highpass] node[yshift=-5mm,xshift=-10mm, below,midway]{High Pass} ($(4,0)+(AudioIN)$);
+\draw ($(4,0)+(AudioIN)$) to node[yshift=0mm,gain,label=below:Gain 1]{$G_{1,1}$} ($(6,0)+(AudioIN)$);
+\draw [->]($(6,0)+(AudioIN)$) -- node[at end,yshift=0mm,xshift=2mm]{\scalebox{0.5}{+}} (Summation);
+
+%% Second Band %%
+\draw ($(1,-2)+(AudioIN)$) to[bandpass] node[yshift=-5mm,xshift=-10mm, below,midway]{Band 1} ($(4,-2)+(AudioIN)$);
+\draw ($(4,-2)+(AudioIN)$) to node[yshift=0mm,gain,label=below:Gain 2]{$G_2$} ($(6,-2)+(AudioIN)$);
+%%% Second band - Compressor%%%
+\draw [->]($(6,-2)+(AudioIN)$) to node[yshift=0mm,gain,near end]{$G_{2,1}$} ($(-.5,0)+(Summation2)$) -- node[at end,yshift=0mm,xshift=2mm]{\scalebox{0.5}{+}} (Summation2);
+\draw ($(6,-2)+(AudioIN)$) -| ($(7,-3)+(AudioIN)$) to node[yshift=0mm,gain]{RMS} ($(10.5,-3)+(AudioIN)$) -| ($(10.5,-2.52)+(AudioIN)$);
+
+%% Third Band %%
+\draw ($(1,-4)+(AudioIN)$) to[bandpass] node[yshift=-5mm,xshift=-10mm, below,midway]{Band 2} ($(4,-4)+(AudioIN)$);
+\draw ($(4,-4)+(AudioIN)$) to node[yshift=0mm,gain,label=below:Gain 3]{$G_2$} ($(6,-4)+(AudioIN)$);
+%%% Third band - Compressor%%%
+\draw [->]($(6,-4)+(AudioIN)$) to node[yshift=0mm,gain,near end]{$G_{3,1}$} ($(-.5,0)+(Summation3)$) -- node[at end,yshift=0mm,xshift=2mm]{\scalebox{0.5}{+}} (Summation3);
+\draw ($(6,-4)+(AudioIN)$) -| ($(7,-5)+(AudioIN)$) to node[yshift=0mm,gain]{RMS} ($(10.5,-5)+(AudioIN)$) -| ($(10.5,-4.52)+(AudioIN)$);
+
+%% Fourth Band %%
+\draw ($(1,-6)+(AudioIN)$) to[bandpass] node[yshift=-5mm,xshift=-10mm, below,midway]{Band 3} ($(4,-6)+(AudioIN)$);
+\draw ($(4,-6)+(AudioIN)$) to node[yshift=0mm,gain,label=below:Gain 4]{$G_2$} ($(6,-6)+(AudioIN)$);
+%%% Fourth band - Compressor%%%
+\draw [->]($(6,-6)+(AudioIN)$) to node[yshift=0mm,gain,near end]{$G_{4,1}$} ($(-.5,0)+(Summation4)$) -- node[at end,yshift=0mm,xshift=2mm]{\scalebox{0.5}{+}} (Summation4);
+\draw ($(6,-6)+(AudioIN)$) -| ($(7,-7)+(AudioIN)$) to node[yshift=0mm,gain]{RMS} ($(10.5,-7)+(AudioIN)$) -| ($(10.5,-6.52)+(AudioIN)$);
+
+%% Fifth band %% 
+\draw ($(1,-8)+(AudioIN)$) to[bandpass] node[yshift=-5mm,xshift=-10mm, below,midway]{Band 4} ($(4,-8)+(AudioIN)$);
+\draw ($(4,-8)+(AudioIN)$) to node[yshift=0mm,gain,label=below:Gain 5]{$G_5$} ($(6,-8)+(AudioIN)$);
+%%% Fourth band - Compressor%%%
+\draw [->]($(6,-8)+(AudioIN)$) to node[yshift=0mm,gain,near end]{$G_{5,1}$} ($(-.5,-2)+(Summation4)$) --($(0,-2)+(Summation4)$) -- node[at end,yshift=2mm,xshift=0mm]{\scalebox{0.5}{+}} (Summation4);
+\draw ($(6,-8)+(AudioIN)$) -| ($(7,-9)+(AudioIN)$) to node[yshift=0mm,gain]{RMS} ($(10.5,-9)+(AudioIN)$) -| ($(10.5,-8.52)+(AudioIN)$);
+\end{circuitikz}
