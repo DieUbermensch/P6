@@ -19,14 +19,27 @@ The reason for different diameters in drivers is because of the wavelength the s
 When the speaker plays sound it does so by moving the diaphragm in the woofer. This difference in air pressure is then perceived as sound. The sound have a specific wavelength according to the frequency. This means that trying to move the air with a speaker cone is more efficient in a specific frequency area according to the diameter. %If a speaker with a small diameter tries to generate a large wavelength the sound would bend and escape around the edges. 
 Since a large wavelength requires more air to be pushed. Hence we need different sizes of speaker cones which is sized according to what area they are going to play.
 
-Next, the woofer needs to deliver a sufficient \gls{SPL}. This creates the need for a enough excursion of the diaphragm. Without dwelling to much on the speaker construction, the diaphragm is suspended in free air hold in place by the surround, see \autoref{fig:regularspeaker}, and the spyder. The spyder is a diaphragm holding the voice coil more tightly in place. When the diaphragm moves it will have physical limits from the mechanical construction. At most, the diaphragm will move regular and linear. When the diaphragm is pushed to the boundaries, the limits of the mechanical construction will intervene and create non-linearities and distortion. This is discussed further in \autoref{subsec:impulses}.
+Next, the woofer needs to deliver a sufficient \gls{SPL}. This creates the need for a enough excursion of the diaphragm. Without dwelling to much on the speaker construction, the diaphragm is suspended in free air hold in place by the surround, see \autoref{fig:regularspeaker}, and the spyder. The spyder is a diaphragm holding the voice coil more tightly in place. 
 
-\begin{figure}
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.75\textwidth]{Speaker-cross-section}
 \caption{Cross section of a woofer}
 \label{fig:louderspeakerCrossSection}
 \end{figure}
+
+When the diaphragm moves it will have physical limits from the mechanical construction. At most, the diaphragm will move regular and linear. When the diaphragm is pushed to the boundaries, the limits of the mechanical construction will intervene and create non-linearities and distortion as seen in \autoref{fig:excursion_graph}. This is discussed further in \autoref{subsec:impulses}.
+
+
+\begin{figure}[H]
+\centering
+\tikzsetnextfilename{excursion_graph}
+\input{figures/excursion_graph.tex}
+\caption{Excursion}
+\label{fig:excursion_graph}
+\end{figure}
+
+
 
 
 
