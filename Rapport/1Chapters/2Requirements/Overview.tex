@@ -1,5 +1,5 @@
 \chapter{Overview} \label{ch:overview}
-This chapter will describe an overview of the system before the needed requirements of the system is set up. A graphical overview of the system can be seen on \autoref{fig:SystemOverview} which shows a feedback system which will regulate the volume of the lower frequency based on the \textbf{TBD} model, seen on \textbf{figure TBD}, comparing the second and third harmonic relative to keynote. Besides the feed forward system a user controlled equalizer should also be part of the system to give the user more flexibility. The following chapter describes the individual blocks in more detail.          
+This chapter will describe an overview of the system before the needed requirements of the system is set up. Recall overview of system the from \ref{sec:feedback}. This block diagram is know futher extended to the block diagram seen in \autoref{fig:SystemOverview}.
 
 \begin{figure}[H]
 \centering
@@ -9,6 +9,12 @@ This chapter will describe an overview of the system before the needed requireme
 \caption{Block overview of the entire system. Black boxes are not static non changeable variable. Grey boxes are also static but has to be taken into account.}
 \label{fig:SystemOverview}
 \end{figure}
+
+The concept is still a feedforward system that analyses the audio before output.
+
+ which shows a feedforward system which will equalize of the audio based on the \textbf{TBD} model, seen on \textbf{figure TBD}, comparing the second and third harmonic relative to keynote. Besides the feed forward system a user controlled equalizer should also be part of the system to give the user more flexibility. The following chapter describes the individual blocks in more detail.          
+
+
 A more detailed description of every block will now follow in the preceding section.
 
 \textbf{Audio source} \\
@@ -46,7 +52,7 @@ When the spectrum analysis shows fluctuations above a certain threshold it shoul
 
 
 
-\textbf{Auto Equalizer} \\
+\textbf{Equalizer} \\
 This equalizer will receive filter constants released/updated by the Decision and Model block. If there is no need of adjustment it will simply adjust by a gain of 1 in the entire spectrum. The equalizer will be consisting of a parametric equalizer which will then adjust according to the information given by the decision block.
 
 \textbf{Limiter} \\

@@ -5,7 +5,7 @@
 %% DSP %%
 \node [Twolineblock, fill=white] (Equalizer) at ($(AudioSource)+(3.5,0)$) {User Equalizer};
 
-\node [Twolineblock, fill=white] (Decisionblock) at ($(Equalizer)+(0,-2)$) {Peak Detection};
+\node [Twolineblock, fill=white] (Decisionblock) at ($(Equalizer)+(0,-2)$) {RMS Detection};
 
 \node [block, fill=white] (Delay) at ($(Equalizer)+(3.25,0)$) {Delay};
 
@@ -15,15 +15,16 @@
 
 \node [Twolineblock, fill=white] (Spectrum) at ($(AmplitudeDetect)+(3.25,0)$) {Decision};
 
-\node [Twolineblock, fill=white] (NewEQ) at ($(Delay)+(3.25,0)$) {Auto Equalizer};
+\node [Twolineblock, fill=white] (NewEQ) at ($(Spectrum)+(3.25,0)$) {Equalizer};
 
+\node [circle, fill=white] (Sum) at ($(Equalizer)+(0,-2)$) {+};
 
 %\node [Twolineblock, fill=white] (SpectralAnalysis) at ($(Decisionblock)+(3.5,0)$) {Spectral analysis};
 
 
 %% External %%
 \node [block, fill=white] (UserInterface) at ($(Equalizer)+(-2,2)$) {User interface};
-\node [Twolineblock, fill=white] (EffectController) at ($(Equalizer)+(2,2)$) {Effect controller};
+%\node [Twolineblock, fill=white] (EffectController) at ($(Equalizer)+(2,2)$) {Effect controller};
 
 %% Speaker Enclosure %%
 \node [Twolineblock, fill=black!80,text=white] (Amplifier) at ($(Limiter)+(4,0)$) {Amplification stage};
@@ -35,8 +36,8 @@
 \node (User) at ($(-2.5,0)+(UserInterface)$) {\textbf{User}};
 \draw[->] (User) -- (UserInterface);
 
-\node (Developer) at ($(3.5,0)+(EffectController)$) {\textbf{Developer}};
-\draw[<-] (EffectController) -- (Developer);
+%\node (Developer) at ($(3.5,0)+(EffectController)$) {\textbf{Developer}};
+%\draw[<-] (EffectController) -- (Developer);
 
 %% Store Blokke %%
 \begin{pgfonlayer}{bg}
@@ -50,14 +51,14 @@
 %% Forbindelse %%
 \draw[->] (AudioSource) -- (Equalizer);
 \draw[->] (Equalizer) -- (Delay);
-\draw[->] (Delay) -- (NewEQ);
+\draw[->] (Delay) -- (Limiter);
 \draw[->] (NewEQ) -- (Limiter);
 
 \draw[->] (Limiter) -- (Amplifier);
 \draw[->] (Amplifier) -- (Driver);
 
 \draw[->] (UserInterface) -| ($(Equalizer)+(-.25,.6)$);
-\draw[->] (EffectController) -| ($(Equalizer)+(.25,.6)$);
+%\draw[->] (EffectController) -| ($(Equalizer)+(.25,.6)$);
 
 %\draw[->] ($(SensorDriver)+(-1.375,-0.3)$) -- ($(SpectralAnalysis)+(1.375,-0.3)$);
 
