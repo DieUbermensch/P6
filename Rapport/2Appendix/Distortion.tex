@@ -74,6 +74,21 @@ T\!H\!D = \sqrt{\sum_{n=2}^{\infty}H\!D_n^2} = \sqrt{\sum_{n=2}^{\infty}\frac{A_
 From the equation it is seen that THD is the ratio between the amplitude of fundamental frequency and the amplitude of all its even and uneven harmonics. Therefore a greater THD means that the ratio between the amplitude of the fundamental frequency and amplitude of the harmonics are smaller.
 
 
+\subsubsection*{Sensitivity and Sound Pressure Level}
+
+A speaker is supplied from the manufacture with a sensitivity rating. This tells how efficient a loudspeaker is. The sensitivity rating is rated in dB and tells what \gls{SPL} a speaker outputs when supplied with 1 watt using 2.86 volt and measured at 1 meter. This is done assuming an infinite baffle and no reflection from a room. The sensitivity is defined by \autoref{eq:speaker_sensitivty}.
+\begin{align}\label{eq:speaker_sensitivty}
+\text{dB}_\text{sensitivity}=112\text {dB} +10 \cdot \log_{10}(\text{efficiency})
+\end{align}  
+The 112 dB in \autoref{eq:speaker_sensitivty} is added to the sensitivity since this 1 watt compared to the $10^{-12}$ watt which is the threshold for audible sound. At 1 watt it will yield 120 dB. The reason for 8 dB difference is due to the assumption of infinite baffle in a reflection free room. When the sound is dispersed at a radius of $2\pi=r^2$, where r is 1 meter it creates a reduction in \gls{SPL} by 8 dB.
+
+The sensitivity of a loudspeaker can be used to calculate the sound pressure level by the amount of dissipated power by following equation:
+
+\begin{align}\label{eq:sound_pressure_level}
+L_\text{p}(P)=\text{dB}_\text{sensitivity} + 10\cdot \log_{10} \left(\frac{P}{1 \text{W}}\right)
+\end{align} 
+
+By using \autoref{eq:sound_pressure_level} it is possible to calculate either the sound pressure level or the power. %In later test the equation might prove useful to calculate the amount of dissipated power in an amplifier if the sound pressure level is measured from a microphone.
 
 
 
