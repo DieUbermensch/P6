@@ -1,4 +1,4 @@
-\section{Amplifier topology}
+\section{Amplifier}
 This section will briefly describe the amplifier in a active loudspeaker and analyse how distortion is created in the amplifier.
 
 The amplifier is the module which amplifies the input signal. There are several different classes of amplifiers for example class A, AB and D, these classes have different characteristics which gives them different advantages and disadvantages. Two main parameters for the performance of an amplifier are distortion and efficiency. There are several sources for the distortion in a amplifier, such as non-linearity in the active components, crossover distortion and audio clipping. Since no active components are ideal, all active components will create some distortion whenever a signal is passed through the components. An option for better performance is to increase the open-loop amplification of the amplifier as this will give more signal to feedback over thus decreasing the distortion from the components. Since the extend of this project will not deal with circuit design of an amplifier, crossover and non-linearity in component will not be further investigated.
@@ -26,8 +26,7 @@ Audio clipping is a wave distortion that occurs when the output signal has a gre
 
 Hard clipping lowers the sound quality if the clipping is not intended, and should therefore be avoided. The wave distortion created by the sharp edge results in a square-wave-like signal. This creates additional uneven harmonics to the signal i.e. 3rd, 5th, 7th and 9th, which are unpleasant to listen to as explained in \autoref{app:distortion}. Since the clipping creates the square-wave-like signal, the generation of the additional uneven harmonics can be described in the Fourier series of a square-wave. The Fourier series of a square-wave is given as:
 \begin{align}\label{eq:fourier_series_square}
-f(t) &= \frac{4}{\pi} \sum_{n=1}^{\infty} \frac{\sin (\omega_0 t \cdot (2n-1))}{(2n-1)} \\
-	 &= \frac{4}{\pi} (\sin(\omega_0 t) + \frac{1}{3}\sin(3 \omega_0 t) + \frac{1}{5}\sin(5 \omega_0 t) + \, ... \,)
+f(t) &= \frac{4}{\pi} (\sin(\omega_0 t) + \frac{1}{3}\sin(3 \omega_0 t) + \frac{1}{5}\sin(5 \omega_0 t) + \, ... \,)
 \end{align}
 \begin{where}
 \va{$\omega_0$}{is the fundamental frequency of the square-wave.}{rad/s}\\
@@ -56,6 +55,7 @@ As seen in \autoref{eq:fourier_series_square}, the function of a square-wave sig
 %The sampling frequency is 48 kHz and a Kaiser-window function with a $\beta$-value of 38 is applied to both signal.
 The amplitude difference between the fundamental frequency on 1 kHz and the 3rd harmonic frequency is 16 dB, which is approximately a factor of 6.3 in linear scale. If the signal is clipped even more, the amplitude difference between the fundamental frequency and uneven harmonics decreases thus making it even more unpleasant. Therefore audio clipping should be avoided or minimized.
 
+Similar distortion characteristic is achieved by using a hard clipping limiter in a DSP. Therefore a hard clipping peak limiter is not ideal for protecting the loudspeaker and still keep the amount of distortion at a low level.
 
 
 

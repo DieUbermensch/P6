@@ -2,11 +2,11 @@
 \input{1Chapters/1Preanalysis/Introduction.tex}
 
 %%%%%%%%%%%%%%%%%%%%%%%% Problem analyse %%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{The Active Loudspeaker and its Limitations}
+\chapter{Active Loudspeakers and their Limitations}
 %Before developing a system which can improve the overall performance of an active loudspeaker a brief analysis on how an active loudspeaker functions, is needed. 
-The main topic of this chapter is to analyse an active loudspeaker and examine any issues concerning distortion in an active loudspeaker, since it is commonly known that distortion adds undesirable artefacts to the sound. %The purpose of this chapter is therefore to examine if it is possible to increase the maximum performance of an active loudspeaker without creating more distortion. 
+The main topic of this chapter is to briefly explain the design of a simplified active loudspeaker and afterwards examine where the issues, concerning distortion in an active loudspeaker, arise. As distortion adds artefacts to the audio, distortion is often undesirable in an active loudspeaker. 
 
-The initial starting point for the analysis is the block diagram of an active loudspeaker as seen in \autoref{fig:speaker_block}. It is seen that the the active loudspeaker is a passive loudspeaker with an incorporated amplifier.
+A simplified version of an active loudspeaker is seen in \autoref{fig:speaker_block}. The active loudspeaker typically consist of speakers (tweeter and woofer), an amplifier and a processing system. While the block "processing system" is not required in an active loudspeaker, it is common to find signal processors in new active loudspeakers. Because active loudspeakers have their own power supply, they can easily provide the necessary power to peripheral electronics such as a signal processor. The application of the signal processors varies from a equalizer to a wireless receiver for audio streaming.
 
 \begin{figure}[H]
 \centering
@@ -16,14 +16,15 @@ The initial starting point for the analysis is the block diagram of an active lo
 \caption{Block diagram of an active speaker.}
 \label{fig:speaker_block}
 \end{figure}
-The active loudspeaker has more flexibility than a passive loudspeaker because an active loudspeaker is powered by its own power supply. The power supply adds the option for an built-in amplifier but also peripheral electronics in "Processing system" that can be incorporated for example a wireless receiver for audio streaming, which reduces the amount of wiring to only a 230 V connector. An example of the backside of an active speaker is seen on \autoref{fig:dali_zensor_ax}, which shows the Zensor 1 AX's from DALI.
+
+An example of an active loudspeaker is the DALI Zensor 5 AX seen in \autoref{fig:dali_zensor_ax}. Besides the speakers and amplifier, the DALI Zensor 5 AX also includes a signal processor to handle wireless connectivity.
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.6\textwidth]{figures/dali_zensor_1_ax.jpg}
 \caption{DALI Zensor 1 AX.}
 \label{fig:dali_zensor_ax}
 \end{figure}
-The DALI Zensor 1 enables you to connect your audio source via cable or via Bluetooth and change volume and source directly on the speaker itself which makes it very flexible in its use. With this very general description a more detailed analysis of how an active loudspeaker is build and since the distortion is mainly created in the amplifier and woofer the analysis will be focused here on.
+The DALI Zensor 5 AX allows connection of the audio source via cable or via Bluetooth which enables the user to control the loudspeaker wirelessly, which makes it flexible to use. In the following sections, each block in \autoref{fig:speaker_block} namely "Processing system", "Amplifier", and "Speakers" will be analysed. The analysis will focus on how distortion can arise in the respective block.
 
 \input{1Chapters/1Preanalysis/signal_processor.tex}
 
@@ -33,7 +34,7 @@ The DALI Zensor 1 enables you to connect your audio source via cable or via Blue
 
 \input{1Chapters/1Preanalysis/PartConclusionAmpSpeaker.tex}
 
-\input{1Chapters/1Preanalysis/Loudspeaker_test.tex}
+%\input{1Chapters/1Preanalysis/Loudspeaker_test.tex}
 
 %\input{1Chapters/1Preanalysis/frequency_response.tex}
 
@@ -46,7 +47,7 @@ The analysis so far has mainly concerned how the performance of a loudspeaker is
 
 \begin{center}
 \label{ProblemStatement}
-\textit{How can a real-time signal processing system in an active speaker limit the amount of distortion and prevent the coil from hitting the back plate of the woofer?"}
+\textit{How can a signal processing system in an active speaker prevent the coil from hitting the back plate of the woofer and reduce distortion compared to peak limitation?"}
 \end{center}
 Besides the problem stated above, DALI desires to have incorporated a user controlled equalizer for the commercial user so it will be able to function more optimal in different room sizes. Further more it should be fully customizable for ongoing adjustments during the development period.\todo{Tilføj kilde til mail fra DALI}
 
