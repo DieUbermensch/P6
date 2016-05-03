@@ -32,7 +32,7 @@ The DALI Zensor 5 AX allows connection of the audio source via cable or via Blue
 
 \input{1Chapters/1Preanalysis/Speaker.tex}
 
-\input{1Chapters/1Preanalysis/PartConclusionAmpSpeaker.tex}
+%\input{1Chapters/1Preanalysis/PartConclusionAmpSpeaker.tex}
 
 %\input{1Chapters/1Preanalysis/Loudspeaker_test.tex}
 
@@ -43,7 +43,16 @@ The DALI Zensor 5 AX allows connection of the audio source via cable or via Blue
 %\input{1Chapters/1Preanalysis/hit_detection.tex}
 
 \section{Problem Statement} \label{sec:problem_statement}
-The analysis so far has mainly concerned how the performance of a loudspeaker is influenced when increasing the volume of the audio signal. Based on previous analysis a processing system will be developed in the pre-amplifier stage. Following problem statement is thus formulated as:
+
+The analysis so far has mainly concerned distortion and non-linearities in an active loudspeaker. It can be concluded that most of the non-linearities are created at high sound pressure levels. The non-linearities may be created in following situations:
+\begin{itemize}
+\item Clipping from either hard peak-limiting or amplifier.
+\item Over excursion (physical clipping).
+\item Coil hitting the back plate.
+\end{itemize}
+
+The system to be designed should therefore reduce the amount of distortion, and protect the active loudspeaker with main focus on each of parameters on the list. Following problem statement is thus formulated:
+
 
 \begin{center}
 \label{ProblemStatement}

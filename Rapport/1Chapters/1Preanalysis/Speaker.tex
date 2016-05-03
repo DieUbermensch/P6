@@ -14,57 +14,38 @@ The reason for different diameters in drivers is because of the wavelength the s
 \todo[inline]{Måske noget forklaring om det kun er nødvendigt at kigge på wooferen}
 
 
-\subsubsection*{Diaphragm excursion}
+\subsection{Diaphragm excursion}
 
 When the speaker plays sound it does so by moving the diaphragm in the woofer. This difference in air pressure is then perceived as sound. The sound have a specific wavelength according to the frequency. This means that trying to move the air with a speaker cone is more efficient in a specific frequency area according to the diameter. %If a speaker with a small diameter tries to generate a large wavelength the sound would bend and escape around the edges. 
 Since a large wavelength requires more air to be pushed. Hence we need different sizes of speaker cones which is sized according to what area they are going to play.
 
-Next, the woofer needs to deliver a sufficient \gls{SPL}. This creates the need for a enough excursion of the diaphragm. Without dwelling to much on the speaker construction, the diaphragm is suspended in free air hold in place by the surround, see \autoref{fig:regularspeaker}, and the spyder. The spyder is a diaphragm holding the voice coil more tightly in place. When the diaphragm moves it will have physical limits from the mechanical construction. At most, the diaphragm will move regular and linear. When the diaphragm is pushed to the boundaries, the limits of the mechanical construction will intervene and create non-linearities and distortion. This is discussed further in \autoref{subsec:impulses}.
+Next, the woofer needs to deliver a sufficient \gls{SPL}. This creates the need for a enough excursion of the diaphragm. Without dwelling to much on the speaker construction, the diaphragm is suspended in free air hold in place by the surround, see \autoref{fig:regularspeaker}, and the spyder. The spyder is a diaphragm holding the voice coil more tightly in place. 
 
-\begin{figure}
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.75\textwidth]{Speaker-cross-section}
 \caption{Cross section of a woofer}
 \label{fig:louderspeakerCrossSection}
 \end{figure}
 
+When the diaphragm moves it will have physical limits from the mechanical construction. At most, the diaphragm will move regular and linear. When the diaphragm is pushed to the boundaries, the limits of the mechanical construction will intervene and create non-linearities and distortion as seen in \autoref{fig:excursion_graph}. This is discussed further in \autoref{subsec:impulses}.
 
-
-\subsection{Distortion from vibration and impulses}\label{subsec:impulses}
-
-A common problem when designing loudspeakers are the vibrations from the enclosure. If the vibrations are strong, they will become audible and distort the overall sound. The sound radiation from the enclosure will become greater when the \gls{SPL} from the speaker increase. This problem is solved with different techniques but yield more or less the same outcome, which is stiffening of the enclosure. Some of the techniques for removing vibrations from the enclosure could be:
-\begin{itemize}
-\item Mechanical decoupling of the drivers from the enclosure.
-\item Denser or heavier construction material with a high natural frequency, making it harder for the enclosure to start vibrating.
-\item Dampening material or complex structural design inside the cabinet to disperse the sound.
-\end{itemize}
-\todo[inline]{Skal nok lige skaffe nogle kilder på de udtagelser}
-
-Another possibility is to use the vibration measurement as an indicator to tell the current performance of the loudspeaker. Since the loudspeaker will vibrate more at higher volumes. %a system can developed upon the amount of vibrations thus decreasing the volume when the loudspeaker vibrates too much for instance.
-
-
-Looking further into the woofer itself, it shows in \autoref{fig:SpeakerModelStress} that parts in the woofer also creates unwanted vibrations. The purpose of the woofer is to reproduce the electrical signal as an acoustical signal. This is done by using a diaphragm which is suspended in a very light and easy to move material. An Induction in the coil is created in a permanent magnet creating a a electro magnetic force resulting in the diaphragm moving. The goal will always be to loose as little as possible energy, giving the most perfect output. The woofer simply needs to be as powerful, light, stiff and efficient as possible.
 
 \begin{figure}[H]
 \centering
-\begin{subfigure}[t]{0.47\textwidth}
-\includegraphics[width=\linewidth]{SpeakerGOOD}
-	\caption{Regular speaker driver showing surround, diaphragm and the magnet.}
-	\label{fig:regularspeaker}
-\end{subfigure}
-\hspace{6mm} 
-\begin{subfigure}[t]{0.47\textwidth}
-\includegraphics[width=\linewidth]{SpeakerBAD}
-	\caption{Regular speaker driver with red markings showing stress areas}
-	\label{fig:badspeaker}
-\end{subfigure}
-\caption{A Speaker driver, where \ref{fig:badspeaker} shows the stress points outlined with red.}
-\label{fig:SpeakerModelStress}
+\tikzsetnextfilename{excursion_graph}
+\input{figures/excursion_graph.tex}
+\caption{Excursion}
+\label{fig:excursion_graph}
 \end{figure}
-%When this signal has a large amplitude, read overload, the diaphragm reaches physical capacity. 
-In \autoref{fig:badspeaker} it shows that when a diaphragm is pushed to its maximum capacity the surround will affect the diaphragm causing unwanted distortion. This will be one of the major problems if the diaphragm is not sufficiently stiff to withstand the high \gls{SPL} and not twist during playback. 
 
-Another notice is the coil hitting the back plate. This would again result in distortion since the coil is now hitting the absolute furthest position possible. This situation can however be resolved by moving the back plate further back. This would make the surround determine how far the diaphragm can be pushed.
+
+
+
+
+\subsection{Back plate hit}\label{subsec:impulses}
+
+Another issue is the coil hitting the back plate. This would again result in distortion and damage on the coil since the it is hitting the absolute furthest position possible. This situation can however be resolved by moving the back plate further back. This would make the surround determine how far the diaphragm can be pushed.
 
 % \begin{figure}[H]
 % \centering
