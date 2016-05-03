@@ -1,57 +1,95 @@
 \chapter{Requirements} \label{ch:requirements}
 This chapter will post the requirements for the system described in \autoref{ch:overview}.  
 
-\begin{itemize}
-\item Functionality
-\begin{enumerate}
-\item The coil must not hit the backplate when the system is activated.
-\end{enumerate}
-\end{itemize}
+As described in \autoref{sec:problem_statement} the coil must not hit the backplate because this damages the loudspeaker significantly. To be able to secure this the system must run in real time which is explained in (\textbf{real time vs non real time SECTION}). This leads to the following requirements.
 
 \begin{itemize}
 \item Overall system
 \begin{enumerate}
-\item The system must be a real time system. 
-\item The system must not have SNR be lower than 120 dB.
+\item [\textlabel{1}{coil}] The coil must not hit the backplate.\\
+\item [\textlabel{2}{realtime}] The system must run in real time.
 \end{enumerate}
 \end{itemize}
+
+The processor has been chosen to be a DSP as explained in (\textbf{Processor Platform SECTION}). This section also explains all the requirement for the DSP which leads to the following requirements. 
 
 \begin{itemize}
-\item DSP platform
+\item Hardware platform
 \begin{enumerate}
-\item The sample rate of the ADC/DAC must be 96 kHz.
-\item A bit resolution of 24 bit must supported by the ADC/DAC and the DSP.
-\item The DSP must have at least two \gls{I2S} ports for interfacing with ADC/DAC.
-\item The DSP must have at least 1024 instructions pr. sample to support both the system and a limiter build by DALI. 
+\item [\textlabel{3}{samplerate44}] The sample rate of the audio codec must be at least 44.1 kHz.\\
+\item [\textlabel{4}{samplerate96}] The sample rate of the audio codec must be compatible with 96 kHz.\\
+\item [\textlabel{5}{resolution}]  A bit resolution of 24 bit must supported by the audio codec and the DSP.\\
+\item [\textlabel{6}{I2S}] The DSP must have at least two I2S ports for interfacing with audio codec.\\
+\item [\textlabel{7}{MIPS}] The DSP must have at least 100 MIPS available.
 \end{enumerate}
 \end{itemize}
-\todo[inline]{Tjek op på om kravet med 1024 er realistisk/"do-able"}
-\todo[inline]{Tjek op på om kravet med 24-bit er realistisk/"do-able"}
+
+The RMS compressor must have four bands which comply with the class 2 of IEC 6964 standard (2001) as descibed in \autoref{sec:PreAnalysisCon}. These bands must be placed below 500 Hz which was desired by DALI which can me seen in (\textbf{MAIL correnspondance}) and is explained in (\textbf{Multiband vs single band section}). The system must also distort less than soft clipping which is fomulated in the problem statement seen in \autoref{sec:problem_statement} and argued for in \autoref{sec:PreAnalysisCon}.
 
 \begin{itemize}
-\item Regulating equalizer
+\item RMS compressor
 \begin{enumerate}
-\item The equalizer must be able to regulate between 11 Hz - 100 Hz with a tolerance of $\pm$ 10 Hz. 
-\item The maximum gain of the user controlled equalizer must be minimum $\pm$ 12 dB SPL with a tolerance of $\pm$ 1 dB SPL.
-\item The resolution of the gain must be 1 dB with a tolerance of 0.1 dB.
-\item The regulating part should be designed as a shelf filter.
+\item [\textlabel{8}{bands}] The compressor must have 4 bands.\\
+\item [\textlabel{9}{standardband}] The bands of the compressor must comply with the class 2 of IEC 6964 standard (2001).\\
+\item [\textlabel{10}{500below}] The compressor must apply to frequencies below 500 Hz.\\
+\item [\textlabel{11}{softclipping}] The system must distort less than soft clipping.
 \end{enumerate}
 \end{itemize}
 
+The requirements of this chapter will be the basis for the final system.
+\todo[inline]{REFERENCER I CHAPTER}
 
-\begin{itemize}
-\item User controlled equalizer
-\begin{enumerate}
-\item There must be \textbf{TBD} n bands in which the equalizer can be controlled with. 
-\item The bands of the equalizer must function between 50 Hz - 15000 Hz with a cut off tolerance of \textbf{TBD}. 
-\item The maximum gain of the user controlled equalizer must be minimum $\pm$ 6 dB with a tolerance of $\pm$ 1 dB.
-\item The resolution of the gain must be 1 dB with a tolerance of 0.1 dB.
-\end{enumerate}
-\end{itemize}
+% \begin{itemize}
+% \item Functionality
+% \begin{enumerate}
+% \item The coil must not hit the backplate when the system is activated.
+% \end{enumerate}
+% \end{itemize}
 
-\begin{itemize}
-\item Interface
-\begin{enumerate}
-\item 
-\end{enumerate}
-\end{itemize}
+% \begin{itemize}
+% \item Overall system
+% \begin{enumerate}
+% \item The system must be a real time system. 
+% \item The system must not have SNR be lower than 120 dB.
+% \end{enumerate}
+% \end{itemize}
+
+% \begin{itemize}
+% \item DSP platform
+% \begin{enumerate}
+% \item The sample rate of the ADC/DAC must be 96 kHz.
+% \item A bit resolution of 24 bit must supported by the ADC/DAC and the DSP.
+% \item The DSP must have at least two \gls{I2S} ports for interfacing with ADC/DAC.
+% \item The DSP must have at least 1024 instructions pr. sample to support both the system and a limiter build by DALI. 
+% \end{enumerate}
+% \end{itemize}
+% \todo[inline]{Tjek op på om kravet med 1024 er realistisk/"do-able"}
+% \todo[inline]{Tjek op på om kravet med 24-bit er realistisk/"do-able"}
+
+% \begin{itemize}
+% \item Regulating equalizer
+% \begin{enumerate}
+% \item The equalizer must be able to regulate between 11 Hz - 100 Hz with a tolerance of $\pm$ 10 Hz. 
+% \item The maximum gain of the user controlled equalizer must be minimum $\pm$ 12 dB SPL with a tolerance of $\pm$ 1 dB SPL.
+% \item The resolution of the gain must be 1 dB with a tolerance of 0.1 dB.
+% \item The regulating part should be designed as a shelf filter.
+% \end{enumerate}
+% \end{itemize}
+
+
+% \begin{itemize}
+% \item User controlled equalizer
+% \begin{enumerate}
+% \item There must be \textbf{TBD} n bands in which the equalizer can be controlled with. 
+% \item The bands of the equalizer must function between 50 Hz - 15000 Hz with a cut off tolerance of \textbf{TBD}. 
+% \item The maximum gain of the user controlled equalizer must be minimum $\pm$ 6 dB with a tolerance of $\pm$ 1 dB.
+% \item The resolution of the gain must be 1 dB with a tolerance of 0.1 dB.
+% \end{enumerate}
+% \end{itemize}
+
+% \begin{itemize}
+% \item Interface
+% \begin{enumerate}
+% \item 
+% \end{enumerate}
+% \end{itemize}

@@ -382,16 +382,16 @@
 \makeatother
 
 
-
-
-
-
 %%PGF TABLES%%
 \usepackage{booktabs}
 \newcommand{\ra}[1]{\renewcommand{\arraystretch}{#1}}
 \usepackage{array}
 \usepackage{ragged2e}
 
+\newcommand*{\textlabel}[2]{				% Gør \textlabel mulig
+  \edef\@currentlabel{#1}					% Set target label
+  \phantomsection							% Correct hyper reference link
+  #1\label{#2}}								% Print and store label
 
 
 
