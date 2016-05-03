@@ -1,1 +1,29 @@
 \section{Signal Processor}
+
+The digital signal processor (DSP) gives the manufacturer flexibility to add digital connectivity and digital signal processing to an active loudspeaker. The DSP also allows great flexibility in development as it is usually easier to implement signal processing algorithms in a signal processors than an equivalent analog circuit. There are however a few parameters to take into account when developing a digital processing system such as sampling rate, computational power, bit-resolution. 
+
+The computational power of a DSP is limited by the clock frequency and the hardware architecture of the DSP. A higher clock frequency gives more computational power but dissipates more power. Also, the clock frequency may only be within the rated frequencies given by the manufacturer. The hardware architecture is also important since the amount clock cycles to perform some instructions varies from hardware architecture.
+
+Because the DSP works in discrete time, the audio signal needs to be sampled. The sampling rate must be high enough to fulfil the Nyquist theorem, which states that the sampling frequency must be at least twice the highest frequency component. For music, the highest frequency component is commonly known as 20 kHz, thus the sampling rate must be greater than 40 kHz to avoid losing information.
+
+The bit-resolution is also important, since it determines the signal to noise ratio (SNR). A higher bit resolution gives a higher SNR which is desirable because the noise affects the signal less. The bit-resolution is also limited by the converters in a DSP and the hardware architecture also plays an important role with respect to efficiency. An example could be a fixed-point 16-bit DSP. Because the hardware architecture is optimized to 16-bit data, a 24-bit signal requires the 24-bit signal to be split into two pieces of data.
+
+Noise and distortion can also be added to the signal in a signal processor if the signal processing algorithm is not designed carefully. For example Infinite Impulse Response (IIR) filter generates noise if they are not designed carefully. In a fixed-point 16-bit DSP, an IIR filter will generate noise because of a conversion from 32-bit to 16-bit which is then fed back into the filter. Peak-limiters, which is implemented to avoid the signal to reach above a certain level, hard clips the signal and will generate distortion. Peak-limiters are therefore not ideal if the goal is to keep the distortion at a minimum level.
+
+
+
+
+
+
+
+
+
+
+
+% and applying signal processing to the signal can result in added noise or distortion to the signal. 
+
+
+
+
+
+
