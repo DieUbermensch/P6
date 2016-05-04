@@ -5,23 +5,25 @@ To implement the system a hardware platform is needed. The hardware platform can
 As previously mentioned, the choice of processor is a DSP, as the DSP has a high performance versus cost. The DSP is also very suitable for signal processing as the CPU architecture usually comes with specialized hardware for tasks such as multiply-accumulate, which can be executed in one instruction. The requirements for the DSP are as follows:
 
 \begin{enumerate}
-\item The DSP must have at least two \gls{I2S} ports for interfacing with ADC/DAC.
-\item The performance of DSP much be good enough to support least 1024 instructions pr. sample at a sampling rate of 96 kHz.
+\item[•] A bit resolution of 24 bit must supported by the DSP.\\
+\item[•] The DSP must have at least two I2S ports for interfacing with audio codec.\\
+\item[•] The DSP must have at least 100 MIPS available.
 \end{enumerate}
 
-The development board should also have an integrated audio codec, which ensures the conversion between analog and digital signals. The requirements for the audio codec are as follows:
+The development board should also have an integrated audio codec, which handles the conversion between analog and digital signals. The requirements for the audio codec are as follows:
 
 \begin{enumerate}
-\item The sample rate of the audio codec can be adjusted to at least 96 kHz.
-\item The audio codec supports a conversion resolution of at least 24-bit.
+\item[•] The sample rate of the audio codec must be at least 44.1 kHz.\\
+\item[•] The sample rate of the audio codec must be compatible with 96 kHz.\\
+\item[•] A bit resolution of 24 bit must supported by the audio codec.\\
 \end{enumerate}
 
 Further more, the development platform needs accessible external GPIO to allow external interaction with the system, since it is required that the user can change settings on a equalizer. 
 
 
-\section{Development board TMDX5515EZDSP}
+\section{Development Board TMDX5515EZDSP}
 
-The TMDX5515EZDSP from Spectrum Digital is chosen as the development board. The TMDX5515EZDSP seen in \autoref{fig:TMDX5515EZDSP_overview}. The TMDX5515EZDSP uses a TMS320C5515 DSP from Texas Instruments as the CPU and is interfaced with a TLV320AIC3204 audio codec. Furthermore the development board is interfaced to peripherals such as an OLED screen, two buttons, microSD and a expansion connector with 60 ports. 
+The TMDX5515EZDSP from Spectrum Digital is chosen as the development board because it fulfils all the hardware requirements. The TMDX5515EZDSP seen in \autoref{fig:TMDX5515EZDSP_overview}. The TMDX5515EZDSP uses a TMS320C5515 DSP from Texas Instruments as the CPU and is interfaced with a TLV320AIC3204 audio codec. Furthermore the development board is interfaced to peripherals such as an OLED screen, two buttons, microSD and a expansion connector with 60 ports. 
 
 \begin{figure}[H]
 \centering
@@ -42,16 +44,12 @@ The TMDX5515EZDSP from Spectrum Digital is chosen as the development board. The 
 
 The TMS320C5515 is interfaced to the audio codec through an $\text{I}^2$S bus and $\text{I}^2$C bus. The $\text{I}^2$S bus is used to transmit and receive serial audio data between each unit, while the $\text{I}^2$C is used by the DSP to control the audio codec. According to the datasheet for the TLV320AIC3204 the rated ADC and DAC input voltage is 0.5 $\text{V}_\text{RMS}$ or 0.7071 $\text{V}_\text{peak}$. If the input signal exceeds the voltage level, the audio codec will clip the signal. To avoid this, the audio source must not exceed a peak voltage on 0.7071 V.
 
-To setup the audio codec so it complies with the requirements on 24-bit and a sampling rate on 96 kHz, the $\text{I}^2$C bus between the dsp and audio codec is used to write to the control registers. \autoref{fig:i2c_aic3204} illustrates how the $\text{I}^2$C communication between the dsp and audio codec where the dsp is set as the master. The dsp transmits a 7-bit address to specify the $\text{I}^2$C slave. The address of the register is afterwards sent followed by the data to the register. 
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.98\textwidth]{i2c_aic3204}
-\caption{Setup of the TLV320AIC3204 with $\text{I}^2$C.}
-\label{fig:i2c_aic3204}
-\end{figure}  
 
-By using procedure above, the registers of the audio codec is then set to be mono, 24-bit and 96 kHz. When a audio sample is transmitted through the $\text{I}^2$S to the dsp, an interrupt flag for the $\text{I}^2$S is set high to tell the processor that data can be read from the data register.
+
+
+
+
 
 
 
