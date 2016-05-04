@@ -1,17 +1,6 @@
 \section{Feedback versus Feedforward System} \label{sec:feedback}
 
-At this point it is yet to be determined if the system will be based on a feedback or a feedforward system. The choices are to design a feedback system that will decide what to do, based on real-time measurements from a sensor i.e. accelerometer, or a feedforward system that will analyse an input signal and then decide what to do. Previous tests have shown that it is possible to use an accelerometer to estimate the performance of the system by looking at the harmonic distortions. A big issue is to analyse harmonic distortions when music is played back, as estimating harmonic distortions introduced in a system, are only well-defined for periodic sinusoids. The tests of the loudspeaker also showed that the frequency response of vibration on the driver and cabinet hardly changes when exposed for loud playback, thus it will be hard to derived anything alone from the frequency response of the vibrations. It can therefore be concluded that developing a system based on measurements from a accelerometer might turn out to be too complex to be realized in time due to time constraints. The system to be designed will therefore be based on a feedforward system. The concept of a feedback system which fulfil the problem statement is shown in \autoref{fig:Concept}.
-
-\begin{figure}[H]
-\centering
-\tikzsetnextfilename{Concept}
-\scalebox{0.8}{
-\input{figures/Concept.tex}}
-\caption{Overview of design concept.}
-\label{fig:Concept}
-\end{figure}
-
-The design concept consist of a signal processing block, which will be analysed to understand which solution is best for the problem stated, a signal analysis block which will not be analysed further in this chapter, a user interface which will be analysed to determine how the user interface should be designed and lastly the processor block which will be analysed to determine which type of processor that should be used. 
+At this point it is yet to be determined if the system will be based on a feedback or a feedforward system. The choices are to design a feedback system that will decide what to do, based on real-time measurements from a sensor i.e. accelerometer, or a feedforward system that will analyse an input signal and then decide what to do. Since there are no well documented experiments when concerning with sensors in speaker cabinets further experiments are to be deducted. 
 
 
 %\subsection{Distortion from vibration and impulses}\label{subsec:impulses}
@@ -59,6 +48,21 @@ The design concept consist of a signal processing block, which will be analysed 
 %\input{1Chapters/1Preanalysis/harmonic_distortion.tex}
 
 \input{1Chapters/1Preanalysis/hit_detection.tex}
+
+
+
+Previous tests have shown that it is possible to use an accelerometer to estimate the performance of the system by looking at the harmonic distortions. A big issue is to analyse harmonic distortions when music is played back, as estimating harmonic distortions introduced in a system, are only well-defined for periodic sinusoids. The tests of the loudspeaker also showed that the frequency response of vibration on the driver and cabinet hardly changes when exposed for loud playback, thus it will be hard to derived anything alone from the frequency response of the vibrations. It can therefore be concluded that developing a system based on measurements from a accelerometer might turn out to be too complex to be realized in time due to time constraints. The system to be designed will therefore be based on a feedforward system. The concept of a feedback system which fulfil the problem statement is shown in \autoref{fig:Concept}.
+
+\begin{figure}[H]
+\centering
+\tikzsetnextfilename{Concept}
+\scalebox{0.8}{
+\input{figures/Concept.tex}}
+\caption{Overview of design concept.}
+\label{fig:Concept}
+\end{figure}
+
+The design concept consist of a signal processing block, which will be analysed to understand which solution is best for the problem stated, a signal analysis block which will not be analysed further in this chapter, a user interface which will be analysed to determine how the user interface should be designed and lastly the processor block which will be analysed to determine which type of processor that should be used. 
 
 
 

@@ -13,12 +13,31 @@ at={(1.011in,0.642in)},
 scale only axis,
 xmin=0,
 xmax=30,
+xtick={0, 10, 20,  30},
+xticklabels={2400, 1600, 800, 0},
+xmajorgrids,
+ymin=-0.2,
+ymax=0.2,
+ymajorgrids,
+axis x line*=top,
+xlabel={Frequency [Hz]},
+axis background/.style={fill=white}
+]
+\end{axis}
+
+\begin{axis}[%
+width=2.3in,
+height=2in,
+at={(1.011in,0.642in)},
+scale only axis,
+xmin=0,
+xmax=30,
 xmajorgrids,
 ymin=-0.2,
 ymax=0.2,
 ymajorgrids,
 xlabel={Time [s]},
-ylabel={Amplitude [s]},
+ylabel={Amplitude [.]},
 axis background/.style={fill=white}
 ]
 \node[rectangle,draw, fill=black!20, minimum height=2in, minimum width=1pt, line width=1pt] at (axis cs:28.9,0) {};
@@ -2428,5 +2447,8 @@ axis background/.style={fill=white}
 30	-0.00154709815979004\\
 }
 \closedcycle;
+
+
+
 \end{axis}
 \end{tikzpicture}%
