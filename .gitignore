@@ -32,6 +32,8 @@
 
 main.pdf
 
+rapport/tikz/*
+
 ### Assembler ###
 *.[sS]
 *.bc
