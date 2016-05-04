@@ -1,0 +1,51 @@
+\chapter{Overall system design}
+The purpose of this chapter is to give an outline of the design ideas considered for the system. As the problem statement pointed out, the system will concern of a processing system which will allow for adjustment when in use, such the speaker wont suffer from the voice coil hitting the backplate. as shown in \autoref{fig:speaker_block2} the system will be integrated with in an active speaker where it will act as the communication between the external audio source and the amplifier.
+
+\begin{figure}[H]
+\centering
+\tikzsetnextfilename{SpeakerBlock2}
+\scalebox{0.9}{
+\input{figures/SpeakerBlock2.tex}}
+\caption{Block diagram of an active speaker.}
+\label{fig:speaker_block2}
+\end{figure}
+
+The starting point of the design concept is to determine what type of processing system that is going to be developed. Different plausible solution will be reviewed and evaluated in order to determine what solution would function optimal. 
+
+
+\section{Analogue versus digital}
+
+It is important to clarify if the processing system is going to be designed as an analogue or digital system. Both types have its own advantages and disadvantages and one of the purposes of this section is thus to determine which platform will suit the system most. A brief analysis on the advantages and disadvantages of both system are therefore provided. 
+
+Briefly, the main difference between an analogue and digital system is that the analogue system works in continuous-time while the digital system works in discrete-time. For a continuous-time system values of a continuous signal, at any given time, is defined. For a discrete-time system, values of a signal are only defined at specific points in time with a fixed resolution. The time difference between each points is defined through defined sampling period $T_s$ and the resolution of each point is defined by the resolution of the Analogue-to-Digital Converter (ADC). By using a digital system, some information of the signal is necessarily lost, since there will be points in time where the signal is not defined, a problem known as quantization.
+
+For an analogue system, components such as resistors, capacitors, inductors, transistors and so on, are usually used. A digital system will typically consist of an ADC to discretize the analogue signal, a processor to process the signal, and a Digital-to-Analogue Converter (DAC) to convert the signal back to an analogue signal. The advantage of designing an analogue system is that ideally no information is lost. This conclusion is however derived with the assumption that analogue components are ideal since distortion will arise as soon as non-ideal components are used. The problem with ideal components is not a problem for a digital system, since no further distortion will be applied to the signal as soon as the signal is made discrete
+
+As the system to be developed, most likely will rely on signal processing, the great disadvantages of an analogue system is the constraints and flexibility to apply signal processing compared to a digital system. Some applications such as the Fourier Transformation is very hard if not impossible to realize in an analogue system while realizable in a digital system through algorithms. Also, if the system is large, an analogue system might turn out to be very complex, and use more components which results in more distortion. As the system to be developed is relying on signal processing the platform is chosen to be digital.
+
+\subsection{Real-time System}
+
+When being settled on using a digital system it arises the question of using real-time or none real time. It diverges again in advantages and disadvantages of both systems. A brief overview will be given which will be used to support the chosen system.
+
+\subsubsection*{Real-time}
+A real time system offers it advantages that when in use it can work continuously with the given input and possible adapt to the given situation. This increases the flexibility of the because adjustment can be done "on-the-fly" and therefore detect problems and possibly avoid a worse outcome. The real time system can easily be adapted into other system because the algorithm hasn't changed and only need new parameters. The system would be able to function when needed for the user, which is important when in e.g. music application. There is only one big disadvantage of the real time system. Based on which frequency the system works with, the real time system should be able to do all the needed calculation before the next sample. This limits the system to a certain amount of time and specific algorithms like large point FFTs or division. Whit a certain time given it might not be possible to finish the needed calculation and if that happens, the system will fail.
+
+\subsubsection*{None real-time}
+The none real time system has the advantage of all the time it needs. Since it is not made for running in the specific situation it can perform rather complex calculation and not worry about how many iterations it might need. This means that low cost system can be used since speed is not a problem. The system would be able to consider possible outcomes and generate a perfectly adjusted signal. Considering those advantages the major drawback is that is doesn't function when the user might need the functions. The none real-time would need time which might not be desirable. A situation could be when listening to music where a loading time of larger proportions are not acceptable 
+
+
+Due to the fact that the system revolves around a active speaker system and is going to handle music signals it seems most fit to use a real-time system. This gives the most flexibility and the pleases the end user by not having to wait for analysis of the signal.
+
+
+
+
+%% Feedback vs Feed Forward %%
+\input{1Chapters/1Preanalysis/feedback_feedforward.tex}
+
+
+%% Krav til Platform %%
+\input{1Chapters/1Preanalysis/TechnicalAnalysis_DSP.tex}
+
+
+%% GUI %%
+\input{1Chapters/1Preanalysis/TechnicalAnalysis_Interface.tex}
