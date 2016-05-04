@@ -1,4 +1,4 @@
-\documentclass[12pt,twoside,a4paper]{report}
+\documentclass[12pt,fleqn,twoside,a4paper]{report}
 \usepackage{etex}
 % Select encoding of your inputs.
 \usepackage[utf8]{inputenc}
@@ -392,6 +392,9 @@
   \edef\@currentlabel{#1}					% Set target label
   \phantomsection							% Correct hyper reference link
   #1\label{#2}}								% Print and store label
+
+% ¤¤ Opsætning af enheder ¤¤ % 
+\newcommand{\enhed}[1]{\hfill[\mathrm{#1}]}   % Skriv \enhed{"din enhed"} og dem bliver rykket til højre
 
 
 

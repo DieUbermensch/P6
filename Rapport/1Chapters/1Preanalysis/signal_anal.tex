@@ -1,30 +1,30 @@
 \section{Signal Analysis}
 
-After the signal has been processed in an equalizer, the signal will be analysed in the \textit{Signal Analysis}-block. The purpose of the signal analysis is to examine the content of the signal. Based on an analysis of the signal, the signal analysis sends some parameters to the signal processing subsystem determining how the audio signal should be processed. 
+% After the signal has been processed in an equalizer, the signal will be analysed in the \textit{Signal Analysis}-block. The purpose of the signal analysis is to examine the content of the signal. Based on an analysis of the signal, the signal analysis sends some parameters to the signal processing subsystem determining how the audio signal should be processed. 
 
-Generally speaking, any signal can be analysed in time domain or frequency domain. If analysed in time domain, the analysis can for instance be extracting signal features and calculating the signal's RMS value. Analysing the signal in frequency domain will reveal the spectral content of the signal. So the following section will cover different relevant techniques for extracting information from an audio signal in both time and frequency domain.
+% Generally speaking, any signal can be analysed in time domain or frequency domain. If analysed in time domain, the analysis can for instance be extracting signal features and calculating the signal's RMS value. Analysing the signal in frequency domain will reveal the spectral content of the signal. So the following section will cover different relevant techniques for extracting information from an audio signal in both time and frequency domain.
 
-\subsection*{Root-mean-square (RMS)}
-Root-mean-square can be used as a tool to estimate the "mean" value of a periodic signal. The problem with calculating a regular mean value for an audio signal is that the result will be 0 as the signal is approximately evenly distributed on both side of the amplitude axis. By using RMS this problem is avoided. The RMS is calculated as the square root of the mean value of the signal squared as shown in following equation:
-\begin{equation}\label{eq:RMS_con}
-V_{\text{RMS}}(t) = \sqrt{\frac{1}{T}\int_0^T v(t)^2 dt}
-\end{equation}
-The definition of the RMS in \autoref{eq:RMS_con} is only defined for continuous signals. If the RMS value is to be calculated for discrete values then following equation is used:
-\begin{equation}
-V_{\text{RMS}}[n] = \sqrt{\frac{1}{N+1}\sum_{k=0}^{N} v[n-k]^2}
-\end{equation}
-In analog electronics, the RMS value of a AC voltage can be used to calculate the corresponding power dissipation in a resistor (for instance) that of a DC voltage. The RMS can be useful to estimate the power of the signal. For instance if the RMS value of the signal moves above a certain threshold, the system may warn that the signal will stress the loudspeaker too much.
+% \subsection*{Root-mean-square (RMS)}
+% Root-mean-square can be used as a tool to estimate the "mean" value of a periodic signal. The problem with calculating a regular mean value for an audio signal is that the result will be 0 as the signal is approximately evenly distributed on both side of the amplitude axis. By using RMS this problem is avoided. The RMS is calculated as the square root of the mean value of the signal squared as shown in following equation:
+% \begin{equation}\label{eq:RMS_con}
+% V_{\text{RMS}}(t) = \sqrt{\frac{1}{T}\int_0^T v(t)^2 dt}
+% \end{equation}
+% The definition of the RMS in \autoref{eq:RMS_con} is only defined for continuous signals. If the RMS value is to be calculated for discrete values then following equation is used:
+% \begin{equation}
+% V_{\text{RMS}}[n] = \sqrt{\frac{1}{N+1}\sum_{k=0}^{N} v[n-k]^2}
+% \end{equation}
+% In analog electronics, the RMS value of a AC voltage can be used to calculate the corresponding power dissipation in a resistor (for instance) that of a DC voltage. The RMS can be useful to estimate the power of the signal. For instance if the RMS value of the signal moves above a certain threshold, the system may warn that the signal will stress the loudspeaker too much.
 
-\subsection*{Signal threshold}
-A signal threshold can be use to detect whenever the amplitude of a signal is above a certain level. This can for instance help identify if the signal will result in a too loud playback. The threshold can be used to detect peaks above the threshold or be used to detect if the RMS values of the signal is above a level.
+% \subsection*{Signal threshold}
+% A signal threshold can be use to detect whenever the amplitude of a signal is above a certain level. This can for instance help identify if the signal will result in a too loud playback. The threshold can be used to detect peaks above the threshold or be used to detect if the RMS values of the signal is above a level.
 
 
-\subsection*{Spectrum analysis}
-A spectral analysis will reveal the spectral content of a signal. For instance if an audio signal consists of an 100 Hz tone and a 200 Hz tone in time domain, a spectral analysis can tell that there is an 100 Hz tone and 200 Hz tone. 
+% \subsection*{Spectrum analysis}
+% A spectral analysis will reveal the spectral content of a signal. For instance if an audio signal consists of an 100 Hz tone and a 200 Hz tone in time domain, a spectral analysis can tell that there is an 100 Hz tone and 200 Hz tone. 
 
-Two commonly techniques to do spectral estimation is by using the Fourier Transformation or the an swept-tuned spectrum analyser. The Fourier transformation is a mathematical equation that breaks the signal up into a sum of sine and cosine function at different frequencies. To perform a Fourier Transformation the the Discrete Fourier Transformation must be used since the Fourier Transformation cannot be implemented in a casual and digital system. The swept-tuned spectrum analyser do not rely on a mathematical expression. The swept-tuned spectrum analyser consist of multiple band-pass filters. The signal is divided into frequency bands and for each band, the RMS value is determined to estimate the energy in that corresponding spectrum. 
+% Two commonly techniques to do spectral estimation is by using the Fourier Transformation or the an swept-tuned spectrum analyser. The Fourier transformation is a mathematical equation that breaks the signal up into a sum of sine and cosine function at different frequencies. To perform a Fourier Transformation the the Discrete Fourier Transformation must be used since the Fourier Transformation cannot be implemented in a casual and digital system. The swept-tuned spectrum analyser do not rely on a mathematical expression. The swept-tuned spectrum analyser consist of multiple band-pass filters. The signal is divided into frequency bands and for each band, the RMS value is determined to estimate the energy in that corresponding spectrum. 
 
-Using a spectrum analyser as a part of the signal analysis may be useful since time domain analysis cannot reveal the frequencies and their respective amplitude. For example a signal may exceed a threshold, but the signal may only consist of high frequency signals, which will not damage the loudspeaker. 
+% Using a spectrum analyser as a part of the signal analysis may be useful since time domain analysis cannot reveal the frequencies and their respective amplitude. For example a signal may exceed a threshold, but the signal may only consist of high frequency signals, which will not damage the loudspeaker. 
 
 
 \subsection{Choice of signal analysis}

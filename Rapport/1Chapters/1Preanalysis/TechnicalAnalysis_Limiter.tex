@@ -1,38 +1,39 @@
-\subsection*{Limiter}
-Instead of equalizing the signal it is possible to limit the signal by using a limiter. A limiter limits the signal at a certain threshold to make sure that a signal does not clip. A limiter system is a feedforward system which can be stated as:
-\begin{equation}
-y[n] = g[n]\cdot x[n-D]
-\end{equation}
+% \subsection*{Limiter}
+% Instead of equalizing the signal it is possible to limit the signal by using a limiter. A limiter limits the signal at a certain threshold to make sure that a signal does not clip. A limiter system is a feedforward system which can be stated as:
+% \begin{equation}
+% y[n] = g[n]\cdot x[n-D]
+% \end{equation}
 
-Where an input $x[n]$ is delayed by $x[n-D]$ and multiplied by a weighting $g[n]$ to give $y[n]$, or as a logarithmic level representation where multiplication leads to the addition of $G_{dB}[n]$ and $X_{dB}[n]$:
-\begin{equation}
-Y_{dB}[n] = X_{dB}[n] + G_{dB}[n]
-\end{equation}
+% Where an input $x[n]$ is delayed by $x[n-D]$ and multiplied by a weighting $g[n]$ to give $y[n]$, or as a logarithmic level representation where multiplication leads to the addition of $G_{dB}[n]$ and $X_{dB}[n]$:
+% \begin{equation}
+% Y_{dB}[n] = X_{dB}[n] + G_{dB}[n]
+% \end{equation}
 
-A limiter system is also seen in more detail on \autoref{fig:limiter_block}.
+% A limiter system is also seen in more detail on \autoref{fig:limiter_block}.
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=1\textwidth]{figures/Limiter_block.png}
-\caption{Limiter block diagram.}
-\label{fig:limiter_block}
-\end{figure}   
+% \begin{figure}[H]
+% \centering
+% \includegraphics[width=1\textwidth]{figures/Limiter_block.png}
+% \caption{Limiter block diagram.}
+% \label{fig:limiter_block}
+% \end{figure}   
 
-\todo[inline]{Ref til Digital Audio Signal Processing bogen kapitel syv} 
+% \todo[inline]{Ref til Digital Audio Signal Processing bogen kapitel syv} 
 
-The level measurement block measures the RMS or peak value of the signal, the static curve applies the gain and the Attack/Release, where the attack determines how fast the limiter should react to inputs that are above the threshold. A high attack time means that the limiter is slow-reacting to inputs changes, thus the limiter will not apply gain reduction if the input is only above the threshold for a short time. The release time determines how fast the limiter should release the gain reduction after the signal level is under the threshold again.
-%time determines when the limiter should apply and stop applying to the signal.
-The static curve, more detailed described, is the curve which determines at which the noise gate threshold (NT), expander threshold (ET), compressor threshold (CT) and limiter threshold (LT) should apply as seen on \autoref{fig:limiter_static}. 
+% The level measurement block measures the RMS or peak value of the signal, the static curve applies the gain and the Attack/Release, where the attack determines how fast the limiter should react to inputs that are above the threshold. A high attack time means that the limiter is slow-reacting to inputs changes, thus the limiter will not apply gain reduction if the input is only above the threshold for a short time. The release time determines how fast the limiter should release the gain reduction after the signal level is under the threshold again.
+% %time determines when the limiter should apply and stop applying to the signal.
+% The static curve, more detailed described, is the curve which determines at which the noise gate threshold (NT), expander threshold (ET), compressor threshold (CT) and limiter threshold (LT) should apply as seen on \autoref{fig:limiter_static}. 
 
-When these different thresholds are surpassed, a specific linear function will be applied to the signal to for example filter out noise (NT) or compress the signal to limit the output relative to the input as seen on \ref{fig:limiter_static}. 
+% When these different thresholds are surpassed, a specific linear function will be applied to the signal to for example filter out noise (NT) or compress the signal to limit the output relative to the input as seen on \ref{fig:limiter_static}. 
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.8\textwidth]{figures/limiter_static_curve.png}
-\caption{Static curve with the parameters (LT, CT, ET and NT).}
-\label{fig:limiter_static}
-\end{figure}  
+% \begin{figure}[H]
+% \centering
+% \includegraphics[width=0.8\textwidth]{figures/limiter_static_curve.png}
+% \caption{Static curve with the parameters (LT, CT, ET and NT).}
+% \label{fig:limiter_static}
+% \end{figure}  
 
-Because the focus will be on limiting the signal and not clipping it, which would introduce too much distortion, the focus should be on CT which compresses the signal. The compressor can be designed for hard compression which limits the output more than a soft compression but it also creates a more distorted output. The compressor can either apply to all frequencies or be a multiband compressor which only applies to the frequency spectrum which needs compression, which gives a more flexible compressor but also increases the complexity of the system. This leads to the analyzis of the automatic volume control.    
+% Because the focus will be on limiting the signal and not clipping it, which would introduce too much distortion, the focus should be on CT which compresses the signal. The compressor can be designed for hard compression which limits the output more than a soft compression but it also creates a more distorted output. The compressor can either apply to all frequencies or be a multiband compressor which only applies to the frequency spectrum which needs compression, which gives a more flexible compressor but also increases the complexity of the system. This leads to the analyzis of the automatic volume control.    
 
-      
+
+%       
