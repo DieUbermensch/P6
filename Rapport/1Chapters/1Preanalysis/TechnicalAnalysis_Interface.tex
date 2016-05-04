@@ -1,67 +1,70 @@
-\section{User interface} \label{sec:user_interface}
-In this section an analyzation of the user interface for the equalizer analyzed in \autoref{sec:tech_equalizer} will be made to determine which user interface will be the most optimal for the specific user of the equalizer. 
+\section{Graphical User Interface} \label{sec:user_interface}
 
-There are two different intended users for the equalizer: 
-\begin{itemize}
-\item The developer.
-\item The commercial user.
-\end{itemize}
-This means that there are different requirements for the specific user of the equalizer.
+Here a GUI will be developed and shit will get really crazy with C\#
 
-\subsection{User interface for the developer}
-The developer is the user which knows everything about an equalizer and its effects on a system therefore the developer desires a great deal of control and options in the interface of the equalizer. This means that the interface can be complex and must not set no restrictions for the developer.  
-
-Because the developer needs to have full control of the equalizer he needs to have control of: 
-\begin{itemize}
-\item Center frequency.
-\item Q - value.
-\item Gain.
-\item Band selection.
-\end{itemize} 
-This leads to a suggestions for a user interface which gives full control to a developer.
-
-\begin{figure}[H]
-\centering
-\tikzsetnextfilename{InterfaceDev1}
-\input{figures/InterfaceDev1.tex}
-\caption{Developer user interface.}
-\label{fig:Dev_sug}
-\end{figure}
-
-The suggestion on \autoref{fig:Dev_sug} has push buttons on the bands so they can be toggled on and of while the center frequency, gain and Q - value for each band can be changed with the use of knobs. The suggestion will be accompanied by a big screen where the frequency response of the equalizer can be seen. 
-
-\subsection{User interface for the commercial user}
-The commercial user is the user which knows the implication of different the different settings of an equalizer but does not know anything about the technical aspect of an equalizer. This means that the interface needs to be simple and show what implpication a setting has on a system but leave out all technical aspects. 
-
-Because the commercial user only needs presets like for example "rock", "jazz" and "movie" the user only needs to have control of: 
-\begin{itemize}
-\item Presets.
-\end{itemize} 
-This leads to some different suggestions for a user interface which consist of a few buttons to keep it as simple as possible.
-
-
-\begin{figure}[H]
-\centering
-\begin{subfigure}[t]{0.47\textwidth}
-	\centering
-	\tikzsetnextfilename{InterfaceUser1}
-	\input{figures/InterfaceUser1.tex}
-	\caption{Suggestion 1}
-	\label{fig:UI_sug_1}
-\end{subfigure}
-\hspace{6mm} 
-\begin{subfigure}[t]{0.47\textwidth}
-	\centering
-	\tikzsetnextfilename{InterfaceUser2}
-	\input{figures/InterfaceUser2.tex}
-	\caption{Suggestion 2}
-	\label{fig:UI_sug_2}
-\end{subfigure}
-\caption{Commercial user interface suggestions.}
-\label{fig:UI_sug}
-\end{figure}
-
-Suggestion one as seen on \autoref{fig:UI_sug_1} has two push buttons and a small screen so the user can interchange between different settings, while suggestion two has x number of push buttons which represents a preset each. The advantage of suggestion two is the overview and simplicity while suggestion one can have a larger number of presets without changing the appearance of the user interface. 
-
-The suggestions for the user interface for both the developer and the commercial user will be choosen in the requirement specification \todo[inline]{reference}  
-
+%In this section an analyzation of the user interface for the equalizer analyzed in \autoref{sec:tech_equalizer} will be made to determine which user interface will be the most optimal for the specific user of the equalizer. 
+%
+%There are two different intended users for the equalizer: 
+%\begin{itemize}
+%\item The developer.
+%\item The commercial user.
+%\end{itemize}
+%This means that there are different requirements for the specific user of the equalizer.
+%
+%\subsection{User interface for the developer}
+%The developer is the user which knows everything about an equalizer and its effects on a system therefore the developer desires a great deal of control and options in the interface of the equalizer. This means that the interface can be complex and must not set no restrictions for the developer.  
+%
+%Because the developer needs to have full control of the equalizer he needs to have control of: 
+%\begin{itemize}
+%\item Center frequency.
+%\item Q - value.
+%\item Gain.
+%\item Band selection.
+%\end{itemize} 
+%This leads to a suggestions for a user interface which gives full control to a developer.
+%
+%\begin{figure}[H]
+%\centering
+%\tikzsetnextfilename{InterfaceDev1}
+%\input{figures/InterfaceDev1.tex}
+%\caption{Developer user interface.}
+%\label{fig:Dev_sug}
+%\end{figure}
+%
+%The suggestion on \autoref{fig:Dev_sug} has push buttons on the bands so they can be toggled on and of while the center frequency, gain and Q - value for each band can be changed with the use of knobs. The suggestion will be accompanied by a big screen where the frequency response of the equalizer can be seen. 
+%
+%\subsection{User interface for the commercial user}
+%The commercial user is the user which knows the implication of different the different settings of an equalizer but does not know anything about the technical aspect of an equalizer. This means that the interface needs to be simple and show what implpication a setting has on a system but leave out all technical aspects. 
+%
+%Because the commercial user only needs presets like for example "rock", "jazz" and "movie" the user only needs to have control of: 
+%\begin{itemize}
+%\item Presets.
+%\end{itemize} 
+%This leads to some different suggestions for a user interface which consist of a few buttons to keep it as simple as possible.
+%
+%
+%\begin{figure}[H]
+%\centering
+%\begin{subfigure}[t]{0.47\textwidth}
+%	\centering
+%	\tikzsetnextfilename{InterfaceUser1}
+%	\input{figures/InterfaceUser1.tex}
+%	\caption{Suggestion 1}
+%	\label{fig:UI_sug_1}
+%\end{subfigure}
+%\hspace{6mm} 
+%\begin{subfigure}[t]{0.47\textwidth}
+%	\centering
+%	\tikzsetnextfilename{InterfaceUser2}
+%	\input{figures/InterfaceUser2.tex}
+%	\caption{Suggestion 2}
+%	\label{fig:UI_sug_2}
+%\end{subfigure}
+%\caption{Commercial user interface suggestions.}
+%\label{fig:UI_sug}
+%\end{figure}
+%
+%Suggestion one as seen on \autoref{fig:UI_sug_1} has two push buttons and a small screen so the user can interchange between different settings, while suggestion two has x number of push buttons which represents a preset each. The advantage of suggestion two is the overview and simplicity while suggestion one can have a larger number of presets without changing the appearance of the user interface. 
+%
+%The suggestions for the user interface for both the developer and the commercial user will be choosen in the requirement specification \todo[inline]{reference}  
+%
