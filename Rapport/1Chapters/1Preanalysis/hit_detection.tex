@@ -1,28 +1,28 @@
-\subsection{Back Plate Hit Detection}\label{sec:hit_detect}
+\subsubsection{Back Plate Hit Detection}\label{sec:hit_detect}
 
 As previously stated, it is possible that the loudspeaker coil hits the back plate of the driver if the coil moves too far back. In the long run this will damage the loudspeaker, and should therefore be avoided. In this section an analysis on how to detect these hits, will be provided. 
 
 From \autoref{subsec:impulses} the frequency response of a mechanical frame of a loudspeaker has the same characteristics as a low-pass filter. This means, if the coil is hitting the back plate of the driver, it will result in a increase in energy in the low frequency spectrum. As most music and loudspeakers have some sort of a high-pass filter implemented to remove almost non-audible sound, it can be assumed that only a back plate hit will generate vibrations at very low frequencies between, for instance, 0 Hz to 20 Hz. To examine if this is true, a section of the dataset 19 of the driver, where a hit is suspected to have occurred, is analysed. The analysed section is seen in \autoref{fig:raw_driver19_windows}.
 
 
-\begin{figure}[H]
-\centering
-\begin{subfigure}[t]{0.55\textwidth}
-	\tikzsetnextfilename{raw_driver19_window}
-	\input{figures/raw_driver19_window.tex}
-	\caption{Raw dataset 19 for driver. }
-	\label{fig:raw_driver19_window}
-\end{subfigure}
-%\hspace{6mm} 
-\begin{subfigure}[t]{0.43\textwidth}
-	\tikzsetnextfilename{raw_driver19_window_zoom}
-	\input{figures/raw_driver19_window_zoom.tex}
-	\caption{The grey area zoomed in.}
-	\label{fig:raw_driver19_window_zoom}
-\end{subfigure}
-\caption{The greyed area is analysed to examine if there are any signs of an impulse.}
-\label{fig:raw_driver19_windows}
-\end{figure}
+%\begin{figure}[H]
+%\centering
+%\begin{subfigure}[t]{0.55\textwidth}
+%	\tikzsetnextfilename{raw_driver19_window}
+%	\input{figures/raw_driver19_window.tex}
+%	\caption{Raw dataset 19 for driver. }
+%	\label{fig:raw_driver19_window}
+%\end{subfigure}
+%%\hspace{6mm} 
+%\begin{subfigure}[t]{0.43\textwidth}
+%	\tikzsetnextfilename{raw_driver19_window_zoom}
+%	\input{figures/raw_driver19_window_zoom.tex}
+%	\caption{The grey area zoomed in.}
+%	\label{fig:raw_driver19_window_zoom}
+%\end{subfigure}
+%\caption{The greyed area is analysed to examine if there are any signs of an impulse.}
+%\label{fig:raw_driver19_windows}
+%\end{figure}
 
 The same window is applied to all datasets for the driver and afterwards spectrum analysed to reveal any increase in low frequent energy. 
 
@@ -38,21 +38,27 @@ The same window is applied to all datasets for the driver and afterwards spectru
 It is seen that the energy for non-harmonic frequencies is increased at very low frequencies as indicated with the arrow. The black graph is the first dataset and the blue is the tenth dataset. As no hit was observed in the window at dataset 1 and 10, the energy of lower part of the spectrum was not increased. However the suspected hit in dataset 19 has an energy increase in  the low frequency spectrum. Note that since the window is 0.25 seconds wide, frequencies below 4 Hz should be discarded.
 
 
+\vspace{3mm}
+
+Concluding on the test it shows that it is possible to measure vibration with precise enough equipment. It also showed that further trails had to be made in order to establish if less precise accelerometer could output a sufficient signal.
+
+\subsubsection{Accelerometer trails}
+
+From \autoref{app:journal_speaker_test2} further trails were deducted to determine whether a less precise accelerometer could measure the same output. Same procedure was followed as in the previous section, hence only the results will be shown. The behaviour of the speaker was identical with the preceding trails. 
+
+\vspace{3mm}
+
+The trails could be concluded with the accelerometers not being able to properly detect the vibrations of the speaker. There were to many fluctuations in the measurements leading to disbelief in the accelerometer being sufficient. however from the measurements a pattern could be derived. Since the speaker behaved linearly when the gain of the amplifier is increased. It was possible to compare the fundamental tone with the third harmonic tone and establish the correlation showed in \autoref{fig:com_mic13All_repport}.
+
+\begin{figure}[H]
+    \centering
+    \tikzsetnextfilename{comp_mic13All1}
+    \input{figures/comp_mic13All1.tex}
+    \caption{1.harmonic / 3.harmonic pr. measurement. comparison for all frequencies}
+\label{fig:com_mic13All_repport}
+\end{figure}  
+
+\autoref{fig:com_mic13All_repport} show that the third harmonic increases with the amplifiers gain. From this information it is possible to determine the speakers behaviour according to the gain and thereby use it is a model for gain adjustment.
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+\subsubsection{Plausible solution} 
