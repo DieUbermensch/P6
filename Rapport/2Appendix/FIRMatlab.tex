@@ -1,0 +1,15 @@
+\chapter{Matlab script for designing FIR filters} \label{app:FIR_Matlab}
+This appendix will explain the Matlab script used for designed quantisized FIR coefficients from the specifications of the standard IEC 6964 (2001) 
+
+The matlab script is called MainDesign2 and uses the follwing self implemented functions
+\begin{itemize}
+\item StandardFunction2
+\item FIRFunction
+\item QuantizingFunction
+\end{itemize}
+MainDesign2 is the main script which designs 8 FIR filters using firstly the function StandardFunction2 to calculate the requirements for all eight FIR filters using the standard IEC 6964 (2001) which is explained in detail in \autoref{app:IEC6964}.
+
+Nextly all the coefficients for the eight FIR filters are derived using the function FIRFunction, for every filter, which uses the Kaiser window method explained in \autoref{app:FIR_theory}. In The FIRFunction the function QuantizingFunction is used to quantisize all coefficients to Q15 format used by the DSP. The script and functions can be seen below. 
+
+\todo[inline]{insert matlab scripts and functions}
+
