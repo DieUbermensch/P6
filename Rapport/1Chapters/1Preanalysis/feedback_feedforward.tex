@@ -51,7 +51,16 @@ At this point it is yet to be determined if the system will be based on a feedba
 
 
 
-Previous tests have shown that it is possible to use an accelerometer to estimate the performance of the system by looking at the harmonic distortions. A big issue is to analyse harmonic distortions when music is played back, as estimating harmonic distortions introduced in a system, are only well-defined for periodic sinusoids. The tests of the loudspeaker also showed that the frequency response of vibration on the driver and cabinet hardly changes when exposed for loud playback, thus it will be hard to derived anything alone from the frequency response of the vibrations. It can therefore be concluded that developing a system based on measurements from a accelerometer might turn out to be too complex to be realized in time due to time constraints. The system to be designed will therefore be based on a feedforward system. The concept of a feedback system which fulfil the problem statement is shown in \autoref{fig:Concept}.
+The Previous tests have shown that it is possible to use an accelerometer to estimate the performance of the system by looking at the harmonic distortions. However following up on all of the trails the problems are as follows:
+\begin{itemize}
+\item harmonic distortions when music is played back, as estimating harmonic distortions introduced in a system, are only well-defined for periodic sinusoids.
+\item frequency response of vibration, using the cheaper accelerometer, on the driver and cabinet hardly changes when exposed for loud playback, thus it will be hard to get usable signals.
+\item The price for usable sensor equipment is too high compared to the application it is targeted for. 
+\item The sensors did not directly show a pattern for when a possible hit of the back plate were about to occur.
+\item The phase of the signal can not assumed "in phase" and it is therefore not possible to apply spectral estimations for detecting specific frequency peaks. i.e. if using a specific frequency as target for attenuation a 180 degrees phase shifted signal might bring false negatives. 
+\end{itemize}
+
+It can therefore be concluded that developing a system based on measurements from a accelerometer might turn out to be too complex to be realized in time due to time constraints. The system to be designed will therefore be based on a feedforward system. The concept of a feedback system which fulfil the problem statement is shown in \autoref{fig:Concept}.
 
 \begin{figure}[H]
 \centering
@@ -63,8 +72,3 @@ Previous tests have shown that it is possible to use an accelerometer to estimat
 \end{figure}
 
 The design concept consist of a signal processing block, which will be analysed to understand which solution is best for the problem stated, a signal analysis block which will not be analysed further in this chapter, a user interface which will be analysed to determine how the user interface should be designed and lastly the processor block which will be analysed to determine which type of processor that should be used. 
-
-
-
-
-%As the audio signal must be continuous when played on loudspeakers
