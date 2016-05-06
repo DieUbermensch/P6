@@ -1,15 +1,7 @@
-\chapter{Filters}
-
-\begin{itemize}
-\item Introduction (Done)
-\item Requirements
-\item Explanation of the FIR design 
-\item Finished design 
-\item Simulation 
-\end{itemize} 
-
-This chapter will describe how the filters in the system is designed, in more detail the chapter will examine the requirements, the interfacing, the design method, the design, the simulation, the implementaion and the test of the filters. Besides this chapter the appendix will contain detailed explanation of the theory of the FIR filter and the matlab script used to design the filters.       
-
+\chapter{Filter design}
+This chapter will describe how the filters in the system are designed, in more detail the chapter will examine the requirements, the design and the simulation of the filters. From \textbf{Realization} it was concluded that decimation and interpolation should be used to reduce the order of the filters.  
+Is was also concluded that the filters used for system should be FIR filters because of spectral subtraction which would reduce the number of filters in the system, because they have linear phase and no noise.
+   
 \input{1Chapters/Filters/ReqInterface.tex}
 
 \input{1Chapters/Filters/Design.tex}

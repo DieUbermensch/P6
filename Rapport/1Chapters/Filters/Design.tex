@@ -1,4 +1,59 @@
 \section{Design}
-The design section will examine if the \gls{IIR} or \gls{FIR} design method is optimal for the system and how the filters are designed. 
+This design section will go through the design of the highest lowpass filter with the specification derived from the requirements of band 1 also seen on \autoref{fig:band1_req}.
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.47\textwidth}
+	\tikzsetnextfilename{Band1Req}
+	\scalebox{0.5}{
+	\input{figures/Band1Req.tex}}
+	\caption{Band 1 requierments.}
+	\label{fig:band1_req}
+\end{subfigure}
+\hspace{6mm} 
+\begin{subfigure}[t]{0.35\textwidth}
+	\tikzsetnextfilename{Band1ReqZoom}
+	\scalebox{0.5}{
+	\input{figures/Band1ReqZoom.tex}}
+	\caption{Band 1 requierments zoomed in.}
+	\label{fig:band1_reqZoom}
+\end{subfigure}
+\caption{Band 1 requierments without and with zoom.}
+\label{fig:band1_reqOverview}
+\end{figure}
+Two points are selected giving the following specifications to the lowpass filter:
+$F_{pass}=6.000 \enhed{Hz}$\\
+$F_{stop}=-1 \enhed{dB}$\\
+$A_{pass}=13.000 \enhed{Hz}$\\
+$A_{stop}=-60 \enhed{dB}$\\
+$Fs=48000 \enhed{Hz}$
+The design method used for designing the filter is the Kaiser window method, explained in detail in \autoref{app:FIR_theory}. The reason for using the Kaiser window method is that it gives the approximate order of the filter and the beta value of the window applied to impulse reponse. This means that no trial and error method is needed to meet the requierments of the standard IEC 6964 (2001).
+
+With the specification stated and using the matlab script explained in \autoref{app:FIR_Matlab} which uses the FIR theoy explained in \autoref{app:FIR_theory} about the Kaiser window method and deriving the coefficients of the filter the following filter is calculated. 
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.47\textwidth}
+	\tikzsetnextfilename{Band1FiltZoom}
+	\scalebox{0.5}{
+	\input{figures/Band1FiltZoom.tex}}
+	\caption{x}
+	\label{fig:band1_filt}
+\end{subfigure}
+\hspace{6mm} 
+\begin{subfigure}[t]{0.35\textwidth}
+	\tikzsetnextfilename{Band1FiltZoom}
+	\scalebox{0.5}{
+	\input{figures/Band1FiltZoom.tex}}
+	\caption{x}
+	\label{fig:band1_filtZoom}
+\end{subfigure}
+\caption{x}
+\label{fig:band1_FiltOverview}
+\end{figure}
+
+
+Band 1 requierments with filter.
+Band 1 requierments with filter zoomed in.
+Band 1 requierments with filter without and with zoom.
+
 
   
