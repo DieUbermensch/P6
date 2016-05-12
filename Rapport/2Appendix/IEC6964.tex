@@ -48,5 +48,35 @@ For calculating the attenuations of these calculated frequencies the following e
 \va{$\Omega_b$}{equals $\Omega_{high}$}{.}
 \end{where}
 
-A table can then be set up with relative frequencies and attenuations. The calculations of these numbers are done using the function StandardFunction2 in matlab explained in \autoref{app:FIR_Matlab}.
+A table can then be set up with relative frequencies and attenuations. The calculations of these numbers are done using the function StandardFunction2 in matlab explained in \autoref{app:FIR_Matlab}. A normalized frequency table for the requirements is as seen on \autoref{tb:IEC6964_att_freq}. 
+
+% Please add the following required packages to your document preamble:
+% \usepackage{multirow}
+\begin{table}[]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+\multirow{3}{*}{\begin{tabular}[c]{@{}c@{}}Normalized\\ frequency\\ $f/f_m=\Omega$\end{tabular}}       & \multicolumn{3}{c|}{\begin{tabular}[c]{@{}c@{}}Minimum; Maximum attenuation limits\\ dB\end{tabular}}                   \\ \cline{2-4} 
+                                                                                                       & \multicolumn{3}{c|}{Filter class}                                                                                       \\ \cline{2-4} 
+                                                                                                       & 0                                      & 1                                      & 2                                     \\ \hline
+$G^0$                                                                                                  & -0,15; +0,15                           & -0,3; +0,3                             & -0,5;+0,5                             \\ \hline
+$G^{\pm 1/8}$                                                                                          & -0,15; +0,2                            & -0,3; +0,4                             & -0,5; +0,6                            \\ \hline
+$G^{\pm 1/4}$                                                                                          & -0,15; +0,4                            & -0,3; +0,6                             & -0,5; +0,8                            \\ \hline
+$G^{\pm 3/8}$                                                                                          & -0,15; +1,1                            & -0,3; +1,3                             & -0,5; +1,6                            \\ \hline
+$<G^{\pm 1/2}$                                                                                         & -0,15; +4,5*                           & -0,3; +5,0*                            & -0,5; +5,5*                           \\ \hline
+$>G^{\pm 1/2}$                                                                                         & +2,3; +4,5*                            & +2,0; +5,0*                            & +1,6; +5,5*                           \\ \hline
+$G^{\pm 1}$                                                                                            & +18,0; +$\infty$                       & +17,5; +$\infty$                       & +16,5; +$\infty$                      \\ \hline
+$G^{\pm 2}$                                                                                            & +42,5; +$\infty$                       & +42; +$\infty$                         & +41; +$\infty$                        \\ \hline
+$G^{\pm 3}$                                                                                            & +62;+$\infty$                          & +61; +$\infty$                         & +55; +$\infty$                        \\ \hline
+$\geq G^{\pm +4}$                                                                                      & +75; +$\infty$                         & +70; +$\infty$                         & +60; +$\infty$                        \\ \hline
+$\leq G^{\pm -4}$                                                                                      & +75; +$\infty$                         & +70; +$\infty$                         & +60; +$\infty$                        \\ \hline
+\multicolumn{4}{|l|}{\begin{tabular}[c]{@{}l@{}}* At frequencies less than the lower band-edge frequency and \\ greater than the upper band-edge frequency, the limit on \\ maximum relative attenuation is +$\infty$;\end{tabular}} \\ \hline
+\end{tabular}
+\caption{standard for IEC6964 base 2 with different classes}
+\label{tb:IEC6964_att_freq}
+\end{table}
+
+
+
+
 

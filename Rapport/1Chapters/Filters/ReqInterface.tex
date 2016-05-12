@@ -1,11 +1,55 @@
-\section{Requirements}
-The requirements affecting the filters are as follows:
-
 8. The compressor must have 4 bands. \\
 9. The bands of the compressor must comply with the class 2 of IEC 6964 standard (2001). \\
-10. The compressor must apply to frequencies below 500 Hz. 
- 
+10. The compressors must apply to frequencies below 500 Hz. \\
+\\ 
+A filter for decimation will be designed which must meet requirements 9, and a filter for interpolation will be designed which must not influence the decimated signals bandwidth, because it would otherwise influence the frequency response of the system making it non flat. The decimation filter will be deigned first.
 
- 
- 
+Because the system is a multirate system with octave bands as mentioned in \autoref{ch:designRealisation} only one filter needs to be designed because the sampling frequency is halved for every octave resulting in the same coefficients for all decimation and interpolation filters.
 
+\section{Decimation filter}
+The decimation filter must meet requirement 9 as just mentioned which states the requiremetns of the filter. The requirement can be seen in \autoref{fig:band1_reqOverview} and \autoref{tb:normalizedReqClass2} states the requirements to the figure.
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.45\textwidth}
+	\tikzsetnextfilename{Band1Req}
+	\input{figures/Band1Req.tex}
+	\caption{Band 1 requierments.}
+	\label{fig:band1_req}
+\end{subfigure}
+\begin{subfigure}[t]{0.45\textwidth}
+	\tikzsetnextfilename{Band1ReqZoom}
+	\input{figures/Band1ReqZoom.tex}
+	\caption{Band 1 requierments zoomed in.}
+	\label{fig:band1_reqZoom}
+\end{subfigure}
+\caption{Band 1 requierments without and with zoom.}
+\label{fig:band1_reqOverview}
+\end{figure}
+
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+\multirow{3}{*}{\begin{tabular}[c]{@{}c@{}}Normalized\\ frequency\\ $f/f_m=\Omega$\end{tabular}}                        & \begin{tabular}[c]{@{}c@{}}Minimum;Maximum attenuation limits\\ dB\end{tabular}                        \\ \cline{2-2} 
+                                                                                                                        & Filter class                                                                                           \\ \cline{2-2} 
+                                                                                                                        & 2                                                                                                      \\ \hline
+$G^0$                                                                                                                   & -0,5;+0,5                                                                                              \\ \hline
+$G^{\pm 1/8}$                                                                                                           & -0,5; +0,6                                                                                             \\ \hline
+$G^{\pm 1/4}$                                                                                                           & -0,5; +0,8                                                                                             \\ \hline
+$G^{\pm 3/8}$                                                                                                           & -0,5; +1,6                                                                                             \\ \hline
+$<G^{\pm 1/2}$                                                                                                          & -0,5; +5,5*                                                                                            \\ \hline
+$>G^{\pm 1/2}$                                                                                                          & +1,6; +5,5*                                                                                            \\ \hline
+$G^{\pm 1}$                                                                                                             & +16,5; +$\infty$                                                                                       \\ \hline
+$G^{\pm 2}$                                                                                                             & +41; +$\infty$                                                                                         \\ \hline
+$G^{\pm 3}$                                                                                                             & +55; +$\infty$                                                                                         \\ \hline
+$\geq G^{\pm +4}$                                                                                                       & +60; +$\infty$                                                                                         \\ \hline
+$\leq G^{\pm -4}$                                                                                                       & +60; +$\infty$                                                                                         \\ \hline
+\multicolumn{2}{|l|}{\begin{tabular}[c]{@{}l@{}}* At frequencies less than the lower band-edge frequency and greater than the\\ upper band-edge frequency, the limit on maximum relative attenuation is +$\infty$;\end{tabular}} \\ \hline
+\end{tabular}
+\caption{Normalized Requirements for the filters}
+\label{tb:normalizedReqClass2}
+\end{table} 
+ 
+Only a lowpass filter should be designed because of spectral subtraction, described in \autoref{ch:designRealisation}, instead of a bandpass filter therefore only one side of the requirements are showed from now on. From system overview the octave bands are given for frequencies below 500 Hz, see \autoref{tb:freqBands} which meets requirement 8 and 10.
