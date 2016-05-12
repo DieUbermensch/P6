@@ -1,6 +1,8 @@
 \chapter{RMS Compressor}
+This chapter will cover the design thoughts and considerations in designing the RMS compressor which will be used to suppress to large amplitude levels in the lower frequencies. 
+\vspace{2mm}
+From \autoref{app:journal_speaker_test2} It showed that the THD of the speaker increased as the amplitude is increased. It can be shown from figure \autoref{fig:com_micALLRMS} that the amplitude difference of the second and third harmonic has a decay correlating with an exponential decay. From these measurements it is possible to determine a given threshold were the speaker will perform with optimum conditions. 
 
-In order to decrease to signal level in the lower bands a compressor will be used. Te compressor will be utilizing an calculated RMS value to determine whether an attenuation should be applied. It is hence important to determine how much attenuation should be applied and how fast it should be applied. To determine how much there will be conducted trails to locate the must problematic frequencies and determine gain models. From the models the needed attenuation is determined 
 
 
 \begin{figure}[H]
@@ -20,8 +22,10 @@ In order to decrease to signal level in the lower bands a compressor will be use
 \label{fig:com_mic13AllRMS}
 \end{subfigure}
 \caption{Comparison of amplitude level of the fundamental, sceond and third harmoinc.}
+\label{fig:com_micALLRMS}
 \end{figure}
 
+In order to decrease to signal level in the lower bands a compressor will be used. The compressor will be utilizing an calculated RMS value to determine whether an attenuation should be applied. It is hence important to determine how much attenuation should be applied and how fast it should be applied. To determine how much attenuation there will be conducted trails to locate the must problematic frequencies and determine gain models, this is documented in \autoref{app:journal_speaker_test3}. From the models the needed attenuation is determined. This is further described in the following section
 
 
 
