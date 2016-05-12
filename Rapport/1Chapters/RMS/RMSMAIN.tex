@@ -2,6 +2,30 @@
 
 In order to decrease to signal level in the lower bands a compressor will be used. Te compressor will be utilizing an calculated RMS value to determine whether an attenuation should be applied. It is hence important to determine how much attenuation should be applied and how fast it should be applied. To determine how much there will be conducted trails to locate the must problematic frequencies and determine gain models. From the models the needed attenuation is determined 
 
+
+\begin{figure}[H]
+\begin{subfigure}[t]{0.45\textwidth}
+    \centering
+    \tikzsetnextfilename{comp_mic12AllRMS}
+    \input{figures/comp_mic12AllRMS.tex}
+    \caption{1.harmonic / 2.harmonic pr. measurement. comparison for all frequencies}
+\label{fig:com_mic12AllRMS}
+\end{subfigure}
+\hspace{3mm}
+\begin{subfigure}[t]{0.45\textwidth}
+    \centering
+    \tikzsetnextfilename{comp_mic13AllRMS}
+    \input{figures/comp_mic13AllRMS.tex}
+    \caption{1.harmonic / 3.harmonic pr. measurement. comparison for all frequencies}
+\label{fig:com_mic13AllRMS}
+\end{subfigure}
+\caption{Comparison of amplitude level of the fundamental, sceond and third harmoinc.}
+\end{figure}
+
+
+
+
+
 \input{1Chapters/RMS/Model.tex}
 
 \input{1Chapters/RMS/Design.tex}
