@@ -24,7 +24,7 @@ Furthermore the speaker will be placed in a listing room to give as natural a re
 \centering
 \tikzsetnextfilename{TestSetupListning}
 \begin{tikzpicture}
-\draw  (-5,4) rectangle (5,-3);
+\draw  (-4,4) rectangle (4,-3);
 \draw  (2,1) rectangle (1,0);
 \draw  (-2,0.5) ellipse (0.5 and 0.5);
 \node at (-2,1.25) {Person};
@@ -79,7 +79,7 @@ All of the data is inserted in tables where an x is placed on the outcome. The t
 
 
 \section{Raw data}\label{sec:rawdata_listning}
-
+The following sections shows tables where the discrete value of each trail is noted. A is multiband and B is singleband. The X marks the most favourable. 
 \begin{figure}[H]
 \centering
 \begin{subfigure}[t]{0.45\textwidth}
@@ -170,7 +170,57 @@ n          & A         & B         & A         & B        \\ \bottomrule
 
 \section{Analysis}
 
+The raw data is visualized in a bar chart showed in \autoref{fig:Barchartsongs}. The bars are plotted showing the singleband and multiband compared directly to each other.
+\begin{figure}
+\centering
+\tikzsetnextfilename{Barchartsongs}
+\begin{tikzpicture}
+\begin{axis}[
+    ybar,
+%    enlargelimits=0.15,
+    legend style={at={(0.5,-0.15)},
+      anchor=north,legend columns=-1},
+    ylabel={no. of trails},
+    symbolic x coords={Song 1,Song 2,Song 3,Song 4},
+    xtick=data,
+    ymin=0,
+    ymax=23,
+    nodes near coords,
+    nodes near coords align={vertical},
+    ]
+\addplot coordinates {(Song 1,18) (Song 2,15) (Song 3,17) (Song 4,20)};
+\addplot coordinates {(Song 1,2)  (Song 2,5)  (Song 3,2) (Song 4,0)};
+\legend{Multiband,Singleband}
+\end{axis}
+\end{tikzpicture}
+\caption{Comparison of the different test}
+\label{fig:Barchartsongs}
+\end{figure}
 
+The figure shows a strong tendency to the sound of a multiband compressor. Songs with a high using a high dynamic range shows a pattern of beeing more even more favourable with the mulitband compressor. This correlates to the fact that the singleband are to aggresive when attenuating. The sound becomes to distorted. This is especially the result of song 4. However the test result also shows that it becomes less important when more the clip contains more instruments in play at the same time. It shows that song 2 was slightly less attractive with the multiband. 
+
+\begin{tikzpicture}
+[
+    pie chart,
+    slice type={comet}{blu},
+    slice type={legno}{rosso},
+    slice type={coltello}{giallo},
+    slice type={sedia}{viola},
+    slice type={caffe}{verde},
+    pie values/.style={font={\small}},
+    scale=2
+]
+
+    \pie{2008}{73/comet,13/legno,7/sedia,7/coltello}
+    \pie[xshift=2.2cm,values of coltello/.style={pos=1.1}]%
+        {2009}{52/comet,23/legno,17/sedia,3/coltello,5/caffe}
+    \pie[xshift=4.4cm,values of caffe/.style={pos=1.1}]%
+        {2010}{56/comet,26/legno,9/sedia,7/coltello,2/caffe}
+
+    \legend[shift={(0cm,-1cm)}]{{Comet (Pordenone)}/comet, {Wood and furniture (Livenza)}/legno, {Knife (Maniago)}/coltello}
+    \legend[shift={(3cm,-1cm)}]{{Chair (Manzano)}/sedia, {Coffee (Trieste)}/caffe}
+
+\end{tikzpicture}
 
 \section{Error sources}
 
@@ -178,7 +228,7 @@ There are two sources of error which could change the outcome of the result. The
 
 \section{Conclusion}
 
-
+The test showed a clear tendency of the multiband being more favourable when subjected to songs in the genres, dance, acoustics, pop/rock and instrumental. It showed that the singleband compressor had to much attenuation which made the music to distorted hence not favourable. The multiband compressor had better chance of only attenuating the problem frequencies.
 
 
 
