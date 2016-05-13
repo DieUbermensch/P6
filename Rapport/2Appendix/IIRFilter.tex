@@ -1,0 +1,62 @@
+\chapter{Infinite Impulse Response filter}
+
+The purpose of this chapter is to explain the theory behind Infinite Impulse Response (IIR) filters. A IIR filter can be described as a type digital filter that imitates the same properties of an analog filter i.e. the frequency response and impulse response. The starting point of designing IIR filters is therefore designing an analog filter a afterwards transform the transfer function into discrete domain i.e. z-domain. The design procedure of a IIR filter is as follows:
+
+\begin{itemize}
+\item[•] Derive the requirements and decide filter type.
+\item[•] Decide which type of transformation to use to move the poles and zeros between s-domain and z-domain.
+\item[•] Design the analog filter.
+\item[•] Transform the transfer function into z-domain.
+\item[•] Do the inverse z-transformation and implement the filter as a difference equation.
+\end{itemize}
+
+As this chapter only discusses the theory behind IIR filters the first bullet point will not be explained.
+
+
+\section{Transformation between s- and z-domain}
+
+Before designing the filter, the type of transformation should be known. This is important since a the transformation type known as bilinear transform (Tustin's method) requires frequency warping (pre-warping) the frequencies. Two transformation methods will be discussed in this chapter and are the impulse invariant method and bilinear transform.
+
+\subsection{Impulse Invariant Method}
+
+This methods is used if the exact frequency of the analog filter is desired. After deriving the transfer function of a analog filter in s-domain, an inverse Laplace-transformation is performed to achieve the impulse response of the analog filter. For a  first order Butterworth the transfer function may be expressed as:
+
+\begin{equation}
+H(s) = \frac{G}{s-p} \Rightarrow h(t) = L^{-1}\left\lbrace \frac{G}{s-p} \right\rbrace = G\text{e}^{pt}
+\end{equation}
+\begin{where}
+\va{$G$}{is the gain of the system}{-}\\
+\va{$p$}{is the pole location}{-}\\
+\end{where}
+
+Sampling the impulse response with the the sample period $T$ the impulse response may be expressed as $h[n] = h(nT)$ where $t = nT$. The z-transformation is then used on the impulse response h(t). The z-transformation is defined as:
+\begin{equation}
+X(z) = Z \left\lbrace x[n] \right\rbrace = \sum_{n=0}^{\infty}x[n]z^{-n}
+\end{equation}
+Using the z-transformation following expressing is achieved.
+\begin{equation} \label{eq:z_transformation_example}
+H(z) = \sum_{n=0}^{\infty}h[n]z^{-n} = \sum_{n=0}^{\infty}G\text{e}^{pnT}z^{-1}
+\end{equation}
+It is seen that \autoref{eq:z_transformation_example} is a infinite geometric series. The definition of a infinite geometric series is:
+\begin{equation} \label{eq:z_transformation_example}
+\sum_{k=0}^{\infty}ar^k  = \frac{a}{1-r}, \text{when |r|<1}
+\end{equation}
+Using the reduced form of a infinite geometric series following expression of the transfer function in z-domain is achieved.
+\begin{equation} \label{eq:z_transformation_example1}
+H(z) = Z \left\lbrace h[n] \right\rbrace = \frac{G}{1-\text{e}^{pnT}z^{-1}}
+\end{equation}
+Thus transforming a transfer function in s-domain to z-domain using impulse invariant method can be simplified to:
+\begin{equation} \label{eq:z_transformation_example2}
+\frac{G}{s-p} \rightarrow \frac{G}{1-\text{e}^{pnT}z^{-1}}
+\end{equation}
+As the transformation is only valid for first order filters, following expression may be used if transforming higher order filters. To apply the expression the transfer function in s-domain should be split into partial fractions.
+\begin{equation} \label{eq:z_transformation_example3}
+\sum_{k=1}^{M} \frac{G_k}{s-p_k} \rightarrow \sum_{k=1}^{M} \frac{G_k}{1-\text{e}^{p_knT}z^{-1}}
+\end{equation}
+
+By using the impulse invariant method the exact impulse response of the system in s-domain is preserved in z-domain.
+
+
+\subsection{Bilinear Transform}
+
+
