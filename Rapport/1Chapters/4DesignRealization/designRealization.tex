@@ -1,12 +1,50 @@
 \chapter{Design Realization} \label{ch:designRealization}
-As the requirements are derived and the development platform is chosen, the system presented in \autoref{ch:overview} may be designed. Evaluating the concept design from \autoref{ch:overview} it is seen that the concept has four bands-pass filters and one high-pass that need to be designed. Before designing these filters, delays in the system need to be considered. 
+As the requirements are derived and the development platform is chosen, the system presented in \autoref{ch:overview} may be designed. Evaluating the concept design from \autoref{ch:overview} it is seen that the concept has four bands-pass filters and one high-pass that need to be designed.
 
 
 \section{Practical Design Considerations}
+
+Before designing the band-pass filters, RMS analysis, and compressor, practical design considerations needs to be done, as designing and simulating the system do not mean the system can be implemented because of hardware constraints. In this section following topics will be covered:
+
+\begin{itemize}
+\item[•] Phase response and group delay.
+\item[•] Filter types.
+\item[•] Computational constraints.
+\end{itemize}
+
 As the signal needs to be reconstructed in the end of the system, it is desirable that the reconstructed signal do not have frequency bands which are out of phase compared to the original input signal. If the bands are out of phase the resulting sound may be unpleasant to listen to. Therefore a design requirement to the system is to ensure that the signals from each band are added together without changing the relative phase between each band.
 
-One of properties in non-statical filters such as low-pass and band-pass filters are the phase shift. For a filters such as the Butterworth low-pass filter, the phase shift begins at the frequency at one decade below the cutoff frequency and ends one decade above. The phase shift in-between for most analog filter except Bessel filter, have a non-linear phase response. Because of the phase response is non-linear, the group-delay will likewise not be linear. The group delay is an important parameter to take into account, as it specifies the sample delay for each frequency. A non-linear group delay will be hard to compensate and thus a constant group delay is desirable. To achieve a constant group delay a linear phase filter needed as the phase response is linear for linear phase filters. Linear phase can be found in FIR filters and Bessel filters. Because of the constant group delay in linear phase filter, it eases the design as constant delays can be implemented to compensate the phase shift in filters. Linear phase filter are thus chosen as the filter type in the system.
 
+\subsection*{Phase response and group delay}
+One of properties in non-statical filters such as low-pass and band-pass filters are the phase shift. For a filters such as the Butterworth low-pass filter, the phase shift begins at the frequency at one decade below the cutoff frequency and ends one decade above. The phase shift in-between for most analog filter except Bessel filter, have a non-linear phase response. Because of the phase response is non-linear, the group-delay will likewise not be linear as seen in \autoref{fig:groupDelayIirPrev}.
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.435\textwidth}
+\includegraphics[width=\linewidth]{groupDelayIirPrev}
+	\caption{Group delay of a 4th order IIR filter.}
+	\label{fig:groupDelayIirPrev}
+\end{subfigure}
+\hspace{6mm} 
+\begin{subfigure}[t]{0.47\textwidth}
+\includegraphics[width=\linewidth]{groupDelayFirPrev}
+	\caption{Group delay of a 50th order FIR filter.}
+	\label{fig:groupDelayFirPrev}
+\end{subfigure}
+\caption{Group delay of IIR and FIR filter.}
+\label{fig:filterGroupDelay}
+\end{figure}
+
+The group delay is an important parameter to take into account, as it specifies the sample delay for each frequencies. 1 sample delay is equivalent to 20.83 $\mu$s in a 48 kHz system. \autoref{fig:groupDelayIirPrev} shows that the group delay for IIR filters is non-linear with a peak at the normalized frequency 0.25 $\pi rad$. To calculate the time delay at 0.25 $\pi$ rad following expression can be used:
+
+\begin{equation}
+t_{d}= \frac{n_{s}}{f_s}
+\end{equation}
+
+Where $n_{s}$ is the number of samples delayed and $f_s$ is the sampling rate. A non-linear group delay will be hard to compensate compared to a constant group delay, thus a constant group delay is desirable. To achieve a constant group delay a linear phase filter needed as the phase response is linear. Linear phase can be found in FIR filters and Bessel filters. Because of the constant group delay in linear phase filter, it eases the design as constant delays can be implemented to compensate the phase shift in filters. Because the Bessel filter do not have a very sharp cutoff compared to other filter types, a high order Bessel filter will be needed. A high order IIR however has risk of being unstable. FIR filters are therefore chosen as they have all the required properties and do not get unstable.
+
+
+\subsection*{Computational Constraints}
 Another subject to consider is the constraints regarding computational power to perform filter algorithms. For FIR filters the amount of instructions to compute the filter output increases by the filter order, as calculating each tap in the filter is equal to a multiply and accumulate. Therefore even though a very high order filter in theory is realizable, the computational constraint needs to be considered. The performance of the DSP is 100 MIPS. At a sample rate of 48 kHz, this will result in approximately 2083 instructions available in-between each sample. A 3000 order FIR filter for instance is thus not realizable on the platform with a sampling rate on 48 kHz as the DSP will not finish calculating the filter output in time before next sample. Designing FIR filters will therefore be difficult as the cutoff frequencies for all required filters are very low relative to the sampling rate. A cutoff frequency located far from the sampling rate results in a long impulse response for a FIR filter. To a achieve a steep cut more samples of the impulse response are needed thus increasing the order of the filter. A solution to avoid very high order filters is to downsample the signal. By downsampling the signal the impulse response of a equivalent filter at the same cutoff frequency is shortened and the amount of taps is therefore reduced. To downsample however requires an anti-aliasing filter to avoid aliasing. The order of the anti-aliasing filter should be high enough to attenuate frequencies above the new $fs/2$. Also the cutoff frequency may still be very low. To minimize the order of the anti-aliasing filters the signal is  downsampled by a factor of 2 until the lowest required band is achieved. By doing so the filter order for each anti-aliasing filter is kept low as the cutoff frequency of each band is closer to the sampling frequency.
 
 Applying the considerations to the system, following new overall system may be presented.
