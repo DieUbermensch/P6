@@ -130,8 +130,7 @@ The poles found in \autoref{eq:det_poles} are now inserted into \autoref{eq:tran
 H(z) = \frac{Y(z)}{X(z)} = \frac{\sum\limits_{k=0}^{M}b_kz^{-k}}{1 + \sum\limits_{k=1}^{N}a_kz^{-k}} 
 \label{eq:trans_standard}
 \end{align}
-
-Where $b_k$ are coefficient for the zeros and $a_k$ are the coefficient for the poles and N and M are the order of the filter. In some literature the sign of the  coefficients $a_k$ are turned thus giving $1 + \sum\limits_{k=1}^{N}a_kz^{-k}$. In this example the signs of the $a_k$ coeffiecients are not turned, thus a plus instead of a minus.
+Where $b_k$ are coefficient for the zeros and $a_k$ are the coefficient for the poles and N and M are the order of the filter. In some literature the sign of the  coefficients $a_k$ are turned thus giving $1 - \sum\limits_{k=1}^{N}a_kz^{-k}$. In this example the signs of the $a_k$ coeffiecients are not turned, thus a plus instead of a minus.
 
 To implement the digital filter the transfer function must be transformed back into discrete-time domain in order to implement it as CPU's such as microcontrollers and DSP's works in discrete-time domain. To do so, the inverse z-transformation is applied to the transfer function. \autoref{eq:trans_standard} is first rewritten into following:
 \begin{align}
