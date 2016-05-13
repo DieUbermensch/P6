@@ -45,7 +45,7 @@ $A_{stop}=-60 \enhed{dB}$
 
 The design method used for designing the filter is the Kaiser window method, explained in detail in \autoref{app:FIR_theory}. The reason for using the Kaiser window method is that it gives the approximate order of the filter and the beta value of the window applied to impulse reponse. This means that no trial and error method is needed to meet the requierments of the filter.
 
-With the specification stated and using the matlab script explained in \autoref{app:FIR_Matlab} which uses the FIR theoy explained in \autoref{app:FIR_theory} about the Kaiser window method, general FIR theory and deriving the coefficients of the filter, the following filter is given with quantisized coefficients, see \autoref{fig:band1_filt} for magnitude response and \autoref{fig:band1_filtPhase} for phase response. The order of the filter is 50, is a type 1 one FIR filter and has linear phase which means that the group delay is constant at 25 samples.  
+With the specification stated and using the matlab script explained in \autoref{app:FIR_Matlab} which uses the FIR theoy explained in \autoref{app:FIR_theory} about the Kaiser window method, general FIR theory and deriving the coefficients of the filter, the following filter is given with quantisized coefficients, see \autoref{fig:band1_filt} for magnitude response and \autoref{fig:band1_filtPhase} for phase response. The order of the filter is 50, it is a type 1 FIR filter and has linear phase which means that the group delay is constant at 25 samples.  
 
 \begin{figure}[H]
 \centering
@@ -62,7 +62,9 @@ With the specification stated and using the matlab script explained in \autoref{
 	\label{fig:band1_filtPhase}
 \end{figure}
 
+From \autoref{fig:band1_filt} it can be concluded that the filter meets the band requirements and has a constant group delay which means that spectral subtraction can be made from the output. This concludes the decimation filter. 
 
+\section{Interpolation filter}
 
 
   
