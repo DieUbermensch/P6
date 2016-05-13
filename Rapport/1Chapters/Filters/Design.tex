@@ -1,5 +1,5 @@
 \subsection*{Design}
-To take advantage of multirate processing extra octave bands have been added, see \autoref{tb:filterBands}, increasing the number of downsamples which results in the following bands:
+To take advantage of multirate processing extra octave bands have been added, see \autoref{tb:filterBands}, increasing the number of downsamples which results in the following bands given in \autoref{tb:filterBands} and seen in \autoref{fig:allBands}.
 \begin{table}[H]
 \centering
 \begin{tabular}{|c|c|c|c|}
@@ -17,41 +17,50 @@ Band 1 & 33,15       & 46,87       & 66,29       \\ \hline
 \label{tb:filterBands}
 \end{table}   
 
-The reason for downsampling seven times is the upper band edge (f2) of band 7. The bandwidth of band 7 until the 
+\begin{figure}[H]
+	\centering
+	\tikzsetnextfilename{allBands}
+	\input{figures/allBands.tex}
+	\caption{Overview of all band requirements}
+	\label{fig:allBands}
+\end{figure}
+The reason for downsampling seven times and not more or less is because of several reasons. Firstly the bandwidth of the decimation filter must not be influenced by the interpolation filter which would give a non flat frequency response so every band is set to have a center frequency 1/16 of Fs, secondly the lower the center frequency in relation to Fs the higher the filter order which is desired as low as possible, lastly increasing the number of downsamples increases the delay of the system which is not desired in relation to real time applications.       
+\todo[inline]{Skal det være mere begrundet? skal vi skrive at det er baseret på trial and error senere i forløbet?}
 
-Insert picture of bands.
+Because there will be downsampled by two for every octave band the following relation can be made between a band and Fs as seen on \autoref{fig:relFsBand}.
+\begin{figure}[H]
+	\centering
+	\tikzsetnextfilename{relativeFsBand}
+	\input{figures/relativeFsBand.tex}
+	\caption{Band relative to Fs}
+	\label{fig:relFsBand}
+\end{figure}
 
-Two points are selected giving the following specifications to the lowpass filter:
+From \autoref{fig:relFsBand} two points are selected giving the following specifications to the lowpass filter:
+
 $F_{pass}=3.000 \enhed{Hz}$\\
 $F_{stop}=-1 \enhed{dB}$\\
 $A_{pass}=6.500 \enhed{Hz}$\\
-$A_{stop}=-60 \enhed{dB}$\\
-$Fs=48000 \enhed{Hz}$
-The design method used for designing the filter is the Kaiser window method, explained in detail in \autoref{app:FIR_theory}. The reason for using the Kaiser window method is that it gives the approximate order of the filter and the beta value of the window applied to impulse reponse. This means that no trial and error method is needed to meet the requierments of the standard IEC 6964 (2001).
+$A_{stop}=-60 \enhed{dB}$
 
-With the specification stated and using the matlab script explained in \autoref{app:FIR_Matlab} which uses the FIR theoy explained in \autoref{app:FIR_theory} about the Kaiser window method and deriving the coefficients of the filter the following filter is calculated. 
+The design method used for designing the filter is the Kaiser window method, explained in detail in \autoref{app:FIR_theory}. The reason for using the Kaiser window method is that it gives the approximate order of the filter and the beta value of the window applied to impulse reponse. This means that no trial and error method is needed to meet the requierments of the filter.
 
-% \begin{figure}[H]
-% \centering
-% \begin{subfigure}[t]{0.47\textwidth}
-% 	\tikzsetnextfilename{Band1FiltZoom}
-% 	\scalebox{0.5}{
-% 	\input{figures/Band1FiltZoom.tex}}
-% 	\caption{x}
-% 	\label{fig:band1_filt}
-% \end{subfigure}
-% \hspace{6mm} 
-% \begin{subfigure}[t]{0.35\textwidth}
-% 	\tikzsetnextfilename{Band1FiltZoom}
-% 	\scalebox{0.5}{
-% 	\input{figures/Band1FiltZoom.tex}}
-% 	\caption{x}
-% 	\label{fig:band1_filtZoom}
-% \end{subfigure}
-% \caption{x}
-% \label{fig:band1_FiltOverview}
-% \end{figure}
+With the specification stated and using the matlab script explained in \autoref{app:FIR_Matlab} which uses the FIR theoy explained in \autoref{app:FIR_theory} about the Kaiser window method, general FIR theory and deriving the coefficients of the filter, the following filter is given with quantisized coefficients, see \autoref{fig:band1_filt} for magnitude response and \autoref{fig:band1_filtPhase} for phase response. The order of the filter is 50, is a type 1 one FIR filter and has linear phase which means that the group delay is constant at 25 samples.  
 
+\begin{figure}[H]
+\centering
+	\tikzsetnextfilename{Band1Filt}
+	\input{figures/Band1Filt.tex}
+	\caption{Calculated filter magnitude response with requirements.}
+	\label{fig:band1_filt}
+\end{figure}
+\begin{figure}[H]
+\centering
+	\tikzsetnextfilename{Band1Phase}
+	\input{figures/Band1Phase.tex}
+	\caption{Calculated filter phase response.}
+	\label{fig:band1_filtPhase}
+\end{figure}
 
 
 

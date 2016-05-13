@@ -1,0 +1,75 @@
+% This file was created by matlab2tikz.
+%
+%The latest updates can be retrieved from
+%  http://www.mathworks.com/matlabcentral/fileexchange/22022-matlab2tikz-matlab2tikz
+%where you can also make suggestions and rate matlab2tikz.
+%
+\begin{tikzpicture}
+
+\begin{axis}[%
+width=5.5in,
+height=2in,
+at={(0.758in,0.481in)},
+scale only axis,
+unbounded coords=jump,
+xmin=0,
+xmax=1,
+xlabel={Normalized frequency [fm/fs]},
+xmajorgrids,
+ymin=-60,
+ymax=10,
+ylabel={Magnitude [dB]},
+ymajorgrids,
+axis background/.style={fill=white}
+]
+\addplot [color=black!30!red,solid,forget plot]
+  table[row sep=crcr]{%
+0.1768	-5.5\\
+0.1768	-60\\
+};
+\addplot [color=black!30!red,solid,forget plot]
+  table[row sep=crcr]{%
+0.0078125	0.5\\
+0.015625	0.5\\
+0.03125	0.5\\
+0.0625	0.5\\
+0.0883883476483184	0.5\\
+0.0883883476483184	0.5\\
+0.0963881765879963	0.5\\
+0.105112051906714	0.5\\
+0.114625505400584	0.5\\
+0.125	0.5\\
+0.136313466583157	0.5\\
+0.14865088937534	0.5\\
+0.162104944331376	0.5\\
+0.176776695296637	0.5\\
+0.176776695296637	-1.6\\
+0.25	-16.5\\
+0.5	-41\\
+1	-55\\
+2	-60\\
+};
+\addplot [color=black!30!red,solid,forget plot]
+  table[row sep=crcr]{%
+0.0078125	-0.5\\
+0.015625	-0.5\\
+0.03125	-0.5\\
+0.0625	-0.5\\
+0.0883883476483184	-0.5\\
+0.0883883476483184	-0.5\\
+0.0963881765879963	-0.5\\
+0.105112051906714	-0.5\\
+0.114625505400584	-0.5\\
+0.125	-0.5\\
+0.136313466583157	-0.6\\
+0.14865088937534	-0.8\\
+0.162104944331376	-1.6\\
+0.176776695296637	-5.5\\
+0.176776695296637	-5.5\\
+0.25	-inf\\
+0.5	-inf\\
+1	-inf\\
+2	-inf\\
+};
+\end{axis}
+\end{tikzpicture}%
