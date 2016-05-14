@@ -15,11 +15,11 @@ As this chapter only discusses the theory behind IIR filters the first bullet po
 
 \section{Transformation between s- and z-domain}
 
-Before designing the filter, the type of transformation should be known. This is important since a the transformation type known as bilinear transform (Tustin's method) requires frequency warping (pre-warping) the frequencies. Two transformation methods will be discussed in this chapter and are the impulse invariant method and bilinear transform.
+Before designing the filter, the type of transformation should be known. This is important since the transformation bilinear transform (Tustin's method) requires frequency warping (pre-warping) the frequencies. Two transformation methods will be discussed in this chapter. These are impulse invariant method and bilinear transform.
 
 \subsection{Impulse Invariant Method}
 
-This methods is used if the exact frequency of the analog filter is desired. After deriving the transfer function of a analog filter in s-domain, an inverse Laplace-transformation is performed to achieve the impulse response of the analog filter. For a  first order Butterworth the transfer function may be expressed as:
+This methods is used if the exact frequency response of the analog filter is desired. After deriving the transfer function of a analog filter in s-domain, an inverse Laplace-transformation is performed to obtain the impulse response of the analog filter. For a  first order Butterworth the transfer function may be expressed as:
 
 \begin{equation}
 H(s) = \frac{G}{s-p} \Rightarrow h(t) = L^{-1}\left\lbrace \frac{G}{s-p} \right\rbrace = G\text{e}^{pt}
@@ -29,7 +29,7 @@ H(s) = \frac{G}{s-p} \Rightarrow h(t) = L^{-1}\left\lbrace \frac{G}{s-p} \right\
 \va{$p$}{is the pole location}{-}\\
 \end{where}
 
-Sampling the impulse response with the the sample period $T$ the impulse response may be expressed as $h[n] = h(nT)$ where $t = nT$. The z-transformation is then used on the impulse response h(t). The z-transformation is defined as:
+Sampling the impulse response with the the sample period $T$ the impulse response may be expressed as $h[n] = h(nT)$ where $t = nT$. The z-transformation is then applied on the impulse response h(t). The z-transformation is defined as:
 \begin{equation}
 X(z) = Z \left\lbrace x[n] \right\rbrace = \sum_{n=0}^{\infty}x[n]z^{-n}
 \end{equation}
@@ -49,7 +49,7 @@ Thus transforming a transfer function in s-domain to z-domain using impulse inva
 \begin{equation} \label{eq:z_transformation_example2}
 \frac{G}{s-p} \rightarrow \frac{G}{1-\text{e}^{pnT}z^{-1}}
 \end{equation}
-As the transformation is only valid for first order filters, following expression may be used if transforming higher order filters. To apply the expression the transfer function in s-domain must be split into partial fractions.
+As the transformation is only valid for first order filters, following expression may be used if transforming higher order filters. To apply the expression to transfer function in s-domain must be split into partial fractions.
 \begin{equation} \label{eq:z_transformation_example3}
 \sum_{k=1}^{M} \frac{G_k}{s-p_k} \rightarrow \sum_{k=1}^{M} \frac{G_k}{1-\text{e}^{p_knT}z^{-1}}
 \end{equation}
@@ -132,9 +132,9 @@ H(z) = \frac{Y(z)}{X(z)} = \frac{\sum\limits_{k=0}^{M}b_kz^{-k}}{1 + \sum\limits
 \end{align}
 Where $b_k$ are coefficient for the zeros and $a_k$ are the coefficient for the poles and N and M are the order of the filter. In some literature the sign of the  coefficients $a_k$ are turned thus giving $1 - \sum\limits_{k=1}^{N}a_kz^{-k}$. In this example the signs of the $a_k$ coeffiecients are not turned, thus a plus instead of a minus.
 
-To implement the digital filter the transfer function must be transformed back into discrete-time domain in order to implement it as CPU's such as microcontrollers and DSP's works in discrete-time domain. To do so, the inverse z-transformation is applied to the transfer function. \autoref{eq:trans_standard} is first rewritten into following:
+To implement the digital filter the transfer function must be transformed back into discrete-time domain in order to implement it into CPU's such as microcontrollers and DSP's as they work in discrete-time domain. To do so, the inverse z-transformation is applied to the transfer function. \autoref{eq:trans_standard} is first rewritten into following:
 \begin{align}
-Y(z) = \sum\limits_{k=0}^{M}(b_kz^{-k})X(z) -\sum\limits_{k=1}^{N}(a_kz^{-k})Y(z)
+Y(z) = \sum\limits_{k=0}^{M}b_kz^{-k}X(z) -\sum\limits_{k=1}^{N}a_kz^{-k}Y(z)
 \label{eq:z_domain_trans}
 \end{align}
 The time-shifting property is used as a part of the inverse z-transformation and is given as:
@@ -144,7 +144,7 @@ x[n-k] \xleftrightarrow{Z} z^{-k} X(z)
 \end{align}
 The inverse z-transformation is now applied and following difference equation is derived:
 \begin{align}
-y[n] = -\sum\limits_{k=1}^{N}a_ky[n-k] + \sum\limits_{k=0}^{M}b_kx[n-k]
+y[n] =  \sum\limits_{k=0}^{M}b_kx[n-k] -\sum\limits_{k=1}^{N}a_ky[n-k]
 \label{eq:time_domain2}
 \end{align}
 \autoref{eq:time_domain2} can then be implemented into a computer such as a DSP or microcontroller. Another topic is filter structures, which is a topic about how to implement filters efficiently. However since IIR-filters are not used in this project, no further discussion on the topic will be provided.

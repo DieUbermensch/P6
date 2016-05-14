@@ -1,21 +1,26 @@
 \chapter{Design Realization} \label{ch:designRealization}
-As the requirements are derived and the development platform is chosen, the system presented in \autoref{ch:overview} may be designed. Evaluating the concept design from \autoref{ch:overview} it is seen that the concept has four bands-pass filters and one high-pass that need to be designed.
-
-
-\section{Practical Design Considerations}
-
-Before designing the band-pass filters, RMS analysis, and compressor, practical design considerations needs to be done, as designing and simulating the system do not mean the system can be implemented because of hardware constraints. In this section following topics will be covered:
+As the requirements are derived and the development platform is chosen, the system presented in \autoref{ch:overview} may be designed. Evaluating the concept design from \autoref{ch:overview} it is seen that the concept has four bands-pass filters and one high-pass that need to be designed. 
+\begin{figure}[H]
+\centering
+\tikzsetnextfilename{SystemOverview}
+\scalebox{0.8}{
+\input{figures/MainSystemOverview.tex}}
+\caption{Block overview of the entire system. Black boxes are not static non changeable variable. Grey boxes are also static but has to be taken into account.}
+\label{fig:SystemOverview2}
+\end{figure}
+%\section{Practical Design Considerations}
+Before designing the band-pass filters, RMS analysis, and compressor, practical design considerations needs to be considered. This is necessary since the concept system may not be realizable due to to hardware constraints. Therefore this chapter will cover the In this section following topics will be covered:
 
 \begin{itemize}
 \item[•] Phase response and group delay.
-\item[•] Filter types.
 \item[•] Computational constraints.
+\item[•] Multirate signal processing with multistages.
 \end{itemize}
 
+
+\section{Phase response and group delay}
 As the signal needs to be reconstructed in the end of the system, it is desirable that the reconstructed signal do not have frequency bands which are out of phase compared to the original input signal. If the bands are out of phase the resulting sound may be unpleasant to listen to. Therefore a design requirement to the system is to ensure that the signals from each band are added together without changing the relative phase between each band.
 
-
-\subsection*{Phase response and group delay}
 One of properties in non-statical filters such as low-pass and band-pass filters are the phase shift. For a filters such as the Butterworth low-pass filter, the phase shift begins at the frequency at one decade below the cutoff frequency and ends one decade above. The phase shift in-between for most analog filter except Bessel filter, have a non-linear phase response. Because of the phase response is non-linear, the group-delay will likewise not be linear as seen in \autoref{fig:groupDelayIirPrev}.
 
 \begin{figure}[H]
@@ -44,22 +49,99 @@ t_{d}= \frac{n_{s}}{f_s}
 Where $n_{s}$ is the number of samples delayed and $f_s$ is the sampling rate. A non-linear group delay will be hard to compensate compared to a constant group delay, thus a constant group delay is desirable. To achieve a constant group delay a linear phase filter needed as the phase response is linear. Linear phase can be found in FIR filters and Bessel filters. Because of the constant group delay in linear phase filter, it eases the design as constant delays can be implemented to compensate the phase shift in filters. Because the Bessel filter do not have a very sharp cutoff compared to other filter types, a high order Bessel filter will be needed. A high order IIR however has risk of being unstable. FIR filters are therefore chosen as they have all the required properties and do not get unstable.
 
 
-\subsection*{Computational Constraints}
+\section{Computational Constraints}
 Another subject to consider is the constraints regarding computational power to perform filter algorithms. For FIR filters the amount of instructions to compute the filter output increases by the filter order, as calculating each tap in the filter is equal to a multiply and accumulate. Therefore even though a very high order filter in theory is realizable, the computational constraint needs to be considered. 
 
-The performance of the DSP is 100 MIPS. At a sample rate of 48 kHz, this will result in approximately 2083 instructions available in-between each sample. A 3000 order FIR filter for instance is thus not realizable on the platform with a sampling rate on 48 kHz as the DSP will not finish calculating the filter output in time before next sample. Designing FIR filters will therefore be difficult as the cutoff frequencies for all required filters are very low relative to the sampling rate. A cutoff frequency located far from the sampling rate results in a long impulse response for a FIR filter. To a achieve a steep cut more samples of the impulse response are needed thus increasing the order of the filter. 
+The performance of the DSP is 100 MIPS. At a sample rate of 48 kHz, this will result in approximately 2083 instructions available in-between each sample. A 10000 order FIR filter for instance is thus not realizable on the platform with a sampling rate on 48 kHz as the DSP will not finish calculating the filter output in time before next sample. This is true because the fastest way to compute the convolution between the input signal x[n] and the impulse response h[n] is by using a Multiply-Accumulate (MAC) instruction which takes 1 clock cycle to perform if a single MAC is used. This gives a total number of 10000 clock cycles to perform one single convolution. Designing FIR filters will therefore be difficult as the cutoff frequencies for all required filters are very low relative to the sampling rate. A cutoff frequency located far from the sampling rate results in a long impulse response for a FIR filter. To a achieve a steep cut more samples of the impulse response are needed thus increasing the order of the filter. 
 
-\subsection*{Multirate signal processing with Multistages}
-A solution to avoid very high order filters is to downsample the signal into a signal with a lower sampling rate. By downsampling the signal the impulse response of an equivalent FIR filter at the same cutoff frequency is shortened and the amount of taps is therefore reduced. To downsample however requires an anti-aliasing filter to avoid aliasing. The order of the anti-aliasing filter should be high enough to attenuate frequencies above the new $fs/2$. Also the cutoff frequency may still be very low. 
+\section{Multirate Signal Processing with Multistages}
+A solution to avoid very high order filters is to downsample the signal into a signal with a lower sampling rate. By downsampling the signal the impulse response of an equivalent FIR filter at the same cutoff frequency is shortened and the amount of taps is therefore reduced. In \autoref{fig:downsample_FIR} it is shown how decreasing the sampling rate by a integer factor of L is equivalent to increasing the cutoff frequency by a factor of L.
 
-To minimize the order of the anti-aliasing filters and amount of instruction to perform signal processing, the signal is downsampled by a factor of 2 until the lowest required band is achieved. An example and explanation of why a downsampling factor of 2 is more efficient than high downsampling factors is now explained. 
+% vis fordele ved multirate
+% - båndpas filter har en højere cutoff
+% - Ulempe er anti aliserings filter --> Høj orden
 
-A high downsampling factor e.g. 32
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.75\textwidth]{figures/downsample_FIR.pdf}
+\caption{}
+\label{fig:downsample_FIR}
+\end{figure}
 
+An example of how to reduce the order of the FIR filter by multirate is shown in \autoref{fig:fir_downsample}. \autoref{fig:fir_downsample1} is a 100 order FIR filter with a sampling frequency of 48 kHz and cutoff frequency at $\frac{fs}{10}$ and \autoref{fig:fir_downsample1} is a 50 order FIR filter with a sampling frequency of 24 kHz and cutoff frequency at $\frac{fs}{5}$. A Hanning window function is applied to both filters' impulse response. 
 
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.44\textwidth}
+\includegraphics[width=\linewidth]{fir_downsample1}
+	\caption{Frequency response of a FIR filter at $f_s$.}
+	\label{fig:fir_downsample1}
+\end{subfigure}
+\hspace{6mm} 
+\begin{subfigure}[t]{0.47\textwidth}
+\includegraphics[width=\linewidth]{fir_downsample2}
+	\caption{Frequency response of a FIR filter at $\frac{f_s}{2}$ with half the order.}
+	\label{fig:fir_downsample2}
+\end{subfigure}
+\caption{}
+\label{fig:fir_downsample}
+\end{figure}
 
+It is seen that the attenuation at the top of the first side lope is -43.97 dB for both filters, thus the frequency response of both are the same at $0 \leq f \leq 24 \text{kHz}$. Because the frequency bands for the multi-band compressor are placed low, a multirate system will be implemented into the system as this helps decreasing the filter orders.
+
+\subsection*{Avoiding Aliasing when Downsampling}
+To downsample however requires an anti-aliasing filter to avoid aliasing as seen in \autoref{fig:aliasing}. The bandwidth of the audio signal is assumed to be 0 Hz to 20 kHz at a sampling rate of 48 kHz. The anti-aliasing filter has two requirements. The  cutoff frequency should be low enough to limit the bandwidth and the order should be high enough to provide enough attenuation at the new sampling rate's at $\frac{f_s}{2}$. 
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.44\textwidth}
+\includegraphics[width=\linewidth]{aliasing1}
+	\caption{Signal bandwidth with sampling rate $f_s$.}
+	\label{fig:aliasing1}
+\end{subfigure}
+\hspace{6mm} 
+\begin{subfigure}[t]{0.47\textwidth}
+\includegraphics[width=\linewidth]{aliasing2}
+	\caption{Aliasing occurs when downsampling to sampling rate $\frac{f_s}{L}$ without anti-aliasing filter.}
+	\label{fig:aliasing2}
+\end{subfigure}
+\hspace{6mm}
+\begin{subfigure}[b]{0.44\textwidth}
+\includegraphics[width=\linewidth]{aliasing3}
+	\caption{Aliasing filter applied to reduce the signal bandwidth.}
+	\label{fig:aliasing3}
+\end{subfigure}
+\hspace{6mm} 
+\begin{subfigure}[b]{0.47\textwidth}
+\includegraphics[width=\linewidth]{aliasing4}
+	\caption{Downsampling no longer occurs.}
+	\label{fig:aliasing4}
+\end{subfigure}
+\caption{A anti-aliasing filter needs to applied to reduce the bandwidth to avoid aliasing when downsampling.}
+\label{fig:aliasing}
+\end{figure}
+
+% Same number of taps required
+If a high downsampling factor, L, is desired, then the order of the anti-aliasing will necessarily get bigger. A rule of thumb is the attenuation at $\frac{f_s}{2L}$ is approximately -60 dB, since an ideal brick wall low-pass filter is not realizable. As the frequency bands for the system is located at the lower spectrum, a high order anti-aliasing filter is needed to downsample the signal. As a high order anti-aliasing filter is not desirable, the downsampling is performed in multistages to ease the amount of computation. If the downsampling is performed with factor of 2 each time, then total amount of computation needed to perform filter algorithm is given as a geometric series:
+
+\begin{equation} \label{eq:z_transformation_example}
+\sum_{k=0}^{\infty}M \left( \frac{1}{2} \right)^k  = \frac{M}{1-\frac{1}{2}} = 2M
+\end{equation}
 
 By doing so the filter order for each anti-aliasing filter is kept low as the cutoff frequency of each band is closer to the sampling frequency. Also, the whole bandwidth of the audio signal is split into octave bands which is an advantages if an equalizer and spectrum analyser are desired.
+
+
+
+
+% Løsning:
+% - Flere Downsamplings
+% - Lavere ordens AA filtre
+% - samlet samme orden, men AA-filtre ved lavere sampling frekvens skal processeres færre gange
+% Processeringsmængden set fra den oprindelige samplingfrekvens er en geometrisk række
+
+% Example downsample in 4 multistages vs 1 downsampling stage
+
+
 
 Applying the considerations to the system, following new overall system may be presented.
 
