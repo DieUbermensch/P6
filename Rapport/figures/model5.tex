@@ -11,7 +11,6 @@
 \definecolor{mycolor5}{rgb}{0.46600,0.67400,0.18800}%
 %
 \begin{tikzpicture}
-
 \begin{axis}[%
 width=5in,
 height=2.5in,
@@ -19,7 +18,9 @@ at={(0.758in,0.481in)},
 scale only axis,
 xmin=100,
 xmax=1024,
-xlabel={Value in lookup tabel},
+xtick={100,200,300,400,500,600,700,800,900,100},
+xticklabels={0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0 },
+xlabel={RMS value [.]},
 xmajorgrids,
 ymin=0.1,
 ymax=2,

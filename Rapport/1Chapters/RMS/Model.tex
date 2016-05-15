@@ -7,14 +7,16 @@ From \autoref{app:journal_speaker_test3} the models are determined for the lower
 \item 132 Hz to 265 Hz
 \item 265 Hz to 530 Hz,
 \end{enumerate}
-Are created. The models are based on experiments documented in \autoref{app:journal_speaker_test3}. The model depicted in \autoref{fig:combineModelreport} shows how THD increases according to the RMS value. The RMS value should be seen as relative to the maximum achievable value in the system. 
+In these bands a compressor will be implemented and hence a worst case model of each band should be determined. The models are based on experiments documented in \autoref{app:journal_speaker_test3}. The models are depicted in \autoref{fig:combineModelreport} and shows how THD increases according to the RMS value. The RMS value should be seen as relative to the maximum achievable value in the system. The models are created from regression on discrete THD value calculated from microphone measurements. Hence the model of band 1 should not be considered valid unless an RMS value of atleast 0.25 is present.
 
 \begin{figure}[H]
     \centering
     \tikzsetnextfilename{BandModelCombineReport}
     \input{figures/BandModelCombine.tex}
-    \caption{4 Interpolated model describing the worst case THD in each band. Further described in \autoref{app:app:journal_speaker_test3}}
+    \caption{4 Interpolated model describing the worst case THD in each band. Further described in \autoref{app:journal_speaker_test3}}
     \label{fig:CombinedModelreport}
 \end{figure}
 
-\autoref{fig:combineModelreport}
+From \autoref{fig:CombinedModelreport} it should be noted that the models only describe the THD from single tone test. Compared with regular music which contains many single tones combined. However from the models can be concluded that the lower frequency should be compress more than the higher frequency bands. It gives means to choose a lower threshold for the 1 band than for second band and up. This correlates with the 1 band is subjected to the resonance frequency of the driver. Already in the second band the THD much more linear and can cope with a higher threshold. Looking at band 3 through 4 it should also be noted that the effect of only playing 1 for these measurements comes into play since it might not be possible to keep the THD under 10\% when at 0dBFS. 
+
+The conclusion on these models being that they should only be seen at guidance to show that the first two bands are most problematic.

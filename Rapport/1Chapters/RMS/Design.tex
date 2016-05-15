@@ -1,9 +1,29 @@
 \section{Design}
+Now that it is possible to determine approximately what threshold that should be used it is possible to determine how the attenuation should be calculated. Since the value being regulated on is an RMS value and the goal is calculated the needed attenuation for the RMS not to exceed the threshold. The attenuation can be calculated as the quotient of the threshold and RMS as seen in \autoref{eq:RMSAttenuation}.
+\begin{equation}\label{eq:RMSAttenuation}
+\text{Attenuation} = \frac{\text{Threshold}}{\text{RMS}}
+\end{equation}
+
+From the equation it is possible to determine exactly the need attenuation factor to apply the band. A graphical representation can be shown on \autoref{fig:GainOverview}.
 
 \begin{figure}[H]
 \centering
 \tikzsetnextfilename{Model5}
 \input{figures/model5.tex}
 \caption{Graph showing how much attenuation needed according to the RMS value}
-\label{fig:SystemOverview}
+\label{fig:GainOverview}
 \end{figure}
+
+The Attenuation values can the be adjusted according to the threshold desired. It is again important to know that every value above 1 will in the system be seen as 1, since a value lower than the threshold should always be sent through the system with no intervention.  
+
+
+\subsubsection{Attack and release time}
+The system will indirectly be introduced with an attack and release time which can be controlled through the sample time of the RMS algorithm. Increasing the samples used for the RMS calculation will increase attack and release time since the algorithm needs more time to process and regulate the output. The minimum amount of samples used in the algorithm will be determined by looking at the largest frequency in each band and determine how many samples need to represent an entire period. The first band have upper frequency of 66 Hz which has a period of $\frac{1}{66 \text{Hz}} \approx 0.015 \text{s} \approx 15 \text{ms}$. From equation \ref{eq:Minsample} it is possible to determine the minimum needed samples
+
+\begin{equation}\label{eq:Minsample}
+\text{Sample}= Something Awesome
+\end{equation} 
+
+Hence the minimum samples needed for detecting every possible frequency in the specific band there is need of XX samples.
+
+
