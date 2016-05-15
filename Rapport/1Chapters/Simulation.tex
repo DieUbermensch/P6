@@ -53,6 +53,13 @@ During the simulation the following settings has been applied to the subsystems:
 \end{itemize}
 
 \section{10 second simulation}
+In the following section a 10 second simulation is showed with a graphical output of each band, showed in \autoref{fig:SimulationComparisson}. As described above, the signal is a sweep from 0 Hz to 500 Hz in a 10 seconds duration. On the graphs the following color codes are used:
+\begin{itemize}
+\item Blue shows the gain applied in each band
+\item Red shows the RMS value calculated in the band
+\item Black shows the output which is feed to the up-sampling system.
+\end{itemize}
+
 \begin{figure}[H]
 \centering
 \begin{subfigure}[t]{0.49\textwidth}
@@ -86,3 +93,11 @@ During the simulation the following settings has been applied to the subsystems:
 \caption{Raw data}
 \label{fig:SimulationComparisson}
 \end{figure} 
+
+The simulations shows that each band from \autoref{fig:Band1Simulation} through \autoref{fig:Band4Simulation} functions as promised. The bands are attenuating as needed and functions all individually. It should be noted that the attack and release time is practically zero in the simulation. Furthermore it was not possible to show the output vs input in a logical way to show the system being linear. But it can be concluded that it is linear.
+
+ 
+
+
+
+
