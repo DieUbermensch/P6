@@ -18,13 +18,46 @@ This test was performed to investigated whether it is more pleasant to listen to
 \vspace{-5mm}
 Furthermore the speaker will be placed in a listing room to give as natural a response as possible. The room conforms with the ITU-R BS775-1 standard for multichannel systems.
 
-\subsection*{Test Setup}
+The clips used are originating from following songs:
+\vspace{-5mm}
+\begin{enumerate}
+\item Shots \& Squats by Vigiland
+\item Sultans Of Swings by Dire Straits
+\item Stormy Weather by Teitur
+\item Hearth Of Courage by Two Steps From Hell
+\end{enumerate}
+Test clips can be found on \path{CD://ListningTestFiles/RefX.wav} where X corresponds to the index number of the song.
+The Songs are mastered with the following effectblocks via Logic Pro:
 
+\noindent\begin{minipage}[t]{0.5\linewidth}
+    \textbf{Singleband:}
+    \begin{itemize}
+    \item 1 band in entire frequency spectrum
+    \item 12 dB attenuation at 0 dBFS
+    \item Attack time of 0.5 ms and release time of 1 ms
+    \end{itemize}
+    \end{minipage}%
+    \begin{minipage}[t]{0.5\linewidth}
+    \textbf{Multiband:}
+    \begin{itemize}
+    \item 1 band from 0 to 100 Hz
+    \item 1 band from 100 to 300 Hz
+    \item 1 band from 300 to 1000 Hz
+    \item 1 Limiter in entire frequency spectrum
+    \item Attack time of 0.5 ms and release time of 1 ms
+    \end{itemize}
+\end{minipage}\par\bigskip
+Test clips can be found on \path{CD://ListningTestFiles/MultiX.wav} and SingleX.wav respectively where X corresponds to the index number of the song.
+
+
+
+\subsection*{Test Setup}
+The setup inside the rooms is done as displayed on \autoref{figure:SpeakertestSetupListning}. The Person is placed in a chair in front of one speaker.
 \begin{figure}[H]
 \centering
 \tikzsetnextfilename{TestSetupListning}
 \begin{tikzpicture}
-\draw  (-4,4) rectangle (4,-3);
+\draw  (-4,3) rectangle (4,-2);
 \draw  (2,1) rectangle (1,0);
 \draw  (-2,0.5) ellipse (0.5 and 0.5);
 \node at (-2,1.25) {Person};
@@ -59,21 +92,17 @@ The producer for this experiment is described as follows:
 \begin{enumerate}
 \item Adjust volume of \gls{SPL} on all songs to approximately 80-83 dB.
 \item Place test person in chair and explain procedure to him
-\item Play \path{signal1.wav} and ask test subject to choose the most favourable clip.
-\item Play \path{signal2.wav} and ask test subject to choose the most favourable clip.
-\item Play \path{signal3.wav} and ask test subject to choose the most favourable clip.
-\item Play \path{signal4.wav} and ask test subject to choose the most favourable clip.
+\item Play \path{RefX.wav}
+\item Play \path{MultiX.wav} and ask test subject to choose the most favourable clip.
+\item Play \path{SingleX.wav} and ask test subject to choose the most favourable clip.
+\item Repeat step 3 through 4 with the X on the file incremented.
 \end{enumerate}
-
-The \path{test_signal.wav} can be found on:\\
-\scalebox{0.7}{
-\path{CD://Test/Lyttetest}}\\
 
 \section{Data Extraction}
 The answers given by the test subjects are located
 The recordings can be found on:\\
 \scalebox{0.7}{
-\path{CD://Test/Lyttetest.excel}}\\
+\path{CD://ListningTestFiles/Lyttetest.excel}}\\
 All of the data is inserted in tables where an x is placed on the outcome. The tables are shown in raw format in section \ref{sec:rawdata_listning}.
 
 
@@ -82,7 +111,7 @@ All of the data is inserted in tables where an x is placed on the outcome. The t
 The following sections shows tables where the discrete value of each trail is noted. A is multiband and B is singleband. The X marks the most favourable. 
 \begin{figure}[H]
 \centering
-\begin{subfigure}[t]{0.45\textwidth}
+\begin{subfigure}[t]{0.20\textwidth}
 \begin{table}[H]
 \centering
 \begin{tabular}{ccccc}
@@ -102,7 +131,8 @@ n        & A       & B       & A       & B      \\ \bottomrule
 \label{tab:shotsandsquats}
 \end{table}
 \end{subfigure}
-\begin{subfigure}[t]{0.45\textwidth}
+\hfill
+\begin{subfigure}[t]{0.20\textwidth}
 \begin{table}[H]
 \centering
 \begin{tabular}{ccccc}
@@ -122,7 +152,8 @@ n         & A        & B        & A       & B       \\ \bottomrule
 \label{tab:Sultansofswing}
 \end{table}
 \end{subfigure}
-\begin{subfigure}[t]{0.45\textwidth}
+\hfill
+\begin{subfigure}[t]{0.20\textwidth}
 \begin{table}[H]
 \centering
 \begin{tabular}{ccccc}
@@ -142,7 +173,8 @@ n       & A      & B      & A      & B      \\ \bottomrule
 \label{tab:stormyweather}
 \end{table}
 \end{subfigure}
-\begin{subfigure}[t]{0.45\textwidth}
+\hfill
+\begin{subfigure}[t]{0.20\textwidth}
 \begin{table}[H]
 \centering
 \begin{tabular}{ccccc}
@@ -169,13 +201,43 @@ n          & A         & B         & A         & B        \\ \bottomrule
 
 
 \section{Analysis}
+The Raw data is first visualized in a pie chart, which creates a overview of how the answers of the test were placed. In \autoref{fig:piechartsongs} it shows this overview.
+\begin{figure}[H]
+\centering
+\resizebox{0.6\textwidth}{!}{
+\tikzsetnextfilename{Piechartsongs}
+\begin{tikzpicture}
+[
+    pie chart,
+    slice type={comet}{blu},
+    slice type={legno}{rosso},
+    slice type={coltello}{giallo},
+    slice type={sedia}{viola},
+    slice type={caffe}{verde},
+    pie values/.style={font={\small}},
+    scale=2
+]
+%    \pie{2008}{73/comet,13/legno,7/sedia,7/coltello}
+%    \pie[xshift=2.2cm,values of coltello/.style={pos=1.1}]%
+%        {2009}{52/comet,23/legno,17/sedia,3/coltello,5/caffe}
+    \pie[values of caffe/.style={pos=1.1}]%
+       {}{87.5/comet,10/legno,2.5/caffe}
+%    \pie{2008}{87.5/comet,2.5/legno,10/sedia}
+    \legend[shift={(1.5cm,0.5cm)}]{{Multiband}/comet, {Uncertain}/caffe, {Singleband}/legno}
+%    \legend[shift={(3cm,-1cm)}]{{Chair (Manzano)}/sedia, {Coffee (Trieste)}/caffe}
+\end{tikzpicture}}
+\caption{Overall comparison of the answers}
+\label{fig:piechartsongs}
+\end{figure}
 
-The raw data is visualized in a bar chart showed in \autoref{fig:Barchartsongs}. The bars are plotted showing the singleband and multiband compared directly to each other.
-\begin{figure}
+The raw data is further visualized in a bar chart showed in \autoref{fig:Barchartsongs} showing more a more in-depth visualization acording to each song. The bars are plotted showing the singleband and multiband compared directly to each other.
+\begin{figure}[H]
 \centering
 \tikzsetnextfilename{Barchartsongs}
 \begin{tikzpicture}
 \begin{axis}[
+	width=3.0in,
+	height=2.5in,
     ybar,
 %    enlargelimits=0.15,
     legend style={at={(0.5,-0.15)},
@@ -197,30 +259,8 @@ The raw data is visualized in a bar chart showed in \autoref{fig:Barchartsongs}.
 \label{fig:Barchartsongs}
 \end{figure}
 
-The figure shows a strong tendency to the sound of a multiband compressor. Songs with a high using a high dynamic range shows a pattern of beeing more even more favourable with the mulitband compressor. This correlates to the fact that the singleband are to aggresive when attenuating. The sound becomes to distorted. This is especially the result of song 4. However the test result also shows that it becomes less important when more the clip contains more instruments in play at the same time. It shows that song 2 was slightly less attractive with the multiband. 
+\autoref{fig:piechartsongs} shows a strong tendency to the sound of a multiband compressor. Songs with a high using a high dynamic range shows a pattern of beeing more even more favourable with the mulitband compressor. This correlates to the fact that the singleband are to aggresive when attenuating. The sound becomes to distorted. This is especially the result of song 4. However, from \autoref{fig:Barchartsongs} the test result also shows that it becomes less important when more the clip contains more instruments in play at the same time. It shows that song 2 was slightly less attractive with the multiband. 
 
-\begin{tikzpicture}
-[
-    pie chart,
-    slice type={comet}{blu},
-    slice type={legno}{rosso},
-    slice type={coltello}{giallo},
-    slice type={sedia}{viola},
-    slice type={caffe}{verde},
-    pie values/.style={font={\small}},
-    scale=2
-]
-
-    \pie{2008}{73/comet,13/legno,7/sedia,7/coltello}
-    \pie[xshift=2.2cm,values of coltello/.style={pos=1.1}]%
-        {2009}{52/comet,23/legno,17/sedia,3/coltello,5/caffe}
-    \pie[xshift=4.4cm,values of caffe/.style={pos=1.1}]%
-        {2010}{56/comet,26/legno,9/sedia,7/coltello,2/caffe}
-
-    \legend[shift={(0cm,-1cm)}]{{Comet (Pordenone)}/comet, {Wood and furniture (Livenza)}/legno, {Knife (Maniago)}/coltello}
-    \legend[shift={(3cm,-1cm)}]{{Chair (Manzano)}/sedia, {Coffee (Trieste)}/caffe}
-
-\end{tikzpicture}
 
 \section{Error sources}
 
