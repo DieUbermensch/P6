@@ -1,4 +1,5 @@
 \chapter{Simulation}
+To make sure the theory will be performing as expected when implemented in the DSP a simulation will be performed before, to make sure every subsystem will function properly with each other. On \autoref{fig:OverallSimulation} an outline of the entire system is depicted. It shows how a signal is applied to the first down sampling and the applied to the following consecutive down-samplings. When the signal has reach the four lowest band, an RMS compressor is applied, before each step is up-sampled and ready for playback.
 
 \begin{figure}[H]
 \centering
@@ -7,7 +8,18 @@
 \caption{Overall view of the system being simulated}
 \end{figure}
 
+Under the simulation, the following settings are set/applied:
+\begin{itemize}
+\item The sampling frequency is 48 kHz
+\item The test signal played with an amplitude of 0.5
+\item The test signal is a logarithmic sweep from 0 Hz to 500 Hz during a 10 second period
+\item The delays throughout the system is calculated based on each filter used in the simulation
+\end{itemize}
 
+The simulation file and needed scripts are found at \path{CD://something }
+
+\section{Subsystems}
+In the simulation the following subsystem depicted on \autoref{fig:SubsystemSimulation}, are used. On \autoref{fig:DownsamplingSimulation} the down-sampling system is shown. It shows how the signal is first filtered followed by subtracting it from the original signal and finally down-sampled. \autoref{fig:UpsamplingSimulation} shows the upsampling system where it shows how the upsampling flow of the signal is. Namely how the signal is zero-padded followed by an lowpass filtering and then applied a gain of 2 corresponding with the up-samplings factor. \autoref{fig:RMSCompressorSimulation} Shows the compressor algorithm applied in the simulation. The compressor calculates the RMS where an if statement determined whether a gain of 1 or the model should be used. When the gain has been determined it is multiplied on before being ready for up-sampling. 
 \begin{figure}[H]
 \centering
 \begin{subfigure}[t]{0.49\textwidth}
@@ -32,6 +44,13 @@
 \caption{View of the subsystems found in figure \ref{fig:OverallSimulation}}
 \end{figure}
 
+
+During the simulation the following settings has been applied to the subsystems:
+\begin{itemize}
+\item The filters, both up and down-sampling has been fitted with quantized filter coefficients corresponding with a 16-bit fixed point architecture.
+\item The RMS compressor is fitted with a threshold of 0.2 
+\item The up and down-samplings factor is 2.
+\end{itemize}
 
 \section{10 second simulation}
 \begin{figure}[H]
