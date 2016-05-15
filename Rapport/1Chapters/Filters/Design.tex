@@ -1,4 +1,3 @@
-\subsection*{Design}
 To take advantage of multirate processing extra octave bands have been added, see \autoref{tb:filterBands}, increasing the number of downsamples which results in the following bands given in \autoref{tb:filterBands} and seen in \autoref{fig:allBands}.
 \begin{table}[H]
 \centering
@@ -38,9 +37,9 @@ Because there will be downsampled by two for every octave band the following rel
 
 From \autoref{fig:relFsBand} two points are selected giving the following specifications to the lowpass filter:
 
-$F_{pass}=3.000 \enhed{Hz}$\\
-$F_{stop}=-1 \enhed{dB}$\\
-$A_{pass}=6.500 \enhed{Hz}$\\
+$\omega_{pass}=3.000\textrm{ Hz }\cdot 2/Fs=0.1250 \enhed{rad/sample}$\\
+$A_{pass}=-1 \enhed{dB}$\\
+$\omega_{stop}=6.500\textrm{ Hz }\cdot 2/Fs=0.2708 \enhed{rad/sample}$\\
 $A_{stop}=-60 \enhed{dB}$
 
 The design method used for designing the filter is the Kaiser window method, explained in detail in \autoref{app:FIR_theory}. The reason for using the Kaiser window method is that it gives the approximate order of the filter and the beta value of the window applied to impulse reponse. This means that no trial and error method is needed to meet the requierments of the filter.
@@ -65,6 +64,29 @@ With the specification stated and using the matlab script explained in \autoref{
 From \autoref{fig:band1_filt} it can be concluded that the filter meets the band requirements and has a constant group delay which means that spectral subtraction can be made from the output. This concludes the decimation filter. 
 
 \section{Interpolation filter}
+The interpolation filter as mentioned before must be designed so it does not influence the bandwidth of the decimated signal therefore the passband of the interpolation filter must be larger than stopband of the decimation filter. This means that the passband of the filter must be above 0.3 rad/sample, while there must be an attenuation of minimum 60 dB at 1 rad/sample (Fs/2). From these demands the following demands are set for the interpolation filter
+\todo[inline]{Oppenheim reference}
 
+$\omega_{pass}=0,3 \enhed{rad/sample}$\\
+$A_{pass}=0 \enhed{dB}$\\
+$\omega_{pass}=1 \enhed{rad/sample}$\\
+$A_{pass}=-60 \enhed{dB}$
 
-  
+A buffer is given to both $\omega_{pass}$ and $\omega_{stop}$ because of quantization, so the following requirements are set for the filter.
+
+$\omega_{pass}=0,3 \enhed{rad/sample}$\\
+$A_{pass}=0 \enhed{dB}$\\
+$\omega_{pass}=0,8 \enhed{rad/sample}$\\
+$A_{pass}=-60 \enhed{dB}$
+
+ If the kaiser window method is used and the same FIR theory and matlab script is used as with the decimatino filter the following filter is given with quatisized coefficient, see for magnitude response and for phase response. The order of the filter is XX, it is a type 1 FIR filter and has linear phase with a group delay of XX samples.
+
+\todo[inline]{Magnitude response figure}
+
+\todo[inline]{Phase response figure}
+
+From XX it can be verified that the filter meets the requirements sat up for the filter. It is seen that the interpolation filter does not attenuate before after the stopband bandwidth of the decimation filter (0,3 rad/sample) and has an attenuation of at least 60 dB at 1 rad/sample. On XX the decimation filter and interpolation filter´s magnitude response is seen.  
+
+\todo[inline]{Magnitude response figure of decimation and interpolation filter}
+
+The decimation and interpolation filter is now designed with quantisized values. The implementation of the filters can be seen in XX.    
