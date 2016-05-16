@@ -1,0 +1,29 @@
+\chapter{Main program implementation}
+The implementation is done using a main program which controls scheduling of the program while assembler functions are called to run critical algorithms. Therefore this chapter will go through the schedueling of the code, the different functions implemented, and how they are called in C to Assembler to get an overview of the implemented program. There are four function which can be called from the main program:
+\begin{itemize}
+\item downFunc, which is a decimation block showed in figure \textbf{XX}.
+\item upFunc, which is a interpolation block showed in figure \textbf{XX}.
+\item delay, which is a delay block used to delay a sample by X samples.
+\item RMS, which is a RMS block showed in figure \textbf{XX}. 
+\end{itemize}
+These blocks will be described in detail in later chapters while this chapter will only focus on the main program. The main code is implemented in C and not assembler because C code is a high language while Assembler is a low language. Assembler is much better computational wise because the programmer has much more control over the processor, but it is much harder to get an overview of a large software, therefore the main program is made in C and Assembler is used to run the critical algorithms which if made in C would result in an increased number of instructions which is not desired. 
+
+The main program is first and foremost used to initialize all components of the program such as memory, registers and functions, but this will not be described more in this chapter but can be found explained in detail in appendix \textbf{XX APPENDIX}
+
+As described in \textbf{XX} using a multirate system consisting of decimating and interpolating by two results in a geometric series, where the first stage of decimation and interpolation runs every sample, the first decimated stage runs every second sample and so fourth. If all of the seven multistages are schedueled the following scheduele is obtained.    
+
+\todo[inline]{Schedueling table}
+
+Using this schedueling a sample consist of the following parts:
+\begin{itemize}
+\item Decimation stage 1.
+\item Interpolation stage 1.
+\item Decimation or interpolation stage 2.
+\item Decimation or interpolation at either stage 3, 4, 5, 6 or 7. 
+\item RMS function if decimation is runned at stage 5, 6 or 7.
+\end{itemize}
+
+A code example of a sample is given in \textbf{XX} 
+
+\todo[inline]{sample code}
+ 
