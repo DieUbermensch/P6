@@ -8,11 +8,69 @@ The implementation is done using a main program which controls scheduling of the
 \end{itemize}
 These blocks will be described in detail in later chapters while this chapter will only focus on the main program. The main code is implemented in C and not assembler because C code is a high language while Assembler is a low language. Assembler is much better computational wise because the programmer has much more control over the processor, but it is much harder to get an overview of a large software, therefore the main program is made in C and Assembler is used to run the critical algorithms which if made in C would result in an increased number of instructions which is not desired. 
 
-The main program is first and foremost used to initialize all components of the program such as memory, registers and functions, but this will not be described more in this chapter but can be found explained in detail in appendix \textbf{XX APPENDIX}
+The main program is first and foremost used to initialize all components of the program such as memory, registers and functions, refer to appendix \textbf{XX} for a detailed description of the setup of the audiocodec. 
 
-As described in \textbf{XX} using a multirate system consisting of decimating and interpolating by two results in a geometric series, where the first stage of decimation and interpolation runs every sample, the first decimated stage runs every second sample and so fourth. If all of the seven multistages are schedueled the following scheduele is obtained.    
+Memory for assembler is initialized using a big array in C called "array[20000]" where all variables, coefficients and data buffers etc is placed in. This is done by knowing the start adress of array and setting the variable in assembler relative to the start adress or initializing coefficient using for loops. An example of adressing variables in assembler is seen in \autoref{tb:schedueling}.
 
-\todo[inline]{Schedueling table}
+\begin{lstlisting}[language={[x86masm]Assembler}, caption = {Adressing assembler},label={listingAdressing}]
+startAddr	.set	0x001860
+bCoeff		.set	0+startAddr
+dataIn1		.set	101+startAddr
+firOut1		.set	160+startAddr
+i1			.set	180+startAddr ; Data pointer
+k1			.set	181+startAddr ; FIR output pointer
+b1			.set	182+startAddr ; Band pass filter data pointer
+d1			.set	183+startAddr ; Delay pointer
+\end{lstlisting}
+
+As described in \textbf{XX} using a multirate system consisting of decimating and interpolating by two results in a geometric series, where the first stage of decimation and interpolation runs every sample, the first decimated stage runs every second sample and so fourth. If all of the seven multistages are schedueled the following scheduele is obtained as seen on \autoref{tb:schedueling}.    
+
+
+
+% Please add the following required packages to your document preamble:
+% \usepackage[table,xcdraw]{xcolor}
+% If you use beamer only pass "xcolor=table" option, i.e. \documentclass[xcolor=table]{beamer}
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+\rowcolor[HTML]{C0C0C0} 
+\multicolumn{16}{|c|}{\cellcolor[HTML]{C0C0C0}Sample}                             \\ \hline
+\rowcolor[HTML]{C0C0C0} 
+1   & 2   & 3  & 4  & 5  & 6  & 7  & 8  & 9   & 10  & 11 & 12 & 13 & 14 & 15 & 16 \\ \hline
+D1  & D1  & D1 & D1 & D1 & D1 & D1 & D1 & D1  & D1  & D1 & D1 & D1 & D1 & D1 & D1 \\ \hline
+U1  & U1  & U1 & U1 & U1 & U1 & U1 & U1 & U1  & U1  & U1 & U1 & U1 & U1 & U1 & U1 \\ \hline
+U2  & D2  & U2 & D2 & U2 & D2 & U2 & D2 & U2  & D2  & U2 & D2 & U2 & D2 & U2 & D2 \\ \hline
+U16 & D16 & U4 & D4 & U8 & D8 & U4 & D4 & U32 & D32 & U4 & D4 & U8 & D8 & U4 & D4 \\ \hline
+\rowcolor[HTML]{C0C0C0} 
+\multicolumn{16}{|c|}{\cellcolor[HTML]{C0C0C0}Sample}                             \\ \hline
+\rowcolor[HTML]{C0C0C0} 
+17  & 18  & 19 & 20 & 21 & 22 & 23 & 24 & 25  & 26  & 27 & 28 & 29 & 30 & 31 & 32 \\ \hline
+D1  & D1  & D1 & D1 & D1 & D1 & D1 & D1 & D1  & D1  & D1 & D1 & D1 & D1 & D1 & D1 \\ \hline
+U1  & U1  & U1 & U1 & U1 & U1 & U1 & U1 & U1  & U1  & U1 & U1 & U1 & U1 & U1 & U1 \\ \hline
+U2  & D2  & U2 & D2 & U2 & D2 & U2 & D2 & U2  & D2  & U2 & D2 & U2 & D2 & U2 & D2 \\ \hline
+U16 & D16 & U4 & D4 & U8 & D8 & U4 & D4 & U64 & D64 & U4 & D4 & U8 & D8 & U4 & D4 \\ \hline
+\rowcolor[HTML]{C0C0C0} 
+\multicolumn{16}{|c|}{\cellcolor[HTML]{C0C0C0}Sample}                             \\ \hline
+\rowcolor[HTML]{C0C0C0} 
+33  & 34  & 35 & 35 & 37 & 38 & 39 & 40 & 41  & 42  & 43 & 44 & 45 & 46 & 47 & 48 \\ \hline
+D1  & D1  & D1 & D1 & D1 & D1 & D1 & D1 & D1  & D1  & D1 & D1 & D1 & D1 & D1 & D1 \\ \hline
+U1  & U1  & U1 & U1 & U1 & U1 & U1 & U1 & U1  & U1  & U1 & U1 & U1 & U1 & U1 & U1 \\ \hline
+U2  & D2  & U2 & D2 & U2 & D2 & U2 & D2 & U2  & D2  & U2 & D2 & U2 & D2 & U2 & D2 \\ \hline
+U16 & D16 & U4 & D4 & U8 & D8 & U4 & D4 & U32 & D32 & U4 & D4 & U8 & D8 & U4 & D4 \\ \hline
+\rowcolor[HTML]{C0C0C0} 
+\multicolumn{16}{|c|}{\cellcolor[HTML]{C0C0C0}Sample}                             \\ \hline
+\rowcolor[HTML]{C0C0C0} 
+49  & 50  & 51 & 52 & 53 & 54 & 55 & 56 & 57  & 58  & 59 & 60 & 61 & 62 & 63 & 64 \\ \hline
+D1  & D1  & D1 & D1 & D1 & D1 & D1 & D1 & D1  & D1  & D1 & D1 & D1 & D1 & D1 & D1 \\ \hline
+U1  & U1  & U1 & U1 & U1 & U1 & U1 & U1 & U1  & U1  & U1 & U1 & U1 & U1 & U1 & U1 \\ \hline
+U2  & D2  & U2 & D2 & U2 & D2 & U2 & D2 & U2  & D2  & U2 & D2 & U2 & D2 & U2 & D2 \\ \hline
+U16 & D16 & U4 & D4 & U8 & D8 & U4 & D4 &     &     & U4 & D4 & U8 & D8 & U4 & D4 \\ \hline
+\end{tabular}
+\caption{Schedueling (D1 = downFunc1, D2 = downFunc2 etc.)(U1 = upFunc1, U2 = upFunc2 etc.).}
+\label{tb:schedueling}
+\end{table}
+
 
 Using this schedueling a sample consist of the following parts:
 \begin{itemize}
@@ -23,7 +81,38 @@ Using this schedueling a sample consist of the following parts:
 \item RMS function if decimation is runned at stage 5, 6 or 7.
 \end{itemize}
 
-A code example of a sample is given in \textbf{XX} 
+A listing example of a sample is given in \textbf{XX} 
 
-\todo[inline]{sample code}
- 
+\begin{lstlisting}[language=C, caption = {Sample 1},label={listingSample}]
+/////// SAMPLE 1 ///////
+    	while((Rcv & I2S0_IR) == 0); 							
+	    audioIn = I2S0_W0_MSW_R;  
+	    audioIn = (long)audioIn*volume>>7;	
+	    // DOWN
+		    downFunc1(audioIn); 			
+			band1 = (long)array[184]*gainBand1>>7; RMS1bandValue = RMScalculate(RMS1bandBuffer,band1,&RMS1bandPtr, &RMS1bandSum);				
+			down1 = array[185];							
+		// DELAY			
+			delayVar1 = delayB1(band1);
+		// UP
+			up16 = upFunc16(up32,delayVar16);
+			up2 = upFunc2(up4,delayVar2);
+			up1 = upFunc1(up2,delayVar1);
+		
+	    while((Xmit & I2S0_IR) == 0);  					
+		if (byPass == 1){ I2S0_W0_MSW_W = audioIn; I2S0_W1_MSW_W = audioIn;} else { I2S0_W0_MSW_W = up1; I2S0_W1_MSW_W = up1;} 
+\end{lstlisting}
+Where: \\
+- int16 audioIn, contains the input sample from the codec. \\
+- uint8 volume, contains the value of the master volume. \\
+- int16 upX, contains the output sample of upFuncX \\
+- int16 band1, contains the spectral subtracted output of downFunc. \\
+- int16 down1, contains the downsampled output of downFunc. \\
+- int16 delayVarX, contains a delayed output of a band. \\
+- int16 RMSXbandValue, contains a calculated RMS value of a band.
+
+The listing shows how a sample 1 of the schedueling in \autoref{tb:schedueling} is processed in the main program. A sample starts by waiting until a new sample has arrived which happens if "Rcv" and "I2S0\_IR" is equal to 1. The sample is then read into "audioIn" where a volume control is applied in line 4. Decimation is then done using downFunc1 with the input "audioIn" for the first stage. From downFunc1 two outputs "band1" and "down1" is read directly from. If decimation was done in the second stage the input for downFunc2 is the decimated signal "down1" and the output would be "band2" and "down2".
+
+"Band1" is read into delayB1 which delays the sample X time dependent on which band it is, where the output is "delayVar1". The delayed sample is the read into the interpolation functions upFuncX. In this sample upFunc16, upFunc2 and upFunc1 runs. The input for the function is both a specific band and the upsampled signal. After the signal has been upsampled a sample has to be outputted, which is done in the same way as reading in an input. A while loop is repeated until the sample is ready to be outputtet, here either a bypassed signal or the upsampled can be ouputtet dependent on the variable "byPass". The sample is inputted in mono but outputtet as stereo. 
+
+
