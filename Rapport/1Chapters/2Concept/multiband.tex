@@ -1,3 +1,52 @@
 \section{Single-band vs multi-band system}
-This section will examine if the system should use multi-band or single-band. This examination will be done by performing a listening test, of both a single-band and a multi-band compressor, to conclude if a multi-band compressor sounds better than a single-band compressor. 
+This section will examine if the system should use multi-band or single-band. When the system is to be designed a question whether one or more bands should be implemented arises. The multiband solution could create a to unnatural frequency response, making the sound more unpleasant. If one one of the bands are attenuate to much it could result in a band acting like a notch filter. This could potentially remove the "richness" of the bass. The singleband solution will be attenuating every frequency keeping the amplitude relation intact. However the singleband will also be attenuating many frequencies which are not contributing to the problem. In order to determine which solution is to be preferred a listning test is conducted of both a single-band and a multi-band compressor, to conclude if a multi-band compressor sounds better than a single-band compressor. 
 
+In the test a group of 10 people were subjected to the following effectblocks:
+\noindent\begin{minipage}[t]{0.5\linewidth}
+    \textbf{Singleband:}
+    \begin{itemize}
+    \item 1 band in entire frequency spectrum
+    \item 12 dB attenuation at 0 dBFS
+    \item Attack time of 0.5 ms and release time of 1 ms
+    \end{itemize}
+    \end{minipage}%
+    \begin{minipage}[t]{0.5\linewidth}
+    \textbf{Multiband:}
+    \begin{itemize}
+    \item 1 band from 0 to 100 Hz
+    \item 1 band from 100 to 300 Hz
+    \item 1 band from 300 to 1000 Hz
+    \item 1 Limiter in entire frequency spectrum
+    \item Attack time of 0.5 ms and release time of 1 ms
+    \end{itemize}
+\end{minipage}\par\bigskip
+
+The test concluded with the following results which can be seen in \autoref{fig:piechartsongsReport}. A rather large portion of the test person were favourable of the mulitband compressor because of the lower attenuation which ultimately created less distortion than the single band. The test is fully described in \autoref{app:journal_ListningTest}.
+
+\begin{figure}[H]
+\centering
+\resizebox{0.4\textwidth}{!}{
+\tikzsetnextfilename{Piechartsongs}
+\begin{tikzpicture}
+[
+    pie chart,
+    slice type={comet}{blu},
+    slice type={legno}{rosso},
+    slice type={coltello}{giallo},
+    slice type={sedia}{viola},
+    slice type={caffe}{verde},
+    pie values/.style={font={\small}},
+    scale=2
+]
+%    \pie{2008}{73/comet,13/legno,7/sedia,7/coltello}
+%    \pie[xshift=2.2cm,values of coltello/.style={pos=1.1}]%
+%        {2009}{52/comet,23/legno,17/sedia,3/coltello,5/caffe}
+    \pie[values of caffe/.style={pos=1.1}]%
+       {}{87.5/comet,10/legno,2.5/caffe}
+%    \pie{2008}{87.5/comet,2.5/legno,10/sedia}
+    \legend[shift={(1.5cm,0.5cm)}]{{Multiband}/comet, {Uncertain}/caffe, {Singleband}/legno}
+%    \legend[shift={(3cm,-1cm)}]{{Chair (Manzano)}/sedia, {Coffee (Trieste)}/caffe}
+\end{tikzpicture}}
+\caption{Overall comparison of the answers. This figure is extracted from \autoref{app:journal_ListningTest}}
+\label{fig:piechartsongsReport}
+\end{figure}
