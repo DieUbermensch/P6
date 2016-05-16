@@ -122,7 +122,7 @@ To downsample however requires an anti-aliasing filter to avoid aliasing as seen
 \end{figure}
 
 % Same number of taps required
-If a high downsampling factor, L, is desired, then the order of the anti-aliasing will necessarily get bigger. A rule of thumb is the attenuation at $\frac{f_s}{2L}$ is approximately -60 dB, since an ideal brick wall low-pass filter is not realizable. As the frequency bands for the system is located at the lower spectrum, a high order anti-aliasing filter is needed to downsample the signal. As a high order anti-aliasing filter is not desirable, the downsampling is performed in multistages to ease the amount of computation. If the downsampling is performed with factor of 2 each time, then total amount of computation needed to perform filter algorithm is given as a geometric series:
+If a high downsampling factor, L, is desired, then the order of the anti-aliasing will necessarily get bigger. A rule of thumb is the attenuation at $\frac{f_s}{2L}$ is approximately -60 dB, since an ideal brick wall low-pass filter is not realizable. As the frequency bands for the system is located at the lower spectrum, a high order anti-aliasing filter is needed to downsample the signal. As a high order anti-aliasing filter is not desirable, the downsampling is performed in multistages to ease the amount of computation. If the downsampling is performed with factor of 2 each time, then the total amount of computation needed to perform the filter algorithm for all stages is given as a geometric series:
 
 \begin{equation} \label{eq:z_transformation_example}
 \sum_{k=0}^{\infty}M \left( \frac{1}{2} \right)^k  = \frac{M}{1-\frac{1}{2}} = 2M
@@ -141,8 +141,6 @@ By doing so the filter order for each anti-aliasing filter is kept low as the cu
 
 % Example downsample in 4 multistages vs 1 downsampling stage
 
-
-
 Applying the considerations to the system, following new overall system may be presented.
 
 \begin{figure}[H]
@@ -152,16 +150,13 @@ Applying the considerations to the system, following new overall system may be p
 \label{fig:designRealBlock}
 \end{figure}
 
-
-
-
 In comparison to previous system overview decimation, "HP and Decimator" and "interpolator" blocks are added to the system. The design of these blocks including the RMS and model will discussed in following sections.
 
 \todo{Husk at tilføje at vi anvender 8 baand.}
 
 \section{High-Pass filter and Decimator}
 
-A decimator is, as previously mentioned, a subsystem consisting of an anti-aliasing filter and a downsampler. If the signal is a combination of high and low frequencies, the anti-aliasing filter, filters high frequencies to avoid aliasing when downsampling. As the anti-aliasing essentially is a low-pass filter the chosen design choice takes advantages of the low-pass, so the remaining filter to be designed is a high-pass filter. By using a design technique called spectral inversion, a high-pass filter can be designed by subtracting the output of the anti-aliasing low-pass filter from the input signal. By doing so, a high pass filter is saved from the system. The decimation block is seen in figure \autoref{fig:designRealDecimator}.
+A decimator is, as previously mentioned, a subsystem consisting of an anti-aliasing filter and a downsampler. As the anti-aliasing essentially is a low-pass filter, applying a design technique called spectral inversion, to the low-pass filtered signal results in high-pass filter. Essentially applying this technique is equivalent to design a mirror filter to the low-pass filter. The technique saves the need for designing a mirror filter to the low-pass filter. The high-pass and decimation block is seen in figure \autoref{fig:designRealDecimator}.
 
 \begin{figure}[H]
 \centering
@@ -170,12 +165,12 @@ A decimator is, as previously mentioned, a subsystem consisting of an anti-alias
 \label{fig:designRealDecimator}
 \end{figure}
 
-To apply spectral inversion to achieve a high-pass filter, it required to apply a delay of the input signal before subtraction. This is due to the group delay of the anti-aliasing filter, and to apply spectral inversion, the phase between the signal must be intact.
+A great advantage of using this technique rather than designing a mirror filter, is the algorithm to perform it, is only a subtraction. To apply spectral inversion, a delay of the input signal before subtraction is required. This is due to the delay of the anti-aliasing filter.
 
 
 \section{Interpolator}
 
-Opposite to the decimator is the interpolator. As it is desired to reconstruct the signal, upsampling is applied to the downsampled signal. To upsample the downsampled signal, zeros are added to the signal. Since the upsampling factor is 2, a zero is added in-between each sample. This adds high frequency components noise which is then filtered by using a low-pass filter. In this case the same anti-aliasing filter from the decimator is sufficient. The block diagram of the interpolator is seen in \autoref{fig:designRealInterpolator}.
+Opposite to the decimator is the interpolator. As it is desired to reconstruct the signal, upsampling is applied to the downsampled signal. To upsample the downsampled signal, zero-padding is applied to the signal. Since the upsampling factor is 2, a zero is added in-between each sample. This adds high frequency components which is then filtered by using a low-pass filter. The does not need to be the same filter as the anti-aliasing filter. The requirement for the upsampling filter is that the attenuation at $\frac{f_s}{2}$ of the zero-padded signal is high enough e.g. -60 dB. The block diagram of the interpolator is seen in \autoref{fig:designRealInterpolator}.
 
 \begin{figure}[H]
 \centering
@@ -184,12 +179,12 @@ Opposite to the decimator is the interpolator. As it is desired to reconstruct t
 \label{fig:designRealInterpolator}
 \end{figure}
 
-Applying the low-pass filter smooths the signal, but because every second sample is zero a gain of a factor of 2 needs to be applied to normalize the signal.
+After low-pass filtering the signal, a gain of 2 is applied.
 
 
 \section{RMS and Model}
 
-To design a RMS limiter a RMS analysis and a mathematical function describing the gain are needed. The input signal from a band is fed in parallel, into a RMS block, which calculates the RMS-value as the output. The output is sent to a "Model" block which essentially checks if the RMS value is above a threshold. If the RMS-value is above the threshold the "Model" will apply a gain derived from a mathematical expression to the band signal to attenuate it. If the RMS-value is below, the output will be a unity gain. The block digram of the RMS and model is seen in \autoref{fig:designRealRMS}.
+To design a RMS limiter, a RMS analysis and a mathematical function of the gain are needed. For each band, the signal is fed into a RMS block, which calculates the RMS-value. The RMS-value is sent to a Model-block which essentially checks if the RMS-value is above a defined threshold. If the RMS-value is above the threshold the model will apply a gain. If the RMS-value is below, the output will be a gain of 1. The block digram of the RMS and model is seen in \autoref{fig:designRealRMS}.
 
 \begin{figure}[H]
 \centering
@@ -198,13 +193,13 @@ To design a RMS limiter a RMS analysis and a mathematical function describing th
 \label{fig:designRealRMS}
 \end{figure}
 
-To determine the threshold of the "model", a test of the loudspeaker needs to be done. The purpose of the test is to examine at which RMS-level the loudspeaker is either performing bad or damaging itself. To perform a RMS-analysis the minimum aount of samples needed is the amount of samples to represent the lowest frequency in that band. This introduces a small attact time, meaning the RMS-limiter cannot catch fast transients.
+%To determine the threshold of the "model", a test of the loudspeaker needs to be done. The purpose of the test is to examine at which RMS-level the loudspeaker is either performing bad or damaging itself. To perform a RMS-analysis the minimum aount of samples needed is the amount of samples to represent the lowest frequency in that band. This introduces a small attact time, meaning the RMS-limiter cannot catch fast transients.
 
 
 
 \section{Complete system}
 
-The RMS limiter cannot protect the loudspeaker againt transients such as kicks in music and short spikes due to the small attack time. To avoid potential damage, a peak limiter is inserted in the upsampled 530 Hz band. The threshold of this limiter is set very high, as the main purpose it to protect the loudspeaker at cases where the RMS-limiter is not fast enough to respond. Another RMS-limiter is inserted in the upsampled 530 band. Because the signal is split into 4 bands, the 530 Hz band RMS-limiter ensures that the upsampled signal below 530 Hz do not exceed the threshold.
+The RMS limiter cannot protect the loudspeaker against transients such as kick drums and short spikes with high amplitude due to the small attack time in the RMS calculation. To avoid potential damage, a peak limiter is inserted in the upsampled 530 Hz band. The threshold of this limiter is set very high, as the main purpose it to protect the loudspeaker at cases where the RMS-limiter is not fast enough to respond. Another RMS-limiter is inserted in the upsampled 530 band. Because the signal is split into 4 bands, the 530 Hz band RMS-limiter ensures that the sum of all 4 bands do not exceed the threshold.
 
 \begin{figure}[H]
 \centering
