@@ -21,9 +21,18 @@ The Attenuation values can the be adjusted according to the threshold desired. I
 The system will indirectly be introduced with an attack and release time which can be controlled through the sample time of the RMS algorithm. Increasing the samples used for the RMS calculation will increase attack and release time since the algorithm needs more time to process and regulate the output. The minimum amount of samples used in the algorithm will be determined by looking at the largest frequency in each band and determine how many samples need to represent an entire period. The first band have upper frequency of 66 Hz which has a period of $\frac{1}{66 \text{Hz}} \approx 0.015 \text{s} \approx 15 \text{ms}$. From equation \ref{eq:Minsample} it is possible to determine the minimum needed samples
 
 \begin{equation}\label{eq:Minsample}
-\text{Sample}= Something Awesome
+\text{Sample}= \frac{\text{Desired Frequency}}{Desired Frequency}
 \end{equation} 
 
 Hence the minimum samples needed for detecting every possible frequency in the specific band there is need of XX samples.
+
+\section{Determine parameters}
+In order to determine the desired threshold for each band a subjective measure is taken.
+From \autoref{app:journal_speaker_test} it is Assumed that the gain throughout the system is 37 dB. With this gain it is possible to achieve sound pressures of upwards 105 dB. Assuming the 
+
+
+
+
+
 
 
