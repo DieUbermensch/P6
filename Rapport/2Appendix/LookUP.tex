@@ -1,0 +1,176 @@
+\chapter{Look Up table values}\label{app:LookupTables}
+\vspace{-0.75cm}
+The implemented lookup tables used in the DSP. 128 Values with a maximum step of 0.5 dB and a total attenuation of 22 dB. created with \path{CD://Compressor/LookUpTables.m}
+\vspace{-0.25cm}
+\renewcommand{\arraystretch}{0.85}
+\begin{table}[H]
+\centering
+\begin{subtable}[t]{0.30\linewidth}
+\centering
+\vspace{0pt}
+\begin{tabular}{lll}
+  \toprule
+n & Gain & Hexvalue \\
+  \midrule
+1 & 1.000 & 0x7fff \\ 
+2 & 0.909 & 0x745e \\ 
+3 & 0.833 & 0x6aab \\ 
+4 & 0.769 & 0x6277 \\ 
+5 & 0.714 & 0x5b6e \\ 
+6 & 0.667 & 0x5556 \\ 
+7 & 0.625 & 0x5000 \\ 
+8 & 0.588 & 0x4b4c \\ 
+9 & 0.556 & 0x471d \\ 
+10 & 0.526 & 0x435f \\ 
+11 & 0.500 & 0x4000 \\ 
+12 & 0.476 & 0x3cf4 \\ 
+13 & 0.455 & 0x3a2f \\ 
+14 & 0.435 & 0x37a7 \\ 
+15 & 0.417 & 0x3556 \\ 
+16 & 0.400 & 0x3334 \\ 
+17 & 0.385 & 0x313c \\ 
+18 & 0.370 & 0x2f69 \\ 
+19 & 0.357 & 0x2db7 \\ 
+20 & 0.345 & 0x2c24 \\ 
+21 & 0.333 & 0x2aab \\ 
+22 & 0.323 & 0x294b \\ 
+23 & 0.313 & 0x2800 \\ 
+24 & 0.303 & 0x26ca \\ 
+25 & 0.294 & 0x25a6 \\ 
+26 & 0.286 & 0x2493 \\ 
+27 & 0.278 & 0x238f \\ 
+28 & 0.270 & 0x2299 \\ 
+29 & 0.263 & 0x21b0 \\ 
+30 & 0.256 & 0x20d3 \\ 
+31 & 0.250 & 0x2000 \\ 
+32 & 0.244 & 0x1f39 \\ 
+33 & 0.238 & 0x1e7a \\ 
+34 & 0.233 & 0x1dc5 \\ 
+35 & 0.227 & 0x1d18 \\ 
+36 & 0.222 & 0x1c72 \\ 
+37 & 0.217 & 0x1bd4 \\ 
+38 & 0.213 & 0x1b3c \\ 
+39 & 0.208 & 0x1aab \\ 
+40 & 0.204 & 0x1a20 \\ 
+41 & 0.200 & 0x199a \\ 
+42 & 0.196 & 0x191a \\ 
+43 & 0.192 & 0x189e \\
+44 & 0.189 & 0x1827 \\  
+  \bottomrule
+\end{tabular}
+%\caption{Value 1 through 44}
+%\label{tbl:Lookup1through44}
+\end{subtable}\hfill
+\vspace{0.7cm}
+\begin{subtable}[t]{0.30\linewidth}
+\centering
+\vspace{0pt}
+\begin{tabular}{lll}
+  \toprule
+n & Gain & Hexvalue \\
+  \midrule
+45 & 0.185 & 0x17b5 \\ 
+46 & 0.182 & 0x1746 \\ 
+47 & 0.179 & 0x16dc \\ 
+48 & 0.175 & 0x1675 \\ 
+49 & 0.172 & 0x1612 \\ 
+50 & 0.169 & 0x15b2 \\ 
+51 & 0.167 & 0x1556 \\ 
+52 & 0.164 & 0x14fc \\ 
+53 & 0.161 & 0x14a6 \\ 
+54 & 0.159 & 0x1452 \\ 
+55 & 0.156 & 0x1400 \\ 
+56 & 0.154 & 0x13b2 \\ 
+57 & 0.152 & 0x1365 \\ 
+58 & 0.149 & 0x131b \\ 
+59 & 0.147 & 0x12d3 \\ 
+60 & 0.145 & 0x128d \\ 
+61 & 0.143 & 0x124a \\ 
+62 & 0.141 & 0x1208 \\ 
+63 & 0.139 & 0x11c8 \\ 
+64 & 0.137 & 0x1189 \\ 
+65 & 0.135 & 0x114d \\ 
+66 & 0.133 & 0x1112 \\ 
+67 & 0.132 & 0x10d8 \\ 
+68 & 0.130 & 0x10a0 \\ 
+69 & 0.128 & 0x106a \\ 
+70 & 0.127 & 0x1034 \\ 
+71 & 0.125 & 0x1000 \\ 
+72 & 0.123 & 0x0fce \\ 
+73 & 0.122 & 0x0f9d \\ 
+74 & 0.120 & 0x0f6c \\ 
+75 & 0.119 & 0x0f3d \\ 
+76 & 0.118 & 0x0f10 \\ 
+77 & 0.116 & 0x0ee3 \\ 
+78 & 0.115 & 0x0eb7 \\ 
+79 & 0.114 & 0x0e8c \\ 
+80 & 0.112 & 0x0e62 \\ 
+81 & 0.111 & 0x0e39 \\ 
+82 & 0.110 & 0x0e11 \\ 
+83 & 0.109 & 0x0dea \\ 
+84 & 0.108 & 0x0dc4 \\ 
+85 & 0.106 & 0x0d9e \\ 
+86 & 0.105 & 0x0d7a \\ 
+87 & 0.104 & 0x0d56 \\ 
+88 & 0.103 & 0x0d33 \\ 
+  \bottomrule
+\end{tabular}
+%\caption{Value 45 through 88}
+%\label{tbl:Lookup45through88}
+\end{subtable}\hfill
+\vspace{0.7cm}
+\begin{subtable}[t]{0.30\linewidth}
+\centering
+\vspace{0pt}
+\begin{tabular}{lll}
+  \toprule
+n & Gain & Hexvalue \\
+  \midrule
+89 & 0.102 & 0x0d10 \\ 
+90 & 0.101 & 0x0cee \\ 
+91 & 0.100 & 0x0ccd \\ 
+92 & 0.099 & 0x0cad \\ 
+93 & 0.098 & 0x0c8d \\ 
+94 & 0.097 & 0x0c6e \\ 
+95 & 0.096 & 0x0c4f \\ 
+96 & 0.095 & 0x0c31 \\ 
+97 & 0.094 & 0x0c14 \\ 
+98 & 0.093 & 0x0bf7 \\ 
+99 & 0.093 & 0x0bdb \\ 
+100 & 0.092 & 0x0bbf \\ 
+101 & 0.091 & 0x0ba3 \\ 
+102 & 0.090 & 0x0b89 \\ 
+103 & 0.089 & 0x0b6e \\ 
+104 & 0.088 & 0x0b54 \\ 
+105 & 0.088 & 0x0b3b \\ 
+106 & 0.087 & 0x0b22 \\ 
+107 & 0.086 & 0x0b09 \\ 
+108 & 0.085 & 0x0af1 \\ 
+109 & 0.085 & 0x0ad9 \\ 
+110 & 0.084 & 0x0ac2 \\ 
+111 & 0.083 & 0x0aab \\ 
+112 & 0.083 & 0x0a95 \\ 
+113 & 0.082 & 0x0a7e \\ 
+114 & 0.081 & 0x0a69 \\ 
+115 & 0.081 & 0x0a53 \\ 
+116 & 0.080 & 0x0a3e \\ 
+117 & 0.079 & 0x0a29 \\ 
+118 & 0.079 & 0x0a15 \\ 
+119 & 0.078 & 0x0a00 \\ 
+120 & 0.078 & 0x09ed \\ 
+121 & 0.077 & 0x09d9 \\ 
+122 & 0.076 & 0x09c6 \\ 
+123 & 0.076 & 0x09b3 \\ 
+124 & 0.075 & 0x09a0 \\ 
+125 & 0.075 & 0x098e \\ 
+126 & 0.074 & 0x097c \\ 
+127 & 0.074 & 0x096a \\ 
+128 & 0.073 & 0x0958 \\
+  \bottomrule
+\end{tabular}
+%\caption{Value 89 through 128}
+%\label{tbl:Lookup89through128}
+\end{subtable}
+\vspace{-1.7cm}
+\caption{Complete lookup table with 128 values in both decimal and hexvalues}\label{tbl:lookup}
+\end{table}
