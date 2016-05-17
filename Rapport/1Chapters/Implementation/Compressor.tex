@@ -22,28 +22,28 @@ _RMSband
 	MOV #0, AC1						; Reset AC1
 	MOV uns(*(#sumLow4)), AC1       ; Move unsigned LSB of sum into AC1
 	MOV uns(*(#sumHigh4))<<#16, AC2 ; Move unsigned MSB of sum into AC2
-	ADD AC2, AC1
-	SUB AC0, AC1					; Subtract AC0 from AC1 and save it in AC1	 
+	ADD AC2, AC1					; Add AC2 to AC1 and save in AC1
+	SUB AC0, AC1					; Subtract AC0/Sample from AC1/Sum and save it in AC1	 
 	MOV T0, HI(AC2)					; Move the value in T0 to the address
 	MPY T0, AC2, AC2				; Square AC0 and save it in AC2
-	SFTL AC2, #-15					; 
-	ADD AC2, AC1
-	MOV AC1, *(#sumLow4)
-	MOV HI(AC1), *(#sumHigh4)
-	MOV AC2, *AR0
+	SFTL AC2, #-15					; Bitshift the value in AC2 15 times left 
+	ADD AC2, AC1					; Add AC2 to AC1 and store in AC1
+	MOV AC1, *(#sumLow4)			; Move LSB in AC1 to sumLow4
+	MOV HI(AC1), *(#sumHigh4)		; Move MSB in AC1 to sumHigh4
+	MOV AC2, *AR0					; Move AC1 to the addr which AR0 points to
 	ADD #1,*(#ptrBuff4)				; Increment the data pointer
 	CMP *(#ptrBuff4)==#16,TC1		; Check if the data pointer should reset to 0
-	CALLCC resetptrBuff4, TC1
-	SFTL AC1, #-9
-	MOV AC1,*(#RMS3)
+	CALLCC resetptrBuff4, TC1		; If data pointer should be reset, call reset routine
+	SFTL AC1, #-9					; Divide by X to get mean
+	MOV AC1,*(#RMS3)				; Save value for GUI output
 	ADD #lookUpBand4, AC1			; Adjust the value to correct loaction in memory
-	MOV AC1, AR0
-	MOV *AR0, AC0
-	SFTL AC0, #16
-	MPY T0, AC0, AC1
-	SFTL AC1, #-15
-	MOV AC1, T0						
-	RET
+	MOV AC1, AR0					; Move gain value addr into AR0
+	MOV *AR0, AC0					; Move gain value into AC0
+	SFTL AC0, #16					; Shift AC0 16 times to put as MSB in AC0
+	MPY T0, AC0, AC1				; Multiply AC0 with AC1 and store in AC1 
+	SFTL AC1, #-15					; Shift AC1 by 15 to create a 16 bit value
+	MOV AC1, T0						; Move AC1 to T0 for function return
+	RET								; Return
 \end{lstlisting}
 
 Where: \\
