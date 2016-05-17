@@ -3,13 +3,368 @@ This appendix will explain the Matlab script used for designed quantisized FIR c
 
 The matlab script is called MainDesign2 and uses the follwing self implemented functions
 \begin{itemize}
-\item StandardFunction2
-\item FIRFunction
-\item QuantizingFunction
+\item StandardFunction2 (\autoref{ls:StandardFunctions}).
+\item FIRFunctionls (\autoref{ls:matlabFirFunction}).
+\item QuantizingFunction (\autoref{ls:quan}).
 \end{itemize}
-MainDesign2 is the main script which designs 8 FIR filters using firstly the function StandardFunction2 to calculate the requirements for all eight FIR filters using the standard IEC 6964 (2001) which is explained in detail in \autoref{app:IEC6964}.
+MainDesign2, see \autoref{ls:FIRMatlabScript} is the main script which designs 8 FIR filters using firstly the function StandardFunction2 to calculate the requirements for all eight FIR filters using the standard IEC 6964 (2001) which is explained in detail in \autoref{app:IEC6964}.
 
 Nextly all the coefficients for the eight FIR filters are derived using the function FIRFunction, for every filter, which uses the Kaiser window method explained in \autoref{app:FIR_theory}. In The FIRFunction the function QuantizingFunction is used to quantisize all coefficients to Q15 format used by the DSP. The script and functions can be seen below. 
 
-\todo[inline]{insert matlab scripts and functions}
+\begin{lstlisting}[language=Matlab, caption = {Matlab script for designing FIR filters},label={ls:FIRMatlabScript}]
+close all
+clear all 
+clc
 
+%% Script for designing the filters
+% The script will create the filters for decimation, analyzer spectrum and
+% interpolation using the functions FIRFunction, QuantizingFunction and
+% StandardFunction. All the filter are made by FIR filters using the 
+%kaiser window method. Made by group 640 EIT
+
+
+
+%% Main specifications 
+Fs = 48000;
+
+%% Decimation
+%Decimation is done by lowpass filtering and then downsampling the signal
+%Filters are designed using the standards
+
+%Standards
+fr = 3000; %start frequency
+G  = 2;  %base
+b  = 1;  %bands in base
+class = 2 %class of demands
+
+% Find the standards
+[f_center, alpha,G_freq] = StandardFunction2(fr,G,b,class);
+
+figure;
+semilogx(f_center(1)*G_freq,-alpha,'color',[0.7 0 0]); grid on;
+hold on 
+semilogx(f_center(2)*G_freq,-alpha,'color',[0 0.7 0]); grid on;
+semilogx(f_center(3)*G_freq,-alpha,'color',[0 0 0.7]); grid on;
+semilogx(f_center(4)*G_freq,-alpha,'color',[0.7 0.7 0]); grid on;
+semilogx(f_center(5)*G_freq,-alpha,'color',[0.7 0 0.7]); grid on;
+semilogx(f_center(6)*G_freq,-alpha,'color',[0 0.7 0.7]); grid on;
+semilogx(f_center(7)*G_freq,-alpha,'color',[0.7 0.2 0.8]); grid on;
+semilogx(f_center(8)*G_freq,-alpha,'color',[0.3 0.3 0.3]); grid on;
+
+%% Filter specs 
+% The values have been fitted so the standards are upheld 
+f_pass = 3000;     % Pass band frequency 
+a_pass = -1;       % Attenuation at pass band 
+f_stop = 6500;    % Stop band frequency
+a_stop = -60;      % Attenuation at stop band
+
+%% Filter specs1
+f_pass1 = f_pass;
+a_pass1 = a_pass;
+f_stop1 = f_stop;
+a_stop1 = a_stop;
+
+% Run function to obtain quatisized b coeff for filter
+[bQDec1, MDec1, betaDec1] = FIRFunction(f_pass1,a_pass1,f_stop1,a_stop1,Fs); 
+%figure with filter and standards to see if the filter uphelds the standard
+figure;
+freqz(bQDec1,1,Fs,Fs)
+ax = findall(gcf, 'Type', 'axes');
+set(ax, 'XScale', 'log');
+hold on 
+semilogx(f_center(1)*G_freq,-alpha,'r'); grid on;
+%% Filter specs2
+% FIlter specs and sampling frequency are halved so the same b coeff are 
+% reached, figure is also made to confirm. Fs and specs continue to be 
+% halved with every new filter so no more comments are made
+K = 2;
+f_pass2 = f_pass/K;
+a_pass2 = a_pass;
+f_stop2 = f_stop/K;
+a_stop2 = a_stop;
+
+[bQDec2, MDec2, betaDec2] = FIRFunction(f_pass2,a_pass2,f_stop2,a_stop2,Fs/K);
+%figure;
+%freqz(bQDec2,1,Fs/K,Fs/K)
+%ax = findall(gcf, 'Type', 'axes');
+%set(ax, 'XScale', 'log');
+%hold on 
+%semilogx(f_center(2)*G_freq,-alpha); grid on;
+%% Filter specs3
+K = 4;
+f_pass3 = f_pass/K;
+a_pass3 = a_pass;
+f_stop3 = f_stop/K;
+a_stop3 = a_stop;
+
+[bQDec3, MDec3, betaDec3] = FIRFunction(f_pass3,a_pass3,f_stop3,a_stop3,Fs/K);
+%figure;
+%freqz(bQDec3,1,Fs/K,Fs/K)
+%ax = findall(gcf, 'Type', 'axes');
+%set(ax, 'XScale', 'log');
+%hold on 
+%semilogx(f_center(3)*G_freq,-alpha); grid on;
+%% Filter specs4
+K = 8;
+f_pass4 = f_pass/K;
+a_pass4 = a_pass;
+f_stop4 = f_stop/K;
+a_stop4 = a_stop;
+
+[bQDec4, MDec4, betaDec4] = FIRFunction(f_pass4,a_pass4,f_stop4,a_stop4,round(Fs/K));
+%figure;
+%freqz(bQDec4,1,round(Fs/K),round(Fs/K))
+%ax = findall(gcf, 'Type', 'axes');
+%set(ax, 'XScale', 'log');
+%hold on 
+%semilogx(f_center(4)*G_freq,-alpha); grid on;
+%% Filter specs5
+K = 16;
+f_pass5 = f_pass/K;
+a_pass5 = a_pass;
+f_stop5 = f_stop/K;
+a_stop5 = a_stop;
+
+[bQDec5, MDec5, betaDec5] = FIRFunction(f_pass5,a_pass5,f_stop5,a_stop5,round(Fs/K));
+%figure;
+%freqz(bQDec5,1,round(Fs/K),round(Fs/K))
+%ax = findall(gcf, 'Type', 'axes');
+%set(ax, 'XScale', 'log');
+%hold on 
+%semilogx(f_center(5)*G_freq,-alpha); grid on;
+%% Filter specs6
+K = 32;
+f_pass6 = f_pass/K;
+a_pass6 = a_pass;
+f_stop6 = f_stop/K;
+a_stop6 = a_stop;
+
+[bQDec6, MDec6, betaDec6] = FIRFunction(f_pass6,a_pass6,f_stop6,a_stop6,round(Fs/K));
+%figure;
+%freqz(bQDec6,1,round(Fs/K),round(Fs/K))
+%ax = findall(gcf, 'Type', 'axes');
+%set(ax, 'XScale', 'log');
+%hold on 
+%semilogx(f_center(6)*G_freq,-alpha); grid on;
+%% Filter specs7
+K = 64;
+f_pass7 = f_pass/K;
+a_pass7 = a_pass;
+f_stop7 = f_stop/K;
+a_stop7 = a_stop;
+
+[bQDec7, MDec7, betaDec7] = FIRFunction(f_pass7,a_pass7,f_stop7,a_stop7,round(Fs/K));
+%figure;
+%freqz(bQDec7,1,round(Fs/K),round(Fs/K))
+%ax = findall(gcf, 'Type', 'axes');
+%set(ax, 'XScale', 'log');
+%hold on 
+%semilogx(f_center(7)*G_freq,-alpha); grid on;
+
+%% Upsamling
+f_passInt = 9600;
+a_passInt = -1;
+f_stopInt = 16800;
+a_stopInt = -80;
+
+% Run function to obtain quatisized b coeff for filter
+[bQInt1, MInt1, betaInt1] = FIRFunction(f_passInt,a_passInt,f_stopInt,a_stopInt,Fs); 
+%figure with filter and standards to see if the filter uphelds the standard
+figure;
+freqz(bQInt1,1)
+ax = findall(gcf, 'Type', 'axes');
+set(ax, 'XScale', 'log');
+hold on 
+semilogx(f_center(1)*G_freq,-alpha,'r'); grid on;
+
+%% Delays2
+delay1  = (MInt1/2) + 2*(MInt1/2)+25*2 + 4*(MInt1/2)+4*25 + 8*(MInt1/2)+25*8 + 16*(MInt1/2)+25*16 + 32*(MInt1/2)+25*32 + 64*(MInt1/2)+25*64
+delay2  = (MInt1/2) + 2*(MInt1/2)+25*2 + 4*(MInt1/2)+4*25 + 8*(MInt1/2)+25*8 + 16*(MInt1/2)+25*16 + 32*(MInt1/2)+25*32
+delay4  = (MInt1/2) + 2*(MInt1/2)+25*2 + 4*(MInt1/2)+4*25 + 8*(MInt1/2)+25*8 + 16*(MInt1/2)+25*16
+delay8  = (MInt1/2) + 2*(MInt1/2)+25*2 + 4*(MInt1/2)+4*25 + 8*(MInt1/2)+25*8
+delay16 = (MInt1/2) + 2*(MInt1/2)+25*2 + 4*(MInt1/2)+4*25
+delay32 = (MInt1/2) + 2*(MInt1/2)+25*2
+delay64 = (MInt1/2)
+
+\end{lstlisting}
+
+\begin{lstlisting}[language=Matlab, caption = {Matlab script for standard functions},label={ls:StandardFunctions}]
+function [fm, alpha, G_freq] = StandardFunction2(fr,G,b,class)
+%% Script for the calculations of filters from standard IEC-61260 (1995)
+%% frequency 
+%Using the octave band (base two G2 = 2) and not the base ten 
+for x = 0:13                % Get center frequencies for 14 bands (only need 8)
+fm(x+1) = (G^(-x/b))*fr;    % Calculate the center frequencies from the input 
+end
+
+% Attenuation at higher frequency than fm
+% Calculate some points where the attenuations also will be calculated
+G_freq(10)=1+((G^(1/(2*b))-1)/(G^(1/2)-1))*(G^(0)-1);
+G_freq(11)=1+((G^(1/(2*b))-1)/(G^(1/2)-1))*(G^(1/8)-1);
+G_freq(12)=1+((G^(1/(2*b))-1)/(G^(1/2)-1))*(G^(1/4)-1); 
+G_freq(13)=1+((G^(1/(2*b))-1)/(G^(1/2)-1))*(G^(3/8)-1); 
+G_freq(14)=1+((G^(1/(2*b))-1)/(G^(1/2)-1))*(G^(1/2)-1); 
+G_freq(15)=1+((G^(1/(2*b))-1)/(G^(1/2)-1))*(G^(1/2)-1); 
+G_freq(16)=1+((G^(1/(2*b))-1)/(G^(1/2)-1))*(G^(1)-1); 
+G_freq(17)=1+((G^(1/(2*b))-1)/(G^(1/2)-1))*(G^(2)-1); 
+G_freq(18)=1+((G^(1/(2*b))-1)/(G^(1/2)-1))*(G^(3)-1); 
+G_freq(19)=1+((G^(1/(2*b))-1)/(G^(1/2)-1))*(G^(4)-1); 
+
+%inverted frequencies
+G_freq(1)=1/G_freq(19);
+G_freq(2)=1/G_freq(18);
+G_freq(3)=1/G_freq(17);
+G_freq(4)=1/G_freq(16);
+G_freq(5)=1/G_freq(15);
+G_freq(6)=1/G_freq(14);
+G_freq(7)=1/G_freq(13);
+G_freq(8)=1/G_freq(12);
+G_freq(9)=1/G_freq(11);
+
+%% Attenuation at normalized frequency f/fm
+% There are three classes(0,1,2) where zero is the most demanding and 2 
+% is the least demanding. Attenuations are inserted manually from the
+% standard
+
+if class == 0
+alpha(1,1) = 75; alpha(1,2) = inf;
+alpha(2,1) = 62; alpha(2,2) = inf;
+alpha(3,1) = 42.5; alpha(3,2) = inf;
+alpha(4,1) = 18; alpha(4,2) = inf;
+alpha(5,1) = 2.3; alpha(5,2) = 4.5;
+alpha(6,1) = -0.15; alpha(6,2) = 4.5;
+alpha(7,1) = -0.15; alpha(7,2) = 1.1;
+alpha(8,1) = -0.15; alpha(8,2) = 0.4;
+alpha(9,1) = -0.15; alpha(9,2) = 0.2;
+alpha(10,1) = -0.15; alpha(10,2) = 0.15;
+alpha(11,1) = -0.15; alpha(11,2) = 0.2;
+alpha(12,1) = -0.15; alpha(12,2) = 0.4;
+alpha(13,1) = -0.15; alpha(13,2) = 1.1;
+alpha(14,1) = -0.15; alpha(14,2) = 4.5;
+alpha(15,1) = 2.3; alpha(15,2) = 4.5;
+alpha(16,1) = 18; alpha(16,2) = inf;
+alpha(17,1) = 42.5; alpha(17,2) = inf;
+alpha(18,1) = 62; alpha(18,2) = inf;
+alpha(19,1) = 75; alpha(19,2) = inf;
+
+elseif class == 1
+%% Attenuation at normalized frequency f/fm
+alpha(1,1) = 70; alpha(1,2) = inf;
+alpha(2,1) = 61; alpha(2,2) = inf;
+alpha(3,1) = 42; alpha(3,2) = inf;
+alpha(4,1) = 17.5; alpha(4,2) = inf;
+alpha(5,1) = 2.0; alpha(5,2) = 5;
+alpha(6,1) = -0.3; alpha(6,2) = 5;
+alpha(7,1) = -0.3; alpha(7,2) = 1.3;
+alpha(8,1) = -0.3; alpha(8,2) = 0.6;
+alpha(9,1) = -0.3; alpha(9,2) = 0.4;
+alpha(10,1) = -0.3; alpha(10,2) = 0.3;
+alpha(11,1) = -0.3; alpha(11,2) = 0.4;
+alpha(12,1) = -0.3; alpha(12,2) = 0.6;
+alpha(13,1) = -0.3; alpha(13,2) = 1.3;
+alpha(14,1) = -0.3; alpha(14,2) = 5;
+alpha(15,1) = 2; alpha(15,2) = 5;
+alpha(16,1) = 17.5; alpha(16,2) = inf;
+alpha(17,1) = 42; alpha(17,2) = inf;
+alpha(18,1) = 61; alpha(18,2) = inf;
+alpha(19,1) = 70; alpha(19,2) = inf;
+    
+elseif class == 2
+%% Attenuation at normalized frequency f/fm
+alpha(1,1) = 60; alpha(1,2) = inf;
+alpha(2,1) = 55; alpha(2,2) = inf;
+alpha(3,1) = 41; alpha(3,2) = inf;
+alpha(4,1) = 16.5; alpha(4,2) = inf;
+alpha(5,1) = 1.6; alpha(5,2) = 5.5;
+alpha(6,1) = -0.5; alpha(6,2) = 5.5;
+alpha(7,1) = -0.5; alpha(7,2) = 1.6;
+alpha(8,1) = -0.5; alpha(8,2) = 0.8;
+alpha(9,1) = -0.5; alpha(9,2) = 0.6;
+alpha(10,1) = -0.5; alpha(10,2) = 0.5;
+alpha(11,1) = -0.5; alpha(11,2) = 0.6;
+alpha(12,1) = -0.5; alpha(12,2) = 0.8;
+alpha(13,1) = -0.5; alpha(13,2) = 1.6;
+alpha(14,1) = -0.5; alpha(14,2) = 5.5;
+alpha(15,1) = 1.6; alpha(15,2) = 5.5;
+alpha(16,1) = 16.5; alpha(16,2) = inf;
+alpha(17,1) = 41; alpha(17,2) = inf;
+alpha(18,1) = 55; alpha(18,2) = inf;
+alpha(19,1) = 60; alpha(19,2) = inf;
+end
+\end{lstlisting}
+
+\begin{lstlisting}[language=Matlab, caption = {Matlab script for FIR coefficients},label={ls:matlabFirFunction}]
+function [bQ, M, beta] = FIRFunction(f_pass,a_pass,f_stop,a_stop,Fs)
+%% Script for calculating quantizised b coefficents 
+% The kaiser window method is taken from oppenheim p. 569
+%% Conversions:
+omega_pass  = f_pass*2*pi/(Fs);     % The frequency F1 in radians
+delta_1     = 10^(a_pass/20);       % The gain at the frequency F1
+omega_stop  = f_stop*2*pi/(Fs);     % The frequency F2 in radians
+delta_2     = 10^(a_stop/20);       % The gain at the frequency F2
+
+%% Determine cutoff
+omega_c = (omega_pass+omega_stop)/2; % Calculate the normalized cutoff 
+fc = omega_c*Fs/2;                   % Calculate the cutoff frequency
+
+%% Detemine kaiser window
+%Find the beta value
+delta_omega = omega_stop-omega_pass     % Calculate the difference
+A = -20*log10(min([delta_1 delta_2]))   % Calculate the largest attenuation 
+
+% Calculate the beta value
+if A > 50 
+    beta = 0.1102*(A-8.7);
+elseif 21 <= A <= 50 
+    beta = 0.5842*((A-21)^0.4)+0.07886*(A-21);
+elseif A < 21
+    beta = 0;
+end
+
+% If the beta value is below 4 set it to 4.
+% This is done because the filter will create noise if beta is under 4
+if beta < 4
+    beta = 4;
+end
+
+%Find order
+M = (A-8)/(2.285*delta_omega) % Calculate the precise order
+M = 2.*round(M/2);            % Round the order to nearest eqaul value to
+                              % get type 1 FIR filter
+
+%% Impulse response
+for n=0:M
+
+% The ideal response is computed according to:
+%            sin(omega_c(n-M/2)) 
+%  h_d[n] = -------------------
+%              omega_c(n-M/2)
+ 
+h(n+1) = (sin(omega_c*(n-(M/2))))/(pi*(n-(M/2))); % Calculate impulse samples
+end
+%L hopspital regel for sin x / x
+h((M+2)/2) = omega_c*cos(omega_c*((M/2)-(1/2)*M))/pi;
+
+%Window is applied
+w = kaiser(M+1,beta)'; % Calculate the kaiser window 
+b = h.*w;              % Apply window
+
+
+%% Quantizing
+% Function for quantizising coefficients
+[bq aq] = QuantizingFunction(b,1); 
+bQ = bq; % Outpu
+\end{lstlisting}
+
+\begin{lstlisting}[language=Matlab, caption = {Matlab script for quantisizing FIR coefficients},label={ls:quan}]
+function [numOut denOut] = QuantizingFunction(numIn,denIn)
+num = numIn.*2^15;
+den = denIn.*2^15;
+
+num = round(num);
+den = round(den);
+
+numOut = num/2^15;
+denOut = den/2^15;
+end
+\end{lstlisting}
