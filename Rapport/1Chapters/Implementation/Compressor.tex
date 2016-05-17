@@ -2,29 +2,26 @@
 
 The compressor is going to be described here.
 
-\begin{lstlisting}[language={[x86masm]Assembler}, caption = {Compressor Algorithm},label={listingCompressorDefines}]
-startAddr	.set	0x008000
 
-lookUpBand4	.set	20000+startAddr
-dataIn4		.set	24300+startAddr
-ptrBuff4	.set	24320+startAddr
-ptrLUb4		.set	24321+startAddr
-sumHigh4	.set	24322+startAddr
-sumLow4		.set	24323+startAddr
-RMS3		.set	24324+startAddr
-\end{lstlisting}
+\begin{figure}[H]
+    \centering
+\includegraphics[width=\textwidth, page=13]{Simulation}
+    \caption{Block diagram of the compressor algorithm}
+    \label{fig:RMSCompressorBlockImplmentation}
+\end{figure}
+
 
 
 \begin{lstlisting}[language={[x86masm]Assembler}, caption = {Compressor Algorithm},label={listingCompressorMain}]
-_RMS64band
+_RMSband
 	; "Circular" data in Buffer
 	MOV #dataIn4,AC0				; Load address of input data into AC0
-	ADD *(#ptrBuff4),AC0			; Add the addr with the value of the data pointer (Point to 							the oldest data)
+	ADD *(#ptrBuff4),AC0			; Add the addr with the value of the data pointer (Point 					 	       to the oldest data)
 	MOV AC0,AR0						; Move the addr to AR0
 	MOV *AR0, AC0					; Move the value which AR0 points to into AC0
-	MOV #0, AC1
-	MOV uns(*(#sumLow4)), AC1
-	MOV uns(*(#sumHigh4))<<#16, AC2
+	MOV #0, AC1						; Reset AC1
+	MOV uns(*(#sumLow4)), AC1       ; Move unsigned LSB of sum into AC1
+	MOV uns(*(#sumHigh4))<<#16, AC2 ; Move unsigned MSB of sum into AC2
 	ADD AC2, AC1
 	SUB AC0, AC1					; Subtract AC0 from AC1 and save it in AC1	 
 	MOV T0, HI(AC2)					; Move the value in T0 to the address
@@ -48,3 +45,17 @@ _RMS64band
 	MOV AC1, T0						
 	RET
 \end{lstlisting}
+
+Where: \\
+- dataIn4, contains the input sample from the buffer. \\
+- ptrBuff4, is the circular buffer pointer. \\
+- lookUpBand4
+- ptrLUb4
+- sumHigh4
+- sumLow4
+- RMS3,
+
+
+
+
+Look up tables can be found at \ref{app:LookupTables}
