@@ -1,5 +1,5 @@
 \chapter{Accepttest of decimation and interpolation filter}\label{app:journal_decimationFilter}
-The purpose of this test is to test the designed decimation filter to verify the magnitude response and the phase response to verify demand \textbf{XX} and verify the interpolation filter in relation to demand \textbf{XX}.
+The purpose of this test is to test the designed decimation filter to verify the magnitude response and the phase response to verify demand \textbf{XX}, verify the interpolation filter in relation to demand \textbf{XX} and verify that the interpolation filter does not affect the bandwidth of the decimation signal.
 
 \section{Setup}
 The setup of this test are depicted in \textbf{XX}, where the equipment is catalogued in \textbf{XX}, and described as follows:
@@ -13,6 +13,7 @@ The setup of this test are depicted in \textbf{XX}, where the equipment is catal
 \end{itemize}
 \item The software of the system used for the  decimation test is found at CD. \todo[inline]{CD}
 \item The software of the system used for the  interpolation test is found at CD. \todo[inline]{CD}
+\item The software of the system used for the  comparison test is found at CD. \todo[inline]{CD}
 \end{itemize}
 
 
@@ -67,25 +68,11 @@ Which is extracted using the matlab script found on CD \todo[inline]{CD}, and gi
 The analysis will verify the demands for both filters.
 
 \subsection*{Decimation filter}
-It is seen on \autoref{fig:AcceptDec} that the filter meets the requirements. It is also seen on figure \autoref{fig:AcceptDecPhase} that the filter has linear phase until the stopband which gives a constant groupdelay in up until the stopband which meet requirement \textbf{XX}. 
-\begin{figure}[H]
-	\centering
-	\tikzsetnextfilename{acceptDecMag}
-	\input{figures/acceptDecMag.tex}
-	\caption{Decimation magnitude response with requirements.}
-	\label{fig:acceptDecMag}
-\end{figure}
-\begin{figure}[H]
-	\centering
-	\tikzsetnextfilename{acceptDecPhase}
-	\input{figures/acceptDecPhase.tex}
-	\caption{Decimation Phase response .}
-	\label{fig:AcceptDecPhase}
-\end{figure}
 
 
 \subsection*{Interpolation filter}
 
+\subsection*{Compare test}
 
 
 \section{Error sources}

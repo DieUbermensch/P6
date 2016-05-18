@@ -1,0 +1,113 @@
+\chapter{Accepttest of decimation and interpolation filter}\label{app:journal_decimationFilter}
+The purpose of these tests is to test the designed decimation filter to verify the magnitude response and the phase response to verify demand \textbf{XX}, verify the interpolation filter in relation to demand \textbf{XX} and verify that the interpolation filter does not affect the bandwidth of the decimation signal.
+
+\section{Setup}
+The setup of this test are depicted in \textbf{XX}, where the equipment is catalogued in \textbf{XX}, and described as follows:
+
+\begin{itemize}
+\item Magnitude response and phase response will be measured with a NI-4461 based audio analyser. 
+\begin{itemize}
+\item Sampling frequency: 48000 Hz.
+\item Generator amplitude: 0.50000 V.
+\item Frequency sweep: 20 Hz - 20000 Hz.
+\end{itemize}
+\item The software of the system used for the  decimation test is found at CD. \todo[inline]{CD}
+\item The software of the system used for the  interpolation test is found at CD. \todo[inline]{CD}
+\item The software of the system used for the  comparison test is found at CD. \todo[inline]{CD}
+\end{itemize}
+
+
+\subsection*{Test Setup}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{AcceptDec.png}
+\label{fig:AcceptDec}
+\caption{Test setup.}
+\end{figure}
+
+\subsection*{Equipment used and AAU-no.}
+
+\begin{table}[H]
+\centering
+\ra{1.3}
+\begin{tabular}{S[table-format=1]ccc} \toprule
+    {Item} & {Description} & {AAU-no} \\ \bottomrule 
+    1      &  NI-4461 based audio analyser  & 64640  \\ 
+    2      &  System  & x  \\  \bottomrule 
+\end{tabular}
+\caption{Table over equipment used in the test}
+\label{tab:UsedEquipmentDecimation}
+\end{table}
+\vspace{-5mm}
+
+
+\section{Procedure}
+The procedure for this experiment is described as follows:
+\vspace{-5mm}
+\begin{enumerate}
+\item Setup the NI-4461 based audio analyser with the mentioned settings.
+\item Setup the system with the correct software as described based on which filter is tested.
+\item Start the sine sweep test.
+\item When finished save the results of the test.
+\end{enumerate}
+
+\section{Data Extraction}
+The raw data can be found on CD for decimation filter data, and interpolation filter data on CD. \todo[inline]{CD} The following raw data is given:
+\begin{itemize}
+\item Frequency [Hz]
+\item Amplitude [dB]
+\item Phase 	[deg]
+\item THD 		[dB]
+\item HD 2 		[dB ref fund]
+\item HD 3		[dB ref fund]
+\item HD 4      [dB ref fund]
+\item HD 5      [dB ref fund]
+\end{itemize} 
+Which is extracted using the matlab script found on CD \todo[inline]{CD}, and gives the magnitude and phase reponse of the filter.
+\section{Analysis}
+The analysis will verify the demands for both filters.
+
+\subsection*{Decimation filter}
+It is seen on \autoref{fig:AcceptDec} that the filter meets the requirements. It is also seen on figure \autoref{fig:AcceptDecPhase} that the filter has linear phase until the stopband which gives a constant groupdelay in up until the stopband which meet requirement \textbf{XX}. 
+\begin{figure}[H]
+	\centering
+	\tikzsetnextfilename{acceptDecMag}
+	\input{figures/acceptDecMag.tex}
+	\caption{Decimation magnitude response with requirements.}
+	\label{fig:acceptDecMag}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\tikzsetnextfilename{acceptDecPhase}
+	\input{figures/acceptDecPhase.tex}
+	\caption{Decimation Phase response .}
+	\label{fig:AcceptDecPhase}
+\end{figure}
+
+
+\subsection*{Interpolation filter}
+
+\begin{figure}[H]
+	\centering
+	\tikzsetnextfilename{acceptIntMag}
+	\input{figures/acceptIntMag.tex}
+	\caption{Decimation magnitude response with requirements.}
+	\label{fig:acceptIntMag}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\tikzsetnextfilename{acceptIntPhase}
+	\input{figures/acceptIntPhase.tex}
+	\caption{Decimation Phase response .}
+	\label{fig:AcceptIntPhase}
+\end{figure}
+
+
+\subsection*{Compare test}
+
+
+\section{Error sources}
+The generator on the NI-4461 card has a deviation of $\pm$ 0,008 dB from 20 Hz - 20 kHz. The analyzer on the NI-4461 card has a deviation of : $\pm$ 0,08 dB from 20 Hz - 92 kHz. 
+
+\section{Conclusion}
+It can be concluded from the two test that both filters meet their respective requirements.
