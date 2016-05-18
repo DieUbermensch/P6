@@ -1,16 +1,28 @@
 \chapter{Compressor}
 
-The compressor is going to be described here.
+The compressor algorithm is implemented using an assembler routine. This is done to as conservative as possible regarding the amount of instructions used to perform the calculation. From \ref{cha:CompressorDesign} is was determined that a sample size of 16 samples were needed in order to detect every frequency in the specific band. In order to save calculation, the algorithm will be implemented as a running mean. Meaning a the oldest sample will be subtracted and the newest value will be added. The concept is graphically shown on \autoref{fig:RMSCompressorBlockImplmentation} where a sample is loaded and added to the sum, followed by the oldest sample being subtracted.
 
 
 \begin{figure}[H]
     \centering
-\includegraphics[width=\textwidth, page=13]{Simulation}
+\includegraphics[width=\textwidth]{Compressor}
     \caption{Block diagram of the compressor algorithm}
     \label{fig:RMSCompressorBlockImplmentation}
 \end{figure}
 
+As mentioned the algorithm is written in assembler by the use of a circular buffer for the samples used in the mean. This size will determine indirectly determine the attack and release time. Both will increase simultaneously when enlarged in sample size. An RMS value is calculated as stated in \autoref{eq:RMScalculation}. This equation can become expensive in instruction time due to both a division and square root. These are both calculated iteratively and hence the computation time is determined by the wanted precision.
 
+\begin{equation}\label{eq:RMScalculation}
+\text{RMS}=\sqrt{\frac{1}{n}\cdot(x_1^2+x_2^2+\cdots+x_n^2)}
+\end{equation}
+
+When implemented the sample size is a value of $2^n$ since it is then possible to bit shift the value n times to create the division. This reduces the instructions drastically from a possible three digit number to one. In order to handle the square root term in the expression, the value calculated will be squared. This eliminates the need for the square root term. The expression is now reduced to addition and multiplication. This is shown in equation \ref{eq:RMScalculationUSED}.
+
+\begin{equation}\label{eq:RMScalculationUSED}
+RMS^2=(\frac{1}{n}\cdot(x_1^2+x_2^2+\cdots+x_n^2))^2
+\end{equation}
+
+In the following listing \ref{listingCompressorMain} is a snippet of the entire RMS algorithm. Each line is commented for better overview.
 
 \begin{lstlisting}[language={[x86masm]Assembler}, caption = {Compressor Algorithm},label={listingCompressorMain}]
 _RMSband
@@ -24,7 +36,7 @@ _RMSband
 	MOV uns(*(#sumHigh4))<<#16, AC2 ; Move unsigned MSB of sum into AC2
 	ADD AC2, AC1					; Add AC2 to AC1 and save in AC1
 	SUB AC0, AC1					; Subtract AC0/Sample from AC1/Sum and save it in AC1	 
-	MOV T0, HI(AC2)					; Move the value in T0 to the address
+	MOV T0, HI(AC2)					; Move the value in T0 to the high part of AC2
 	MPY T0, AC2, AC2				; Square AC0 and save it in AC2
 	SFTL AC2, #-15					; Bitshift the value in AC2 15 times left 
 	ADD AC2, AC1					; Add AC2 to AC1 and store in AC1
@@ -49,13 +61,16 @@ _RMSband
 Where: \\
 - dataIn4, contains the input sample from the buffer. \\
 - ptrBuff4, is the circular buffer pointer. \\
-- lookUpBand4
-- ptrLUb4
-- sumHigh4
-- sumLow4
-- RMS3,
+- lookUpBand4, is start address for the lookup table\\
+- sumHigh4, is a 16-bit value for storing MSB \\
+- sumLow4, is a 16-bit value for storing LSB \\
+- RMS3, is an address used for GUI output \\
+
+\subsubsection*{Flow}
 
 
+The algorithm starts by subtracting the oldest 16-bit sample from the sum. Then the new 16-bit sample in T0 is squared and added. The 32-bit value is saved in sumHigh and sumLow. The pointer which keeps track of the samples is then incremented and checked if has reached 16 samples. If 16 samples has been calculated it will reset.
 
+The MSB of the sum is then used to locate the desired gain value in the look up table. The value calculated will act as an offset to the start address in the lookup table. Meaning if the input is so low it yields 0, it will take the first value in the table which is 1. Should the input be high enough to produce a number it will use that number as an offset to determine the prober address. This means that when the value is to be divided it should be shifted 4 times due to the amount of samples. Next it should shifted 5 times before added to the lookup tables start value. The reason of the last 5 shifts is due to the size of the lookup table, which is of 128 values. This corresponds with 7 bits. This removes the chance of overflow, since the possible maximum value will now take the 128'th place in the table. The complete Look up table can be found at \autoref{app:LookupTables}. 
 
-Look up tables can be found at \ref{app:LookupTables}
+When the value has been determined it is multiplied with the MSB of sum. This yields again a 32-bit where the MSB is stored in T0, which is used as output of the function.
