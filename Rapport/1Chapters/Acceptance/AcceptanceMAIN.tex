@@ -2,8 +2,6 @@
 
 This chapter governs the acceptance test of the requirements listed in \autoref{ch:requirements}. The requirements are listed in \autoref{table:acceptancetest}. The table shows both reference number and the correlating appendix which documents the results.  
 
-
-
 \renewcommand{\arraystretch}{0.95}
 \begin{table}[H]
 \centering
@@ -55,8 +53,12 @@ This chapter governs the acceptance test of the requirements listed in \autoref{
 \subsubsection*{Requirement 3}
 
 \subsubsection*{Requirement 4}
-
+The Audio coded was initialized as 48 kHz, by writing to a specific register during boot-up. 
+\path{CD://Datasheet/tlv320aic3204.pdf}
 \subsubsection*{Requirement 5}
+The system was run using 16-bit algorithm. The DSP is equipped with two ALU where only one has been implemented. Hence it is possible two run approximately the same algorithm with double precision. From the datasheet it is documented that the ALU's are 40-Bit, which should be sufficient to use. The datasheet for the codec and DSP can be found at: \\
+\path{CD://Datasheet/tms320C5515.pdf}\\
+\path{CD://Datasheet/tlv320aic3204.pdf}
 
 \subsubsection*{Requirement 6}
 
