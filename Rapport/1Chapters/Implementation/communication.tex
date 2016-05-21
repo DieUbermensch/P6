@@ -40,6 +40,21 @@ As PC's usually do not have a serial port for UART interfacing, a converter is n
 \label{fig:communicationProtocolUART}
 \end{figure}
 
+
+
+\begin{lstlisting}[language=C, caption = {Delay function for bypass},label={listingByPass}]
+int16 delayBypass(int16 dataIn, int16 *dataBuffer, int16 *dataPtr){
+	int16 temp;
+	temp = dataBuffer[*dataPtr];
+	dataBuffer[*dataPtr] = dataIn;
+	(*dataPtr)++;
+	if (*dataPtr == 5333){
+		*dataPtr = 0;
+	}
+	return temp;
+}
+\end{lstlisting}
+
 \section{Spectrum Analyser}
 
 \begin{figure}[H]
@@ -50,7 +65,7 @@ As PC's usually do not have a serial port for UART interfacing, a converter is n
 \end{figure}
 
 
-\begin{lstlisting}[language=C, caption = {Calculate RMS value},label={listingSample}]
+\begin{lstlisting}[language=C, caption = {Calculate RMS value},label={listingRMSuart}]
 uint8 RMScalculate(int16 *dataBuffer, int16 dataIn, int16 *BufferPtr, long *sum){
 	// Initialize local variables
 	uint8 result; long temp;
