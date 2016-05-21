@@ -50,6 +50,30 @@ As PC's usually do not have a serial port for UART interfacing, a converter is n
 \end{figure}
 
 
+\begin{lstlisting}[language=C, caption = {Calculate RMS value},label={listingSample}]
+uint8 RMScalculate(int16 *dataBuffer, int16 dataIn, int16 *BufferPtr, long *sum){
+	// Initialize local variables
+	uint8 result; long temp;
+	
+	// Calculate RMS^2
+	*sum = *sum - dataBuffer[*BufferPtr]; // Substract the oldest data from sum
+	temp = (long)dataIn*dataIn;	// Square the new sample
+	dataBuffer[*BufferPtr] = temp>>15;	// Bit-shift and store in data buffer
+	*sum = *sum + dataBuffer[*BufferPtr];
+	result = ((*sum)>>4)>>5;				// Calculate new RMS^2
+	
+	// Increment data pointer
+	(*BufferPtr)++;
+	if (*BufferPtr == 16){ 
+		*BufferPtr = 0;
+	}
+	
+	return result;
+}
+\end{lstlisting}
+\todo[inline]{Fejl i koden! BufferPtr skal sammenlignes med 32 og ikke 16! Samt bit shift på 10 og ikke 9.}
+
+
 
 % Appendix - Baudrate, register setup. Husk external bus setup.
 
