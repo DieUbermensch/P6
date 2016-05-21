@@ -80,22 +80,34 @@ band1 = (long)array[184]*gainBand1>>7;
 The resolution of the equalizer is the same as the volume controller. 
 
 \subsection*{Bypass}
-The simplest type of bypass is by setting the input signal of the audio codec as the output. Since the the audio signal in the system is delayed, changing the output between bypass and system will give and unpleasant transition. In order to give a smoother transition, a delay must be applied to the bypassed input signal as well. The total amount of delay can be calculated as th 
+The simplest type of bypass is by setting the input signal of the audio codec as the output. Since the the audio signal in the system is delayed, changing the output between bypass and system will give and unpleasant transition. In order to give a smoother transition, a delay must be applied to the bypassed input signal as well. The total amount of delay must the same delay applied to stage 1 in the multistage system. The total amount of delay in stage one is calculated to 5333 sample delay. The delay corresponds to 111 ms for a 48 kHz system. The implementation of the delay is seen in \autoref{listingByPass}.
 
 \begin{lstlisting}[language=C, caption = {Delay function for bypass},label={listingByPass}]
 int16 delayBypass(int16 dataIn, int16 *dataBuffer, int16 *dataPtr){
 	int16 temp;
-	temp = dataBuffer[*dataPtr];
-	dataBuffer[*dataPtr] = dataIn;
-	(*dataPtr)++;
-	if (*dataPtr == 5333){
-		*dataPtr = 0;
+	temp = dataBuffer[*dataPtr]; // Store oldest data in temp
+	dataBuffer[*dataPtr] = dataIn;	// Overwrite with newest data
+	(*dataPtr)++;	// Increment data pointer
+	if (*dataPtr == 5333){	
+		*dataPtr = 0;	
 	}
 	return temp;
 }
 \end{lstlisting}
 
+Before overwriting the oldest data in the data buffer, the oldest data is stored the a temporary variable. Afterwards the new data is overwriting the oldest data. The oldest data in the temporary variable is then returned.
+
+As the delay is large the delayed samples are stored in Single Access RAM (SARAM) block 2. To do so the pragma directive is used to tell the compiler that it is desired that the data for the delay is stored in SARAM.
+
+\begin{lstlisting}[language=C, caption = {Pragma for delay buffer for bypass.},label={listingPragma}]
+#pragma DATA_SECTION(BypassBuffer, ".BypassArray")
+int16 BypassBuffer[5333];
+\end{lstlisting}
+
+
 \section{Spectrum Analyser}
+
+To implement a spectrum analyser RMS-calculators are implemented as a C-function for all bands in the system. There are multiple octave bands in the system and to differentiate between each band another communication protocol is implemented. The implemented communication protocol is seen in \autoref{fig:communicationProtocolUARTTransmit}.
 
 \begin{figure}[H]
 \centering
@@ -104,6 +116,9 @@ int16 delayBypass(int16 dataIn, int16 *dataBuffer, int16 *dataPtr){
 \label{fig:communicationProtocolUARTTransmit}
 \end{figure}
 
+The communication protocol consist of a header-byte and 8 data byte and a check byte in the end to reduce the amount of error readings. The cheack-byte has the same value as the header byte. The first byte in "RMS data" is the RMS value for the lowest octave band while the last is the highest.
+
+The RMS-function is called after the RMS compression. The C-function for the RMS-function is seen in \autoref{listingRMSuart}
 
 \begin{lstlisting}[language=C, caption = {Calculate RMS value},label={listingRMSuart}]
 uint8 RMScalculate(int16 *dataBuffer, int16 dataIn, int16 *BufferPtr, long *sum){
@@ -128,7 +143,7 @@ uint8 RMScalculate(int16 *dataBuffer, int16 dataIn, int16 *BufferPtr, long *sum)
 \end{lstlisting}
 \todo[inline]{Fejl i koden! BufferPtr skal sammenlignes med 32 og ikke 16! Samt bit shift på 10 og ikke 9.}
 
-
+The RMS function is essentially the same to the RMS algorithm described under the compressor section.
 
 % Appendix - Baudrate, register setup. Husk external bus setup.
 
