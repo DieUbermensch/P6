@@ -1,7 +1,7 @@
 \section{Signal Processing Tools Conclusion}
-This section will conclude on which methods for signal analysis and processing should be used for the system to optimally protect the loudspeaker according to \autoref{sec:problem_statement} building onto \textbf{BLOCK DIAGRAM SYSTEM OVERVIEW}.
+This section will conclude on which methods for signal analysis and processing should be used for the system to optimally protect the loudspeaker according to \autoref{sec:problem_statement} building onto \autoref{fig:speaker_block2}.
 
-The following methods for analysing and processing have been examined:
+The following methods for analysing and processing signals have been examined:
 \begin{itemize}
 \item Analysing
 \begin{itemize}
@@ -16,15 +16,18 @@ The following methods for analysing and processing have been examined:
 \item Equalizer
 \item Processing in freuqency domain
 \end{itemize}
+\item Multirate
 \end{itemize}
 
-The optimal way of determing how much the diapragm moves is by measuring the RMS value of a signal and not the peak value, because the peak value does not give any information of the power signal which RMS does. In effect this means that a high peak value could result in a small movement in the diapragm while a high RMS value will always result in a large movement in the diapragm. This is because a peak value could just be a single sample while the RMS is the average over a time interval. 
+The optimal way of determing how much the diapragm moves is by measuring the RMS value of a signal and not the peak value, because the peak value does not give any information of the power which RMS does. In effect this means that a high peak value could result in a small movement in the diapragm while a high RMS value will always result in a large movement in the diapraghm. This is because a peak value could just be a single sample while the RMS is the average over a time interval. 
 
-Because its only large RMS values in 500 Hz and below which could result in the coil hitting the backplate the analyzed signals spectrum should be 500 Hz and below, which can either be done with a spectrum analyzer or a FFT. The method choosen to analyse the signal spectrum is the spectrum analyzer, because it is firstly faster computational wise because no transformation is necessary, secondly because the information wanted is the RMS value of the band and nt a specific frequency which sorts out the FFT. This spectrum analyzer should meet the standard IEC 61260 relating to octave-band and fractional-octave-band filters.
+Because its only large RMS values in 500 Hz \todo{Hvordan argumenter vi for det dali?}and below which could result in the coil hitting the backplate the analyzed signals spectrum should be 500 Hz and below, which can either be done with a spectrum analyzer or a FFT. The method choosen to analyse the signal spectrum is the spectrum analyzer, because it is firstly faster computational wise because no transformation is necessary, secondly because the information wanted is the RMS value of the band and not a specific frequency which sorts out the FFT. %This spectrum analyzer should meet the standard IEC 61260 relating to octave-band and fractional-octave-band filters. 
 
 For attenuating the signal both a compressor or an equalizer could be used. The method choosen is the compressor because of the spectrum analyzer. The spectrum analyzer divides the signal into the correct band/bands so there is no need for an equalizer. If the FFT had been choosen as the analyser of the signal spectrum the equalizer processed in the frequency domain would have been optimally, because the transform from time to frequency is given because of the needed FFT. 
 
-The graphic equalizer is given free because of the spectrum analyzer so it is choosen to implement a user controlled gain in each band. This leads to a choice of the system should be a single-band or a multi-band system.   
+The use of multirate should be considered if computation time is a problem in the system.
+
+%The graphic equalizer is given free because of the spectrum analyzer so it is choosen to implement a user controlled gain in each band. This concludes the concept of the system which leads to an overview of the system before the requirements are set up for the system.
 
 
 
