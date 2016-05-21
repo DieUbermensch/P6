@@ -1,39 +1,45 @@
 \chapter{Requirements} \label{ch:requirements}
 This chapter will post the requirements for the system described in \autoref{ch:overview}.  
 
-As described in \autoref{sec:problem_statement} the coil must not hit the backplate because this damages the loudspeaker significantly. To be able to secure this the system must run in real time which is explained in (\textbf{real time vs non real time SECTION}). This leads to the following requirements.
+As described in \autoref{sec:problem_statement} the coil must not hit the backplate because this damages the loudspeaker significantly. To be able to secure this, the system must run in real time which is explained in \autoref{sec:RealTime}. However the delay of the full system must not be larger than 100 ms which is a delay a normal modern television today is able to delay the video with. This means that the system is not applicable with e.g. live music where the sound should not be delayed by more than maximum 20 ms, but only applicable with delayed video and normal audio listening. This leads to the following requirements for the overall system.
 
 \begin{itemize}
 \item Overall system
 \begin{enumerate}
 \item [\textlabel{1}{coil}] The coil must not hit the backplate.\\
-\item [\textlabel{2}{realtime}] The system must run in real time and have a delay no more than 200 ms.
-
+\item [\textlabel{2}{realtime}] The system must run in real time. \\
+\item [\textlabel{3}{delay}] The system must not have a delay bigger than 100 ms.
 \end{enumerate}
 \end{itemize}
 
-The processor has been chosen to be a DSP as explained in (\textbf{Processor Platform SECTION}). This section also explains all the requirement for the DSP which leads to the following requirements. 
+The processor has been chosen to be a DSP as explained in \autoref{sec:platformReq}. This section also explains all the requirements for the platform regarding, 96 kHz sample rate, 24 bit resolution, SNR of 120 dB, 100 MIPS and infacing through $I^2S$ to an ADC and DAC. However these demands would be considered necessary for a finish product but because of time constraints and the complexity of a system meeting theese requirements, the demands have been scaled to 48 kHz sample rate, 16 bit resolution, SNR of \textbf{XX} while maintaining infacing through $I^2S$ to an ADC and DAC. 
+
+The hardware must also be able to meet the specifications of IEC 60268-15 which concerns specifications for an Hi-fi system which leads to the following requirements for the hardware platform.
 
 \begin{itemize}
 \item Hardware platform
 \begin{enumerate}
-\item [\textlabel{3}{samplerate44}] The sample rate of the audio codec must be at least 44.1 kHz.\\
-\item [\textlabel{4}{samplerate96}] The sample rate of the audio codec must be compatible with 96 kHz.\\
-\item [\textlabel{5}{resolution}]  A bit resolution of 24 bit must supported by the audio codec and the DSP.\\
-\item [\textlabel{6}{I2S}] The DSP must have at least two I2S ports for interfacing with audio codec.\\
-\item [\textlabel{7}{MIPS}] The DSP must have at least 100 MIPS available.
+\item [\textlabel{4}{samplerate44}] The sample rate of the audio codec must be at least 44.1 kHz.\\
+\item [\textlabel{5}{samplerate96}] The sample rate of the audio codec must be compatible with 96 kHz.\\
+\item [\textlabel{6}{resolution}]  A bit resolution of 24 bit must supported by the audio codec and the DSP.\\
+\item [\textlabel{7}{I2S}] The DSP must have at least two I2S ports for interfacing with audio codec.\\
+\item [\textlabel{8}{MIPS}] The DSP must have at least 100 MIPS available.\todo{hmmmmmm den her vil sofus ikke kunne lide}\\
+\item [\textlabel{9}{IEC}] The interface must comply with IEC 60268-15 specification.
 \end{enumerate}
 \end{itemize}
 
 The RMS compressor must have four bands which comply with the class 2 of IEC 6964 standard (2001) which descibed in \autoref{app:IEC6964}, the reason for class 2 is that it has the biggest tolerances for the filters which should be designed. These bands must be placed below 500 Hz which was desired by DALI which can me seen in (\textbf{MAIL correnspondance}) and is explained in (\textbf{Multiband vs single band section}). The system must also distort less than soft clipping which is fomulated in the problem statement seen in \autoref{sec:problem_statement} and argued for in \autoref{sec:PreAnalysisCon}.
 
+The RMS compressor must have a threshold at 150 W determined in 
+
 \begin{itemize}
 \item RMS compressor
 \begin{enumerate}
-\item [\textlabel{8}{bands}] The compressor must have 4 bands.\\
-\item [\textlabel{9}{standardband}] The bands of the compressor must comply with the class 2 of IEC 6964 standard (2001).\\
-\item [\textlabel{10}{500below}] The compressor must apply to frequencies below 500 Hz.\\
-\item [\textlabel{11}{softclipping}] The system must distort less than soft clipping.
+\item [\textlabel{10}{Threshold}] The compressor must have a threshold at 150 W.\\
+\item [\textlabel{11}{bands}] The compressor must have 4 bands.\\
+\item [\textlabel{12}{standardband}] The bands of the compressor must comply with the class 2 of IEC 6964 standard (2001).\\
+\item [\textlabel{13}{500below}] The compressor must apply to frequencies below 500 Hz.\\
+\item [\textlabel{14}{clipping}] The system must distort less than clipping.
 \end{enumerate}
 \end{itemize}
 
