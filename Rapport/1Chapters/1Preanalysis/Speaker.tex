@@ -1,23 +1,23 @@
 \section{Loudspeaker}
 
-As previously stated, distortion also occurs in the woofer block in \autoref{fig:speaker_block}. In order to understand how the distortion occurs in a loudspeaker, it is necessary to understand the basic fundamentals and the topology of a loudspeaker. This section will consist of the basic topology and then glans over the topic of vibration induced in the speaker woofer.
+As previously stated, distortion also occurs in the woofer block in \autoref{fig:speaker_block}. In order to understand how the distortion occurs in a loudspeaker, it is necessary to understand the basic fundamentals and the topology of a loudspeaker. %This section will consist of the basic topology and then glans over the topic of vibration induced in the speaker woofer.
 
 %\subsubsection*{The basics}
-The loudspeaker is a transducer which purpose is to convert the electrical energy into acoustical energy. This is done by sending the signal into the speaker which can consist of numerous driver. Each driver is made with a specific purpose for handling frequency. The drivers are designed to perform best within their frequency range, hence they are usually different sizes in diameter.
+The loudspeaker is a transducer which purpose is to convert the electrical energy into acoustical energy. This is done by sending the signal into the speaker which can consist of numerous drivers. The drivers are designed to perform best within their frequency range, hence they are usually different sizes in diameter.
 \begin{itemize}
-\item[] For the high frequencies their is a tweeter, 1-2 inches in diameters, high frequencies is roughly 3-4 kHz and above.
-\item[] In the midrange their is a midrange driver which usually is around 5-6 inches. The midrange is roughly 300 Hz to 3-4 kHz. 
-\item[] The lower frequencies, which is 300 and below, is then handled by the woofer. The woofer can is usually 5-6+ inches in diameter.
+\item[] For the high frequencies their is a tweeter, 1 - 2 inches in diameters, high frequencies is roughly 3 - 4 kHz and above.
+\item[] In the midrange their is a midrange driver which usually is around 5 - 6 inches. The midrange is roughly 300 Hz to 3 - 4 kHz. 
+\item[] The lower frequencies, which is 300 Hz and below, is then handled by the woofer. The woofer is usually 5 - 6 inches and above in diameter.
 \end{itemize}
-The reason for different diameters in drivers is because of the wavelength the specific frequencies got. Should a woofer play frequencies at +4 kHz it would end in the driver physically not being able to move that fast. The limitations will end up in non-linear distortion in the diaphragm. Vice versa, should a tweeter reproduced low frequency sound at high \gls{SPL} it will end in distortion. The tweeter has a very low excursion range which limits it to the high frequency area.
+The reason for different diameters in drivers is because of the wavelength the specific frequencies consists of. Should a woofer play frequencies at +4 kHz it would end in the driver physically not being able to move that fast. The limitations will end up in non-linear distortion in the diaphragm. Vice versa, should a tweeter reproduce low frequency sound at high \gls{SPL} it will end in distortion. %The tweeter has a very low excursion range which limits it to the high frequency area. 
+Because the tweeter has a very low excursion range, which means it cannot break because of its physical movement only the woofer will be analyzed further. 
 
-\todo[inline]{Måske noget forklaring om det kun er nødvendigt at kigge på wooferen}
+%\todo[inline]{Måske noget forklaring om det kun er nødvendigt at kigge på wooferen}
 
 
-\subsection{Diaphragm excursion}
-
-When the speaker plays sound it does so by moving the diaphragm in the woofer. This difference in air pressure is then perceived as sound. The sound have a specific wavelength according to the frequency. This means that trying to move the air with a speaker cone is more efficient in a specific frequency area according to the diameter. %If a speaker with a small diameter tries to generate a large wavelength the sound would bend and escape around the edges. 
-Since a large wavelength requires more air to be pushed. Hence we need different sizes of speaker cones which is sized according to what area they are going to play.
+\subsection*{Diaphragm excursion}
+When the speaker plays sound it does so by moving the diaphragm in the woofer. This difference in air pressure is then perceived as sound. The sound has a specific wavelength according to the frequency. This means that trying to move the air with a speaker cone is more efficient in a specific frequency area according to the diameter. %If a speaker with a small diameter tries to generate a large wavelength the sound would bend and escape around the edges. 
+Since a large wavelength requires more air to be pushed speaker cones is sized according to what area they are going to play.
 
 Next, the woofer needs to deliver a sufficient \gls{SPL}. This creates the need for a enough excursion of the diaphragm. Without dwelling to much on the speaker construction, the diaphragm is suspended in free air hold in place by the surround, see \autoref{fig:regularspeaker}, and the spyder. The spyder is a diaphragm holding the voice coil more tightly in place. 
 
@@ -28,7 +28,7 @@ Next, the woofer needs to deliver a sufficient \gls{SPL}. This creates the need 
 \label{fig:louderspeakerCrossSection}
 \end{figure}
 
-When the diaphragm moves it will have physical limits from the mechanical construction. At most, the diaphragm will move regular and linear. When the diaphragm is pushed to the boundaries, the limits of the mechanical construction will intervene and create non-linearities and distortion as seen in \autoref{fig:excursion_graph}. This is discussed further in \autoref{subsec:impulses}.
+When the diaphragm moves it will have physical limits from the mechanical construction. At most, the diaphragm will move regular and linear. When the diaphragm is pushed to the boundaries, the limits of the mechanical construction will intervene and create non-linearities and distortion as seen in \autoref{fig:excursion_graph}. %This is discussed further in \autoref{subsec:impulses}.
 
 
 \begin{figure}[H]
@@ -43,9 +43,8 @@ When the diaphragm moves it will have physical limits from the mechanical constr
 
 
 
-\subsection{Back plate hit}\label{subsec:impulses}
-
-Another issue is the coil hitting the back plate. This would again result in distortion and damage on the coil since the it is hitting the absolute furthest position possible. This situation can however be resolved by moving the back plate further back. This would make the surround determine how far the diaphragm can be pushed.
+\subsection*{Back plate hit}\label{subsec:impulses}
+Another issue concerning the physical limits is the coil hitting the back plate. This would result in distortion and damage on the coil since the it is hitting the absolute furthest position possible. This situation can however be resolved by moving the back plate further back. This would make the surround determine how far the diaphragm can be pushed. This however mean that the physical size of the loudspeaker needs to be increases which is not always desired.
 
 % \begin{figure}[H]
 % \centering

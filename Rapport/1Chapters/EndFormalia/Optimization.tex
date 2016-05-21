@@ -1,1 +1,19 @@
 \chapter{Optimization}
+This chapter will examine optimization possiblities on the final product as described in \textbf{XX}. There are endless ways of optimizing a product, but this chapter will only examine posibilities which could have been made but because of time constraints are not implemented on the final product. 
+
+\subsection*{Instructions}
+The final product has a implemented system working which use instructions \textbf{XX} pr. sample on average, which could have been optimized significantly. This could be done by avoiding calls of any form which costs 10 instructions because the pipeline of instructions has to be emptied. In the implemented software calls are used constantly because it gives an easier overview of the software but by removing these the number of instructions would be reduce. 
+
+An example of optimizing the software is the use of buffers in the software for example downFunc which is described in \textbf{XX}. Here samples are loaded into firstly on buffer and then secondly loaded into an identical buffer for the fir filter. This means that two buffers needs to be initialized instead of a single which would reduce the complexity of the software and the number of instructions. 
+
+Another example is the use of internal rescources in the DSP. Firstly the DSP has five internal circular buffers but in the software only a single circular buffer is used, which means this buffer is initalized every time is it used instead of exploiting all five. Secondly the DSP is capaple of perfoming parallel execution such as dual MACs pr. cycle which is not exploited either in the FIR routine, where it would reduce the repeats of the mac by two, which in general would mean that a filter with twice the order would cost the same when utilizing both MACs. 
+
+\textbf{Polyphase}\\
+\textbf{filter 1/4}
+If one of the filters would have been designed to have a cutoff frequency of 1/4 Fs every second coefficient would be zero which would reduce the instructions of the filter by two, which could be combined with the polyphase filter so only every second coefficient and every second sample is necessary.  
+
+\subsection*{Delay}
+The final product has a delay of \textbf{XX} which was concluded to be to high as described in test \textbf{XX} therefore this delay should be reduced. There are several ways of reducing the current delay, such as reducing the orders of the filters, by either moving the filters or by having a smaller attenuation, or by removing octave bands, which leads to larger filter orders but smaller delays because there are less downsamples. By removing an octave band the filters would have to be moved one octave down, which means the filter order would double but it would then be possible to downsample by more than two which would make the filter order small again.
+
+Another possibility of reducing the delay substantialy is by converting the interpolation filter from FIR to IIR. It is not possible to convert the decimation filter to IIR because of an non constant group delay which would give an error when summing the signal, but the bandwidth of the interpolation filter is much higher than the bandwidth of decimated signal and therefore the group delay would not be a problem because it is constant approximately until the cutoff frequency of the filter. The IIR filter would have a much lower delay which would in term divide the delay by two.   
+
