@@ -143,7 +143,7 @@ uint8 RMScalculate(int16 *dataBuffer, int16 dataIn, int16 *BufferPtr, long *sum)
 \end{lstlisting}
 \todo[inline]{Fejl i koden! BufferPtr skal sammenlignes med 32 og ikke 16! Samt bit shift på 10 og ikke 9.}
 
-The RMS function is essentially the same to the RMS algorithm described under the compressor section.
+The RMS function is essentially the same to the RMS algorithm described under the compressor section. The function calculates the RMS$^2$ and transmits that value to the GUI which handles the square root function.
 
 % Appendix - Baudrate, register setup. Husk external bus setup.
 
