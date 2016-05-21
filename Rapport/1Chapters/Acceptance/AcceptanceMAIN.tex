@@ -15,31 +15,31 @@ This chapter governs the acceptance test of the requirements listed in \autoref{
 2			& The system must run in real time and 			& \autoref{app:journal_speaker_test}	& 	$\surd$			\\ 
 			& have a delay no more than 200 ms.				& 										&					\\ \hline
 %
-3			& The sample rate of the audio codec must 		& \autoref{app:journal_speaker_test}	&	$\times$		\\ 
-			& be at least 44.1 kHz. 						& 										&					\\ \hline
+3			& The sample rate of the audio codec must 		& Appendix								&	$\surd$			\\ 
+			& be at least 44.1 kHz. 						& 	CD									&					\\ \hline
 %
-4			& The sample rate of the audio codec must   	& \autoref{app:journal_speaker_test}	& 	$\times$		\\ 
-			& be compatible with 96 kHz.					&										&					\\ \hline
+4			& The sample rate of the audio codec must   	& Appendix								& 	$\surd$			\\ 
+			& be compatible with 96 kHz.					&	CD									&					\\ \hline
 
-5			&  A bit resolution of 24 bit must supported 	& \autoref{app:journal_speaker_test}	&	$\surd$			\\ 
-			&  by the audio codec and the DSP. 	 	 		&						 				&					\\ \hline
+5			&  A bit resolution of 24 bit must supported 	& Appendix								&	$\surd$			\\ 
+			&  by the audio codec and the DSP. 	 	 		&	CD					 				&					\\ \hline
 %
-6			& The DSP must have at least two I2S ports 		& \autoref{app:journal_speaker_test}	&	$\times$		\\ 
-			& for interfacing with audio codec  			& 			 					 		&					\\ \hline
+6			& The DSP must have at least two I2S ports 		& Appendix								&	$\surd$			\\ 
+			& for interfacing with audio codec  			& 	CD		 					 		&					\\ \hline
 %
-7			& The DSP must have at least 100 MIPS available	& \autoref{app:journal_speaker_test}	&	$\surd$			\\ 
-			&										  	 	&						 				&					\\ \hline
+7			& The DSP must have at least 100 MIPS available	& Appendix								&	$\surd$			\\ 
+			&										  	 	&	CD					 				&					\\ \hline
 %
-8			& The compressor must have 4 bands 				& \autoref{app:journal_speaker_test}	&	$\times$		\\ 
+8			& The compressor must have 4 bands 				& \autoref{app:journal_speaker_test}	&	$\surd$			\\ 
 			& 												& 			 					 		&					\\ \hline
 
-9			& The bands of the compressor must comply with 	& \autoref{app:journal_speaker_test}	&	$\times$		\\ 
+9			& The bands of the compressor must comply with 	& \autoref{app:journal_decimationFilter}&	$\surd$			\\ 
 			& the class 2 of IEC 6964 standard (2001).		& 			 					 		&					\\ \hline
 %
 10			& The compressor must apply to frequencies		& \autoref{app:journal_speaker_test}	&	$\surd$			\\ 
 			& below 500 Hz. 							 	&			 							&					\\ \hline
 %
-11			& The system must distort less than soft  		& \autoref{app:journal_speaker_test}	&	$\times$		\\ 
+11			& The system must distort less than soft  		& \autoref{app:journal_speaker_test}	&	$\surd$			\\ 
 			& clipping.										& 			 						 	&					\\ \hline								
 \end{tabular}	
 \caption{Requirements for the entire system}
@@ -53,8 +53,10 @@ This chapter governs the acceptance test of the requirements listed in \autoref{
 \subsubsection*{Requirement 3}
 
 \subsubsection*{Requirement 4}
-The Audio coded was initialized as 48 kHz, by writing to a specific register during boot-up. 
+The Audio coded was initialized as 48 kHz, by writing to a specific register during boot-up. The TLV320AIC3204 are compatible with 44.1,48,96 and 192 kHz. Which is sufficient for the system. Further details are can be found at:
 \path{CD://Datasheet/tlv320aic3204.pdf}
+
+
 \subsubsection*{Requirement 5}
 The system was run using 16-bit algorithm. The DSP is equipped with two ALU where only one has been implemented. Hence it is possible two run approximately the same algorithm with double precision. From the datasheet it is documented that the ALU's are 40-Bit, which should be sufficient to use. The datasheet for the codec and DSP can be found at: \\
 \path{CD://Datasheet/tms320C5515.pdf}\\
@@ -63,10 +65,54 @@ The system was run using 16-bit algorithm. The DSP is equipped with two ALU wher
 \subsubsection*{Requirement 6}
 
 \subsubsection*{Requirement 7}
+The DSP datasheet documents a possible 120 MIPS of computation power. Hence the requirement from DALI with 1024 instructions pr. sample at 96 kHz are withheld. The specifications are documented at:
+\path{CD://Datasheet/tlv320aic3204.pdf}
+
 
 \subsubsection*{Requirement 8}
 
 \subsubsection*{Requirement 9}
+\autoref{fig:Acceptancetest4pic} shows that the amplitude response of the interpolation and decimation filters uphold the required filter response. The figures are depicted in greater detail in \autoref{app:journal_decimationFilter}. The filters also uphold a linear phase response, which can be seen in figure \ref{fig:AcceptIntPhase2} and \ref{fig:AcceptDecPhase2}
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.45\textwidth}
+	\centering
+	\tikzsetnextfilename{acceptDecMag2}
+	\input{figures/acceptDecMag2.tex}
+	\caption{Decimation magnitude response with requirements.}
+	\label{fig:acceptDecMag2}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.45\textwidth}
+	\centering
+	\tikzsetnextfilename{acceptIntMag2}
+	\input{figures/acceptIntMag2.tex}
+	\caption{Decimation magnitude response with requirements.}
+	\label{fig:acceptIntMag2}
+\end{subfigure} 
+\begin{subfigure}[t]{0.45\textwidth}
+	\centering
+	\tikzsetnextfilename{acceptDecPhase2}
+	\input{figures/acceptDecPhase2.tex}
+	\caption{Decimation Phase response .}
+	\label{fig:AcceptDecPhase2}
+\end{subfigure} 
+\hfill
+\begin{subfigure}[t]{0.45\textwidth}
+	\centering
+	\tikzsetnextfilename{acceptIntPhase2}
+	\input{figures/acceptIntPhase2.tex}
+	\caption{Decimation Phase response.}
+	\label{fig:AcceptIntPhase2}
+\end{subfigure} 
+\caption{Amplitude and phase response of the Decimation and Interpolation Filter.}
+\label{fig:Acceptancetest4pic}
+\end{figure}
+
+
+
+
+
 
 \subsubsection*{Requirement 10}
 
