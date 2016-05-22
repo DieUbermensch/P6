@@ -1,10 +1,10 @@
 \chapter{DSP setup}
 
-In this chapter the setup of the DSP is explained.
-
+In this chapter the setup of the DSP is explained. 
 
 \section{DSP setup}
 
+The initialization is performed in a function called system\_init, which is shown in \autoref{listingSystemInit}. The first two lines of the function is the setup of the clock. SYS\_PCGCR1 and SYS\_PCGCR2 are defined as IO-ports to the registers namely 0x1c02 and 0x1c03. By setting SYS\_PCGCR1 and SYS\_PCGCR2 (Peripheral Clock Gating Configuration Registers) to 0 the clock is activated on all peripherals needing a clock. The next line SYS\_EXBUSSEL, which has the IO register address 0x1c00, is the external bus selector. The register determine which of the external peripheral IO unit is selected. By setting the register to 0x1100, SPI, GPIO, UART, I2S2 and I2S0 and, are activated. The system only uses the I2S0 and UART ports. The I$^2$C is afterwards initialized. The I$^2$C bus is used for communication between the TMS320C5515 and TLV320AIC3204.
 
 \begin{lstlisting}[language=C, caption = {System initialization},label={listingSystemInit}]
 void system_init(uint8 audioType, uint8 resolution, uint8 fs){
@@ -25,10 +25,9 @@ void system_init(uint8 audioType, uint8 resolution, uint8 fs){
 	else if (audioType == 1 && resolution == 16) I2S_init(0x8010);	
 	else if	(audioType == 1 && resolution == 24) I2S_init(0x801C);
 	else I2S_init(0x9010);
-	
 }
-
 \end{lstlisting}
+Between line 7 and 11 the sampling rate and bit resolution is set up in the audio codec. The function TLV320AIC3204\_init() is described later under TLV320AIC3204 setup. The last lines are the setup of the I$^2$S0 port where the function I2S\_init() is called.
 
 \begin{lstlisting}[language=C, caption = {Setup of I2S port for the DSP},label={listingI2SDSP}]
 void I2S_init(uint8 Type){
@@ -38,6 +37,14 @@ void I2S_init(uint8 Type){
 }
 \end{lstlisting}
 
+I2S0\_CTRL is defined as an IO port to the register 0x2800 which is the serializer control register for the I2S busses.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\textwidth]{figures/Ideal_filter.png}
+\caption{The ideal frequency response of a lowpass filter.}
+\label{fig:IdealFilterApp}
+\end{figure}
 
 \section{TLV320AIC3204 setup}
 
