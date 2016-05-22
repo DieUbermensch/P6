@@ -15,8 +15,8 @@ For measuring the vibrations inside the enclosure two accelometers have been pla
 
 
 
-The loudspeaker is set to play a sinesweep from the crossover frequency of the speaker which is 2400 Hz to 10 Hz. The sine sweep is then repeated from the lowest volume setting of a power amplifier until the loudspeaker breaks. There are in total 20 datasets each containing four measurements, namely the vibrations from the enclosure, driver, the sound pressure from the microphone, and lastly a reference signal to synchronize all data. The amount of data is therefore large and only relevant datasets will be presented. If needed, a more comprehensive approach is taken in \autoref{app:journal_speaker_test} and a full detailed overview of graphs is stored on the enclosed CD.%This resulted in 20 sine sweep measurements from all three sensors  where the results can be deducted from the test journal in \autoref{app:journal_speaker_test} and the outputs from every sensor can be seen on the CD
-\todo[inline]{reference til cd}
+The loudspeaker is set to play a sinesweep from the crossover frequency of the speaker which is 2400 Hz to 10 Hz. The sine sweep is then repeated from the lowest volume setting of a power amplifier until the loudspeaker breaks. There are in total 20 datasets each containing four measurements, namely the vibrations from the enclosure, driver, the sound pressure from the microphone, and lastly a reference signal to synchronize all data. The amount of data is therefore large and only relevant datasets will be presented. If needed, a more comprehensive approach is taken in \autoref{app:journal_speaker_test} and a full detailed overview of graphs is stored on the enclosed CD\footnote{\scalebox{0.7}{\path{CD://Maalinger/Maalinger030316 - Loudspeaker test/Complete Analysis.pdf}}}.
+
 
 
 \subsubsection{Analysis of the DALI Zensor AX 5 measurements}
@@ -37,7 +37,7 @@ During the first accelerometer measurements the loudspeaker acts linear with ver
 \begin{subfigure}[t]{0.55\textwidth}
 	\tikzsetnextfilename{raw_driver19_window}
 	\input{figures/raw_driver19_window.tex}
-	\caption{Raw dataset 19 for driver.}
+	\caption{Raw dataset 16 for driver.}
 	\label{fig:raw_driver19_window_main}
 \end{subfigure}
 %\hspace{6mm} 
@@ -51,13 +51,13 @@ During the first accelerometer measurements the loudspeaker acts linear with ver
 \label{fig:raw_driver19_windows_main}
 \end{figure}
 
-Further investigation of the spikes is shown in figure \ref{fig:raw_driver19_window_zoom_main}. It shows that theses spikes appear where the speaker should naturally attenuate the spikes and the spikes appear with no sudden coherence which show signs of the coil hitting the backplate. Looking further into the specific area, around 70-90 Hz, an FFT analysis shows how the hit on the back plates appears which is shown on \autoref{fig:FFT_hit_Main}.
+Further investigation of the spikes is shown in figure \ref{fig:raw_driver19_window_zoom_main}. It shows that theses spikes appear where the speaker should naturally attenuate the spikes and they appear with no sudden coherence which show signs of the coil hitting the backplate. Looking further into the specific area, around 70-90 Hz, an FFT analysis shows how the hit on the back plates appears which is shown on \autoref{fig:FFT_hit_Main}.
 
 \begin{figure}[H]
 \centering
 \tikzsetnextfilename{FFTFinal}
 \input{figures/Forsog1/FFTFinal.tex}
-\caption{The spectrum of the window. The yellow graph is dataset 1, red is 10 and blue is 19.}
+\caption{The spectrum of the window. The measurements are in ascending order 1, 10, 13, 16 and 19}
 \label{fig:FFT_hit_Main}
 \end{figure}
 

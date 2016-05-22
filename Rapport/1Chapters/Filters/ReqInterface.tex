@@ -1,6 +1,6 @@
-8. The compressor must have 4 bands. \\
-9. The bands of the compressor must comply with the class 2 of IEC 6964 standard (2001). \\
-10. The compressors must apply to frequencies below 500 Hz. \\
+10. The compressor must have 4 bands. \\
+11. The bands of the compressor must comply with the class 2 of IEC 6964 standard (2001). \\
+12. The compressors must apply to frequencies below 500 Hz. \\
 \\ 
 A filter for decimation will be designed which must meet requirements 9, and a filter for interpolation will be designed which must not influence the decimated signals bandwidth, because it would otherwise influence the frequency response of the system making it non flat. The decimation filter will be deigned first.
 
@@ -48,8 +48,8 @@ $\geq G^{\pm +4}$                                                               
 $\leq G^{\pm -4}$                                                                                                       & +60; +$\infty$                                                                                         \\ \hline
 \multicolumn{2}{|l|}{\begin{tabular}[c]{@{}l@{}}* At frequencies less than the lower band-edge frequency and greater than the\\ upper band-edge frequency, the limit on maximum relative attenuation is +$\infty$;\end{tabular}} \\ \hline
 \end{tabular}
-\caption{Normalized Requirements for the filters}
+\caption{Normalized Requirements for the filters. G=2}
 \label{tb:normalizedReqClass2}
 \end{table} 
  
-Only a lowpass filter should be designed because of spectral subtraction, described in \autoref{ch:designRealisation}, instead of a bandpass filter therefore only one side of the requirements are showed from now on. From system overview the octave bands are given for frequencies below 500 Hz, see \autoref{tb:freqBands} which meets requirement 8 and 10.
+Only a lowpass filter should be designed because of spectral inversion, as described in \autoref{ch:designRealisation}, so instead of a bandpass requirements only one side of the requirements are showed from now on. %From system overview the octave bands are given for frequencies below 530 Hz, see \autoref{tb:freqBands} which meets requirement 8 and 10.

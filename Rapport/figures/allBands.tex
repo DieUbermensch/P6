@@ -16,21 +16,56 @@ width=5.5in,
 height=2.5in,
 at={(0.758in,0.481in)},
 scale only axis,
-unbounded coords=jump,
 xmode=log,
 xmin=1,
 xmax=100000,
 xminorticks=true,
+xlabel={Frequency [Hz]},
 xmajorgrids,
 xminorgrids,
-ylabel={Magnitude [dB]},
-xlabel={Frequency [Hz]}
 ymin=-60,
 ymax=10,
+ylabel={Magnitude [dB]},
 ymajorgrids,
 axis background/.style={fill=white}
 ]
 \addplot [color=black!30!red,solid,forget plot]
+  table[row sep=crcr]{%
+375	-60\\
+750	-55\\
+1500	-41\\
+3000	-16.5\\
+4242.64068711928	-1.6\\
+4242.64068711928	0.5\\
+4626.63247622382	0.5\\
+5045.37849152229	0.5\\
+5502.02425922803	0.5\\
+6000	0.5\\
+6543.04639599155	0.5\\
+7135.24269001633	0.5\\
+7781.03732790606	0.5\\
+8485.28137423857	0.5\\
+8485.28137423857	-1.6\\
+12000	-16.5\\
+24000	-41\\
+48000	-55\\
+96000	-60\\
+};
+\addplot [color=black!30!red,solid,forget plot]
+  table[row sep=crcr]{%
+4242.64068711928	-5.5\\
+4242.64068711928	-5.5\\
+4626.63247622382	-1.6\\
+5045.37849152229	-0.8\\
+5502.02425922803	-0.6\\
+6000	-0.5\\
+6543.04639599155	-0.6\\
+7135.24269001633	-0.8\\
+7781.03732790606	-1.6\\
+8485.28137423857	-5.5\\
+8485.28137423857	-5.5\\
+};
+\addplot [color=black!30!green,solid,forget plot]
   table[row sep=crcr]{%
 187.5	-60\\
 375	-55\\
@@ -52,12 +87,8 @@ axis background/.style={fill=white}
 24000	-55\\
 48000	-60\\
 };
-\addplot [color=black!30!red,solid,forget plot]
+\addplot [color=black!30!green,solid,forget plot]
   table[row sep=crcr]{%
-187.5	-inf\\
-375	-inf\\
-750	-inf\\
-1500	-inf\\
 2121.32034355964	-5.5\\
 2121.32034355964	-5.5\\
 2313.31623811191	-1.6\\
@@ -69,12 +100,8 @@ axis background/.style={fill=white}
 3890.51866395303	-1.6\\
 4242.64068711929	-5.5\\
 4242.64068711929	-5.5\\
-6000	-inf\\
-12000	-inf\\
-24000	-inf\\
-48000	-inf\\
 };
-\addplot [color=black!30!green,solid,forget plot]
+\addplot [color=black!30!blue,solid,forget plot]
   table[row sep=crcr]{%
 93.75	-60\\
 187.5	-55\\
@@ -96,12 +123,8 @@ axis background/.style={fill=white}
 12000	-55\\
 24000	-60\\
 };
-\addplot [color=black!30!green,solid,forget plot]
+\addplot [color=black!30!blue,solid,forget plot]
   table[row sep=crcr]{%
-93.75	-inf\\
-187.5	-inf\\
-375	-inf\\
-750	-inf\\
 1060.66017177982	-5.5\\
 1060.66017177982	-5.5\\
 1156.65811905596	-1.6\\
@@ -113,12 +136,8 @@ axis background/.style={fill=white}
 1945.25933197651	-1.6\\
 2121.32034355964	-5.5\\
 2121.32034355964	-5.5\\
-3000	-inf\\
-6000	-inf\\
-12000	-inf\\
-24000	-inf\\
 };
-\addplot [color=black!30!blue,solid,forget plot]
+\addplot [color=mycolor1,solid,forget plot]
   table[row sep=crcr]{%
 46.875	-60\\
 93.75	-55\\
@@ -140,12 +159,8 @@ axis background/.style={fill=white}
 6000	-55\\
 12000	-60\\
 };
-\addplot [color=black!30!blue,solid,forget plot]
+\addplot [color=mycolor1,solid,forget plot]
   table[row sep=crcr]{%
-46.875	-inf\\
-93.75	-inf\\
-187.5	-inf\\
-375	-inf\\
 530.330085889911	-5.5\\
 530.330085889911	-5.5\\
 578.329059527978	-1.6\\
@@ -157,12 +172,8 @@ axis background/.style={fill=white}
 972.629665988257	-1.6\\
 1060.66017177982	-5.5\\
 1060.66017177982	-5.5\\
-1500	-inf\\
-3000	-inf\\
-6000	-inf\\
-12000	-inf\\
 };
-\addplot [color=mycolor1,solid,forget plot]
+\addplot [color=mycolor2,solid,forget plot]
   table[row sep=crcr]{%
 23.4375	-60\\
 46.875	-55\\
@@ -184,12 +195,8 @@ axis background/.style={fill=white}
 3000	-55\\
 6000	-60\\
 };
-\addplot [color=mycolor1,solid,forget plot]
+\addplot [color=mycolor2,solid,forget plot]
   table[row sep=crcr]{%
-23.4375	-inf\\
-46.875	-inf\\
-93.75	-inf\\
-187.5	-inf\\
 265.165042944955	-5.5\\
 265.165042944955	-5.5\\
 289.164529763989	-1.6\\
@@ -201,12 +208,8 @@ axis background/.style={fill=white}
 486.314832994129	-1.6\\
 530.330085889911	-5.5\\
 530.330085889911	-5.5\\
-750	-inf\\
-1500	-inf\\
-3000	-inf\\
-6000	-inf\\
 };
-\addplot [color=mycolor2,solid,forget plot]
+\addplot [color=mycolor3,solid,forget plot]
   table[row sep=crcr]{%
 11.71875	-60\\
 23.4375	-55\\
@@ -228,12 +231,8 @@ axis background/.style={fill=white}
 1500	-55\\
 3000	-60\\
 };
-\addplot [color=mycolor2,solid,forget plot]
+\addplot [color=mycolor3,solid,forget plot]
   table[row sep=crcr]{%
-11.71875	-inf\\
-23.4375	-inf\\
-46.875	-inf\\
-93.75	-inf\\
 132.582521472478	-5.5\\
 132.582521472478	-5.5\\
 144.582264881994	-1.6\\
@@ -245,12 +244,8 @@ axis background/.style={fill=white}
 243.157416497064	-1.6\\
 265.165042944955	-5.5\\
 265.165042944955	-5.5\\
-375	-inf\\
-750	-inf\\
-1500	-inf\\
-3000	-inf\\
 };
-\addplot [color=mycolor3,solid,forget plot]
+\addplot [color=mycolor4,solid,forget plot]
   table[row sep=crcr]{%
 5.859375	-60\\
 11.71875	-55\\
@@ -272,12 +267,8 @@ axis background/.style={fill=white}
 750	-55\\
 1500	-60\\
 };
-\addplot [color=mycolor3,solid,forget plot]
+\addplot [color=mycolor4,solid,forget plot]
   table[row sep=crcr]{%
-5.859375	-inf\\
-11.71875	-inf\\
-23.4375	-inf\\
-46.875	-inf\\
 66.2912607362388	-5.5\\
 66.2912607362388	-5.5\\
 72.2911324409972	-1.6\\
@@ -289,18 +280,15 @@ axis background/.style={fill=white}
 121.578708248532	-1.6\\
 132.582521472478	-5.5\\
 132.582521472478	-5.5\\
-187.5	-inf\\
-375	-inf\\
-750	-inf\\
-1500	-inf\\
 };
-\addplot [color=mycolor4,solid,forget plot]
+\addplot [color=white!30!black,solid,forget plot]
   table[row sep=crcr]{%
 2.9296875	-60\\
 5.859375	-55\\
 11.71875	-41\\
 23.4375	-16.5\\
 33.1456303681194	-1.6\\
+33.1456303681194	0.5\\
 33.1456303681194	0.5\\
 36.1455662204986	0.5\\
 39.4170194650179	0.5\\
@@ -316,12 +304,22 @@ axis background/.style={fill=white}
 375	-55\\
 750	-60\\
 };
-\addplot [color=mycolor4,solid,forget plot]
-  table[row sep=crcr]{%
-2.9296875	-inf\\
-5.859375	-inf\\
-11.71875	-inf\\
-23.4375	-inf\\
+%\addplot [color=white!30!black,solid,forget plot]
+%  table[row sep=crcr]{%
+%33.1456303681194	-5.5\\
+%33.1456303681194	-5.5\\
+%36.1455662204986	-1.6\\
+%39.4170194650179	-0.8\\
+%42.984564525219	-0.6\\
+%46.875	-0.5\\
+%51.117549968684	-0.6\\
+%55.7440835157526	-0.8\\
+%60.7893541242661	-1.6\\
+%66.2912607362388	-5.5\\
+%66.2912607362388	-5.5\\
+%};
+\addplot [color=white!30!black,solid,forget plot]
+table[row sep=crcr]{%
 33.1456303681194	-5.5\\
 33.1456303681194	-5.5\\
 36.1455662204986	-1.6\\
@@ -333,54 +331,7 @@ axis background/.style={fill=white}
 60.7893541242661	-1.6\\
 66.2912607362388	-5.5\\
 66.2912607362388	-5.5\\
-93.75	-inf\\
-187.5	-inf\\
-375	-inf\\
-750	-inf\\
 };
-\addplot [color=white!30!black,solid,forget plot]
-  table[row sep=crcr]{%
-1.46484375	-60\\
-2.9296875	-55\\
-5.859375	-41\\
-11.71875	-16.5\\
-16.5728151840597	-1.6\\
-16.5728151840597	0.5\\
-18.0727831102493	0.5\\
-19.7085097325089	0.5\\
-21.4922822626095	0.5\\
-23.4375	0.5\\
-25.558774984342	0.5\\
-27.8720417578763	0.5\\
-30.394677062133	0.5\\
-33.1456303681194	0.5\\
-33.1456303681194	-1.6\\
-46.875	-16.5\\
-93.75	-41\\
-187.5	-55\\
-375	-60\\
-};
-\addplot [color=white!30!black,solid,forget plot]
-  table[row sep=crcr]{%
-1.46484375	-inf\\
-2.9296875	-inf\\
-5.859375	-inf\\
-11.71875	-inf\\
-16.5728151840597	-5.5\\
-16.5728151840597	-5.5\\
-18.0727831102493	-1.6\\
-19.7085097325089	-0.8\\
-21.4922822626095	-0.6\\
-23.4375	-0.5\\
-25.558774984342	-0.6\\
-27.8720417578763	-0.8\\
-30.394677062133	-1.6\\
-33.1456303681194	-5.5\\
-33.1456303681194	-5.5\\
-46.875	-inf\\
-93.75	-inf\\
-187.5	-inf\\
-375	-inf\\
-};
+
 \end{axis}
 \end{tikzpicture}%
