@@ -26,9 +26,8 @@ A spectrum analyser can consist of multiple bandpass filters which divides the s
 The advantage of the spectrum analyzer is that it gives the capability of analysing the frequency spectrum of a signal in a very effective way with the use of either RMS or peak analysing. The disadvantage of the spectrum analyzer is that it is not possible to analyse a specific frequency if wanted, but only able to analyse the spectral content of the bandwidth designed.      
 
 \subsection*{Fast fourier transform}
-The Fourier transformation is a mathematical equation that breaks the signal up into a sum of sine and cosine function at different frequencies which gives the spectral composition of the signal. To perform a Fourier Transformation (FT) the the Discrete Fourier Transformation (DFT), refer to \todo{APPENDIX}, must be used since the FT cannot be implemented in a causal and discrete system. The DFT is very inefficient in its computation so it is more common to use the more effective FFT which obtains the same result as the DFT. The difference in computation time is given as
+The Fourier transformation is a mathematical equation that breaks the signal up into a sum of sine and cosine function at different frequencies which gives the spectral composition of the signal. To perform a Fourier Transformation (FT) the Discrete Fourier Transformation (DFT), must be used since the FT cannot be implemented in a causal and discrete system. The DFT is very inefficient in its computation so it is more common to use the more effective FFT which obtains the same result as the DFT. The difference in computation time is given as
 
-\todo[inline]{DFT Appendix}
 
 DFT computation time:
 \begin{equation}
@@ -184,11 +183,11 @@ Another advantages of implementing a parametric equalizer is that any parametric
 \centering
 \tikzsetnextfilename{parametric_eq_preanalysis_comb}
 \input{figures/parametric_eq_preanalysis_comb.tex}
-\caption{Combining all three parameters.}
+\caption{A filter where gain, Q-Value and center frequency is adjusted. Same filter with different parameters.}
 \label{fig:parametric_eq_preanalysis_comb}
 \end{figure}
 
-\todo[inline]{Burde det ikke ikke være stiplede linjer men konstante linjer}
+
 
 %A disadvantages of the parametric equalizer is however the ease of use. If the user is not experienced with using a parametric equalizer, it can be difficult to examine if the equalizer has the desired frequency response. The parametric equalizer may be flexible but should be interfaced to a display, so the user can see the frequency response of the equalizer.
 
