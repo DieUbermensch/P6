@@ -1,9 +1,30 @@
 \chapter{Simulation}
-To make sure the theory will be performing as expected when implemented in the DSP a simulation will be performed before, to make sure every subsystem will function properly with each other. On \autoref{fig:OverallSimulation} an outline of the entire system is depicted. It shows how a signal is applied to the first downsampling and the applied to the following consecutive downsamplings. When the signal has reach the four lowest band, a RMS compressor is applied, before each step is upsampled and ready for playback.
+All components for the subsystems have now been designed, which leads to a simulation of the full system to make sure the system will be performing as expected when implemented in the DSP. The full system has 7 downsampling stages, which mean that the Fs will be $Fs/128=375 Hz$.The decimation filter has a delay of 25 samples  while the interpolation filter has a delay of 17 samples, therefore the band in the differetn downsampling stages must be delayed correctly so the bands can be summed up in phase. 
+
+To calculate the delays the following formula is used for every band:
+
+Stage 1:
+\begin{equation}
+Z^{-d}_{stage} = (M_{Int}/2) + \sum_{n=1}^{6} ((M_{Dec}/2)\cdot 2^n+(M_{Int}/2)\cdot 2^n) = 5309\enhed{samples}
+\label{eq:delays}
+\end{equation}
+Stage 2: 2621 sample delay (n going from 1 to 5). \\
+Stage 3: 1277 sample delay (n going from 1 to 4). \\
+Stage 4: 605 sample delay (n going from 1 to 3). \\
+Stage 5: 269 sample delay (n going from 1 to 2). \\
+Stage 6: 101 sample delay (n going from 1 to 1). 
+
+While the last delay in stage 8 is only the delay of the interpolation filter which equals 17: \\
+Stage 7: 17.
+
+
+
+
+On \autoref{fig:OverallSimulation} an outline of the entire system is depicted. It shows how a signal is applied to the first downsampling and then applied to the following consecutive downsamplings. When the signal has reached the four lowest band, a RMS compressor is applied, before each step is upsampled and ready for playback.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth, page=1]{Simulation}
+\includegraphics[width=\textwidth,angle=90, page=1]{Simulation}
 \label{fig:OverallSimulation}
 \caption{Overall view of the system being simulated}
 \end{figure}
@@ -13,16 +34,6 @@ Under the simulation, the following settings are set/applied:
 \item The sampling frequency is 48 kHz.
 \item The test signal played with an amplitude of 0.5.
 \item The test signal is a logarithmic sweep from 0 Hz to 500 Hz during a 10 second period.
-\item The delays are as follows (refer to \autoref{app:FIR_Matlab} for calculations):
-\begin{itemize}
-\item Stage 1: 5309 samples.
-\item Stage 2: 2621 samples.
-\item Stage 3: 1277 samples.
-\item Stage 4: 605 samples.
-\item Stage 5: 269 samples.
-\item Stage 6: 101 samples.
-\item Stage 7: 17 samples.
-\end{itemize}
 \end{itemize}
 
 The simulation file and needed scripts are found at \path{CD://something }
