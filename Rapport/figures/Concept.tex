@@ -9,17 +9,17 @@
 
 
 %% External %%
-\node [block, fill=blue!15] (UserInterface) at ($(Equalizer1)+(-3.5,2)$) {User interface};
-\node [block, fill=blue!15] (UserInterfaceDev) at ($(Equalizer1)+(3.5,2)$) {Developer interface};
+%\node [block, fill=blue!15] (UserInterface) at ($(Equalizer1)+(-3.5,2)$) {User interface};
+%\node [block, fill=blue!15] (UserInterfaceDev) at ($(Equalizer1)+(3.5,2)$) {Developer interface};
 
 %% Speaker Enclosure %%
 \node [block, fill=black!80,text=white] (Amplifier) at ($(SpectralAnalysis)+(4.5,-3)$) {Amplifier};
 \node [block, fill=black!80,text=white] (Driver) at ($(Amplifier)+(-3.5,0)$) {Driver};
 
-\node (User) at ($(-2.5,0)+(UserInterface)$) {\textbf{User}};
-\node (Developer) at ($(3.6,0)+(UserInterfaceDev)$) {\textbf{Developer}};
-\draw[->] (User) -- (UserInterface);
-\draw[->] (Developer) -- (UserInterfaceDev);
+%\node (User) at ($(-2.5,0)+(UserInterface)$) {\textbf{User}};
+%\node (Developer) at ($(3.6,0)+(UserInterfaceDev)$) {\textbf{Developer}};
+%\draw[->] (User) -- (UserInterface);
+%\draw[->] (Developer) -- (UserInterfaceDev);
 
 % Store Blokke %%
 \begin{pgfonlayer}{bg}
@@ -37,8 +37,8 @@
 \draw[->] (Equalizer) -- (Amplifier);
 \draw[->] (Amplifier) -- (Driver);
 
-\draw[->] (UserInterface) -| ($(Equalizer1)+(-.25,.6)$);
-\draw[->] (UserInterfaceDev) -| ($(Equalizer1)+(.25,.6)$);
+%\draw[->] (UserInterface) -| ($(Equalizer1)+(-.25,.6)$);
+%\draw[->] (UserInterfaceDev) -| ($(Equalizer1)+(.25,.6)$);
 
 %\draw[->] ($(SensorDriver)+(-1.375,-0.3)$) -- ($(SpectralAnalysis)+(1.375,-0.3)$);
 
