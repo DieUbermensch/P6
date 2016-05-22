@@ -1,2 +1,57 @@
-\section{RMS Compressor release time}
+\section{Release time}
 
+If no release time is implied to the compressor the compression will be too aggressive, which will result in a distorted sound. The release time is basically the time span for the compressor to release the gain reduction. Implementing a release time also ensures that the compression is not constantly switch between two different gains. The release time will be implemented as a first order IIR filter where the release time will be the time constant $\tau$. The release time is chosen to be 5 seconds, as 5 seconds is estimated to be sufficient.
+
+It is commonly known that an analog first order filter can be designed as following expression:
+\begin{equation}
+H(s) = \frac{\omega_c}{s+\omega_c}
+\end{equation}
+As $\tau = 5\, s$ and the natural frequency is $\omega_c = \frac{1}{\tau}$ then the transfer function for the first order filter is:
+\begin{equation}
+H(s) = \frac{0.2}{s+0.2}
+\end{equation} 
+A pole is located at -0.2 and the cutoff frequency can be calculated as $f = \frac{0.2}{2\pi} = 0.0318 \text{Hz}$. The frequency response of the transfer function and the step response of the filter are now plotted to examine if the filter has the desired response:
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.7\textwidth}
+	\tikzsetnextfilename{releaseTimeAnalogFreq}
+	\input{figures/releaseTimeAnalogFreq.tex}
+	\caption{Band 1 requierments.}
+	\label{fig:releaseTimeAnalogFreq}
+\end{subfigure}
+\begin{subfigure}[t]{0.7\textwidth}
+	\tikzsetnextfilename{releaseTimeAnalogStep}
+	\input{figures/releaseTimeAnalogStep.tex}
+	\caption{Band 1 requierments zoomed in.}
+	\label{fig:releaseTimeAnalogStep}
+\end{subfigure}
+\caption{Band 1 requierments without and with zoom.}
+\label{fig:releaseTimeAnalog}
+\end{figure}
+
+It is seen that the -3 dB cutoff frequency is located at 0,0318 Hz in \autoref{fig:releaseTimeAnalogFreq} and the release time is 5 seconds as the 66\% rise time is located at 5 seconds. To implement the filter on a DSP, the transfer function is now transformed into z-domain. The chosen transformation is the impulse invariant. An explanation of the impulse invariant and bilinear transformation is provided in \autoref{ch:IIR}. By using the impulse invariant method following transfer function is obtained.
+\begin{equation}
+H(s) = T\frac{0.2}{1-\text{e}^{-0.2T} z^{-1}}
+\end{equation} 
+The filter coefficient is obtained to quantized them in order to examine if the frequency response and step response of the filter still has the desired characteristic when implementing the filter in DSP. To apply quantization, the coefficients are first multiplied with $2^{15}$ (Q15 format) and then rounded. Afterwards the coefficients are divided by $2^{15}$ to obtain a floating point number. After the quantization, the frequency response and step response is now plotted to examine the filter.
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.7\textwidth}
+	\tikzsetnextfilename{releaseTimeDigitalFreq}
+	\input{figures/releaseTimeDigitalFreq.tex}
+	\caption{Band 1 requierments.}
+	\label{fig:releaseTimeDigitalFreq}
+\end{subfigure}
+\begin{subfigure}[t]{0.7\textwidth}
+	\tikzsetnextfilename{releaseTimeDigitalStep}
+	\input{figures/releaseTimeDigitalStep.tex}
+	\caption{Band 1 requierments zoomed in.}
+	\label{fig:releaseTimeDigitalStep}
+\end{subfigure}
+\caption{Band 1 requierments without and with zoom.}
+\label{fig:releaseTime}
+\end{figure}
+
+In it is seen in \autoref{fig:releaseTime} that the frequency response and step response remains intact after quantization.

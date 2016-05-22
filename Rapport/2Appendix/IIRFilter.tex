@@ -1,4 +1,4 @@
-\chapter{Infinite Impulse Response filter}
+\chapter{Infinite Impulse Response filter} \label{ch:IIR}
 
 The purpose of this chapter is to explain the theory behind Infinite Impulse Response (IIR) filters. A IIR filter can be described as a type digital filter that imitates the same properties of an analog filter i.e. the frequency response and impulse response. The starting point of designing IIR filters is therefore designing an analog filter a afterwards transform the transfer function into discrete domain i.e. z-domain. The design procedure of a IIR filter is as follows:
 
@@ -29,13 +29,13 @@ H(s) = \frac{G}{s-p} \Rightarrow h(t) = L^{-1}\left\lbrace \frac{G}{s-p} \right\
 \va{$p$}{is the pole location}{-}\\
 \end{where}
 
-Sampling the impulse response with the the sample period $T$ the impulse response may be expressed as $h[n] = h(nT)$ where $t = nT$. The z-transformation is then applied on the impulse response h(t). The z-transformation is defined as:
+Sampling the impulse response with the the sample period $T$ the impulse response may be expressed as $h[n] = Th(nT)$ where $t = nT$. The z-transformation is then applied on the impulse response h(t). The z-transformation is defined as:
 \begin{equation}
 X(z) = Z \left\lbrace x[n] \right\rbrace = \sum_{n=0}^{\infty}x[n]z^{-n}
 \end{equation}
 Using the z-transformation following expressing is achieved.
 \begin{equation} \label{eq:z_transformation_example}
-H(z) = \sum_{n=0}^{\infty}h[n]z^{-n} = \sum_{n=0}^{\infty}G\text{e}^{pnT}z^{-1}
+H(z) = T\cdot \sum_{n=0}^{\infty}h[n]z^{-n} = T\cdot \sum_{n=0}^{\infty}G\text{e}^{pnT}z^{-1}
 \end{equation}
 It is seen that \autoref{eq:z_transformation_example} is a infinite geometric series. The definition of a infinite geometric series is:
 \begin{equation} \label{eq:z_transformation_example}
@@ -43,15 +43,15 @@ It is seen that \autoref{eq:z_transformation_example} is a infinite geometric se
 \end{equation}
 Using the reduced form of a infinite geometric series following expression of the transfer function in z-domain is achieved.
 \begin{equation} \label{eq:z_transformation_example1}
-H(z) = Z \left\lbrace h[n] \right\rbrace = \frac{G}{1-\text{e}^{pnT}z^{-1}}
+H(z) = Z \left\lbrace h[n] \right\rbrace = T \frac{G}{1-\text{e}^{pnT}z^{-1}}
 \end{equation}
 Thus transforming a transfer function in s-domain to z-domain using impulse invariant method can be simplified to:
 \begin{equation} \label{eq:z_transformation_example2}
-\frac{G}{s-p} \rightarrow \frac{G}{1-\text{e}^{pnT}z^{-1}}
+\frac{G}{s-p} \rightarrow T\frac{G}{1-\text{e}^{pnT}z^{-1}}
 \end{equation}
 As the transformation is only valid for first order filters, following expression may be used if transforming higher order filters. To apply the expression to transfer function in s-domain must be split into partial fractions.
 \begin{equation} \label{eq:z_transformation_example3}
-\sum_{k=1}^{M} \frac{G_k}{s-p_k} \rightarrow \sum_{k=1}^{M} \frac{G_k}{1-\text{e}^{p_knT}z^{-1}}
+\sum_{k=1}^{M} \frac{G_k}{s-p_k} \rightarrow T \sum_{k=1}^{M} \frac{G_k}{1-\text{e}^{p_knT}z^{-1}}
 \end{equation}
 
 By using the impulse invariant method the exact impulse response of the system in s-domain is preserved in z-domain.
