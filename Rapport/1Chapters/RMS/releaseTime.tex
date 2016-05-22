@@ -17,16 +17,16 @@ A pole is located at -0.2 and the cutoff frequency can be calculated as $f = \fr
 \begin{subfigure}[t]{0.7\textwidth}
 	\tikzsetnextfilename{releaseTimeAnalogFreq}
 	\input{figures/releaseTimeAnalogFreq.tex}
-	\caption{Band 1 requierments.}
+	\caption{Frequency response.}
 	\label{fig:releaseTimeAnalogFreq}
 \end{subfigure}
 \begin{subfigure}[t]{0.7\textwidth}
 	\tikzsetnextfilename{releaseTimeAnalogStep}
 	\input{figures/releaseTimeAnalogStep.tex}
-	\caption{Band 1 requierments zoomed in.}
+	\caption{Step response.}
 	\label{fig:releaseTimeAnalogStep}
 \end{subfigure}
-\caption{Band 1 requierments without and with zoom.}
+\caption{The frequency response and step response of the analog filter.}
 \label{fig:releaseTimeAnalog}
 \end{figure}
 
@@ -34,23 +34,23 @@ It is seen that the -3 dB cutoff frequency is located at 0,0318 Hz in \autoref{f
 \begin{equation}
 H(s) = T\frac{0.2}{1-\text{e}^{-0.2T} z^{-1}}
 \end{equation} 
-The filter coefficient is obtained to quantized them in order to examine if the frequency response and step response of the filter still has the desired characteristic when implementing the filter in DSP. To apply quantization, the coefficients are first multiplied with $2^{15}$ (Q15 format) and then rounded. Afterwards the coefficients are divided by $2^{15}$ to obtain a floating point number. After the quantization, the frequency response and step response is now plotted to examine the filter.
+The Sampling period, T, varies as it depends on which octave band it is implemented into. In the following example, the sampling period is $T = 2.667$ ms or $f_s = 375$ which corresponds to the sampling rate for the lowest octave band. The filter coefficient is obtained to quantized them in order to examine if the frequency response and step response of the filter still has the desired characteristic when implementing the filter in DSP. To apply quantization, the coefficients are first multiplied with $2^{15}$ (Q15 format) and then rounded. Afterwards the coefficients are divided by $2^{15}$ to obtain a floating point number. After the quantization, the frequency response and step response is now plotted to examine the filter.
 
 \begin{figure}[H]
 \centering
 \begin{subfigure}[t]{0.7\textwidth}
 	\tikzsetnextfilename{releaseTimeDigitalFreq}
 	\input{figures/releaseTimeDigitalFreq.tex}
-	\caption{Band 1 requierments.}
+	\caption{Frequency response.}
 	\label{fig:releaseTimeDigitalFreq}
 \end{subfigure}
 \begin{subfigure}[t]{0.7\textwidth}
 	\tikzsetnextfilename{releaseTimeDigitalStep}
 	\input{figures/releaseTimeDigitalStep.tex}
-	\caption{Band 1 requierments zoomed in.}
+	\caption{Step response.}
 	\label{fig:releaseTimeDigitalStep}
 \end{subfigure}
-\caption{Band 1 requierments without and with zoom.}
+\caption{Frequency response and step response of the quantized digital filter. The sampling rate for the filter in this example is $f_s = 375$ Hz.}
 \label{fig:releaseTime}
 \end{figure}
 
