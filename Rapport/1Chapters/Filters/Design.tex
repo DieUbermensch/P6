@@ -23,8 +23,9 @@ Band 1 & 33,15       & 46,87       & 66,29       \\ \hline
 	\caption{Overview of all band requirements}
 	\label{fig:allBands}
 \end{figure}
-The reason for downsampling seven times and not more or less is because of several reasons. Firstly the bandwidth of the decimation filter must not be influenced by the interpolation filter which would give a non flat frequency response so every band is set to have a center frequency 1/16 of Fs, secondly the lower the center frequency in relation to Fs the higher the filter order which is desired as low as possible, lastly increasing the number of downsamples increases the delay of the system which is not desired in relation to real time applications.       
-\todo[inline]{Skal det være mere begrundet? skal vi skrive at det er baseret på trial and error senere i forløbet?}
+The reason for downsampling seven times and not more or less is because of several reasons. Firstly the bandwidth of the decimation filter must not be influenced by the interpolation filter which would give a non flat frequency response so every band is set to have a center frequency 1/16 of Fs, secondly the lower the center frequency in relation to Fs the higher the filter order which is desired as low as possible, lastly increasing the number of downsamples increases the delay of the system which is not desired in relation to real time applications.      
+
+Because of the reasons the number of stages was based on trial and error, giving the optimal compromise between the just mentioned reasons. If more stages were added, the delay of the system would be to big, and aliasing would occur, while removing additional stages would multiply the filter order by two for every stage removed and giving a user fewer bands in the equalizer.    
 
 Because there will be downsampled by two for every octave band the following relation can be made between a band and Fs as seen on \autoref{fig:relFsBand}.
 \begin{figure}[H]
