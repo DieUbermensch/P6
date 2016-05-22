@@ -6,10 +6,10 @@
 \node [block, fill=white] (Signal processing system) at ($(AudioSource)+(4,0)$) {Signal processor};
 \node [block, fill=white] (Amplifier) at ($(Signal processing system)+(4,0)$) {Amplifier};
 %%\node [block, fill=white] (PSU) at ($(Amplifier)+(0,2)$) {PSU};
-\node [block, fill=white] (Driver) at ($(Amplifier)+(3.5,0)$) {Speakers};
+\node [block, fill=white] (Driver) at ($(Amplifier)+(3.5,0)$) {Drivers};
 
 %% Store Blokke %%
-\begin{pgfonlayer}{bg}
+\begin{pgfonlayer}{background}
 \draw[thick, fill=black!20] ($(-6.2,1.2)+(Amplifier)$) -- ($(1.750,1.2)+(Driver)$) -- ($(1.750,-1.25)+(Driver)$) -- ($(-6.2,-1.25)+(Amplifier)$) -- ($(-6.2,1.2)+(Amplifier)$); 
 \node (Speakertag) at ($(-.25,-1)+(Driver)$) {\textbf{Speaker Enclosure}};
 \end{pgfonlayer}
