@@ -23,28 +23,31 @@ The hardware must also be able to meet the specifications of IEC 60268-15 which 
 \item [\textlabel{5}{samplerate96}] The sample rate of the audio codec must be compatible with 96 kHz.\\
 \item [\textlabel{6}{resolution}]  A bit resolution of 24 bit must supported by the audio codec and the DSP.\\
 \item [\textlabel{7}{I2S}] The DSP must have at least two I2S ports for interfacing with audio codec.\\
-\item [\textlabel{8}{MIPS}] The DSP must have at least 100 MIPS available.\todo{hmmmmmm den her vil sofus ikke kunne lide}\\
-\item [\textlabel{9}{IEC}] The interface must comply with IEC 60268-15 specification.
+%\item [\textlabel{8}{MIPS}] The DSP must have at least 100 MIPS available.\todo{hmmmmmm den her vil sofus ikke kunne lide}\\
+\item [\textlabel{8}{IEC}] The interface must comply with IEC 60268-15 standard.
 \end{enumerate}
 \end{itemize}
 
-The RMS compressor must have four bands which comply with the class 2 of IEC 6964 standard (2001) which descibed in \autoref{app:IEC6964}, the reason for class 2 is that it has the biggest tolerances for the filters which should be designed. These bands must be placed below 500 Hz which was desired by DALI which can me seen in (\textbf{MAIL correnspondance}) and is explained in (\textbf{Multiband vs single band section}). The system must also distort less than soft clipping which is fomulated in the problem statement seen in \autoref{sec:problem_statement} and argued for in \autoref{sec:PreAnalysisCon}.
+%The RMS compressor must have four bands which comply with the class 2 of IEC 6964 standard (2001) which descibed in \autoref{app:IEC6964}, the reason for class 2 is that it has the biggest tolerances for the filters which should be designed. These bands must be placed below 500 Hz which was desired by DALI which can me seen in (\textbf{MAIL correnspondance}) and is explained in (\textbf{Multiband vs single band section}). The system must also distort less than soft clipping which is fomulated in the problem statement seen in \autoref{sec:problem_statement} and argued for in \autoref{sec:PreAnalysisCon}.
 
-The RMS compressor must have a threshold at 150 W determined in 
+The RMS compressor must have a threshold at 150 W determined in \autoref{sec:hit_detect}. The compressor must have 4 bands which was determined by a listening test concerning single-band versus multi-band. These bands must also comply with the specifications of class 2 of IEC 6964. The reasoning for not meeting class 0 or class 1 requirements are because of time constraints, because it would require more tuning of the filters. The compressor shall only apply to frequencies below 500 Hz because frequencies over 500 Hz are not going to damage the loudspeaker by hitting the coil against the backplate. 
+
+Lastly the compressor must distort less than clipping because a limiter could just have been used instead of a compressor if the compressor distorts just as much. This leads to the following requirements for the RMS compressor.     
 
 \begin{itemize}
 \item RMS compressor
 \begin{enumerate}
-\item [\textlabel{10}{Threshold}] The compressor must have a threshold at 150 W.\\
-\item [\textlabel{11}{bands}] The compressor must have 4 bands.\\
-\item [\textlabel{12}{standardband}] The bands of the compressor must comply with the class 2 of IEC 6964 standard (2001).\\
-\item [\textlabel{13}{500below}] The compressor must apply to frequencies below 500 Hz.\\
-\item [\textlabel{14}{clipping}] The system must distort less than clipping.
+\item [\textlabel{9}{Threshold}] The compressor must have a threshold at 150 W.\\
+\item [\textlabel{10}{bands}] The compressor must have 4 bands.\\
+\item [\textlabel{11}{standardband}] The bands of the compressor must comply with the class 2 of IEC 6964 standard (2001).\\
+\item [\textlabel{12}{500below}] The compressor must apply to frequencies below 500 Hz.\\
+\item [\textlabel{13}{clipping}] The compressor must distort less than clipping.
 \end{enumerate}
 \end{itemize}
 
-The requirements of this chapter will be the basis for the final system.
-\todo[inline]{REFERENCER I CHAPTER}
+This conlcudes all the requirements for the system to be designed and implemented, fullfilling the problemstatement. 
+%The requirements of this chapter will be the basis for the final system.
+%\todo[inline]{REFERENCER I CHAPTER}
 
 % \begin{itemize}
 % \item Functionality

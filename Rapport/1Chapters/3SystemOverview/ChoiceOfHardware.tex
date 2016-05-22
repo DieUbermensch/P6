@@ -5,17 +5,17 @@ To implement the system a hardware platform is needed. The hardware platform can
 As previously mentioned, the choice of processor is a DSP, as the DSP has a high performance versus cost. The DSP is also very suitable for signal processing as the CPU architecture usually comes with specialized hardware for tasks such as multiply-accumulate, which can be executed in one instruction. The requirements for the DSP are as follows:
 
 \begin{enumerate}
-\item[•] A bit resolution of 24 bit must supported by the DSP.\\
-\item[•] The DSP must have at least two I2S ports for interfacing with audio codec.\\
-\item[•] The DSP must have at least 100 MIPS available.
+\item[6] A bit resolution of 24 bit must supported by the DSP.\\
+\item[7] The DSP must have at least two I2S ports for interfacing with audio codec.
 \end{enumerate}
 
 The development board should also have an integrated audio codec, which handles the conversion between analog and digital signals. The requirements for the audio codec are as follows:
 
 \begin{enumerate}
-\item[•] The sample rate of the audio codec must be at least 44.1 kHz.\\
-\item[•] The sample rate of the audio codec must be compatible with 96 kHz.\\
-\item[•] A bit resolution of 24 bit must supported by the audio codec.\\
+\item[4] The sample rate of the audio codec must be at least 44.1 kHz.\\
+\item[5] The sample rate of the audio codec must be compatible with 96 kHz.\\
+\item[6] A bit resolution of 24 bit must supported by the audio codec.\\
+\item[8] The interface must comply with IEC 60268-15 standard.
 \end{enumerate}
 
 Further more, the development platform needs accessible external GPIO to allow external interaction with the system, since it is required that the user can change settings on a equalizer. 
@@ -23,7 +23,7 @@ Further more, the development platform needs accessible external GPIO to allow e
 
 \section{Development Board TMDX5515EZDSP}
 
-The TMDX5515EZDSP from Spectrum Digital is chosen as the development board because it fulfils all the hardware requirements. The TMDX5515EZDSP seen in \autoref{fig:TMDX5515EZDSP_overview}. The TMDX5515EZDSP uses a TMS320C5515 DSP from Texas Instruments as the CPU and is interfaced with a TLV320AIC3204 audio codec. Furthermore the development board is interfaced to peripherals such as an OLED screen, two buttons, microSD and a expansion connector with 60 ports. 
+The TMDX5515EZDSP, seen in \autoref{fig:TMDX5515EZDSP_overview}, from Spectrum Digital is chosen as the development board because it fulfills all the hardware requirements except requirement eight, but this is deemed acceptable. \todo{Skal der skrives mere til at vi ikke opfylder dette krav} The TMDX5515EZDSP uses a TMS320C5515 DSP from Texas Instruments as the CPU and is interfaced with a TLV320AIC3204 audio codec. Furthermore the development board is interfaced to peripherals such as an OLED screen, two buttons, microSD and a expansion connector with 60 ports. 
 
 \begin{figure}[H]
 \centering
@@ -42,7 +42,7 @@ The TMDX5515EZDSP from Spectrum Digital is chosen as the development board becau
 \label{fig:TMDX5515EZDSP_overview}
 \end{figure}
 
-The TMS320C5515 is interfaced to the audio codec through an $\text{I}^2$S bus and $\text{I}^2$C bus. The $\text{I}^2$S bus is used to transmit and receive serial audio data between each unit, while the $\text{I}^2$C is used by the DSP to control the audio codec. According to the datasheet for the TLV320AIC3204 the rated ADC and DAC input voltage is 0.5 $\text{V}_\text{RMS}$ or 0.7071 $\text{V}_\text{peak}$. If the input signal exceeds the voltage level, the audio codec will clip the signal. To avoid this, the audio source must not exceed a peak voltage on 0.7071 V.
+The TMS320C5515 is interfaced to the audio codec through an $\text{I}^2$S bus and $\text{I}^2$C bus. The $\text{I}^2$S bus is used to transmit and receive serial audio data between each unit, while the $\text{I}^2$C is used by the DSP to control the audio codec. According to the datasheet for the TLV320AIC3204 the rated ADC and DAC input voltage is 0.5 $\text{V}_\text{RMS}$ or 0.7071 $\text{V}_\text{peak}$. If the input signal exceeds the voltage level, the audio codec will clip the signal. To avoid this, the audio source must not exceed a peak voltage of 0.7071 V.
 
 
 
