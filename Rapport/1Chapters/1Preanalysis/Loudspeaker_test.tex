@@ -1,28 +1,28 @@
 \subsection*{Test of DALI Zensor 5}
-In order to determine whether or not it is possible to use sensory equipment to measure any vibration from the loudspeaker system. It is desireable to check if the output of the sensors can be analyzed and a suitable action can be taken. The loudspeaker which will be the basis for the test is the Zensor 5, shown on \autoref{fig:dali_zensor5}, produced by DALI. A passive loudspeaker has been choosen for the test because the amplifier in DALI's active loudspeakers are designed not to push the loudspeaker to its limits and beyond. %and to be able to test how the vibrations affect distortion, the loudspeaker must be tested to above its limits.
+In order to determine whether or not it is possible to use sensory equipment to measure any vibration from the loudspeaker. It is desireable to investigate if the output of the sensors can be analyzed. The loudspeaker which will be the basis for the test is the DALI Zensor 5, shown on \autoref{fig:dali_zensor5}. A passive loudspeaker has been choosen for the test because the amplifier in DALI's active loudspeakers are designed not to push the loudspeaker to its limits and beyond. %and to be able to test how the vibrations affect distortion, the loudspeaker must be tested to above its limits.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.5\textwidth]{figures/zensor5.png}
-\caption{DALI zensor 5.}
+\caption{DALI Zensor 5.}
 \label{fig:dali_zensor5}
 \end{figure}
 
 %\todo[inline]{Reference http://www.dali-speakers.com/loudspeakers/zensor/zensor-5/}
 
-For measuring the vibrations inside the enclosure two accelometers have been placed inside the enclosure, one on the back of bottom driver and one on the top back of the enclosure. For measuring sound a microphone has been placed 1 m from the speaker. To limit any reflection from the room, the test is perfomed in the Anechoic room at \gls{AAU}, refer to the full journal for detailed descriptions of setup in \autoref{app:journal_speaker_test}.  
+For measuring the vibrations two accelometers have been placed inside the enclosure, one on the back of the bottom driver and one on the top back of the enclosure. For measuring sound a microphone has been placed 1 m from the speaker. To limit any reflections from the room, the test is perfomed in a Anechoic room at \gls{AAU}, for further documentation refer to the journal in \autoref{app:journal_speaker_test}.  
 %\todo[inline]{Reference (09.03.2016) http://doc.es.aau.dk/labs/acoustics/facilities/anechoic_room_large/} 
 
 
 
-The loudspeaker is set to play a sinesweep from the crossover frequency of the speaker which is 2400 Hz to 10 Hz. The sine sweep is then repeated from the lowest volume setting of a power amplifier until the loudspeaker breaks. There are in total 20 datasets each containing four measurements, namely the vibrations from the enclosure, driver, the sound pressure from the microphone, and lastly a reference signal to synchronize all data. The amount of data is therefore large and only relevant datasets will be presented. If needed, a more comprehensive approach is taken in \autoref{app:journal_speaker_test} and a full detailed overview of graphs is stored on the enclosed CD\footnote{\scalebox{0.7}{\path{CD://Maalinger/Maalinger030316 - Loudspeaker test/Complete Analysis.pdf}}}.
+The loudspeaker is set to play a sinesweep from the crossover frequency of the loudspeaker which is 2400 Hz to 10 Hz. The sine sweep is then repeated from the lowest volume setting of a power amplifier until the loudspeaker breaks. There are in total 20 datasets each containing four measurements, namely the vibrations from the enclosure, driver, the sound pressure from the microphone and lastly a reference signal to synchronize all data. The amount of data is therefore large and only relevant datasets will be presented.  A full detailed overview of graphs is stored on the enclosed CD\footnote{\scalebox{0.7}{\path{CD://Maalinger/Maalinger030316 - Loudspeaker test/Complete Analysis.pdf}}}.
 
 
 
-\subsubsection{Analysis of the DALI Zensor AX 5 measurements}
+\subsubsection{Analysis of the DALI Zensor 5 measurements}
 
-In this section a brief review and conclusion of the analysis done in \autoref{app:journal_speaker_test} is presented. 
-There are many different approaches in analysing the measured data, and the approach done in this project, will be analysing the frequency response of the loudspeaker vibration, harmonic distortion, and detection of the coil hitting the back plate of the driver. The structure of the following part of this section will be showing how the speaker reacts to the different levels of amplification and to expose if a pattern can be extracted.
+%In this section a brief review and conclusion of the analysis done in \autoref{app:journal_speaker_test} is presented. 
+There are many different approaches in analysing the measured data, and the approach done in this project, will consist of analysing the frequency response of the loudspeaker vibration, harmonic distortion, and detection of the coil hitting the back plate of the driver. The structure of the following part will be showing how the speaker reacts to the different levels of amplification and to conclude if a pattern can be extracted.
 
 %\subsection*{Experiment analysis}
 
@@ -30,38 +30,39 @@ There are many different approaches in analysing the measured data, and the appr
 
 %\vspace{3mm}
 
-During the first accelerometer measurements the loudspeaker acts linear with very little fluctuations. The frequency response keeps being steadily the same with an increase in amplitude which was expected. A tendency shows that the 3rd harmonic increases more rapidly than the 2nd harmonic, again as expected for the performance of a loudspeaker. When the speaker was pushed beyond the capabilities specified by DALI an anomaly appears in the measurements. This is shown in \autoref{fig:raw_driver19_window_main}, where spikes in amplitude appear when playing very low frequency sound. 
+During the first accelerometer measurements the loudspeaker acts linear with very little fluctuations. The frequency response keeps being steadily the same with an increase in amplitude which was expected.\todo{Billede af reference tids figur og forklaring af resonans frekvens} %A tendency shows that the 3rd harmonic increases more rapidly than the 2nd harmonic, again as expected for the performance of a loudspeaker. 
+When the speaker was pushed beyond the capabilities specified by DALI an anomaly appears in the measurements. This is shown in \autoref{fig:raw_driver19_window_main}, where spikes in amplitude appear when playing very low frequency sound. 
 
 \begin{figure}[H]
 \centering
 \begin{subfigure}[t]{0.55\textwidth}
 	\tikzsetnextfilename{raw_driver19_window}
 	\input{figures/raw_driver19_window.tex}
-	\caption{Raw dataset 16 for driver.}
+	\caption{Raw dataset 16 from driver.}
 	\label{fig:raw_driver19_window_main}
 \end{subfigure}
 %\hspace{6mm} 
 \begin{subfigure}[t]{0.43\textwidth}
 	\tikzsetnextfilename{raw_driver19_window_zoom}
 	\input{figures/raw_driver19_window_zoom.tex}
-	\caption{The grey area zoomed in.}
+	\caption{The grey area zoomed in from 70 - 85 Hz.}
 	\label{fig:raw_driver19_window_zoom_main}
 \end{subfigure}
 \caption{Raw data from the driver measured by an accelerometer placed on the driver. The greyed area is analysed to examine if there are any signs of an impulse.}
 \label{fig:raw_driver19_windows_main}
 \end{figure}
 
-Further investigation of the spikes is shown in figure \ref{fig:raw_driver19_window_zoom_main}. It shows that theses spikes appear where the speaker should naturally attenuate the spikes and they appear with no sudden coherence which show signs of the coil hitting the backplate. Looking further into the specific area, around 70-90 Hz, an FFT analysis shows how the hit on the back plates appears which is shown on \autoref{fig:FFT_hit_Main}.
+Further investigation of the spikes is shown in Figure \ref{fig:raw_driver19_window_zoom_main}. It shows that theses spikes appear where the speaker should naturally attenuate the spikes and they appear with no sudden coherence which show signs of the coil hitting the backplate. Looking further into the specific area, shown in \autoref{fig:raw_driver19_window_zoom_main}, an FFT analysis shows how the hit on the back plates appears in relation to other measurements where no hits are detected, which is shown on \autoref{fig:FFT_hit_Main}.
 
 \begin{figure}[H]
 \centering
 \tikzsetnextfilename{FFTFinal}
 \input{figures/Forsog1/FFTFinal.tex}
-\caption{The spectrum of the window. The measurements are in ascending order 1, 10, 13, 16 and 19}
+\caption{The spectrum of accelerometer measurements from time 28.95 - 29.20. The measurements are in ascending order 1, 10, 13, 16 and 19.}
 \label{fig:FFT_hit_Main}
 \end{figure}
 
-\autoref{fig:FFT_hit_Main} shows that this area is affected by hits as mentioned before, refering back to \autoref{subsec:impulses} where it can also be seen that an increase in energy level across all frequencies point towards an impulse in the form of a hit. This is particularly seen when comparing measurement 10 through 19. It is possible to see how the fundamental tone at 80 Hz is not increasing dramatically. This is due to the high needs of wattages at that point. However, the entire signals lies more or less 20 dB higher which corresponds to 100 times the energy. This concludes that hits occur but at a very high volume level.
+\autoref{fig:FFT_hit_Main} shows that this area is affected by hits on measurement 16 and upwards, refering back to \autoref{subsec:impulses} where it can be seen that an increase in energy level across all frequencies point towards an impulse in the form of a hit. This is particularly seen when comparing measurement 16 through 19. It is possible to see how the fundamental tone at 80 Hz is not increasing dramatically. This is due to the high needs of wattages at this point. However, the entire signals lies more or less 20 dB higher which corresponds to 100 times the energy. This concludes that hits occur but at a very high volume levels \gls{SPL}.
 
 
 

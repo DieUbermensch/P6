@@ -1,8 +1,7 @@
-\subsubsection{Back Plate Hit Detection}\label{sec:hit_detect}
+%\subsubsection{Backplate hit detection}\label{sec:hit_detect}
+As previously stated, it is possible that the loudspeaker's coil hits the backplate of the driver if the coil moves too far back. This will damage the loudspeaker, and should therefore be avoided. It is seen that the impulse arrives spontaneously and from the measurements it can be concluded that the backplate hit is present at a wattage of 168 watt. This is clearly shown in \autoref{fig:FFT_hit_Main} where the measurement at 168 W have and increase in energy level in the lower frequency area.
 
-As previously stated, it is possible that the loudspeaker coil hits the back plate of the driver if the coil moves too far back. In the long run this will damage the loudspeaker, and should therefore be avoided. In this section an analysis on how to detect these hits, will be provided. It is seen that the impulse arrives spontaneously and from the measurements it can be concluded that the backplate hit is present at a wattage of 168 watt. This is clearly shown in \autoref{fig:FFT_hit_Main} where the measurement at 168 have and increase in energy level in the lower frequency area.
-
-Since a woofer mainly is constructed by the use of a coil, when seen from an electrical point of view, the frequency response of such a woofer has the same characteristics as a low-pass filter. This means, if the coil is hitting the back plate of the driver, it will result in a increase of energy in the low frequency spectrum. However, since most music and loudspeakers have some sort of a high-pass filter implemented to remove almost non-audible sound, it can be assumed that only a back plate hit will generate vibrations at very low frequencies between, for instance, 0 Hz to 20 Hz. To examine if this is true, a section of the dataset 19 of the driver, where a hit is suspected to have occurred, is analysed. %The analysed section is seen in \autoref{fig:raw_driver19_windows}.
+Since a woofer mainly is constructed by the use of a coil, when seen from an electrical point of view, the frequency response of such a woofer has the same characteristics as a low-pass filter. This means, if the coil is hitting the backplate of the driver, it will result in a increase of energy in the low frequency spectrum. However, since most music and loudspeakers have some sort of a high-pass filter implemented to remove almost non-audible sound, it can be assumed that only a back plate hit will generate vibrations at very low frequencies between, 0 Hz to 20 Hz. %To examine if this is true, a section of the dataset 19 of the driver, where a hit is suspected to have occurred, is analysed. %The analysed section is seen in \autoref{fig:raw_driver19_windows}.
 
 
 %\begin{figure}[H]
@@ -37,15 +36,17 @@ Since a woofer mainly is constructed by the use of a coil, when seen from an ele
 
 %\todo[inline]{FIGUR FEJL? fft detaljer mangler}
 
-It is seen that the energy for non-harmonic frequencies is increased at very low frequencies as indicated with the arrow. The black graph is the first dataset and the blue is the tenth dataset. As no hit was observed in the window at dataset 1 and 10, the energy of lower part of the spectrum was not increased. However the suspected hit in dataset 19 has an energy increase in the low frequency spectrum. Note that since the window is 0.25 seconds wide, frequencies below 4 Hz should be discarded.
+It is seen that the energy for non-harmonic frequencies on \autoref{fig:FFT_hit_Main} is increased at very low frequencies. %as indicated with the arrow. 
+%The black graph is the first dataset and the blue is the tenth dataset. As no hit was observed in the window at dataset 1 and 10, the energy of lower part of the spectrum was not increased. However the suspected hit in dataset 19 has an energy increase in the low frequency spectrum. 
+Note that since the window is 0.25 seconds wide, frequencies below 4 Hz should be discarded.
 
-Concluding on the test it shows that it is possible to measure vibration and hits with precise enough equipment. It also showed that further trails had to be made in order to establish if less precise accelerometer could output a sufficient signal.
+Concluding on the test it shows that it is possible to measure vibration and hits with precise enough equipment. It also showed that further trials had to be made in order to establish if less precise accelerometer could output a sufficient signal.
 
-\subsubsection{Accelerometer trails}
+\subsubsection{Accelerometer trials}
 
-From \autoref{app:journal_speaker_test2} further trails were deducted to determine whether a less precise accelerometer could measure the same output. Same procedure was followed as in the previous section, hence only the results will be shown. The behaviour of the speaker was identical with the preceding trails. 
+From \autoref{app:journal_speaker_test2} further trials were deducted to determine whether a less precise accelerometer could measure the same output. Same procedure was followed as in the previous section, hence only the results will be shown. The behaviour of the speaker was identical with the preceding trials. 
 
-The trails could be concluded with the accelerometers not being able to properly detect the vibrations of the speaker. There were to many fluctuations in the measurements leading to disbelief in the accelerometer being accurately enough, however from the measurements a pattern could be derived. Since the speaker behaved linearly when the gain of the amplifier is increased. It was possible to compare the fundamental tone with the third harmonic tone and establish the correlation showed in \autoref{fig:com_mic13All_repport}.
+The trials could be concluded with the accelerometers not being able to properly detect the vibrations of the driver. There were to many fluctuations in the measurements leading to disbelief in the accelerometer being accurately enough, however from the measurements a pattern could be derived. Since the speaker behaved linearly when the gain of the amplifier is increased. It was possible to compare the fundamental tone with the third harmonic tone and establish the correlation showed in \autoref{fig:com_mic13All_repport}.
 
 \begin{figure}[H]
     \centering
