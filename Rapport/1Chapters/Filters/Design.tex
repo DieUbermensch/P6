@@ -4,13 +4,14 @@ To take advantage of multirate processing extra octave bands have been added, se
 \begin{tabular}{|c|c|c|c|}
 \hline
        & f1 {[}Hz{]} & fm {[}Hz{]} & f2 {[}Hz{]} \\ \hline
+Band 8 & 4245        & -           & -       	 \\ \hline
 Band 7 & 2121        & 3000        & 4243        \\ \hline
 Band 6 & 1061        & 1500        & 2121        \\ \hline
 Band 5 & 530,3       & 750         & 1061        \\ \hline
 Band 4 & 265,2       & 375         & 530,3       \\ \hline
 Band 3 & 132,6       & 187,5       & 265,2       \\ \hline
 Band 2 & 66,29       & 93,75       & 132,6       \\ \hline
-Band 1 & 33,15       & 46,87       & 66,29       \\ \hline
+Band 1 & 0     		 & 46,87       & 66,29       \\ \hline
 \end{tabular}
 \caption{Bands}
 \label{tb:filterBands}
@@ -65,9 +66,14 @@ With the specification stated and using the matlab script explained in \autoref{
 From \autoref{fig:band1_filt} it can be concluded that the filter meets the band requirements and has a constant group delay which means that spectral subtraction can be made from the output. This concludes the decimation filter. 
 
 \section{Interpolation filter} \label{sec:IntFilter}
-The interpolation filter as mentioned before must be designed so it does not influence the bandwidth of the decimated signal therefore the passband of the interpolation filter must be larger than stopband of the decimation filter. This means that the passband of the filter must be above 0.3 rad/sample, while there must be an attenuation of minimum 80 dB at approximately 0.7 rad/sample, which is the mirrored stopband of the decimation filter at the downsampled Fs as seen on \textbf{XX}. 
+The interpolation filter as mentioned before must be designed so it does not influence the bandwidth of the decimated signal therefore the passband of the interpolation filter must be larger than stopband of the decimation filter. This means that the passband of the filter must be above 0.3 rad/sample, while there must be an attenuation of minimum 80 dB at approximately 0.7 rad/sample, which is the mirrored stopband of the decimation filter at the downsampled Fs as seen on \autoref{fig:MirrorDec}. 
 
-\todo[inline]{FIGUR AF SPEJLET}
+\begin{figure}[H]
+\centering
+	\includegraphics[width=\textwidth]{figures/DecIntCompMirror}
+\caption{Decimation filter (blue) with mirrored decimation filter (dark blue)}
+\label{fig:MirrorDec}
+\end{figure}
 
 From these demands the following demands are set for the interpolation filter
 
@@ -109,13 +115,6 @@ From \autoref{fig:IntMag} and \autoref{fig:IntPhase} it can be verified that the
 	\input{figures/DecIntComp.tex}
 	\caption{Decimation and interpolation filter´s magnitude response compared.}
 	\label{fig:decIntComp}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=\textwidth]{figures/DecIntCompMirror}
-	\caption{Decimation and interpolation filter´s magnitude response compared.}
-	\label{fig:decIntComp3}
 \end{figure}
 
 The decimation and interpolation filter is now designed with quantisized values. %The implementation of the filters can be seen in XX.    
