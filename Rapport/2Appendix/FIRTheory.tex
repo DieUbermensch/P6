@@ -1,15 +1,99 @@
-\chapter{Finite impulse response Theory} \label{app:FIR_theory}
+\chapter{Finite Impulse Response Theory} \label{app:FIR_theory}
 This appendix will describe the theory of the FIR filter design method, which includes the Kaiser window method and calculating the b coefficients.
 
-\section{Designing FIR filters}
+\section{Designing FIR Filters}
 
-To design a FIR filter the 
+Finite Impulse Response filters are a type of digital filter that can be implemented in a DSP. Opposite to the IIR filter the FIR, the impulse response of a FIR filter is only of finite length, because the FIR filter samples the impulse response by a finite number of samples, while the IIR is a recursive filter resulting in an infinite length. Another difference between IIR and FIR filters is the starting point of the design. The starting point of IIR filters is by designing an analog filter and then transforming it, while designing FIR do not require any analog filter design. This chapter will focus on two design methods for FIR filters which are the window method and Kaiser window method.
+
+\subsection*{Impulse Response of Low-pass Filter}
+The starting point for both design methods is the derivation of the impulse response of an ideal brick wall low-pass filter. The expression of the impulse response is used to determine the coefficients for the filter. The derivation of the impulse response is done by using the ideal frequency response as seen on \autoref{fig:IdealFilterApp}.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\textwidth]{figures/Ideal_filter.png}
+\caption{The ideal frequency response of a lowpass filter.}
+\label{fig:IdealFilterApp}
+\end{figure}
+Which is defined as:
+\begin{equation} \label{eq:idealfreq}
+H_d(e^{j\omega})=\left\{
+\begin{array}{c l}      
+    e^{\frac{j\omega M}{2}} & |\omega|\leq\omega_c\\
+    0 & \omega_c\leq\pi
+\end{array}\right.
+\end{equation}
+The ideal impulse response can be found by applying the inverse Fourier transformation of \autoref{eq:idealfreq}.
+\begin{equation}
+h_d[n]=\frac{1}{2\pi}\int_{-\omega_c}^{\omega_c}e^{\frac{j\omega M}{2}} e^{j\omega n} d\omega \Leftrightarrow h_d[n]=\frac{1}{2\pi}\int_{-\omega_c}^{\omega_c}e^{j(n-\frac{M}{2})\omega} d\omega
+\end{equation}
+
+By using Eulers rule the expression is reduced to:
+\begin{equation}
+h_d[n]=\frac{1}{2\pi}\int_{-\omega_c}^{\omega_c}cos\Big((n-\frac{M}{2})\omega\Big)+jsin\Big((n-\frac{M}{2})\omega\Big) d\omega
+\end{equation}
+\textbf{Explanation} (Sin is an odd function)
+\begin{equation}
+h_d[n]=\frac{1}{2\pi(n-\frac{M}{2})}\bigg[sin\Big((n-\frac{M}{2})\omega\Big)\bigg]_{-\omega_{c}}^{\omega_{c}}
+\end{equation}
+where:
+\begin{equation}
+\int_{a}^{b}cos(ax) dx = \Big[\frac{sin(ax)}{a}\Big]_{a}^{b}
+\end{equation}
+The integral is expanded:
+\begin{equation}
+h_d[n]=\frac{1}{2\pi(n-\frac{M}{2})}\bigg[sin\Big(\omega_c(n-\frac{M}{2})\Big)-sin\Big(-\omega_c(n-\frac{M}{2})\Big)\bigg]
+\end{equation}
+where:
+\begin{equation}
+sin(-x) = -sin(x)
+\end{equation}
+Which means that the numenator is doubled equaling:
+\begin{equation}
+h_d[n]=\frac{sin\Big(\omega_c(n-\frac{M}{2})\Big)}{\pi(n-\frac{M}{2})}\qquad-\infty<n<\infty
+\end{equation}
+The impulse response is now symmetric around M/2 and the phase is therefore linear. The impulse response is still infinite and non-causal so the impulse response must be truncated.
 
 % Samples the impulse response of an ideal brick-wall filter
 
+\section{Window Method}
+The impulse response needs to be truncated. To truncate the impulse response a window function is applied. The most basic window function that can be applied is an rectangular window which basically cuts of the ends of the impulse response. After applying the window function the impulse response can be expressed as:
 
+\begin{equation}
+h[n]=h_d[n]\cdot w[n]\qquad\textrm{ where } w[n]\neq0 \textrm{ for } 0<n<M
+\end{equation}
 
-The requirements for a lowpass filter should be stated as on \autoref{fig:filter_req}.
+An example is shown in \autoref{fig:FIRWindow}, where a Hamming window is applied to the truncated impulse response of a order of 40. The Hamming window prevents the impulse response from stopping abruptly.
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.45\textwidth}
+    \centering
+    \tikzsetnextfilename{FIRTruncation}
+    \input{figures/FIRTruncation.tex}
+    \caption{Sound pressure level from microphone.}
+    \label{fig:FIRTruncation}
+\end{subfigure}
+\begin{subfigure}[t]{0.45\textwidth}
+    \centering
+    \tikzsetnextfilename{FIRHamming}
+    \input{figures/FIRHamming.tex}
+    \caption{Reference signal.}
+    \label{fig:FIRHamming}
+\end{subfigure}
+\caption{Raw data}
+\label{fig:FIRWindow}
+\end{figure} 
+
+If no window function is applied the truncated impulse response, the window function is per default a rectangular window. The rectangular window attenuates fast as the main lope but the attenuation at the first side is not high. Applying the Hamming window reduces the steepness but the attenuation at the first side lope is bigger. Also the pass-band ripple is reduced. This is illustrated in \autoref{fig:FIRFrequencyResp}.
+
+\begin{figure}[H]
+    \centering
+    \tikzsetnextfilename{FIRFrequencyResp}
+    \input{figures/FIRFrequencyResp.tex}
+    \caption{1.harmonic / 3.harmonic pr. measurement. comparison for all frequencies}
+\label{fig:FIRFrequencyResp}
+\end{figure}  
+
+A disadvantages of using the window method is it is hard to design a FIR filter from requirements i.e. stop-band and pass-band requirements. Another FIR design method which is similar to the window method is the Kaiser window method. As the window function of the Kaiser window depends on a beta-value, the beta-value can be interchanged in order to obtained the desired frequency response. The requirements for a lowpass filter should be stated as on \autoref{fig:filter_req}.
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{figures/filter_req.png}
@@ -24,9 +108,9 @@ From these the following conversion are made:
 \delta_s=10^{A_{stop}/20}
 \end{equation}
 
-The method used for deriving the order of the FIR filter will be the Kaiser window an is explained below.
+To obtain a transfer function for a filter fulfilling the requirement the Kaiser window method is used.
 
-\section{Kaiser window method}
+\section{Kaiser Window Method}
 The kaiser window method calculates the order of the filter and the beta value of the Kaiser window which is will be used to calculating the coefficients of the filter.
 
 First the specification of the filter must be established: $\omega_p$, $\omega_s$, $\delta_p$ and $\delta_s$. For the kaiser window method the peak error $\delta$ will be the same in both the passband and stopband. which means: $\delta_p = \delta_s$ and the $\delta$ used is the lowest.
@@ -62,66 +146,21 @@ w[n]=\left\{
 \end{equation}
 Where $I_0$ is the zeroth-order modified Bessel function. The order of the FIR filter and the coefficients of the kaiser window can now be calculated and applied to the coefficients of the FIR filter which are derived below.
 
-\section{Calculation of coefficients}
-The calculation of the coefficients is done using the ideal frequency response as seen on \autoref{fig:IdealFilterApp}.
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.6\textwidth]{figures/Ideal_filter.png}
-\caption{The ideal frequency response of a lowpass filter.}
-\label{fig:IdealFilterApp}
-\end{figure}
-Which is defined as:
-\begin{equation} \label{eq:idealfreq}
-H_d(e^{j\omega})=\left\{
-\begin{array}{c l}      
-    e^{\frac{j\omega M}{2}} & |\omega|\leq\omega_c\\
-    0 & \omega_c\leq\pi
-\end{array}\right.
-\end{equation}
-The ideal impulse response can be found taking the inverse Fourier transformation of \autoref{eq:idealfreq}
-\begin{equation}
-h_d[n]=\frac{1}{2\pi}\int_{-\omega_c}^{\omega_c}e^{\frac{j\omega M}{2}} e^{j\omega n} d\omega
-\end{equation}
-The two exponentials are subtracted to a single exponential:
-\begin{equation}
-h_d[n]=\frac{1}{2\pi}\int_{-\omega_c}^{\omega_c}e^{j(n-\frac{M}{2})\omega} d\omega
-\end{equation}
-Using Eulers rule:
-\begin{equation}
-h_d[n]=\frac{1}{2\pi}\int_{-\omega_c}^{\omega_c}cos\Big((n-\frac{M}{2})\omega\Big)+jsin\Big((n-\frac{M}{2})\omega\Big) d\omega
-\end{equation}
-\textbf{Forklaring} (Sin is an odd function)
-\begin{equation}
-h_d[n]=\frac{1}{2\pi(n-\frac{M}{2})}\bigg[sin\Big((n-\frac{M}{2})\omega\Big)\bigg]_{-\omega_{c}}^{\omega_{c}}
-\end{equation}
-where:
-\begin{equation}
-\int_{a}^{b}cos(ax) dx = \Big[\frac{sin(ax)}{a}\Big]_{a}^{b}
-\end{equation}
-The integral is expanded:
-\begin{equation}
-h_d[n]=\frac{1}{2\pi(n-\frac{M}{2})}\bigg[sin\Big(\omega_c(n-\frac{M}{2})\Big)-sin\Big(-\omega_c(n-\frac{M}{2})\Big)\bigg]
-\end{equation}
-where:
-\begin{equation}
-sin(-x) = -sin(x)
-\end{equation}
-Which means that the numenator is doubled equaling:
-\begin{equation}
-h_d[n]=\frac{sin\Big(\omega_c(n-\frac{M}{2})\Big)}{\pi(n-\frac{M}{2})}\qquad-\infty<n<\infty
-\end{equation}
-The impulse response is now symmetric around M/2 and the phase is therefore linear. The impulse response is still infinite and non-causal so the impulse response must be truncated.
+\subsection*{Implementation of FIR Filters}
 
-The impulse response is truncated using the Kaiser window:
+The transfer function of a FIR filter is expressed as:
 \begin{equation}
-h[n]=h_d[n]\cdot w[n]\qquad\textrm{ where } w[n]\neq0 \textrm{ for } 0<n<M
+H(z) = \sum_{M}^{k=0} b_k z^{-k}
 \end{equation}
-Which gives the coefficients of the designed lowpass type 1 FIR filter. 
-
-
-
-
-
+The $b_k$ coefficients can be found by sampling the impulse response by M samples and afterwards applying a window function. The FIR only have zeros, thus cannot be unstable. To implement the filter the transfer function must be transformed into discrete time domain. First the transfer function is rewritten into following form:
+\begin{equation}
+H(z) = \frac{Y(z)}{X(z)} = \sum_{M}^{k=0} b_k z^{-k} \Leftrightarrow Y(z) = \sum_{M}^{k=0} b_k z^{-k} X(z) 
+\end{equation}
+The inverse z-transformation is applied which reveals:
+\begin{equation}
+y[n] = Z^{-1}(H(z)) =\sum_{M}^{k=0} b_k x[n-k]
+\end{equation}
+The difference can now be implemented.
 
 
 
