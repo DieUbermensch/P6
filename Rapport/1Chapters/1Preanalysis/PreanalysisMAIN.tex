@@ -6,7 +6,7 @@
 %Before developing a system which can improve the overall performance of an active loudspeaker a brief analysis on how an active loudspeaker functions, is needed. 
 The main topic of this chapter is to briefly explain the design of a simplified active loudspeaker and afterwards examine where the issues, concerning distortion in an active loudspeaker, arises. As distortion adds artefacts to the audio, distortion is often undesirable in an active loudspeaker. 
 
-A simplified version of an active loudspeaker is seen in \autoref{fig:speaker_block}. The active loudspeaker typically consist of speakers (tweeter and woofer), an amplifier and a processing system. While the block "processing system" is not required in an active loudspeaker, it is common to find signal processors in new active loudspeakers. Because active loudspeakers have their own power supply, they can easily provide the necessary power to peripheral electronics such as a signal processor. The application of the signal processors varies from an equalizer to a wireless receiver for audio streaming.
+A simplified version of an active loudspeaker is seen in \autoref{fig:speaker_block}. The active loudspeaker typically consist of drivers (tweeter and woofer), an amplifier and a signal processor. While the block "signal processor" is not required in an active loudspeaker, it is common to find signal processors in new active loudspeakers. Because active loudspeakers have their own power supply, they can easily provide the necessary power to peripheral electronics such as a signal processor. The application of the signal processor varies from an equalizer to a wireless receiver for audio streaming.
 
 \begin{figure}[H]
 \centering
@@ -17,14 +17,14 @@ A simplified version of an active loudspeaker is seen in \autoref{fig:speaker_bl
 \label{fig:speaker_block}
 \end{figure}
 
-An example of an active loudspeaker is the DALI Zensor 5 AX seen in \autoref{fig:dali_zensor_ax}. Besides the speakers and amplifier, the DALI Zensor 5 AX also includes a signal processor to handle wireless connectivity.
+An example of an active loudspeaker is the DALI Zensor 5 AX seen in \autoref{fig:dali_zensor_ax}. Besides the drivers and amplifier, the DALI Zensor 5 AX also includes a signal processor to handle wireless connectivity.
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.6\textwidth]{figures/dali_zensor_1_ax.jpg}
 \caption{DALI Zensor 5 AX.}
 \label{fig:dali_zensor_ax}
 \end{figure}
-The DALI Zensor 5 AX allows connection of the audio source via cable or via Bluetooth which enables the user to control the loudspeaker wirelessly, which makes it flexible to use. In the following sections, each block in \autoref{fig:speaker_block} namely "Processing system", "Amplifier", and "Speakers" will be analysed. The analysis will focus on the basics of the block and how distortion can arise in the respective block.
+The DALI Zensor 5 AX allows connection of the audio source via cable or via Bluetooth which enables the user to control the loudspeaker wirelessly, which makes it flexible to use. In the following sections, each block in \autoref{fig:speaker_block} namely "Signal processor", "Amplifier", and "Drivers" will be analysed. The analysis will focus on the basics of the block and how distortion can arise in the respective block.
 
 \input{1Chapters/1Preanalysis/signal_processor.tex}
 
@@ -42,7 +42,7 @@ The DALI Zensor 5 AX allows connection of the audio source via cable or via Blue
 
 %\input{1Chapters/1Preanalysis/hit_detection.tex}
 
-\section{Problem Statement} \label{sec:problem_statement}
+\section{Problem statement} \label{sec:problem_statement}
 The analysis has focused on distortion and non-linearities in an active loudspeakers different blocks. It can be concluded that most of the non-linearities are created at high sound pressure levels, which could be in the following situations:
 \begin{itemize}
 \item Clipping from either hard peak-limiting or amplifier.
@@ -50,15 +50,14 @@ The analysis has focused on distortion and non-linearities in an active loudspea
 \item Coil hitting the back plate. 
 \end{itemize}
 
-From the situations it is seen that the most critical situation would be if the coil hits the back plate because it could result in damaging or destroying the speaker, therefore a system should be designed first and foremost to protect the speaker from being damaged, secondly it should be designed to reduce the amount of distortion in minimum the whole bass region (below 300 Hz), while creating as little distortion as possible, thus avoiding peak limitation. With this the following problem statement is thus formulated:
-
+From the situations it is seen that the most critical situation would be if the coil hits the back plate because it could result in damaging or destroying the speaker. Therefore a system should be designed first and foremost to protect the speaker from being damaged. Secondly it should be designed to reduce the amount of distortion in minimum the woofer frequency range (below 200 Hz), thus avoiding peak limitation as protection. With this the following problem statement is formulated:
 
 \begin{center}
 \label{ProblemStatement}
-\textit{How can a signal processing system in an active speaker prevent the coil from hitting the back plate of the woofer and reduce distortion compared to peak limitation?"}
+\textit{How can a signal processing system in an active loudspeaker prevent the coil from hitting the back plate of the woofer and reduce distortion compared to peak limitation?}
 \end{center}
 
-Besides the problem stated above, DALI desires to have incorporated a user controlled equalizer for the commercial user so it will be able to function more optimal in different room sizes. Further more it should be fully customizable for ongoing adjustments during the development period. The DALI requirements are derived via e-mail correspondence located at: \scalebox{0.7}{\path{CD://MAIL/DALIRequirements.pdf}}  
+Besides the problem stated above, DALI desires to have incorporated an equalizer\footnote{\scalebox{0.7}{\path{CD://MAIL/DALIRequirements.pdf}} }. % for the commercial user so it will be able to function more optimal in different room sizes. Further more it should be fully customizable for ongoing adjustments during the development period. The DALI requirements are derived via e-mail correspondence located at: \scalebox{0.7}{\path{CD://MAIL/DALIRequirements.pdf}}  
 
 
 
