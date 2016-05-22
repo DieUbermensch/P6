@@ -150,15 +150,15 @@ Where $I_0$ is the zeroth-order modified Bessel function. The order of the FIR f
 
 The transfer function of a FIR filter is expressed as:
 \begin{equation}
-H(z) = \sum_{M}^{k=0} b_k z^{-k}
+H(z) = \sum_{k=0}^{M} b_k z^{-k}
 \end{equation}
 The $b_k$ coefficients can be found by sampling the impulse response by M samples and afterwards applying a window function. The FIR only have zeros, thus cannot be unstable. To implement the filter the transfer function must be transformed into discrete time domain. First the transfer function is rewritten into following form:
 \begin{equation}
-H(z) = \frac{Y(z)}{X(z)} = \sum_{M}^{k=0} b_k z^{-k} \Leftrightarrow Y(z) = \sum_{M}^{k=0} b_k z^{-k} X(z) 
+H(z) = \frac{Y(z)}{X(z)} = \sum_{k=0}^{M} b_k z^{-k} \Leftrightarrow Y(z) = \sum_{k=0}^{M} b_k z^{-k} X(z) 
 \end{equation}
 The inverse z-transformation is applied which reveals:
 \begin{equation}
-y[n] = Z^{-1}(H(z)) =\sum_{M}^{k=0} b_k x[n-k]
+y[n] = Z^{-1} \left\lbrace H(z)) \right\rbrace =\sum_{k=0}^{M} b_k x[n-k]
 \end{equation}
 The difference can now be implemented.
 
