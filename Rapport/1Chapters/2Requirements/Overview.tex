@@ -6,9 +6,9 @@ This chapter will describe an overview of the system before the needed requireme
 %\section{Single-band vs multi-band system}
 %This section will examine if the system should use multi-band or single-band. When the system is to be designed a question whether one or more bands should be implemented arises. 
 There are advantages and disadvantages with both a single-band and a multi-band limiter, but the question arises which sounds better?
-A multi-band solution could create an unnatural frequency response, making the music sounding unpleasant. If one of the bands are attenuated to much it could result in a band acting like a notch filter which could sound strangely. The singleband solution will be attenuating every frequency keeping the amplitude relation intact. However the singleband will also be attenuating many frequencies which are not contributing to the problem. In order to determine which solution is to be preferred, a listening test is conducted with both a single-band and a multi-band limiter, to conclude what type of limiter sounds better. 
+A multi-band solution could create an unnatural frequency response, making the music sounding unpleasant. If one of the bands are attenuated to much it could result in a band acting like a notch filter which could sound strangely. The single-band solution will be attenuating every frequency keeping the amplitude relation intact. However the single-band will also be attenuating many frequencies which are not contributing to the problem. In order to determine which solution is to be preferred, a listening test is conducted with both a single-band and a multi-band limiter, to conclude what type of limiter sounds better. 
 
-In the test a group of 10 people were subjected to the following effectblocks:
+In the test a group of 10 people were subjected to the following effect blocks:
  \begin{itemize}
     \item Single-band limiter:
     \begin{itemize}
@@ -33,7 +33,7 @@ Using the following songs in different genres:
 \item Stormy Weather by Teitur (Folk)
 \item Hearth of Courage by Two Steps From Hell (Classical)
 \end{itemize}
-The test concluded with the following results which can be seen in \autoref{fig:piechartsongsReport}. A rather large portion of the test person were favourable of the mulit-band limiter because of the weighting of the signal which ultimately created less distortion in the higher frequency spectrum than the single-band. The test is fully described in \autoref{app:journal_ListningTest}.
+The test concluded with the following results which can be seen in \autoref{fig:piechartsongsReport}. A rather large portion of the test person were favourable of the multi-band limiter because of the weighting of the signal which ultimately created less distortion in the higher frequency spectrum than the single-band. The test is fully described in \autoref{app:journal_ListningTest}.
 
 \begin{figure}[H]
 \centering
@@ -93,7 +93,7 @@ Because of the multi-bands it is also possible to have a five band graphic equal
 \label{fig:SystemOverview}
 \end{figure}
 %This shows a feedforward system which will equalize of the audio based on the \textbf{TBD} model, seen on \textbf{figure TBD}, comparing the second and third harmonic relative to keynote. Besides the feed forward system a user controlled equalizer should also be part of the system to give the user more flexibility. The following chapter describes the individual blocks in more detail.          
-\autoref{fig:SystemOverview} shows a feedforward system with a user controlled five band graphich equalizer, controlled with a GUI, with the band frequencies seen in \autoref{tb:freqBands}. Besides the user controlled equalizer a four band RMS limiter (band 1-4) will monitor the RMS levels of the four bands and gain relative to a threshold of 150 W set in \autoref{sec:hit_detect}. The divided signal is then summed up to a single signal and outputted. This should result in a protective system which makes sure that the driver never breaks because of the coil hitting the backplate. A more detailed description of every block will now follow in the preceding section.
+\autoref{fig:SystemOverview} shows a feedforward system with a user controlled five band graphic equalizer, controlled with a GUI, with the band frequencies seen in \autoref{tb:freqBands}. Besides the user controlled equalizer a four band RMS limiter (band 1-4) will monitor the RMS levels of the four bands and gain relative to a threshold of 150 W set in \autoref{sec:hit_detect}. The divided signal is then summed up to a single signal and outputted. This should result in a protective system which makes sure that the driver never breaks because of the coil hitting the backplate. A more detailed description of every block will now follow in the preceding section.
 
 \textbf{Audio source} \\
 The audio source in this system will be based on the IEC 60268-15 specification. Meaning that it will be limited to a analog signal with a maximum peak voltage of 2 Volt RMS but otherwise nominal 0.5 Volt RMS for a line signal. %This input will handled by an onboard TLV320AIC3204 codec located on the eZdsp development board.

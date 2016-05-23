@@ -47,11 +47,11 @@ t_{d}= \frac{n_{s}}{F_s} \enhed{s}
 \va{$n_{s}$}{is the number of samples delayed}{.}
 \end{where}
 
-A non-linear group delay will be hard to compensate compared to a constant group delay, thus a constant group delay is desirable. To achieve a constant group delay a linear phase filter is needed as the phase response is linear. Linear phase can be found in FIR filters and Bessel filters. Because of the constant group delay in linear phase filter, it eases the design as constant delays can be implemented to compensate the phase shift in filters. Because the Bessel filter do not have a very sharp cutoff compared to other filter types, a high order Bessel filter will be needed. A high order IIR however has risk of being unstable. FIR filters are therefore chosen as they have all the required properties and do not get unstable. \todo[inline]{Bessel har ikke totalt konstant group delay. ellers skal man nok skrive hvad den dæmpning er pr decade}
+A non-linear group delay will be hard to compensate compared to a constant group delay, thus a constant group delay is desirable. To achieve a constant group delay a linear phase filter is needed as the phase response is linear. Linear phase can be found in FIR filters and Bessel filters. Because of the constant group delay in linear phase filter, it eases the design as constant delays can be implemented to compensate the phase shift in filters. Bessel filters have a constant group delay until the cutoff frequency and gets non-linear afterwards. Because the Bessel filter do not have a very sharp cutoff compared to other filter types, a high order Bessel filter will be needed. A high order IIR however has risk of being unstable. FIR filters are therefore chosen as they have all the required properties and do not get unstable. 
 
 
 \section{Computational Constraints}
-Another subject to consider is the constraints regarding computational power to perform filter algorithms. For FIR filters the amount of instructions to compute the filter output increases by the filter order, as calculating each tap in the filter is equal to a multiply and accumulate. Therefore eventhough a very high order filter in theory is realizable, the computational constraint needs to be considered. 
+Another subject to consider is the constraints regarding computational power to perform filter algorithms. For FIR filters the amount of instructions to compute the filter output increases by the filter order, as calculating each tap in the filter is equal to a multiply and accumulate. Therefore even though a very high order filter in theory is realizable, the computational constraint needs to be considered. 
 
 The performance of the DSP is 100 MIPS. At a sample rate of 48 kHz, this will result in approximately 2083 instructions available in-between each sample. A 10000 order FIR filter for instance is thus not realizable on the platform with a sampling rate of 48 kHz as the DSP will not finish calculating the filter output in time before the next sample. This is true because the fastest way to compute the convolution between the input signal x[n] and the impulse response h[n] is by using a Multiply-Accumulate (MAC) instruction which takes 1 clock cycle to perform if a single MAC is used. This gives a total number of 10000 clock cycles to perform one single convolution. Designing FIR filters will therefore be difficult as the cutoff frequencies for all required filters are very low relative to the sampling rate. A cutoff frequency located far from the sampling rate results in a long impulse response for a FIR filter. To a achieve a steep cut more samples of the impulse response are needed thus increasing the order of the filter. 
 
@@ -131,7 +131,40 @@ If a high downsampling factor, L, is desired, then the order of the anti-aliasin
 
 By doing so the filter order for each anti-aliasing filter is kept low as the cutoff frequency of each band is closer to the sampling frequency. Also, the whole bandwidth of the audio signal is split into octave bands which is an advantages if an equalizer and spectrum analyser are desired.
 
-\todo[inline]{Upsampling is not discussed or mentioned anywhere?}
+After downsampling, an upsampler is used to upsample the signal to the original sampling frequency. To upsample by a factor of L, L amount of zeros are inserted in-between each sample. This creates high frequency component that needs to be filtered to avoid artefacts from the mirrored spectrum. \autoref{fig:upsampling} illustrates the processes which is called interpolation
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.44\textwidth}
+\includegraphics[width=\linewidth]{upsampling1}
+	\caption{Signal bandwidth with sampling rate $f_s$.}
+	\label{fig:upsampling1}
+\end{subfigure}
+\hspace{6mm} 
+\begin{subfigure}[t]{0.47\textwidth}
+\includegraphics[width=\linewidth]{upsampling2}
+	\caption{Upsampling mirrors the spectrum. The sampling frequency is increased by 2.}
+	\label{fig:upsampling2}
+\end{subfigure}
+\hspace{6mm}
+\begin{subfigure}[b]{0.44\textwidth}
+\includegraphics[width=\linewidth]{upsampling3}
+	\caption{A low-pass removes artefacts from the mirrored spectrum.}
+	\label{fig:upsampling3}
+\end{subfigure}
+\hspace{6mm} 
+\begin{subfigure}[b]{0.47\textwidth}
+\includegraphics[width=\linewidth]{upsampling4}
+	\caption{Aliasing at downsampling no longer occurs.}
+	\label{fig:upsampling4}
+\end{subfigure}
+\caption{Processes of interpolation.}
+\label{fig:upsampling}
+\end{figure}
+
+
+
+
 
 
 % Løsning:
@@ -151,11 +184,10 @@ Applying the considerations to the system, the following new overall system may 
 \label{fig:designRealBlock}
 \end{figure}
 
-\todo[inline]{figur er forkert!}
+In comparison to previous system overview decimation, "HP and Decimator" and "interpolator" blocks are added to the system. The design of these blocks including the RMS and model will discussed in following sections. 
 
-In comparison to previous system overview decimation, "HP and Decimator" and "interpolator" blocks are added to the system. The design of these blocks including the RMS and model will discussed in following sections.
+Because a downsampling factor of 2 is used, the total amount of bands is 8, which means the equalizer to be designed has 8 adjustable bands.
 
-\todo{Husk at tilføje at vi anvender 8 baand.}
 
 \section{High-Pass filter and Decimator}
 
@@ -211,6 +243,5 @@ The RMS limiter cannot protect the loudspeaker against transients such as kick d
 \label{fig:designRealBlock}
 \end{figure}
 
-\todo[inline]{FIGUR FORKERT}
 
 The complete system is now explained and each subsystem of the system may now be designed in the following chapters.
