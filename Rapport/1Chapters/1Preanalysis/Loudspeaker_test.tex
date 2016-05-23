@@ -30,7 +30,20 @@ There are many different approaches in analysing the measured data, and the appr
 
 %\vspace{3mm}
 
-During the first accelerometer measurements the loudspeaker acts linear with very little fluctuations. The frequency response keeps being steadily the same with an increase in amplitude which was expected.\todo{Billede af reference tids figur og forklaring af resonans frekvens} %A tendency shows that the 3rd harmonic increases more rapidly than the 2nd harmonic, again as expected for the performance of a loudspeaker. 
+During the first accelerometer measurements the loudspeaker acts linear with very little fluctuations. The frequency response keeps being steadily the same with an increase in amplitude which was expected. In \autoref{fig:Driver1} the first accelerometer measurement on the driver is seen. At 25 seconds a mechanical resonance frequency. 
+
+%\todo{Billede af reference tids figur og forklaring af resonans frekvens} %A tendency shows that the 3rd harmonic increases more rapidly than the 2nd harmonic, again as expected for the performance of a loudspeaker.
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[t]{0.335\textwidth}
+	\tikzsetnextfilename{Raw_Driver1}
+	\input{figures/Forsog1/Driver1.tex}
+\end{subfigure}
+\caption{Raw dataset 1 from driver.}
+\label{fig:Driver1}
+\end{figure}
+
 When the speaker was pushed beyond the capabilities specified by DALI an anomaly appears in the measurements. This is shown in \autoref{fig:raw_driver19_window_main}, where spikes in amplitude appear when playing very low frequency sound. 
 
 \begin{figure}[H]
@@ -64,36 +77,7 @@ Further investigation of the spikes is shown in Figure \ref{fig:raw_driver19_win
 
 \autoref{fig:FFT_hit_Main} shows that this area is affected by hits on measurement 16 and upwards, refering back to \autoref{subsec:impulses} where it can be seen that an increase in energy level across all frequencies point towards an impulse in the form of a hit. This is particularly seen when comparing measurement 16 through 19. It is possible to see how the fundamental tone at 80 Hz is not increasing dramatically. This is due to the high needs of wattages at this point. However, the entire signals lies more or less 20 dB higher which corresponds to 100 times the energy. This concludes that hits occur but at a very high volume levels \gls{SPL}.
 
-
-
-
-% Formål
-
-% Råt Data
-
-% Frekvensrespons
-% - Konklusion: Ikke muligt at detektere tegn på at højtaleren har nået grænsen
-% - Accelerometeret kan bruges til at estimere lydtrykket
-
-% Harmonisk forvrængning
-% - Der er tydelige tegn på øget harmonisk forvrængning, når lydstyrken øges.
-% - Det er dog ikke muligt at måle harmonisk forvrængning, når der er tale om musik og derfor er det ikke muligt at udvinde information om harmonisk forvrængning
-
-% Slag detektering
-% - Undersøger et givet punkt i målingerne, der ligner slag mod driveren.
-% - Spektralanalyser i området viser at der sker en betydelig energinieauet i lave frekvensen.
-% - Da amplitude forøgelsen ikke er forbeholdt harmoniske frekvenser, må det antages at udslagene har er i impulser der 
-
-
-% Conclusion: 
-% - The vibration do not affect the distortion
-% - The vibration can however be used as a tool to determine the sound pressure level since there is a strong correlation between the amount of vibration and sound pressure.
-% - The analysis of the hits suggest that it is possible to detect these hits by measurering very low frequenct frequencies and determine the energy increase
-
-% Further investigation
-% - Investigate the impulse response of the loudspeaker
-% - Investigate if there is a if the break of the loudspeaker unit was due to the amount of vibration at the resonance frequency.
-
+The vibration was also measured on the enclosure but an analysis concludes that the vibration from the enclosure do not change its characteristics at different gains.
 
 
 
