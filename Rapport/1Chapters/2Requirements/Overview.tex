@@ -72,14 +72,14 @@ Because of multi-band the spectrum analyzer must be divided into several bands, 
 \begin{tabular}{|
 >{\columncolor[HTML]{C0C0C0}}l |c|c|c|}
 \hline
-& \cellcolor[HTML]{C0C0C0}$f_1$ {[}Hz{]} & \cellcolor[HTML]{C0C0C0}$f_c$ {[}Hz{]} & \cellcolor[HTML]{C0C0C0}$f_2$ {[}Hz{]} \\ \hline
+& \cellcolor[HTML]{C0C0C0}$f_1$ {[}Hz{]} & \cellcolor[HTML]{C0C0C0}$f_m$ {[}Hz{]} & \cellcolor[HTML]{C0C0C0}$f_2$ {[}Hz{]} \\ \hline
 Band 5 & 530,3                               & -                                   & -                                   \\ \hline
 Band 4 & 265,2                               & 375                                 & 530,3                               \\ \hline
 Band 3 & 132,6                               & 187,5                               & 265,2                               \\ \hline
 Band 2 & 66,29                               & 93,75                               & 132,6                               \\ \hline
 Band 1 & 0                                   & 46,87                               & 66,29                               \\ \hline
 \end{tabular}
-\caption{Frequencies for bands. ($f_1$ lower cutoff frequency of the band)($f_c$ center frequency of the band)($f_2$ higher cutoff frequency of the band)}
+\caption{Frequencies for bands. ($f_1$ lower cutoff frequency of the band)($f_m$ center frequency of the band)($f_2$ higher cutoff frequency of the band)}
 \label{tb:freqBands}
 \end{table}
 
@@ -96,7 +96,7 @@ Because of the multi-bands it is also possible to have a five band graphic equal
 \autoref{fig:SystemOverview} shows a feedforward system with a user controlled five band graphic equalizer, controlled with a GUI, with the band frequencies seen in \autoref{tb:freqBands}. Besides the user controlled equalizer a four band RMS limiter (band 1-4) will monitor the RMS levels of the four bands and gain relative to a threshold of 150 W set in \autoref{sec:hit_detect}. The divided signal is then summed up to a single signal and outputted. This should result in a protective system which makes sure that the driver never breaks because of the coil hitting the backplate. A more detailed description of every block will now follow in the preceding section.
 
 \textbf{Audio source} \\
-The audio source in this system will be based on the IEC 60268-15 specification. Meaning that it will be limited to a analog signal with a maximum peak voltage of 2 Volt RMS but otherwise nominal 0.5 Volt RMS for a line signal. %This input will handled by an onboard TLV320AIC3204 codec located on the eZdsp development board.
+The audio source in this system will be based on the IEC 60268-15 specification. Meaning that it will be limited to a analog signal with a maximum peak voltage of 2 V RMS but otherwise nominal 0.5 V RMS for a line signal. The concept system will be developed upon a mono system as a prove of concept. If a stereo system is desired the system can be duplicated. %This input will handled by an onboard TLV320AIC3204 codec located on the eZdsp development board.
 
 \textbf{User} \\
 %The system will be able to be partially controlled by the end user. The user will be able to affect the entire system with the desired preference. The preference will be restricted to gain in the lower frequency as wished by DALI.
