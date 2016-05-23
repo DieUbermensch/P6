@@ -19,34 +19,33 @@ Band 1 & 0     		 & 46,87       & 66,29       \\ \hline
 
 \begin{figure}[H]
 	\centering
-	\tikzsetnextfilename{allBands}
-	\input{figures/allBands.tex}
+	\includegraphics[width=\textwidth]{allBandsExtended}
 	\caption{Overview of all band requirements}
 	\label{fig:allBands}
 \end{figure}
-The reason for downsampling seven times and not more or less is because of several reasons. Firstly the bandwidth of the decimation filter must not be influenced by the interpolation filter which would give a non flat frequency response so every band is set to have a center frequency 1/16 of Fs, secondly the lower the center frequency in relation to Fs the higher the filter order which is desired as low as possible, lastly increasing the number of downsamples increases the delay of the system which is not desired in relation to real time applications.      
+The reason for downsampling seven times and not more or less is because of several reasons. Firstly the bandwidth of the decimation filter must not be influenced by the interpolation filter which would give a non linear frequency response. Therefore every band is set to have a center frequency 1/16 of $f_s$, secondly the lower the center frequency in relation to $f_S$ the higher the filter order and lastly increasing the number of downsamples increases the delay of the system which is not desired in relation to real time applications.      
 
-Because of the reasons the number of stages was based on trial and error, giving the optimal compromise between the just mentioned reasons. If more stages were added, the delay of the system would be to big, and aliasing would occur, while removing additional stages would multiply the filter order by two for every stage removed and giving a user fewer bands in the equalizer.    
+Because of the reasons the number of stages were based on trial and error, giving the optimal compromise between the just mentioned reasons. If more stages were added, the delay of the system would be to big, and artifacts would occur, while removing additional stages would multiply the filter order by two for every stage removed and giving a user fewer bands in the equalizer.    
 
-Because there will be downsampled by two for every octave band the following relation can be made between a band and Fs as seen on \autoref{fig:relFsBand}.
+Because there will be downsampled by two for every octave band the following relation can be made between a band and $f_S$ as seen on \autoref{fig:relFsBand}.
 \begin{figure}[H]
 	\centering
 	\tikzsetnextfilename{relativeFsBand}
 	\input{figures/relativeFsBand.tex}
-	\caption{Band relative to Fs}
+	\caption{Band relative to $f_s$.}
 	\label{fig:relFsBand}
 \end{figure}
 
 From \autoref{fig:relFsBand} two points are selected giving the following specifications to the lowpass filter:
 
-$\omega_{pass}=3.000\textrm{ Hz }\cdot 2/Fs=0.1250 \enhed{rad/sample}$\\
+$\omega_{pass}=3.000\textrm{ Hz }\cdot 2/f_s=0.1250 \enhed{\pi rad/sample}$\\
 $A_{pass}=-1 \enhed{dB}$\\
-$\omega_{stop}=6.500\textrm{ Hz }\cdot 2/Fs=0.2708 \enhed{rad/sample}$\\
+$\omega_{stop}=6.500\textrm{ Hz }\cdot 2/f_s=0.2708 \enhed{\pi rad/sample}$\\
 $A_{stop}=-60 \enhed{dB}$
 
-The design method used for designing the filter is the Kaiser window method, explained in detail in \autoref{app:FIR_theory}. The reason for using the Kaiser window method is that it gives the approximate order of the filter and the beta value of the window applied to impulse reponse. This means that no trial and error method is needed to meet the requierments of the filter.
+The design method used for designing the filter is the Kaiser window method, explained in detail in \autoref{app:FIR_theory}. The reason for using the Kaiser window method is that it gives the approximate order of the filter and the beta value of the window applied to impulse reponse. This means that no trial and error method is needed to meet the requirements for the filter.
 
-With the specification stated and using the matlab script explained in \autoref{app:FIR_Matlab} which uses the FIR theoy explained in \autoref{app:FIR_theory} about the Kaiser window method, general FIR theory and deriving the coefficients of the filter, the following filter is given with quantisized coefficients, see \autoref{fig:band1_filt} for magnitude response and \autoref{fig:band1_filtPhase} for phase response. The order of the filter is 50, it is a type 1 FIR filter and has linear phase which means that the group delay is constant at 25 samples.  
+With the specification stated and using the FIR theoy explained in \autoref{app:FIR_theory} about the Kaiser window method and deriving the coefficients of the filter, the following filter is given with quantisized coefficients, see \autoref{fig:band1_filt} for magnitude response and \autoref{fig:band1_filtPhase} for phase response. The order of the filter is 50, it is a type 1 FIR filter and has linear phase which means that the group delay is constant at 25 samples.  
 
 \begin{figure}[H]
 \centering
@@ -63,10 +62,10 @@ With the specification stated and using the matlab script explained in \autoref{
 	\label{fig:band1_filtPhase}
 \end{figure}
 
-From \autoref{fig:band1_filt} it can be concluded that the filter meets the band requirements and has a constant group delay which means that spectral subtraction can be made from the output. This concludes the decimation filter. 
+From \autoref{fig:band1_filt} it can be concluded that the filter meets the band requirements and has a constant group delay which means that spectral inversion can be made from the output. This concludes the decimation filter. 
 
 \section{Interpolation filter} \label{sec:IntFilter}
-The interpolation filter as mentioned before must be designed so it does not influence the bandwidth of the decimated signal therefore the passband of the interpolation filter must be larger than stopband of the decimation filter. This means that the passband of the filter must be above 0.3 rad/sample, while there must be an attenuation of minimum 80 dB at approximately 0.7 rad/sample, which is the mirrored stopband of the decimation filter at the downsampled Fs as seen on \autoref{fig:MirrorDec}. 
+The interpolation filter as mentioned before must be designed so it does not influence the bandwidth of the decimated signal, therefore the passband of the interpolation filter must be larger than stopband of the decimation filter. This means that the passband of the filter must be above 0.3 $\pi$ rad/sample, while there must be an attenuation of minimum 60 dB at approximately 0.7 $\pi$ rad/sample, which is the mirrored stopband of the decimation filter at the downsampled $f_s$ as seen on \autoref{fig:MirrorDec}. 
 
 \begin{figure}[H]
 \centering
@@ -75,21 +74,21 @@ The interpolation filter as mentioned before must be designed so it does not inf
 \label{fig:MirrorDec}
 \end{figure}
 
-From these demands the following demands are set for the interpolation filter
+From these demands the following specifications should be used for the interpolation filter.
 
-$\omega_{pass}=0,3 \enhed{rad/sample}$\\
+$\omega_{pass}=0.3 \enhed{\pi rad/sample}$\\
 $A_{pass}=0 \enhed{dB}$\\
-$\omega_{stop}=0,7 \enhed{rad/sample}$\\
+$\omega_{stop}=0.7 \enhed{\pi rad/sample}$\\
 $A_{stop}=-60 \enhed{dB}$
 
 A buffer is given to both $\omega_{pass}$ and $\omega_{stop}$ because of quantization, so the following requirements are set for the filter.
 
-$\omega_{pass}=0,4 \enhed{rad/sample}$\\
+$\omega_{pass}=0.4 \enhed{rad/sample}$\\
 $A_{pass}=-1 \enhed{dB}$\\
-$\omega_{stop}=0,7 \enhed{rad/sample}$\\
+$\omega_{stop}=0.7 \enhed{rad/sample}$\\
 $A_{stop}=-80 \enhed{dB}$
 
- If the kaiser window method is used and the same FIR theory and matlab script is used as with the decimation filter the following filter is given with quatisized coefficient, see for magnitude response and for phase response. The order of the filter is 34, it is a type 1 FIR filter and has linear phase with a group delay of 17 samples.
+If the Kaiser window method is used and the same FIR theory is used as with the decimation filter the following filter is given with quantisized coefficient, see \autoref{fig:IntMag} for magnitude response and \autoref{fig:IntPhase} for phase response. The order of the filter is 34, it is a type 1 FIR filter and has linear phase with a group delay of 17 samples.
 
 \begin{figure}[H]
 	\centering
@@ -103,17 +102,17 @@ $A_{stop}=-80 \enhed{dB}$
 	\centering
 	\tikzsetnextfilename{IntPhase}
 	\input{figures/IntPhase.tex}
-	\caption{Interpolation filter´s phase response.}
+	\caption{Interpolation filter phase response.}
 	\label{fig:IntPhase}
 \end{figure}
 
-From \autoref{fig:IntMag} and \autoref{fig:IntPhase} it can be verified that the filter meets the requirements sat up for the filter. It is seen that the interpolation filter does not attenuate before after the stopband bandwidth of the decimation filter (0,3 rad/sample) and has an attenuation of at least 80 dB at 0.7 rad/sample. On \autoref{fig:decIntComp} the decimation filter and interpolation filter´s magnitude response is seen.  
+From \autoref{fig:IntMag} and \autoref{fig:IntPhase} it can be verified that the filter meets the requirements set up for the filter. It is seen that the interpolation filter does not attenuate before after the stopband bandwidth of the decimation filter (0.3 $\pi$ rad/sample) and has an attenuation of at least 80 dB at 0.7 $\pi$ rad/sample. On \autoref{fig:decIntComp} the decimation filter and interpolation filter's magnitude response is seen.  
 
 \begin{figure}[H]
 	\centering
 	\tikzsetnextfilename{DecIntComp}
 	\input{figures/DecIntComp.tex}
-	\caption{Decimation and interpolation filter´s magnitude response compared.}
+	\caption{Decimation and interpolation filter's magnitude response compared.}
 	\label{fig:decIntComp}
 \end{figure}
 

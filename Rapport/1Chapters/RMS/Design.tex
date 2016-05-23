@@ -1,44 +1,38 @@
 \section{Design}
-Now that it is possible to determine approximately what threshold that should be used it is possible to determine the needed attenuation. Since the value being regulated from is an RMS value and the goal is calculated the needed attenuation for the RMS not to exceed the desired threshold. The attenuation can be calculated as the quotient of the threshold and RMS as seen in \autoref{eq:RMSAttenuation}.
+It is now possible to determine the threshold which should be used and the corresponding needed attenuation. The goal is to attenuate the RMS value such it does not exceed the desired threshold. The attenuation can be calculated as the quotient of the threshold and RMS as seen in \autoref{eq:RMSAttenuation}.
 \begin{equation}\label{eq:RMSAttenuation}
-\text{Needed attenuation} = \frac{\text{Threshold}}{\text{RMS}}
+\text{Needed Attenuation} = \frac{\text{Threshold}}{\text{RMS}} \enhed{.}
 \end{equation}
 
-From the equation it is possible to determine exactly the need attenuation factor to apply the band. A graphical representation of different threshold can be shown on \autoref{fig:GainOverview}.
+From the equation it is possible to determine exactly the needed attenuation factor to apply. A graphical representation of different gains according to different thresholds can be shown on \autoref{fig:GainOverview}.
 
 \begin{figure}[H]
 \centering
 \tikzsetnextfilename{Model5}
 \input{figures/model5.tex}
-\caption{Graph showing how much attenuation needed according to the RMS value if the threshold was 0.1 through 0.5}
+\caption{Graph showing how much attenuation is needed according to the RMS value if the threshold is 0.1 through 0.5.}
 \label{fig:GainOverview}
 \end{figure}
 
-The Attenuation values can the be adjusted according to the threshold desired. It is again important to know that every value above 1 will in the system be seen as 1, since a value lower than the threshold should always be sent through the system with no intervention.  
+The attenuation values can the be adjusted according to the threshold desired. It is again important to know that every value above 1 will in the system be seen as 1, since a value lower than the threshold should always be sent through the system with no intervention.  
 
 
-\subsubsection{Needed sample size}
-The system will indirectly be introducing an attack and release time which is determined through the sample time/size of the RMS algorithm. Increasing the samples used for the RMS calculation will increase attack and release time since the algorithm needs more time to process and regulate the output. Hence it is important to determined the minimum needed sample size in order of the system to correct properly. The minimum amount of samples used in the algorithm will be determined by looking at the largest frequency in each band and determine how many samples need to represent an entire period. The first band have upper frequency of 66 Hz. From equation \ref{eq:Minsample} it is possible to determine the minimum needed samples
-
+\subsubsection{Sample Size}
+The system will indirectly be introducing an attack and release time which is determined through the sample time/size of the RMS algorithm. Increasing the samples size used for the RMS calculation will increase attack and release time since an increased sample size decreases every sample's influence on the RMS value. Hence it is important to determine the minimum needed sample size in order for the system to analyze properly. The minimum amount of samples used in the algorithm will be determined by looking at the lowest frequency in each band and determine how many samples needed to represent an entire period. The first band has a lower common audible frequency of 30 Hz. From equation \ref{eq:Minsample} it is possible to determine the minimum needed samples:
 \begin{equation}\label{eq:Minsample}
-\text{Needed samples}= \frac{\text{Sampling Frequency}}{\text{Desired Frequency}}
+\text{Needed samples} = \frac{f_s}{\text{Desired frequency}} = \frac{375 \text{ Hz}}{30 \text{ Hz}} = 12.5 \enhed{.}
 \end{equation} 
-Hence the minimum samples needed for detecting every possible frequency in the specific band is $\frac{750}{66} \approx 12$ samples. Because the lowest bands operates at a sampling frequency of 750 Hz. In order to implement this most efficiently it is set to 16 samples which makes the division possible by bit-shifting 4 times.
+In order to implement this most efficiently it is set to 16 samples which makes the division possible by bit-shifting 4 times.
 
-\section{Determine parameters}
-From \autoref{app:journal_speaker_test} it is Assumed that the gain throughout the system will be 37 dB. With this gain it is possible to achieve sound pressures of upwards 105 dB assumed that the signal complies with the IEC 60258-15 standard. The limiters are only going to be activate when the wattage goes above the recommended 150 Watt it is possible to determine the maximum RMS value. The maximum output from the DSP is 0.5 $\text{V}_\text{RMS}$. With a gain of 37 dB the linear gain is determined by:
+\section{Parameter Determination}
+From \autoref{app:journal_speaker_test} it is assumed that the gain throughout the system will be 37 dB, however the maximum output from the DSP is 0.5 $\text{V}_\text{RMS}$ which means the gain should be 40 dB. With this gain it is possible to achieve sound pressures of upwards of 105 dB with a maximum input of 0.5 $\text{V}_\text{RMS}$. The limiters are only going to be activated when the power goes above the recommended 150 W. With a gain of 40 dB the linear gain is 100.
 
-\begin{align}
-20*log_{10}(x)&=37 \enhed{dB}
-\\
-10^{\frac{37}{20}} = 70.795 \enhed{.}
-\end{align}
-Now it is possible to determine the maximum output signal from the DSP. Since the DSP are working with Q15 format it is assumed that 1 is seen as 0dBFS. This means effectively that the maximum threshold is governed by equation \ref{eq:Thresgain} and determined in equation \ref{eq:Threscalculated}. The voltage is determined by ohms law of $V=\sqrt{I \cdot R}$
+Now it is possible to determine threshold in the DSP. From requirement 10 the threshold should be 150 W.  This means effectively that the threshold in the DSP is governed by equation \ref{eq:Thresgain} and determined in equation \ref{eq:Threscalculated}.
 \vspace{-3mm}
 \begin{align}
-\text{Power}&=\frac{(\text{Threshold} \cdot \text{V})^2}{\text{R}}\enhed{.}\label{eq:Thresgain}
+\text{P}&=\frac{(\text{Threshold} \cdot \text{G})^2}{\text{R}} \enhed{W}\label{eq:Thresgain}
 \\
-\text{Threshold}&=\frac{\sqrt{150 \cdot 6}}{70.795}=0.4237\enhed{.}\label{eq:Threscalculated}
+\text{Threshold}&=\frac{\sqrt{150 \text{ W} \cdot 6 \Omega }}{100}=0.4237\enhed{.}\label{eq:Threscalculated}
 \end{align}
 
 %Now that the Threshold is determined for the entire system it is suitable to place the threshold lower for first and second band. Since the combined threshold will be larger than the individual bands. 
