@@ -1,32 +1,32 @@
 \chapter{Signal Processing Tools}
-Generally speaking, any signal can be analysed and processed in time domain or frequency domain. If analysed in time domain, the analysis can for instance be extracting signal features and calculating the signal's RMS value. Analysing the signal in frequency domain will reveal the spectral content of the signal. Processing the signal in time domain could be for example filtering or gain control, while processing the signal in frequency domain could be multiplication in frequency domain. So the following sections will cover different relevant techniques for extracting and processing information from an audio signal in both time and frequency domain. A conclusion at the end will determine which analyzing and process methods should be used in the system.
+Generally speaking, any signal can be analysed and processed in time domain or frequency domain. If analysed in time domain, the analysis can for instance be extracting signal features and calculating the signal's RMS value. Analysing the signal in frequency domain will reveal the spectral content of the signal. Processing the signal in time domain could be e.g. filtering or gain control, while processing the signal in frequency domain could be multiplication in frequency domain. So the following sections will cover different relevant techniques for extracting and processing information from an audio signal in both time and frequency domain. A conclusion at the end will determine which analyzing and process methods should be used in the system.
 
 \section{Analysis in time} \label{sec:SignalTime}
-The purpose of analysing in time domain is to analyse thresholds of a given signal so when analysing in time domain there are two main ways of analysing, peak or Root-mean-square (RMS) which will be examined.
+The purpose of analysing in time domain is to analyse thresholds of a given signal so when analysing in time domain there are two main ways of analysing, peak or RMS which will be examined.
 \subsection*{Root-mean-square}
-RMS can be used as a tool to estimate the "mean" value of a periodic signal. The problem with calculating a regular mean value for an audio signal is that the result will be 0 as the signal is approximately evenly distributed on both side of the amplitude axis. By using RMS this problem is avoided. The RMS is calculated as the square root of the mean value of the signal squared as shown in following equation:
+RMS can be used as a tool to estimate the "mean" value of a signal. The problem with calculating a regular mean value for an audio signal is that the result will be 0 as the signal is approximately evenly distributed on both side of the amplitude axis. By using RMS this problem is avoided. The RMS is calculated as the square root of the mean value of the signal squared as shown in following equation:
 \begin{equation}\label{eq:RMS_con}
-V_{\text{RMS}}(t) = \sqrt{\frac{1}{T}\int_0^T v(t)^2 dt}
+V_{\text{RMS}}(t) = \sqrt{\frac{1}{T}\int_0^T v(t)^2 dt} \enhed{V}
 \end{equation}
-The definition of the RMS in \autoref{eq:RMS_con} is only defined for continuous signals. If the RMS value is to be calculated for discrete values then following equation is used:
+The definition of the RMS in \autoref{eq:RMS_con} is only defined for continuous signals. If the RMS value is to be calculated for discrete values then the following equation is used:
 \begin{equation}
-V_{\text{RMS}}[n] = \sqrt{\frac{1}{N+1}\sum_{k=0}^{N} v[n-k]^2}
+V_{\text{RMS}}[n] = \sqrt{\frac{1}{N+1}\sum_{k=0}^{N} v[n-k]^2} \enhed{V}
 \end{equation}
-In analog electronics, the RMS value of a AC voltage can be used to calculate the corresponding power dissipation in a resistor (for instance) that of a DC voltage. The RMS can be useful to estimate the power of the signal, for instance if the RMS value of the signal moves above a certain threshold, the system may warn that the signal will stress the loudspeaker too much.
+In analog electronics, the RMS value of a AC voltage can be used to calculate the corresponding power dissipation in a resistor, for instance that of a DC voltage. The RMS can be useful to estimate the power of the signal, for instance if the RMS value of the signal moves above a certain threshold, the system may warn that the signal will stress the loudspeaker too much.
 
 \subsection*{Signal threshold}
 A signal threshold can be used to detect whenever the amplitude of a signal is above a certain level. This can for instance help identify if the signal will result in a too loud playback. The threshold can be used to detect peaks above the threshold or be used to detect if the RMS values of the signal is above a level.
 
 \section{Analysis in frequency} \label{sec:SignalFreq}
-The purpose of analysing in frequency domain is to analyse the spectral content of a signal so when analysing in frequency domain there are two main ways of analysing, spectrum analyzer or fast fourier transform (FFT) which will be examined.
+The purpose of analysing in frequency domain is to analyse the spectral content of a signal so when analysing in frequency domain there are two main ways of analysing, spectrum analyzer and fast fourier transform (FFT) which will be examined.
 
 \subsection*{Spectrum analyzer}
 A spectrum analyser can consist of multiple bandpass filters which divides the signal into frequency bands and for each band, the RMS value or peak value is determined to estimate the energy or amplitude in that corresponding band. %The bandpass filters of the spectrum analyzer could meet the requirements of the standard IEC 6964 (2001) which sets the requirements of octave-band or fractional-octave-band filters, this is also explained in more detail in \ref{app:IEC6964}.  
 
-The advantage of the spectrum analyzer is that it gives the capability of analysing the frequency spectrum of a signal in a very effective way with the use of either RMS or peak analysing. The disadvantage of the spectrum analyzer is that it is not possible to analyse a specific frequency if wanted, but only able to analyse the spectral content of the bandwidth designed.      
+The advantage of the spectrum analyzer is that it gives the capability of analysing the frequency spectrum of a signal in a very effective way with the use of either RMS or peak analyzing. The disadvantage of the spectrum analyzer is that it is not possible to analyse a specific frequency if wanted, but only able to analyse the spectral content of the bandwidth designed.      
 
 \subsection*{Fast fourier transform}
-The Fourier transformation is a mathematical equation that breaks the signal up into a sum of sine and cosine function at different frequencies which gives the spectral composition of the signal. To perform a Fourier Transformation (FT) the Discrete Fourier Transformation (DFT), must be used since the FT cannot be implemented in a causal and discrete system. The DFT is very inefficient in its computation so it is more common to use the more effective FFT which obtains the same result as the DFT. The difference in computation time is given as
+The Fourier transformation is a mathematical equation that breaks the signal into a sum of sine and cosine function at different frequencies which gives the spectral composition of the signal. To perform a Fourier Transformation (FT) the Discrete Fourier Transformation (DFT), must be used since the FT cannot be implemented in a causal and discrete system. The DFT is very inefficient in its computation so it is more common to use the more effective FFT which obtains the same result as the DFT. The difference in computation time is given as
 
 
 DFT computation time:
@@ -47,9 +47,9 @@ C_{FFT} = \frac{N}{2}\cdot log_{2}(N)\cdot t_{instr} \enhed{ms}
 \va{$C_{FFT}$}{is the computation time of the FFT}{ms}
 \end{where}
 
-The FFT can be used to give a precise spectral composition of the signal, so if its desired to analyse a specific frequency or specific frequencies for example 100 Hz and 200 Hz it will be possible, which in relation to the spectrum analyzer which cannot analyse a specific frequency. So the FFT is good at analysing specific frequencies but the disadvantage of the FFT is that it is bad at analyzing a large spectrum. This is because it takes a lot of computation power if the resolution of the FFT is required to be high, which is very ineffective in relation to the spectrum analyser. This is because the resolution is given as:
+The FFT can be used to give a precise spectral composition of the signal, so if it is desired to analyse a specific frequency or specific frequencies e.g. 100 Hz and 200 Hz it will be possible, which in relation to the spectrum analyzer which cannot analyse a specific frequency. So the FFT is good at analysing specific frequencies but the disadvantage of the FFT is that it is bad at analyzing a large spectrum. This is because it takes a lot of computation power if the resolution of the FFT is required to be high, which is very ineffective in relation to the spectrum analyser. This is because the resolution is given as:
 \begin{equation}
-R_{FFT} = \frac{Fs}{N} \enhed{Hz}
+R_{FFT} = \frac{f_s}{N} \enhed{Hz}
 \end{equation}
 \begin{where}
 \va{$R_{FFT}$}{is the resolution}{Hz}
@@ -67,16 +67,16 @@ So if the sample frequency is high it requires a large number of samples to get 
 
 
 \section{Processing in time}
-The reasoning for processing a signal in time is its simplicity. A continous signal is a time signal so there is no need for an FFT and IFFT when processing in time. There are two common ways of processing a signal in time, dynamic gain control and equalizing  
+The reason for processing a signal in time is its simplicity. A continous signal is a time signal so there is no need for an FFT and IFFT when processing in time. There are two common ways of processing a signal in time, dynamic gain control and equalizing  
 
 
 \subsection*{Dynamic gain control}
-Dynamic gain control (DGC) gains differently based on certain threshold to for example make sure that a signal does not clip. A DGC system is a feedforward system which can be stated as:
+Dynamic gain control (DGC) gains differently based on certain thresholds which could for example be to make sure that a signal does not clip. A DGC system is a feedforward system which can be stated as:
 \begin{equation}
 y[n] = g[n]\cdot x[n-D]
 \end{equation}
 
-Where an input $x[n]$ is delayed by $x[n-D]$ and multiplied by a weighting $g[n]$ to give $y[n]$, or as a logarithmic level representation where multiplication leads to the addition of $G_{dB}[n]$ and $X_{dB}[n]$:
+Where an input $x[n]$ is delayed $D$ and multiplied by a weighting $g[n]$ to give $y[n]$, or as a logarithmic level representation where multiplication leads to the addition of $G_{dB}[n]$ and $X_{dB}[n]$:
 \begin{equation}
 Y_{dB}[n] = X_{dB}[n] + G_{dB}[n]
 \end{equation}
@@ -92,7 +92,7 @@ A DGC is also seen in more detail on \autoref{fig:limiter_block}.
 
 \todo[inline]{Ref til Digital Audio Signal Processing bogen kapitel syv} 
 
-The level measurement block measures the RMS or peak value of the signal, the static curve applies a specific gain and the Attack/Release, where the attack determines how fast the DGC should react to inputs that are above the threshold. A high attack time means that the DGC is slow-reacting to inputs changes, thus the DGC will not apply gain variation if the input is only above the threshold for a short time. The release time determines how fast the DGC should release the gain variation after the signal level is under the threshold again.
+The level measurement block measures the RMS or peak value of the signal, the static curve applies a specific gain and the Attack/Release, where the attack determines how fast the DGC should react to inputs that are above the threshold and the release time determines how fast the DGC should release the gain variation after the signal level is under the threshold again. A high attack/release time means that the DGC is slow-reacting to inputs changes, thus the DGC will not apply gain variation if the input is only above or below the threshold for a short time.
 %time determines when the limiter should apply and stop applying to the signal.
 The static curve, more detailed described, is the curve which determines at which the noise gate threshold (NT), expander threshold (ET), compressor threshold (CT) and limiter threshold (LT) should apply as seen on \autoref{fig:limiter_static}. 
 
@@ -105,7 +105,7 @@ When these different thresholds are surpassed, a specific linear function will b
 \label{fig:limiter_static}
 \end{figure}  
 
-Because the focus will be on compressing the signal and not clipping it, which would introduce too much distortion, the focus should be on CT which compresses the signal. The compressor gain as seen \autoref{fig:limiter_static} is a variable gain dependent on the threshold and the input. The compressor can either apply to all frequencies or be a multiband compressor which only applies to the frequency spectrum which needs compression, which gives a more flexible compressor but also increases the complexity of the system. 
+Because the focus will be on limiting the signal and not clipping it, which would introduce too much distortion, the focus should be on LT which limits the signal. The limiter gain as seen on \autoref{fig:limiter_static} is a variable gain dependent on the threshold and the input. The limiter can either apply to all frequencies or be a multiband limiter which only applies to the frequency spectrum which needs limiting, which gives a more flexible limiter but also increases the complexity of the system. 
 
 \subsection*{Equalizer}
 % This section will examine the options for processing the signal so the limit of the loudspeaker never gets surpassed. Three ways for processing the signal are set up:  
@@ -119,7 +119,7 @@ Because the focus will be on compressing the signal and not clipping it, which w
 By implementing an equalizer it is possible to manipulate different areas of the frequency spectrum. Generally speaking, there are two common types of equalizer designs used in audio.
 
 %\subsection{Graphic and parametric equalizer}\label{sec:tech_equalizer}
-The first type of equalizer is the graphic equalizer. The graphic equalizer consist of multiple bandpass filters each with a fixed center frequency as seen in \autoref{fig:graphic_eq}. The amount of bandpass filters can vary, but can commonly be seen with 10 bands or more. A high amount of bands gives greater flexibility to adjust the frequency response of the equalizer.
+The first type of equalizer is the graphic equalizer. The graphic equalizer consist of multiple bandpass filters each with a fixed center frequency as seen on \autoref{fig:graphic_eq}. The amount of bandpass filters can vary, but can commonly be seen with 10 bands or more. A high amount of bands gives greater flexibility to adjust the frequency response of the equalizer.
 
 \begin{figure}[H]
 \centering
@@ -129,7 +129,7 @@ The first type of equalizer is the graphic equalizer. The graphic equalizer cons
 \label{fig:graphic_eq}
 \end{figure}
 
-The input signal is passed through each band and then summed again at the output of the equalizer as seen on \autoref{fig:graphic_eq_block}. This makes it possible to adjust every desired frequency band of the audio signal independently. To achieve the desired frequency response of the filter, a gain is applied to the desired bands. The graphic equalizer should be designed very carefully if a flat frequency response should be obtained when no gain is applied to any bandpass filter. %which can be achieved with the standard IEC 6964 as mentioned in \autoref{sec:SignalFreq}.
+The input signal is passed through each band and then summed again at the output of the equalizer as seen on \autoref{fig:graphic_eq_block}. This makes it possible to adjust every desired frequency band of the audio signal independently. To achieve the desired frequency response of the filter, a gain is applied to the desired bands. %The graphic equalizer should be designed very carefully if a flat frequency response should be obtained when no gain is applied to any bandpass filter. %which can be achieved with the standard IEC 6964 as mentioned in \autoref{sec:SignalFreq}.
 
 \begin{figure}[H]
 \centering
@@ -177,7 +177,7 @@ The parametric equalizer can be seen as a combined peak- and notch filter, where
 \label{fig:parametric_equalizer}
 \end{figure}
 
-Another advantages of implementing a parametric equalizer is that any parametric filter can be realized as a second order filter. This means the implementation can be done efficiently and without a high risk of IIR filters getting unstable, since it is only a second order filter. For instance, if an attenuation is desired in the bass with a high bandwidth and boost at a high frequency with low bandwidth, this can easily be realized with a parametric equalizer, since the bandwidth of the parametric equalizer is variable. An illustration of the frequency response of a parametric filter is shown in \autoref{fig:parametric_eq_preanalysis_comb}.
+Another advantages of implementing a parametric equalizer is that any parametric filter can be realized as a second order filter. This means the implementation can be done efficiently and without a high risk of IIR filters getting unstable, since it is only a second order filter. For instance, if an attenuation is desired in the bass with a high bandwidth and a boost at a high frequency with low bandwidth, this can easily be realized with a parametric equalizer, since the bandwidth of the parametric equalizer is variable. An illustration of the frequency response of a parametric filter is shown on \autoref{fig:parametric_eq_preanalysis_comb}.
 
 \begin{figure}[H]
 \centering
@@ -200,12 +200,10 @@ Another type of parametric equalizer is the high- and low-shelf filters. They ha
 \label{fig:shelf_filter}
 \end{figure}
 
-\todo[inline]{Sort farve?}
-
 One of the advantages of implementing shelf filters is that they are good at applying a gain to a wide region. For instance if a attenuation of the bass region is desired, it may be more convient to bass attenuate the whole bass region including the subbass region, rather than only apply a gain centered around a center frequency in the bass.
 
 \section{Processing in frequency}
-The reasoning for processing a signal in frequency is its flexibility. When the signal is transformed from time to frequency no convolution is needed because convolution in time domain equals multiplication in frequency domain. This results in no addition is needed when filtering the signal in frequency domain, which means an algorithm can be parallelized which gives a much faster computation time. 
+The reason for processing a signal in frequency is its flexibility. When the signal is transformed from time to frequency no convolution is needed because convolution in time domain equals multiplication in frequency domain. This results in no addition is needed when filtering the signal in frequency domain, which means an algorithm can be parallelized which gives a much faster computation time. 
 
-Another advantage of processing in frequency domain is how easy it is to change the frequency response of a filter for example. This makes the implementation of a parametric equalizer very simple. The disadvantage of processing in frequency domain is the transformation from time domain to frequency domain and back which could take op a lot of computation time in its own. 
+Another advantage of processing in frequency domain is how easy it is to change the frequency response of a filter for example. This makes the implementation of a filter very simple. The disadvantage of processing in frequency domain is the transformation from time domain to frequency domain and back which could take op a lot of computation time in its own. 
 

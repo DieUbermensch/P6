@@ -1,18 +1,17 @@
 \section{Platform requirements} \label{sec:platformReq}
-The purpose of this section is to derive the requirements for the digital development platform. Most of the requirements derived in this section are provided by DALI thus the choice of platform will mostly be based on an analysis of which processor platform will be optimal in order to fulfill the requirements. The requirements for the processor platform have been derived in a mail correspondence with DALI\footnote{\scalebox{0.7}{\path{CD://Maalinger/Maalinger030316 - Loudspeaker test/Complete Analysis.pdf}}}.
+Most of the requirements derived in this section are provided by DALI thus the choice of platform will mostly be based on an analysis of which processor platform will be optimal in order to fulfill the requirements. The requirements for the processor platform have been derived in a mail correspondence with DALI\footnote{\scalebox{0.7}{\path{CD://MAIL/DALIRequirements.pdf}}}.
 %\subsection*{Demands for the platform}
 %The demands for the processor platform have been derived in a mail correspondence with DALI 
 %\todo[inline]{Reference til CD}
 \begin{itemize}
-\item \textbf{Audio sample rate}: The system must be able to handle 96 kHz sample rate since peripheral components will be running at this rate.
-\item \textbf{Audio resolution}: There must be support for audio in at least a 24 bit resolution since the \gls{DAC} chosen by DALI is of 24 bit.
+\item \textbf{Sample rate ($f_s$)}: The system must be able to handle 96 kHz sample rate since peripheral components will be running at this rate.
+\item \textbf{Bit resolution}: There must be support for an input of at least a 24 bit resolution since the \gls{DAC} chosen by DALI is of 24 bit.
 \item \textbf{\gls{SNR}}: A minimum \gls{SNR} of 120 dB on the \gls{DAC} must be achieved. This will provide headroom for digital volume control.
-\item \textbf{Performance}: The processor must a least be able to run 1024 instructions per sample. which would give approximately 100 \gls{MIPS}.
+%\item \textbf{Performance}: The processor must a least be able to run 1024 instructions per sample. which would give approximately 100 \gls{MIPS}.
 %\item \textbf{Program space}: The platform will consist of an equalizer and limiter when finished. This project will however focus on the equalizer and sensory system. Hence it only desireable to leave TBD room for an multi band limiter which is desired by DALI. 
 \item \textbf{Interfacing to peripherals}: The platform must be able to interface with an ADC and DAC with the bus type \gls{I2S}.
-
-A 32 bit resolution is prefered by DALI over a 24 bit resolution because it would give a increased \gls{SNR} of 48 dB. These demands lead to the analyzation of which platform would be the most optimal.  
 \end{itemize}
+A 32 bit resolution is prefered by DALI over a 24 bit resolution because it would give a increased \gls{SNR} of 48 dB. These demands lead to the analyzation of which platform would be the most optimal.  
 
 
 %\subsection*{Sample rate} 
@@ -37,8 +36,8 @@ A 32 bit resolution is prefered by DALI over a 24 bit resolution because it woul
 %
 %The 32 bit resolution is prefered by DALI over a 24 bit resolution because it would give a increased \gls{SNR} of 48 dB. These demands lead to the analyzation of which platform would be the most optimal.   
 
-\subsection{Choice of processor platform}
-For the choice of processor platform different types of platforms could be used, such as an ASIC chip, an \gls{FPGA}, a microcontroller ($\mu$C) or a \gls{DSP}. These types of processors have different advantage and disadvantages which needs to be analyzed to find the most optimal platform for the demands above. The basic difference between the types of platforms is given in \autoref{tb:summary_DSP_hardware_implementation}. 
+\subsection*{Choice of processor platform}
+For the choice of processor platform, different types of platforms could be used, such as an ASIC chip, a \gls{FPGA}, a microcontroller ($\mu$C) or a \gls{DSP}. These types of processors have different advantages and disadvantages which needs to be analyzed to find the most optimal platform for the demands above. The basic difference between the types of platforms is given in \autoref{tb:summary_DSP_hardware_implementation}. 
 
 \begin{table}[H]
 \centering
@@ -57,7 +56,7 @@ For the choice of processor platform different types of platforms could be used,
 \end{table}
 
 
-Because filtering is probably needed and the high performance demands from above the natural choice of platform would be a \gls{DSP}. An ASIC chip would not be viable as a prototype platform because it does not have any flexibility. The FPGA lacks flexibility, has an increased design time and is costly. The microcontroller has less performance than a \gls{DSP}, cost more and normally has a bigger power consumption than a \gls{DSP} so as stated before a \gls{DSP} is the choice of platform.     
+Because the system should process audio the weighting of performance should be high, so the natural choice of platform would be a \gls{DSP}. An ASIC chip would not be viable as a prototype platform because it does not have any flexibility. The FPGA lacks flexibility, has an increased design time and is costly. The microcontroller has less performance than a \gls{DSP} and normally has a bigger power consumption than a \gls{DSP} so as stated before a \gls{DSP} is the choice of platform.     
 
 
 
