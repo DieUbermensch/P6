@@ -8,7 +8,7 @@ In this section the interface, between the DSP and its peripheral, is explained.
 \caption{}
 \label{fig:interfaceBlock}
 \end{figure}
-\todo[inline]{Audio in out er forkerte værdier}
+
 \subsection*{I$^2$C Interface to Audio Codec}
 
 As mentioned the audio codec supports a sampling rate of 96 kHz and at least 48 kHz. The bit-resolution of the audio codec can also be adjusted to 24-bit and 32-bit. A $\text{I}^2$C-bus is linked between the DSP and the audio codec to setup the registers in the audio codec. In \autoref{fig:i2c_aic3204} the communication protocol between the DSP and audio codec is shown, where the DSP works as the master of the bus. Since the same $\text{I}^2$C-bus is used to interface with the OLED-display, the DSP must transmit 7-bit to specify the address of the audio codec. Afterwards a byte is transmitted to specify the register address for the next data byte which is transmitted afterwards.
