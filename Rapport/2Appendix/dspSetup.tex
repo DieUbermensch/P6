@@ -1,9 +1,5 @@
 \chapter{DSP setup}
 
-In this chapter the setup of the DSP is explained. 
-
-\section{DSP setup}
-
 The initialization is performed in a function called system\_init, which is shown in \autoref{listingSystemInit}. The first two lines of the function is the setup of the clock. SYS\_PCGCR1 and SYS\_PCGCR2 are defined as IO-ports to the registers namely 0x1c02 and 0x1c03. By setting SYS\_PCGCR1 and SYS\_PCGCR2 (Peripheral Clock Gating Configuration Registers) to 0 the clock is activated on all peripherals needing a clock. The next line SYS\_EXBUSSEL, which has the IO register address 0x1c00, is the external bus selector. The register determine which of the external peripheral IO unit is selected. By setting the register to 0x1100, SPI, GPIO, UART, I2S2 and I2S0 and, are activated. The system only uses the I2S0 and UART ports. The I$^2$C is afterwards initialized. The I$^2$C bus is used for communication between the TMS320C5515 and TLV320AIC3204.
 
 \begin{lstlisting}[language=C, caption = {System initialization},label={listingSystemInit}]
@@ -39,17 +35,28 @@ void I2S_init(uint8 Type){
 
 I2S0\_CTRL is defined as an IO port to the register 0x2800 which is the serializer control register for the I2S busses.
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.6\textwidth]{figures/Ideal_filter.png}
-\caption{The ideal frequency response of a lowpass filter.}
-\label{fig:IdealFilterApp}
-\end{figure}
-
 \section{TLV320AIC3204 setup}
+
+Most of the setup of the audio codec is done in Spectrum Digital's sample code for the TLV320AIC3204. The code can be found in the CD or at Spectrum Digital's website. Minor changes are added to the sample code. These are:
+
+\begin{lstlisting}[language=C, caption = {Setup of I2S port for the DSP},label={listingI2SDSP}]
+TLV320AIC3204_set( 27, BCLK );      // BCLK and WCLK is set as o/p to AIC3204(Master) (0x2D for 24-bit)
+TLV320AIC3204_set( 6, PLLJ );       // PLL setting: J=7	(J=14 for 96 kHz)
+TLV320AIC3204_set( 7, HI_BYTE );    // PLL setting: HI_BYTE(D=1680)(0x06) (D=3360 for 96 kHz)(0x0D)
+TLV320AIC3204_set( 8, LO_BYTE );    // PLL setting: LO_BYTE(D=1680)(0X90) (D=3360 for 96 kHz)(0x20)
+\end{lstlisting}
+
+The function TLV320AIC3204\_set() is used to write to the audio codec through the I$^2$C bus. The first argument specifies the register address of the audio codec while the second argument specifies the data to be written in the register. The register address are now explained:
+
+\begin{itemize}
+\item[•]Register address 27 is the Audio Interface Setting Register. The register is used to define the bit-resolution.
+\item[•]Register address 6, 7, and 8 is used to define the clock frequency and sampling rate for the audio codec.
+\end{itemize}
 
 
 \section{UART setup} \label{UART_setup}
+
+A library named "uart.h" which handles the initialization and debug functionalities. The full code for "uart.c" is seen in \autoref{listingUartInit}. In order to use the UART module in the TMS320C5515 the SYS\_EXBUSSEL is set to 0x1100. 
 
 \begin{lstlisting}[language=C, caption = {Initialization of UART},label={listingUartInit}]
 // By 16gr640, Spring 2016, AAU
@@ -64,10 +71,10 @@ void uartInit(long baudRate)
 	int16 baudRateLSB;
 	int16 baudRateMSB;
 	
-	SYS_EXBUSSEL = 0x1100;
+	SYS_EXBUSSEL = 0x1100; // Select UART peripheral
 	
 	// Setup power management (PWREMU_MGMT). Setting UTRST and URRST to 0
-	UART_PWREMU_MGMT = 0x0000;
+	UART_PWREMU_MGMT = 0x0000; // Set UART in reset state
 	
 	// Baud rate setup 
 	UART_LCR = 0x80; // Setup control line register to change baud rate
@@ -90,7 +97,7 @@ void uartInit(long baudRate)
 	UART_LCR = 0x03; // No parity bits and 8 bit length word
 	
 	// (free bit setting in power management and activate UART)
-	UART_PWREMU_MGMT = 0x7FFF; // Go go go
+	UART_PWREMU_MGMT = 0x7FFF; 
 	
 }
 
@@ -104,12 +111,33 @@ void uartWrite(char *string)
 }
 \end{lstlisting}
 
+To setup the UART module in the TMS320C5515 following procedure is used:
+
+\begin{enumerate}
+\item The power management register UART\_PWREMU\_MGMT is set to 0 to reset the unit.
+\item The line control register UART\_LCR to 0x80 in order to setup the baud rate. 
+\item The baud rate is set up by using following expression:
+\begin{equation}
+\text{DIVISOR} = \frac{f_{\text{UARTCLK}}}{16 \text{BAUDRATE}}
+\end{equation} 
+\item The divisor is now split up into LSB and MSB which are written to the registers UART\_DLL and UART\_DLL.
+\item The line control register UART\_LCR is changed back to 0x00 as the baud rate is now set up.
+\item The UART\_IER is used to setup the interrupt of the UART. As interrupt is not used, most bits in the register are disabled.
+\item The register UART\_FCR sets up the FIFO buffer. By setting the register to 0x07 the buffers are cleared and the UART module is set to FIFO mode.
+\item The UART protocol is defined in line control register UART\_LCR. By sending 0x03 the UART is set to 1 start bit, 8 data bits, and 1 stop bit.
+\item In the last line, the power management register is set to 0x7FFF to activate the UART.
+\end{enumerate}
+
+The function uartWrite() is used to send a string through the serial line.
+
 \begin{lstlisting}[language=C, caption = {Set a flag high if data available in FIFO},label={listingUartFlag}]
     	if(UART_AVAILABLE == 1)
     	{	
 			uartFlag = 1;
 		}
 \end{lstlisting}
+
+To examine if the FIFO contains data, the register UART\_AVAILABLE is compared to 1. If the FIFO buffer contains, data the if statement is.
 
 \begin{lstlisting}[language=C, caption = {Read the incomming packet from FIFO buffer},label={listingUartRead}]
 		/////// UART READ //////
@@ -167,6 +195,8 @@ void uartWrite(char *string)
 		}	
 \end{lstlisting}
 
+\autoref{listingUartRead} shows how the system handles UART data by using switch statement. 
+
 \begin{lstlisting}[language=C, caption = {Transmit the RMS values of all bands. Only runs every second time},label={listingUartTransmit}]
 		///// UART TRANSMIT RMS //////
 		if (uartTransmitFlag == 1){
@@ -184,3 +214,5 @@ void uartWrite(char *string)
 			uartTransmitFlag = 1;
 		}
 \end{lstlisting}
+
+In \autoref{listingUartTransmit} the transmission is handled.
