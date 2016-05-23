@@ -1,6 +1,6 @@
 \chapter{RMS Limiter}\label{cha:CompressorDesign}
-The RMS limiter which will be used to suppress to large amplitude levels in the lower frequencies. 
-From \autoref{app:journal_speaker_test2} the trials showed that the THD of the drivers increased as the amplitude was increased. The difference between the fundamental tone and the harmonics decreased as the amplification throughout the system increased. Following up on the experiment, new trials were run with single sinusoids of different amplitudes. On figure \ref{fig:THDComparissonRMS} The different bands are showed in four individual graphs. Each graph shows specific single sinusoids where the THD is compared to RMS value of the input. The graphs shows different frequencies plotted. 
+The RMS limiter which will be used to suppress large amplitude levels in the lower frequencies. 
+From \autoref{app:journal_speaker_test2} the trials showed the difference between the fundamental tone and the harmonics decreasing as the amplification throughout the system increased. This behavior correlates directly with an increase in THD.   Following up on the experiment, new trials were run with single sinusoids of different amplitudes. On figure \ref{fig:THDComparissonRMS} The different bands are showed in four individual graphs. Each graph shows specific single sinusoids where the THD is compared to RMS value of the input. The graphs shows different frequencies plotted with 10 Hz intervals in the specific bands. From these graphs it should be possible to determine the needed parameters for the limiter
 %It can be shown from figure \autoref{fig:com_micALLRMS} that the amplitude difference of the second and third harmonic has a decay correlating with an exponential decay. From these measurements it is possible to determine a given threshold were the speaker will perform with optimum conditions. 
 
 \begin{figure}[H]
@@ -37,7 +37,7 @@ From \autoref{app:journal_speaker_test2} the trials showed that the THD of the d
 	\label{fig:THDComparissonRMS}
 \end{figure} 
 
-In each figure the worst case scenario is chosen as basis for creating a model to describe the THD level according the RMS value. The RMS value in the graphs should på seen as 0 dBFS according to the DSP, meaning 1.0 RMS value correspond to a input of 0.5 $\text{V}_\text{RMS}$. The Preceding section will be covering the determination of the most suitable parameters. 
+In each figure the worst case scenario is chosen as basis for creating a model to describe the THD level according the RMS value. The RMS value in the graphs should på seen as 0 dBFS according to the DSP, meaning 1.0 RMS value correspond to a input of 0.5 $\text{V}_\text{RMS}$. The Preceding section will be covering the determination of the most suitable parameters based on the requirements from \autoref{ch:requirements} and the models. 
 
 
 %In order to decrease to signal level in the lower bands a compressor will be used. The compressor will be utilizing an calculated RMS value to determine whether an attenuation should be applied. It is hence important to determine how much attenuation should be applied and how fast it should be applied. To determine how much attenuation there will be conducted trails to locate the must problematic frequencies and determine gain models, this is documented in \autoref{app:journal_speaker_test3}. From the models the needed attenuation is determined. This is further described in the following section

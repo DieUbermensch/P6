@@ -1,13 +1,12 @@
 \section{Model}
-
-From \autoref{app:journal_speaker_test3} the models are determined for the lower frequency bands:
+From \autoref{app:journal_speaker_test3} and the previous section the models are determined for the lower frequency bands as:
 \begin{enumerate}
 \item 33 Hz to 66 Hz
 \item 66 Hz to 132 Hz
 \item 132 Hz to 265 Hz
 \item 265 Hz to 530 Hz,
 \end{enumerate}
-In these bands a compressor will be implemented and hence a worst case model of each band should be determined. The models are based on experiments documented in \autoref{app:journal_speaker_test3}. The models are depicted in \autoref{fig:combineModelreport} and shows how THD increases according to the RMS value. The RMS value should be seen as relative to the maximum achievable value in the system. The models are created from regression on discrete THD value calculated from microphone measurements. Hence the model of band 1 should not be considered valid unless an RMS value of atleast 0.25 is present.
+Futhermore a limiter placed from 500 hz and down will be implemented. This limiter will provide limitation if the entire band exceeds an RMS value great enough to introduce 150 watts into the speaker. The 4 other bands will also be subjected to individual limitation based on a worst case model of each band. As stated before the models are based on experiments documented in \autoref{app:journal_speaker_test3}. These models are depicted in \autoref{fig:CombinedModelreport} and shows THD according to the RMS value. The models are created by 2.order polynomial regression of discrete THD value calculated from microphone measurements. Hence the model of band 1 should not be considered valid unless an RMS value of at least 0.25 is present.
 
 \begin{figure}[H]
     \centering
@@ -17,6 +16,7 @@ In these bands a compressor will be implemented and hence a worst case model of 
     \label{fig:CombinedModelreport}
 \end{figure}
 
-From \autoref{fig:CombinedModelreport} it should be noted that the models only describe the THD from single tone test. Compared with regular music which contains many single tones combined. However from the models can be concluded that the lower frequency should be compress more than the higher frequency bands. It gives means to choose a lower threshold for the 1 band than for second band and up. This correlates with the 1 band is subjected to the resonance frequency of the driver. Already in the second band the THD much more linear and can cope with a higher threshold. Looking at band 3 through 4 it should also be noted that the effect of only playing 1 for these measurements comes into play since it might not be possible to keep the THD under 10\% when at 0dBFS. 
+From \autoref{fig:CombinedModelreport} it should be noted that the models only describe the THD from single tone test. Compared with regular music which contains many single tones combined. However from the models it can be concluded that the lower frequency bands should be limited more than the higher frequency bands. It gives means to choose a lower threshold for the first band than for the third band and up. This correlates with the first band is subjected to the resonance frequency of the driver. Already in the second band the THD much more linear and can cope with a higher threshold
 
-The conclusion on these models being that they should only be seen at guidance to show that the first two bands are most problematic.
+\vspace{2mm}
+Since the need for limitations in the third and fourth band is not as critical compared as with the first and second band, it would be logical to choose a THD value and find the respective threshold for band 1 and 2. Where as the third and fourth band should be made equal to the limiter covering the entire 500 Hz spectrum. The goal of this project is however to prevent a possible hit against the backplate and since this is documented to occur at 150 watt the parameters will solely be based on the 150 watt threshold. 
