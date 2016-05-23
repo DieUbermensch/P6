@@ -12,7 +12,7 @@ As described in \autoref{sec:problem_statement} the coil must not hit the backpl
 
 The processor has been chosen to be a DSP as explained in \autoref{sec:platformReq}. This section also explains all the requirements for the platform regarding, 96 kHz sample rate, 24 bit resolution, SNR of 120 dB and infacing through $I^2S$ to an ADC and DAC. However these demands would be considered necessary for a finished product but because of time constraints and the complexity of a system meeting theese requirements, the demands have been scaled to 48 kHz sample rate, 16 bit resolution, SNR of 96 dB while maintaining interfacing through $I^2S$ to an ADC and DAC. 
 
-The hardware must also be able to meet the specifications of IEC 60268-15 which concerns specifications for an Hi-fi \todo{specificering af Standard} system which leads to the following requirements for the hardware platform.
+The hardware must also be able to meet the specifications of IEC 60268-15 which concerns specifications for hi-fi equipment which leads to the following requirements for the hardware platform.
 
 \begin{itemize}
 \item Hardware platform
@@ -23,7 +23,12 @@ The hardware must also be able to meet the specifications of IEC 60268-15 which 
 \item [\textlabel{7}{resolution}]  A bit resolution of 24 bit must be supported by the audio codec.\\
 \item [\textlabel{8}{I2S}] The DSP must have at least two $I^2S$ ports for interfacing with the audio codec.\\
 %\item [\textlabel{8}{MIPS}] The DSP must have at least 100 MIPS available.\todo{hmmmmmm den her vil sofus ikke kunne lide}\\
-\item [\textlabel{9}{IEC}] The interface must comply with IEC 60268-15 standard.
+\item [\textlabel{9}{IEC}] The interface must comply with IEC 60268-15 standard \citep{IEC60268}.
+\begin{enumerate}
+\item Rated output voltage: 0.5 V.
+\item Minimum output voltage: 0.2 V.
+\item Maximum output voltage: 2 V.
+\end{enumerate}
 \end{enumerate}
 \end{itemize}
 

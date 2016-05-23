@@ -1,5 +1,5 @@
 \chapter{Design Realization} \label{ch:designRealization}
-As the requirements are derived and the development platform is chosen, the system presented in \autoref{ch:overview} may be designed. Evaluating the concept design from \autoref{ch:overview} it is seen that the concept has four bands-pass filters and one high-pass that needs to be designed. 
+Evaluating the concept design from \autoref{ch:overview} it is seen that the concept has four bands-pass filters and one high-pass that needs to be designed. 
 \begin{figure}[H]
 \centering
 \tikzsetnextfilename{SystemOverview}
@@ -9,7 +9,7 @@ As the requirements are derived and the development platform is chosen, the syst
 \label{fig:SystemOverview2}
 \end{figure}
 %\section{Practical Design Considerations}
-Before designing the band-pass filters, RMS analysis, and compressor, practical design considerations needs to be considered. This is necessary since the concept system may not be realizable due to to hardware constraints. Therefore this chapter will cover this and in the following sections the topics covered will be:
+Before designing the band-pass filters, RMS analysis, and RMS limiter, practical design considerations needs to be considered. This is necessary since the concept system may not be realizable due to hardware constraints. Therefore this chapter will cover the following topics:
 \begin{itemize}
 \item[•] Phase response and group delay.
 \item[•] Computational constraints.
@@ -18,9 +18,9 @@ Before designing the band-pass filters, RMS analysis, and compressor, practical 
 
 
 \section{Phase response and group delay}
-As the signal needs to be reconstructed in the end of the system, it is desirable that the reconstructed signal do not have frequency bands which are out of phase compared to the original input signal. If the bands are out of phase the resulting sound may be unpleasant to listen to. Therefore a design requirement to the system is to ensure that the signals from each band are added together without changing the relative phase between each band.
+As the signal needs to be reconstructed in the end of the system, it is desirable that the reconstructed signal do not have frequency bands which are out of phase compared to the other bands. If the bands are out of phase the resulting sound may be unpleasant to listen to. Therefore a design requirement to the system is to ensure that the signals from each band are added together without changing the relative phase between each band.
 
-One of the properties in non-statical filters such as low-pass and band-pass filters are the phase shift. For filters such as the Butterworth low-pass filter, the phase shift begins at the frequency at one decade below the cutoff frequency and ends one decade above. The phase shift in-between for most analog filter except Bessel filter, have a non-linear phase response. Because the phase response is non-linear, the group-delay will likewise not be linear as seen in \autoref{fig:groupDelayIirPrev}.
+One of the properties in non-statical filters such as low-pass and band-pass filters are the phase shift. For filters such as the Butterworth low-pass filter, the phase shift begins at the frequency at one decade below the cutoff frequency and ends one decade above. The phase shift in-between for most analog filter except Bessel filter, have a non-linear phase response. Because the phase response is non-linear, the group-delay will likewise not be linear as seen on \autoref{fig:groupDelayIirPrev}.
 
 \begin{figure}[H]
 \centering
@@ -41,13 +41,13 @@ One of the properties in non-statical filters such as low-pass and band-pass fil
 
 The group delay is an important parameter to take into account, as it specifies the sample delay for each frequency. 1 sample delay is equivalent to 20.83 $\mu$s in a 48 kHz system. \autoref{fig:groupDelayIirPrev} shows that the group delay for IIR filters is non-linear with a peak at the normalized frequency 0.25 $\pi rad$. To calculate the time delay at 0.25 $\pi$ rad following expression can be used:
 \begin{equation}
-t_{d}= \frac{n_{s}}{F_s} \enhed{s}
+t_{d}= \frac{n_{s}}{f_s} \enhed{s}
 \end{equation}
 \begin{where}
 \va{$n_{s}$}{is the number of samples delayed}{.}
 \end{where}
 
-A non-linear group delay will be hard to compensate compared to a constant group delay, thus a constant group delay is desirable. To achieve a constant group delay a linear phase filter is needed as the phase response is linear. Linear phase can be found in FIR filters and Bessel filters. Because of the constant group delay in linear phase filter, it eases the design as constant delays can be implemented to compensate the phase shift in filters. Bessel filters have a constant group delay until the cutoff frequency and gets non-linear afterwards. Because the Bessel filter do not have a very sharp cutoff compared to other filter types, a high order Bessel filter will be needed. A high order IIR however has risk of being unstable. FIR filters are therefore chosen as they have all the required properties and do not get unstable. 
+A non-linear group delay will be hard to compensate compared to a constant group delay, thus a constant group delay is desirable. To achieve a constant group delay a linear phase filter is needed as the phase response is linear. Linear phase can be found in FIR filters and Bessel filters. Because of the constant group delay in linear phase filters, it eases the design as constant delays can be implemented to compensate for the phase shift in filters. Bessel filters have a constant group delay until the cutoff frequency and gets non-linear afterwards. Because the Bessel filter do not have a very sharp cutoff compared to other filter types, a high order Bessel filter will be needed. A high order IIR however has risk of being unstable. FIR filters are therefore chosen as they have all the required properties and do not get unstable. 
 
 
 \section{Computational Constraints}
@@ -56,7 +56,7 @@ Another subject to consider is the constraints regarding computational power to 
 The performance of the DSP is 100 MIPS. At a sample rate of 48 kHz, this will result in approximately 2083 instructions available in-between each sample. A 10000 order FIR filter for instance is thus not realizable on the platform with a sampling rate of 48 kHz as the DSP will not finish calculating the filter output in time before the next sample. This is true because the fastest way to compute the convolution between the input signal x[n] and the impulse response h[n] is by using a Multiply-Accumulate (MAC) instruction which takes 1 clock cycle to perform if a single MAC is used. This gives a total number of 10000 clock cycles to perform one single convolution. Designing FIR filters will therefore be difficult as the cutoff frequencies for all required filters are very low relative to the sampling rate. A cutoff frequency located far from the sampling rate results in a long impulse response for a FIR filter. To a achieve a steep cut more samples of the impulse response are needed thus increasing the order of the filter. 
 
 \section{Multirate Signal Processing with Multistages}
-A solution to avoid very high order filters is to downsample the signal into a signal with a lower sampling rate. By downsampling the signal the impulse response of an equivalent FIR filter at the same cutoff frequency is shortened and the amount of taps is therefore reduced. In \autoref{fig:downsample_FIR} it is shown how decreasing the sampling rate by a integer factor of L is equivalent to increasing the cutoff frequency by a factor of L.
+A solution to avoid very high order filters is to downsample the signal into a signal with a lower sampling rate. By downsampling the signal the impulse response of an equivalent FIR filter at the same cutoff frequency is shortened and the amount of taps is therefore reduced. In \autoref{fig:downsample_FIR} it is shown how decreasing the sampling rate by an integer factor of L is equivalent to increasing the cutoff frequency by a factor of L.
 
 % vis fordele ved multirate
 % - båndpas filter har en højere cutoff
@@ -69,7 +69,7 @@ A solution to avoid very high order filters is to downsample the signal into a s
 \label{fig:downsample_FIR}
 \end{figure}
 
-An example of how to reduce the order of the FIR filter by multirate is shown in \autoref{fig:fir_downsample}. \autoref{fig:fir_downsample1} is a 100 order FIR filter with a sampling frequency of 48 kHz and cutoff frequency at $\frac{fs}{10}$ and \autoref{fig:fir_downsample2} is a 50 order FIR filter with a sampling frequency of 24 kHz and cutoff frequency at $\frac{fs}{5}$. A Hanning window function is applied to both filters' impulse response. 
+An example of how to reduce the order of the FIR filter by multirate is shown in \autoref{fig:fir_downsample}. \autoref{fig:fir_downsample1} is a 100 order FIR filter with a sampling frequency of 48 kHz and cutoff frequency at $\frac{f_s}{10}$ and \autoref{fig:fir_downsample2} is a 50 order FIR filter with a sampling frequency of 24 kHz and cutoff frequency at $\frac{f_s}{5}$. 
 
 \begin{figure}[H]
 \centering
@@ -88,10 +88,10 @@ An example of how to reduce the order of the FIR filter by multirate is shown in
 \label{fig:fir_downsample}
 \end{figure}
 
-It is seen that the attenuation at the top of the first side lope is -43.97 dB for both filters, thus the frequency response of both are the same at $0 \leq f \leq 24 \text{kHz}$. Because the frequency bands for the multi-band compressor are placed low, a multirate system will be implemented into the system as this helps decreasing the filter orders significantly.
+It is seen that the attenuation at the top of the first side lope is -43.97 dB for both filters, thus the frequency response of both are the same at $0 \leq f \leq 24 \text{kHz}$. Because the frequency bands for the multi-band limiter are placed low, a multirate system will be implemented into the system as this helps decreasing the filter orders significantly.
 
-\subsection*{Avoiding Aliasing when Downsampling}
-To downsample however requires an anti-aliasing filter to avoid aliasing as seen in \autoref{fig:aliasing}. The bandwidth of the audio signal is assumed to be 0 Hz to 20 kHz at a sampling rate of 48 kHz. The anti-aliasing filter has two requirements. The cutoff frequency should be low enough to limit the bandwidth and the order should be high enough to provide enough attenuation at the new sampling rate's at $\frac{F_s}{2}$. 
+%\subsection*{Avoiding Aliasing when Downsampling}
+To downsample however requires an anti-aliasing filter to avoid aliasing as seen in \autoref{fig:aliasing}. The bandwidth of the audio signal is assumed to be 0 Hz to 20 kHz at a sampling rate of 48 kHz. The anti-aliasing filter has two requirements. The cutoff frequency should be low enough to limit the bandwidth and the attenuation at the new sampling rate $\frac{f_s}{2}$ should be high enough for aliasing not to occur. 
 
 \begin{figure}[H]
 \centering
@@ -118,16 +118,20 @@ To downsample however requires an anti-aliasing filter to avoid aliasing as seen
 	\caption{Aliasing at downsampling no longer occurs.}
 	\label{fig:aliasing4}
 \end{subfigure}
-\caption{A anti-aliasing filter needs to applied to reduce the bandwidth to avoid aliasing when downsampling.}
+\caption{An anti-aliasing filter needs to applied to reduce the bandwidth to avoid aliasing when downsampling.}
 \label{fig:aliasing}
 \end{figure}
 
 % Same number of taps required
-If a high downsampling factor, L, is desired, then the order of the anti-aliasing filters will necessarily get bigger. A rule of thumb is the attenuation at $\frac{f_s}{2L}$ should approximately be -60 dB, since an ideal brick wall low-pass filter is not realizable. As the frequency bands for the system is located at the lower spectrum, a high order anti-aliasing filter is needed to downsample the signal. As a high order anti-aliasing filter is not desirable, the downsampling is performed in multistages to ease the amount of computation. If the downsampling is performed with factor of 2 each time, then the total amount of computation needed to perform the filter algorithm for all stages is given as a geometric series:
+If a high downsampling factor, L, is desired, then the order of the anti-aliasing filters will necessarily get bigger. A rule of thumb is the attenuation at $\frac{f_s}{2L}$ should approximately be -60 dB, since an ideal brick wall low-pass filter is not realizable. As the frequency bands for the system is located at the lower spectrum, a high order anti-aliasing filter is needed to downsample the signal. As a high order anti-aliasing filter is not desirable, the downsampling is performed in multistages to ease the amount of computation. If the downsampling is performed with a factor of 2 each time, then the total amount of computation needed to perform the filter algorithm for all stages pr. sample is given as a geometric series:
 
 \begin{equation} \label{eq:z_transformation_example}
 \sum_{k=0}^{\infty}M \left( \frac{1}{2} \right)^k  = \frac{M}{1-\frac{1}{2}} = 2M
 \end{equation}
+\begin{where}
+\va{$M$}{is the filter order}{.}
+\va{$k$}{is the number of downsamples}{.}
+\end{where}
 
 By doing so the filter order for each anti-aliasing filter is kept low as the cutoff frequency of each band is closer to the sampling frequency. Also, the whole bandwidth of the audio signal is split into octave bands which is an advantages if an equalizer and spectrum analyser are desired.
 
@@ -149,13 +153,13 @@ After downsampling, an upsampler is used to upsample the signal to the original 
 \hspace{6mm}
 \begin{subfigure}[b]{0.44\textwidth}
 \includegraphics[width=\linewidth]{upsampling3}
-	\caption{A low-pass removes artefacts from the mirrored spectrum.}
+	\caption{A low-pass filter removes artefacts from the mirrored spectrum.}
 	\label{fig:upsampling3}
 \end{subfigure}
 \hspace{6mm} 
 \begin{subfigure}[b]{0.47\textwidth}
 \includegraphics[width=\linewidth]{upsampling4}
-	\caption{Aliasing at downsampling no longer occurs.}
+	\caption{Aliasing at upsampling no longer occurs.}
 	\label{fig:upsampling4}
 \end{subfigure}
 \caption{Processes of interpolation.}
@@ -184,14 +188,14 @@ Applying the considerations to the system, the following new overall system may 
 \label{fig:designRealBlock}
 \end{figure}
 
-In comparison to previous system overview decimation, "HP and Decimator" and "interpolator" blocks are added to the system. The design of these blocks including the RMS and model will discussed in following sections. 
+In comparison to previous system overview, "HP and Decimator" and "interpolator" blocks are added to the system. The design of these blocks including the RMS and model will be discussed in following sections. 
 
 Because a downsampling factor of 2 is used, the total amount of bands is 8, which means the equalizer to be designed has 8 adjustable bands.
 
 
-\section{High-Pass filter and Decimator}
+\section{High-Pass Filter and Decimator}
 
-A decimator is, as previously mentioned, a subsystem consisting of an anti-aliasing filter and a downsampler. As the anti-aliasing essentially is a low-pass filter, applying a design technique called spectral inversion, to the low-pass filtered signal results in high-pass filter. Essentially applying this technique is equivalent to design a mirror filter to the low-pass filter. The technique saves the need for designing a mirror filter to the low-pass filter. The high-pass and decimation block is seen in figure \autoref{fig:designRealDecimator}.
+A decimator is, as previously mentioned, a subsystem consisting of an anti-aliasing filter and a downsampler. As the anti-aliasing essentially is a low-pass filter, applying a design technique called spectral inversion, to the low-pass filtered signal results in high-pass filter. Applying this technique is equivalent to design a mirror filter of the low-pass filter. The technique saves the need for designing a mirror filter of the low-pass filter. The high-pass and decimation block is seen in figure \autoref{fig:designRealDecimator}.
 
 \begin{figure}[H]
 \centering
@@ -205,26 +209,26 @@ A great advantage of using this technique rather than designing a mirror filter/
 
 \section{Interpolator}
 
-Opposite to the decimator is the interpolator. As it is desired to reconstruct the signal, upsampling is applied to the downsampled signal. To upsample the downsampled signal, zero-padding is applied to the signal. Since the upsampling factor is 2, a zero is added in-between each sample. This adds high frequency components which is then filtered by using a low-pass filter. This does not need to be the same filter as the anti-aliasing filter in the decimator. The requirement for the upsampling filter is that the attenuation at $\frac{f_s}{2}$ of the zero-padded signal is high enough e.g. -60 dB. The block diagram of the interpolator is seen in \autoref{fig:designRealInterpolator}.
+Opposite to the decimator is the interpolator. As it is desired to reconstruct the signal, upsampling is applied to the downsampled signal. To upsample the downsampled signal, zero-padding is applied. Since the upsampling factor is 2, a zero is added in-between each sample. This adds high frequency components which is then filtered by using a low-pass filter. The requirement for the upsampling filter is that the attenuation at $\frac{f_s}{2}$ of the zero-padded signal is high enough to attenuate the mirrored spectrum and not influencing the bandwidth of the signal. The block diagram of the interpolator is seen in \autoref{fig:designRealInterpolator}.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.75\textwidth]{figures/designRealInterpolator.pdf}
-\caption{The interpolator consist of a upsampler, low-pass filter and a gain factor determined by the upsampling factor.}
+\caption{The interpolator consist of an upsampler, low-pass filter and a gain factor determined by the upsampling factor.}
 \label{fig:designRealInterpolator}
 \end{figure}
 
-After low-pass filtering the signal, a gain of 2 is applied.
+After low-pass filtering the signal, a gain of 2 corresponding to L is applied.
 
 
 \section{RMS and Model}
 
-To design a RMS limiter, a RMS analysis and a mathematical function of the gain are needed. For each band, the signal is fed into a RMS block, which calculates the RMS-value. The RMS-value is sent to a Model-block which essentially checks if the RMS-value is above a defined threshold. If the RMS-value is above the threshold the model will apply a gain. If the RMS-value is below, the output will be a gain of 1. The block digram of the RMS and model is seen in \autoref{fig:designRealRMS}.
+To design an RMS limiter, an RMS analysis and a mathematical function of the gain is needed. For each band, the signal is fed into an RMS block, which calculates the RMS-value. The RMS-value is sent to a Model-block which checks if the RMS-value is above a defined threshold. If the RMS-value is above the threshold the model will apply a gain. If the RMS-value is below, the output will be a gain of 1. The block diagram of the RMS and model is seen in \autoref{fig:designRealRMS}.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.75\textwidth]{figures/designRealRMS.pdf}
-\caption{The RMS-value is first calculated and then fed into a subsystem that determines which gain to apply on the band signal.}
+\caption{The RMS-value is first calculated and then fed into a subsystem that determines which gain to apply on the signal.}
 \label{fig:designRealRMS}
 \end{figure}
 
@@ -232,9 +236,9 @@ To design a RMS limiter, a RMS analysis and a mathematical function of the gain 
 
 
 
-\section{Complete system}
+\section{Complete System}
 
-The RMS limiter cannot protect the loudspeaker against transients such as kick drums and short spikes with high amplitude due to the attack time in the RMS calculation which is not instantanious. To avoid potential damage, a peak limiter is inserted in the upsampled 530 Hz band. The threshold of this limiter is set very high, as the main purpose it to protect the loudspeaker at cases where the RMS-limiter is not fast enough to respond. Another RMS-limiter is inserted in the upsampled 530 band. Because the signal is split into 4 bands, the 530 Hz band RMS-limiter ensures that the sum of all 4 bands do not exceed the threshold.
+The RMS limiter cannot protect the driver against transients such as kick drums and short spikes with high amplitude due to the attack time in the RMS calculation which is not instantanious. To avoid potential damage, a peak limiter is inserted in the upsampled 530 Hz band. The threshold of this limiter is set very high, as the main purpose it to protect the driver at cases where the RMS-limiter is not fast enough to respond. Another RMS-limiter is inserted in the upsampled 530 band. Because the signal is split into 4 bands, the 530 Hz band RMS-limiter ensures that the sum of all 4 bands do not exceed the threshold.
 
 \begin{figure}[H]
 \centering
