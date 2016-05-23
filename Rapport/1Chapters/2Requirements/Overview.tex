@@ -1,41 +1,39 @@
 \chapter{Overview} \label{ch:overview}
-This chapter will describe an overview of the system before the needed requirements of the system is set up. Recall the overview of system from \autoref{sec:feedback}. It was concluded from the previous chapter to use an spectrum analyzer combined with a compressor, but it has yet to be determined if it should be a single-band compressor or a multi-band compressor. So firstly this will be examined, while a final overview of the system will be given afterwards. 
+This chapter will describe an overview of the system before the needed requirements of the system is determined. Recall the overview of system from \autoref{fig:Concept}. It was concluded from the previous chapter to use a spectrum analyzer combined with a limiter, but it has yet to be determined if it should be a single-band limiter or a multi-band limiter. So firstly this will be examined, while a final overview of the system will be given afterwards. 
 
 %This block diagram is know futher extended to the block diagram seen in \autoref{fig:SystemOverview}, based on the conclusions from \autoref{sec:PreAnalysisCon}.
 
 %\section{Single-band vs multi-band system}
 %This section will examine if the system should use multi-band or single-band. When the system is to be designed a question whether one or more bands should be implemented arises. 
-There are advantages and disadvantages with both a single-band and a multi-band compressor, but the question arises which sounds better?
-A multiband solution could create an unnatural frequency response, making music sound unpleasant. If one one of the bands are attenuated to much it could result in a band acting like a notch filter which could sound strangely. The singleband solution will be attenuating every frequency keeping the amplitude relation intact. However the singleband will also be attenuating many frequencies which are not contributing to the problem. In order to determine which solution is to be preferred a listning test is conducted with both a single-band and a multi-band compressor, to conclude what type of compressor sounds better. 
+There are advantages and disadvantages with both a single-band and a multi-band limiter, but the question arises which sounds better?
+A multi-band solution could create an unnatural frequency response, making the music sounding unpleasant. If one of the bands are attenuated to much it could result in a band acting like a notch filter which could sound strangely. The singleband solution will be attenuating every frequency keeping the amplitude relation intact. However the singleband will also be attenuating many frequencies which are not contributing to the problem. In order to determine which solution is to be preferred, a listening test is conducted with both a single-band and a multi-band limiter, to conclude what type of limiter sounds better. 
 
 In the test a group of 10 people were subjected to the following effectblocks:
  \begin{itemize}
-    \item Single-band:
+    \item Single-band limiter:
     \begin{itemize}
-    \item 1 compressor ranging the entire frequency spectrum.
+    \item 1 limiter ranging the entire frequency spectrum.
     \item 12 dB attenuation at 0 dBFS.
     \item Attack time of 0.5 ms and release time of 1 ms.
     \end{itemize}
-    \item Multi-band:
+    \item Multi-band limiter:
     \begin{itemize}
-    \item 1 multiband compressor ranging.
-    \item 1 compressor ranging from 0 to 100 Hz.
-    \item 1 compressor ranging from 100 to 300 Hz.
-    \item 1 compressor from 300 to 1000 Hz.
-    \item Attack time of 0,5 ms and release time of 1 ms.
-    \item 1 compressor ranging the entire frequency spectrum.
-    \item Attack time of 0,5 ms and release time of 1 ms.
+    \item 1 limiter ranging from 0 to 100 Hz.
+    \item 1 limiter ranging from 100 to 300 Hz.
+    \item 1 limiter from 300 to 1000 Hz.
+    \item 1 limiter ranging the entire frequency spectrum.
+    \item Attack time of 0.5 ms and release time of 1 ms.
     \item 12 dB attenuation at 0 dBFS.
     \end{itemize}
  \end{itemize}
 Using the following songs in different genres:
 \begin{itemize}
-\item Shots \& squats by Vigiland
-\item Sultans of swing by Dire straits
-\item Stormy weather by Teitur
-\item Hearth Of Courage by Two Steps From Hell
+\item Shots \& Squats by Vigiland (Dance)
+\item Sultans of Swing by Dire Straits (Classic rock)
+\item Stormy Weather by Teitur (Folk)
+\item Hearth of Courage by Two Steps From Hell (Classical)
 \end{itemize}
-The test concluded with the following results which can be seen in \autoref{fig:piechartsongsReport}. A rather large portion of the test person were favourable of the mulitband compressor because of the weighting of the signal which ultimately created less distortion in the higher frequency spectrum than the single band. The test is fully described in \autoref{app:journal_ListningTest}.
+The test concluded with the following results which can be seen in \autoref{fig:piechartsongsReport}. A rather large portion of the test person were favourable of the mulit-band limiter because of the weighting of the signal which ultimately created less distortion in the higher frequency spectrum than the single-band. The test is fully described in \autoref{app:journal_ListningTest}.
 
 \begin{figure}[H]
 \centering
@@ -65,7 +63,7 @@ The test concluded with the following results which can be seen in \autoref{fig:
 \label{fig:piechartsongsReport}
 \end{figure}
 
-The multiband weighted the signal so most of the compression happened in the bass ranged instead of the higher frequency spectrum, this gave a thinner sound but much less distortion than the single-band compressor which compressed the entire frequency the same. From this it can be concluded that a multi-band compressor should be used. 
+The multi-band weighted the signal so most of the compression happened in the lower range instead of the higher frequency spectrum, this gave a thinner sound but less distortion than the single-band limiter which limited the entire frequency spectrum. From this it can be concluded that a multi-band limiter should be used. 
 
 Because of multi-band the spectrum analyzer must be divided into several bands, so to weight each band equally the bands should be octave bands. The standard IEC 6964 (2001), refer to \autoref{app:IEC6964} for detailed description of the standard, states the requirements for octave bands in a spectrum analyzer and will therefore be used as the requirements for the bands. Using octave bands will result in 4 bands below 500 Hz which are stated in \autoref{tb:freqBands}.
 
@@ -74,31 +72,31 @@ Because of multi-band the spectrum analyzer must be divided into several bands, 
 \begin{tabular}{|
 >{\columncolor[HTML]{C0C0C0}}l |c|c|c|}
 \hline
-& \cellcolor[HTML]{C0C0C0}f1 {[}Hz{]} & \cellcolor[HTML]{C0C0C0}fc {[}Hz{]} & \cellcolor[HTML]{C0C0C0}f2 {[}Hz{]} \\ \hline
+& \cellcolor[HTML]{C0C0C0}$f_1$ {[}Hz{]} & \cellcolor[HTML]{C0C0C0}$f_c$ {[}Hz{]} & \cellcolor[HTML]{C0C0C0}$f_2$ {[}Hz{]} \\ \hline
 Band 5 & 530,3                               & -                                   & -                                   \\ \hline
 Band 4 & 265,2                               & 375                                 & 530,3                               \\ \hline
 Band 3 & 132,6                               & 187,5                               & 265,2                               \\ \hline
 Band 2 & 66,29                               & 93,75                               & 132,6                               \\ \hline
-Band 1 & 33,15                               & 46,87                               & 66,29                               \\ \hline
+Band 1 & 0                                   & 46,87                               & 66,29                               \\ \hline
 \end{tabular}
-\caption{Frequencies for bands}
+\caption{Frequencies for bands. ($f_1$ lower cutoff frequency of the band)($f_c$ center frequency of the band)($f_2$ higher cutoff frequency of the band)}
 \label{tb:freqBands}
 \end{table}
 
-Because of the multi-bands it is also possible to have a five band graphic equalizer implemented for free. With single-band versus multi-band concluded the following system seen on \autoref{fig:SystemOverview} is derived.
+Because of the multi-bands it is also possible to have a five band graphic equalizer implemented very easily. With single-band versus multi-band concluded the following system seen on \autoref{fig:SystemOverview} is derived.
 \begin{figure}[H]
 \centering
 \tikzsetnextfilename{SystemOverview}
 \scalebox{0.8}{
 \input{figures/MainSystemOverview.tex}}
-\caption{Block overview of the entire system. Black boxes are not static non changeable variable. Grey boxes are also static but has to be taken into account.}
+\caption{Block overview of the entire system.}
 \label{fig:SystemOverview}
 \end{figure}
 %This shows a feedforward system which will equalize of the audio based on the \textbf{TBD} model, seen on \textbf{figure TBD}, comparing the second and third harmonic relative to keynote. Besides the feed forward system a user controlled equalizer should also be part of the system to give the user more flexibility. The following chapter describes the individual blocks in more detail.          
-This shows a feedforward system with a user controlled five band graphich equalizer, controlled with a GUI, with the band frequencies seen in \autoref{tb:freqBands}. Besides the user controlled equalizer a four band RMS compressor (band 1-4) will monitor the RMS levels of the four bands and gain  to a threshold of 150 W set in \autoref{sec:hit_detect}. The divided signal is then summed up to a single signal and outputtet. This should result in a protective system which makes sure that the loudspeaker never breaks because of the coil hitting the backplate. A more detailed description of every block will now follow in the preceding section.
+\autoref{fig:SystemOverview} shows a feedforward system with a user controlled five band graphich equalizer, controlled with a GUI, with the band frequencies seen in \autoref{tb:freqBands}. Besides the user controlled equalizer a four band RMS limiter (band 1-4) will monitor the RMS levels of the four bands and gain relative to a threshold of 150 W set in \autoref{sec:hit_detect}. The divided signal is then summed up to a single signal and outputted. This should result in a protective system which makes sure that the driver never breaks because of the coil hitting the backplate. A more detailed description of every block will now follow in the preceding section.
 
 \textbf{Audio source} \\
-The audio source in this system will be based on the IEC 60268-15 specification. Meaning that it will be limited to a analogue signal with a maximum peak voltage of 2 Volt RMS but otherwise nominal 0.5 Volt RMS. %This input will handled by an onboard TLV320AIC3204 codec located on the eZdsp development board.
+The audio source in this system will be based on the IEC 60268-15 specification. Meaning that it will be limited to a analog signal with a maximum peak voltage of 2 Volt RMS but otherwise nominal 0.5 Volt RMS for a line signal. %This input will handled by an onboard TLV320AIC3204 codec located on the eZdsp development board.
 
 \textbf{User} \\
 %The system will be able to be partially controlled by the end user. The user will be able to affect the entire system with the desired preference. The preference will be restricted to gain in the lower frequency as wished by DALI.
@@ -107,15 +105,15 @@ The user will be able to control the graphic equalizer via a GUI.
 
 \textbf{Graphic user interface}\\
 %The GUI will be based on physical hardware. The hardware will be simple of construction. The user will be browsing through the different preset using a push down button. The different preset will be displayed on the on board LCD display.
-The GUI will be based on a C\# program where the user will be able to control the gain in the systems five bands.
+The GUI will be based on a C\# program where the user will be able to control the gain in the system's five bands.
 
 \textbf{Graphic equalizer}\\
-The five band graphic equalizer will be user controlled from the GUI. The reasoning behind implementing a five band graphic equalizer also mentioned in \autoref{sec:PreAnalysisCon}, is that the graphic equalizer is easily implemented into the system because of the four band RMS compressor. To implement the equalizer the only thing needed is to implement a variable gain block before the RMS compressor.
+The five band graphic equalizer will be user controlled from the GUI. The reasoning behind implementing a five band graphic equalizer also mentioned in \autoref{sec:PreAnalysisCon}, is that the graphic equalizer is easily implemented into the system because of the four band RMS limiter. To implement the equalizer the only thing needed is to implement a variable gain block before the RMS limiter.
 
-\textbf{RMS compressor}\\
-The four octave band RMS compressor, meeting the requirements of IEC 6964 (2001), is based on a RMS detector block in each band which will detect the RMS level of a future determined time window and from the RMS level gain by a variable margin based on a threshold of 150 W. The RMS compressor is explained in detail in \autoref{sec:SignalTime}  
+\textbf{RMS limiter}\\
+The four octave band RMS limiter, meeting the requirements of IEC 6964 (2001), is based on a RMS detector block in each band which will detect the RMS level. From the RMS level a variable gain, gains based on a threshold of 150 W. 
 
-This leads to the requirement specification. 
+This leads to the following requirement specification. 
 
 
 
