@@ -1,5 +1,5 @@
 \subsection*{Test of DALI Zensor 5}
-In order to determine whether or not it is possible to use sensory equipment to measure any vibration from the loudspeaker. It is desireable to investigate if the output of the sensors can be analyzed. The loudspeaker which will be the basis for the test is the DALI Zensor 5, shown on \autoref{fig:dali_zensor5}. A passive loudspeaker has been choosen for the test because the amplifier in DALI's active loudspeakers are designed not to push the loudspeaker to its limits and beyond. %and to be able to test how the vibrations affect distortion, the loudspeaker must be tested to above its limits.
+In order to determine whether or not it is possible to use sensory equipment to measure any vibration from the loudspeaker. It is desirable to investigate if the output of the sensors can be analyzed. The loudspeaker which will be the basis for the test is the DALI Zensor 5, shown on \autoref{fig:dali_zensor5}. A passive loudspeaker has been choosen for the test because the amplifier in DALI's active loudspeakers are designed not to push the loudspeaker to its limits and beyond. %and to be able to test how the vibrations affect distortion, the loudspeaker must be tested to above its limits.
 
 \begin{figure}[H]
 \centering
@@ -10,7 +10,7 @@ In order to determine whether or not it is possible to use sensory equipment to 
 
 %\todo[inline]{Reference http://www.dali-speakers.com/loudspeakers/zensor/zensor-5/}
 
-For measuring the vibrations two accelometers have been placed inside the enclosure, one on the back of the bottom driver and one on the top back of the enclosure. For measuring sound a microphone has been placed 1 m from the speaker. To limit any reflections from the room, the test is perfomed in a Anechoic room at \gls{AAU}, for further documentation refer to the journal in \autoref{app:journal_speaker_test}.  
+For measuring the vibrations two Bruel \& Kjær (B\&K) accelerometers have been placed inside the enclosure, one on the back of the bottom driver and one on the top back of the enclosure. For measuring sound a microphone has been placed 1 m from the speaker. To limit any reflections from the room, the test is performed in a Anechoic room at \gls{AAU}, for further documentation refer to the journal in \autoref{app:journal_speaker_test}.  
 %\todo[inline]{Reference (09.03.2016) http://doc.es.aau.dk/labs/acoustics/facilities/anechoic_room_large/} 
 
 
@@ -30,18 +30,27 @@ There are many different approaches in analysing the measured data, and the appr
 
 %\vspace{3mm}
 
-During the first accelerometer measurements the loudspeaker acts linear with very little fluctuations. The frequency response keeps being steadily the same with an increase in amplitude which was expected. In \autoref{fig:Driver1} the first accelerometer measurement is shown, played using 0.005 watt at XX dB SPL, on the driver is seen. The figure shows the enclosures resonance frequency at approximatly 13 seconds and at 25 seconds the drivers mechanical resonance frequency appears. This pattern continues for approximatly 15 measurements. 
+During the first accelerometer measurements the loudspeaker acts linear with very little fluctuations. The frequency response keeps being steadily the same with an increase in amplitude which was expected. In \autoref{fig:Driver1} the first accelerometer measurement is shown, played using 5 mW at XX dB$_{\text{SPL}}$\todo{Fix dB SPL}, on the driver is seen. \autoref{fig:Enclosure1Report} shows the enclosure having a mechanical resonance frequencies at approximately 13 seconds and at 25 seconds while the driver's resonance frequency occurs at 25 seconds. An antiresonance frequency is located at 13 seconds for the accelerometers placed on the driver. The antiresonance frequency is assumed to be caused by the enclosure resonance frequency. This pattern continues for approximately 15 measurements. 
 
 %\todo{Billede af reference tids figur og forklaring af resonans frekvens} %A tendency shows that the 3rd harmonic increases more rapidly than the 2nd harmonic, again as expected for the performance of a loudspeaker.
 
 \begin{figure}[H]
 \centering
-\begin{subfigure}[t]{0.335\textwidth}
-	\tikzsetnextfilename{Raw_Driver1}
-	\input{figures/Forsog1/Driver1.tex}
+\begin{subfigure}[t]{0.55\textwidth}
+	\tikzsetnextfilename{Driver1Report}
+	\input{figures/Forsog1/Driver1Report.tex}
+	\caption{Raw dataset 16 from driver.}
+	\label{fig:Driver1Report}
 \end{subfigure}
-\caption{Raw dataset 1 from driver.}
-\label{fig:Driver1}
+%\hspace{6mm} 
+\begin{subfigure}[t]{0.43\textwidth}
+	\tikzsetnextfilename{Enclosure1Report}
+	\input{figures/Forsog1/Enclosure1Report.tex}
+	\caption{The grey area zoomed in from 70 - 85 Hz.}
+	\label{fig:Enclosure1Report}
+\end{subfigure}
+\caption{Raw data from the driver measured by an accelerometer placed on the driver. The greyed area is analysed to examine if there are any signs of an impulse.}
+\label{fig:dataset1}
 \end{figure}
 
 When the speaker was pushed beyond the capabilities specified by DALI an anomaly appears in the measurements. This is shown in \autoref{fig:raw_driver19_window_main}, where spikes in amplitude appear when playing very low frequency sound. 
@@ -65,7 +74,7 @@ When the speaker was pushed beyond the capabilities specified by DALI an anomaly
 \label{fig:raw_driver19_windows_main}
 \end{figure}
 
-Further investigation of the spikes is shown in Figure \ref{fig:raw_driver19_window_zoom_main}. It shows that theses spikes appear where the speaker should naturally attenuate the spikes and they appear with no sudden coherence which show signs of the coil hitting the backplate. Looking further into the specific area, shown in \autoref{fig:raw_driver19_window_zoom_main}, an FFT analysis shows how the hit on the back plates appears in relation to other measurements where no hits are detected, which is shown on \autoref{fig:FFT_hit_Main}.
+Further investigation of the spikes is shown in Figure \ref{fig:raw_driver19_window_zoom_main}. It shows that these spikes appear where the speaker should naturally attenuate the spikes and they appear with no sudden coherence which show signs of the coil hitting the backplate. Looking further into the specific area, shown in \autoref{fig:raw_driver19_window_zoom_main}, an FFT analysis shows how the hit on the back plates appears in relation to other measurements where no hits are detected, which is shown on \autoref{fig:FFT_hit_Main}.
 
 \begin{figure}[H]
 \centering
