@@ -69,17 +69,17 @@ An example is shown in \autoref{fig:FIRWindow}, where a Hamming window is applie
     \centering
     \tikzsetnextfilename{FIRTruncation}
     \input{figures/FIRTruncation.tex}
-    \caption{Sound pressure level from microphone.}
+    \caption{Hamming window is applied to the truncated impulse response.}
     \label{fig:FIRTruncation}
 \end{subfigure}
 \begin{subfigure}[t]{0.45\textwidth}
     \centering
     \tikzsetnextfilename{FIRHamming}
     \input{figures/FIRHamming.tex}
-    \caption{Reference signal.}
+    \caption{Impulse response after applying Hamming window.}
     \label{fig:FIRHamming}
 \end{subfigure}
-\caption{Raw data}
+\caption{Applying a Hamming window to a truncated impulse response.}
 \label{fig:FIRWindow}
 \end{figure} 
 
@@ -89,7 +89,7 @@ If no window function is applied the truncated impulse response, the window func
     \centering
     \tikzsetnextfilename{FIRFrequencyResp}
     \input{figures/FIRFrequencyResp.tex}
-    \caption{1.harmonic / 3.harmonic pr. measurement. comparison for all frequencies}
+    \caption{Frequency response of a FIR filter. The black graph is a FIR with a rectangular window and the blue is a FIR filter with a Hamming window.}
 \label{fig:FIRFrequencyResp}
 \end{figure}  
 
