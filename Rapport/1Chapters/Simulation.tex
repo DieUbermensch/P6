@@ -111,7 +111,34 @@ In the following section a 10 second simulation is showed with a graphical outpu
 \label{fig:SimulationComparisson}
 \end{figure} 
 
+\begin{figure}
+    \centering
+    \tikzsetnextfilename{BandTopSimulation}
+    \input{figures/BandTopSimulation.tex}
+    \caption{Top covering entire 500 Hz spectrum}
+    \label{fig:BandTopSimulation}
+\end{figure}
+
+
+\begin{figure}
+	\centering
+	\tikzsetnextfilename{OutputSimulation}
+	\input{figures/OutputSimulation.tex}
+	\caption{Output of the entire spectrum during the 10 second simulation}
+	\label{fig:TotalOutputSimulation}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\tikzsetnextfilename{Output3Zoom}
+	\input{figures/Output3.tex}
+	\caption{Output of the entire spectrum with a zoom on 9.468s to 9.478s}
+	\label{fig:TotalOutputZoomSimulation}
+\end{figure}
+
+
 The simulations shows that each band from \autoref{fig:Band1Simulation} through \autoref{fig:Band4Simulation} functions as promised. The bands are attenuating as needed and functions all individually. It should be noted that the attack and release time is practically zero in the simulation. Furthermore it was not possible to show the output vs input in a logical way to show the system being linear. But it can be concluded that it is linear.
+
 
  
 
