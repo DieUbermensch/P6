@@ -1,58 +1,60 @@
 \section{Design}
-Now that it is possible to determine approximately what threshold that should be used it is possible to determine how the attenuation should be calculated. Since the value being regulated on is an RMS value and the goal is calculated the needed attenuation for the RMS not to exceed the threshold. The attenuation can be calculated as the quotient of the threshold and RMS as seen in \autoref{eq:RMSAttenuation}.
+Now that it is possible to determine approximately what threshold that should be used it is possible to determine the needed attenuation. Since the value being regulated from is an RMS value and the goal is calculated the needed attenuation for the RMS not to exceed the desired threshold. The attenuation can be calculated as the quotient of the threshold and RMS as seen in \autoref{eq:RMSAttenuation}.
 \begin{equation}\label{eq:RMSAttenuation}
-\text{Attenuation} = \frac{\text{Threshold}}{\text{RMS}}
+\text{Needed attenuation} = \frac{\text{Threshold}}{\text{RMS}}
 \end{equation}
 
-From the equation it is possible to determine exactly the need attenuation factor to apply the band. A graphical representation can be shown on \autoref{fig:GainOverview}.
+From the equation it is possible to determine exactly the need attenuation factor to apply the band. A graphical representation of different threshold can be shown on \autoref{fig:GainOverview}.
 
 \begin{figure}[H]
 \centering
 \tikzsetnextfilename{Model5}
 \input{figures/model5.tex}
-\caption{Graph showing how much attenuation needed according to the RMS value}
+\caption{Graph showing how much attenuation needed according to the RMS value if the threshold was 0.1 through 0.5}
 \label{fig:GainOverview}
 \end{figure}
 
 The Attenuation values can the be adjusted according to the threshold desired. It is again important to know that every value above 1 will in the system be seen as 1, since a value lower than the threshold should always be sent through the system with no intervention.  
 
 
-\subsubsection{Attack and release time}
-The system will indirectly be introduced with an attack and release time which can be controlled through the sample time of the RMS algorithm. Increasing the samples used for the RMS calculation will increase attack and release time since the algorithm needs more time to process and regulate the output. The minimum amount of samples used in the algorithm will be determined by looking at the largest frequency in each band and determine how many samples need to represent an entire period. The first band have upper frequency of 66 Hz. From equation \ref{eq:Minsample} it is possible to determine the minimum needed samples
-\vspace{-3mm}
+\subsubsection{Needed sample size}
+The system will indirectly be introducing an attack and release time which is determined through the sample time/size of the RMS algorithm. Increasing the samples used for the RMS calculation will increase attack and release time since the algorithm needs more time to process and regulate the output. Hence it is important to determined the minimum needed sample size in order of the system to correct properly. The minimum amount of samples used in the algorithm will be determined by looking at the largest frequency in each band and determine how many samples need to represent an entire period. The first band have upper frequency of 66 Hz. From equation \ref{eq:Minsample} it is possible to determine the minimum needed samples
+
 \begin{equation}\label{eq:Minsample}
-\text{Sample}= \frac{\text{Sampling Frequency}}{\text{Desired Frequency}}
+\text{Needed samples}= \frac{\text{Sampling Frequency}}{\text{Desired Frequency}}
 \end{equation} 
-Hence the minimum samples needed for detecting every possible frequency in the specific band there is need of $\frac{750}{66} \approx 12$ samples. In order to implement this most efficient it is set to 16 samples which makes the division possible by bit-shifting 4 times.
+Hence the minimum samples needed for detecting every possible frequency in the specific band is $\frac{750}{66} \approx 12$ samples. Because the lowest bands operates at a sampling frequency of 750 Hz. In order to implement this most efficiently it is set to 16 samples which makes the division possible by bit-shifting 4 times.
 
 \section{Determine parameters}
-In order to determine the desired threshold for each band a subjective measure is taken.
-From \autoref{app:journal_speaker_test} it is Assumed that the gain throughout the system is 37 dB. With this gain it is possible to achieve sound pressures of upwards 105 dB. Assuming the compressor only are to activate when the wattage goes above the recommended 150 Watt it is possible to determine the maximum RMS value. The maximum output from the DSP is 0.9 V RMS. With a gain of 37 dB the linear gain is determined by:
-\vspace{-3mm}
+From \autoref{app:journal_speaker_test} it is Assumed that the gain throughout the system will be 37 dB. With this gain it is possible to achieve sound pressures of upwards 105 dB assumed that the signal complies with the IEC 60258-15 standard. The limiters are only going to be activate when the wattage goes above the recommended 150 Watt it is possible to determine the maximum RMS value. The maximum output from the DSP is 0.5 $\text{V}_\text{RMS}$. With a gain of 37 dB the linear gain is determined by:
+
 \begin{align}
-20*log_{10}(\frac{x}{0.9})&=37 \enhed{dB}
+20*log_{10}(x)&=37 \enhed{dB}
 \\
-x&=0.9 \cdot 10^{\frac{17}{20}} = 63.715 \enhed{.}
+10^{\frac{37}{20}} = 70.795 \enhed{.}
 \end{align}
-Now it is possible to determine the maximum output signal from the DSP. Since the DSP are working with Q15 format it is assumed that 1 is seen as 0dBFS. This means effectively that the maximum threshold is governed by equation \ref{eq:Thresgain} and determined in equation \ref{eq:Threscalculated}. The voltage is determined by ohms law of $V=\sqrt{E \cdot R}$
+Now it is possible to determine the maximum output signal from the DSP. Since the DSP are working with Q15 format it is assumed that 1 is seen as 0dBFS. This means effectively that the maximum threshold is governed by equation \ref{eq:Thresgain} and determined in equation \ref{eq:Threscalculated}. The voltage is determined by ohms law of $V=\sqrt{I \cdot R}$
 \vspace{-3mm}
 \begin{align}
-\text{Threshold}&=\frac{\text{V}^2}{\text{R} \cdot \text{Gain}}\enhed{.}\label{eq:Thresgain}
+\text{Power}&=\frac{(\text{Threshold} \cdot \text{V})^2}{\text{R}}\enhed{.}\label{eq:Thresgain}
 \\
-\text{Threshold}&=\frac{34.642}{8 \cdot 63.715}=0.5437\enhed{.}\label{eq:Threscalculated}
+\text{Threshold}&=\frac{\sqrt{150 \cdot 6}}{70.795}=0.4237\enhed{.}\label{eq:Threscalculated}
 \end{align}
 
-Now that the Threshold is determined for the entire system it is suitable to place the threshold lower for each band. Since the combined threshold will be larger than the individual bands. 
+%Now that the Threshold is determined for the entire system it is suitable to place the threshold lower for first and second band. Since the combined threshold will be larger than the individual bands. 
 
 \subsubsection*{Resolution}
 
-When the table is to be implemented it will be by use of a look-up table, hence the RMS values will be quantized in order to reduce the amount of memory cells used. When the the steps are calculated it is important to determine the jumps size of the steps. The steps are not to be hearable, hence it is determined to use steps of 0.01 since it is subjectively seen as below the audible threshold when changing gain level. The tables are constructed with by the use of \autoref{eq:Threslookup}. The equation calculates the needed attenuation when the threshold is exceeded and does so with a predefined step resolution.
+The system will be using a lookup table to determined the correct gain when the RMS is calculated. The RMS values will hence need to be quantized in order to reduce the amount of memory cells used. When the the steps are calculated it is important to determine the jumps size of the steps. The steps are not to be hearable. It is determined to use steps of 0.01 since it is subjectively seen as below the audible threshold when changing gain level. The reason for choosing a linear steps size rather than dB lies in the RMS value being of a linear scale. The RMS value will be changing linearly hence the lookup tables needs to be as well. The tables are constructed with by the use of \autoref{eq:Threslookup}. The equation calculates the needed attenuation when the threshold is exceeded and does so with a predefined step resolution. 
 \vspace{-2mm}
 \begin{equation}\label{eq:Threslookup}
 \text{Threshold}=\frac{\text{Treshold}}{\text{Threshold}+((n-1) \cdot \text{Resolution}}\enhed{.}
 \end{equation}
+Where:\\
+N is the Index number in the lookup table$\enhed{rad/sample}$\\
 
-When the equation has calculated for 128 values, these are stored in a array and converted to Q15 written in hexadecimals for implementation into the DSP.
+\vspace{2mm}
+When the equation has calculated for 1024 values, these are stored in a array and converted to Q15 written in hexadecimals for implementation into the DSP.
 The script for creating the values are located on a MATLAB script at: \\
 \path{CD://CD/Something Somethin}
 
