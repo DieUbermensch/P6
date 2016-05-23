@@ -16,16 +16,20 @@ While the last delay in band 8 is only the delay of the interpolation filter whi
 Band 7: 17 sample delay.
 
 
-On \autoref{fig:OverallSimulation} an outline of the entire system is depicted. It shows how a signal is applied to the first downsampling and then applied to the following consecutive downsamplings. When the signal has reached the four lowest band, a RMS compressor is applied. Each band is delayed according to the calculated delays, upsampled and summed together, whiched is outputted.
+On \autoref{fig:OverallSimulation} an outline of the entire system is depicted. It shows how a signal is applied to the first downsampling and then applied to the following consecutive downsamplings. When the signal has reached the four lowest band, a RMS limiter is applied. Each band is delayed according to the calculated delays, upsampled and summed together, which is outputted. When upsampled three times a RMS limiter which covers the frequency range 0 to 500 Hz is applied, and afterwards a peak limiter is applied to make sure no transients are let through if the RMS limiter does not apply fast enough.  
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth,angle=90, page=1]{Simulation}
+\includegraphics[width=1\textwidth]{SimulinkMainSystem}
 \label{fig:OverallSimulation}
 \caption{Overall view of the system used for simulation in Simulink.}
 \end{figure}
 
-In the simulation the following subsystem depicted on \autoref{fig:SubsystemSimulation}, are used. On \autoref{fig:DownsamplingSimulation} the downsampling system is shown. It shows how the signal is first filtered followed by subtracting it from the original signal and finally downsampled. \autoref{fig:UpsamplingSimulation} shows the upsampling system where it shows how the upsampling flow of the signal is. Namely how the signal is zero-padded followed by an lowpass filtering and then applied a gain of 2 corresponding with the up-samplings factor. \autoref{fig:RMSCompressorSimulation} Shows the compressor algorithm applied in the simulation. The compressor calculates the RMS where an if statement determined whether a gain of 1 or the model should be used. When the gain has been determined it is multiplied on before being ready for up-sampling. 
+In the simulation the following subsystem depicted on \autoref{fig:SubsystemSimulation}, are used. On \autoref{fig:DownsamplingSimulation} the downsampling system is shown. It shows how the signal is first filtered followed by subtracting it from the original signal and finally downsampled. 
+
+\autoref{fig:UpsamplingSimulation} shows the upsampling system where it shows how the upsampling flow of the signal is. Namely how the signal is zero-padded followed by an lowpass filtering and then applied a gain of 2 corresponding with the up-samplings factor. It should be noted that the delay of the upsampler is incorporated into the delays calculated using \autoref{eq:delays}.  
+
+\autoref{fig:RMSCompressorSimulation} shows the limiter algorithm applied in the simulation. The limiter calculates the RMS where an if statement determined whether a gain of 1 or the model should be used. When the gain has been determined it is multiplied on before being ready for upsampling. 
 \begin{figure}[H]
 \centering
 \begin{subfigure}[t]{0.49\textwidth}
@@ -43,7 +47,7 @@ In the simulation the following subsystem depicted on \autoref{fig:SubsystemSimu
 \begin{subfigure}[t]{\textwidth}
     \centering
 \includegraphics[width=\textwidth, page=13]{Simulation}
-    \caption{RMS Compressor subsystem.}
+    \caption{RMS limiter subsystem.}
     \label{fig:RMSCompressorSimulation}
 \end{subfigure}
 \label{fig:SubsystemSimulation}
@@ -53,29 +57,45 @@ In the simulation the following subsystem depicted on \autoref{fig:SubsystemSimu
 
 During the simulation the following settings has been applied to the subsystems:
 \begin{itemize}
-\item The filters, both up and down-sampling has been fitted with quantized filter coefficients corresponding with a 16-bit fixed point architecture.
-\item The RMS compressor is fitted with a threshold of 0.2 
-\item The up and down-samplings factor is 2.
+\item The filters, both up and downsampling has been fitted with quantisized filter coefficients corresponding with a 16-bit fixed point architecture.
+\item The RMS limiter is fitted with a threshold of 0.2. 
+\item The up and downsamplings factor is 2.
 \end{itemize}
 
-\section{10 second simulation}
+%\section{10 second simulation}
 Under the simulation, the following settings are set/applied:
 \begin{itemize}
 \item The sampling frequency is 48 kHz.
 \item The test signal played with an amplitude of 0.5.
-\item The test signal is a logarithmic sweep from 0 Hz to 500 Hz during a 10 second period.
+\item The test signal is a logarithmic sweep from 0 Hz to 1000 Hz during a 10 second period.
 \end{itemize}
 
-The simulation file and needed scripts are found at \path{CD://something }
+The simulation file and needed scripts are found at \path{CD://something } \todo{insert}
 
 
-
-In the following section a 10 second simulation is showed with a graphical output of each band, showed in \autoref{fig:SimulationComparisson}. As described above, the signal is a sweep from 0 Hz to 500 Hz in a 10 seconds duration. On the graphs the following color codes are used:
+In the following a 10 second simulation is showed with a graphical output of the following:
+\begin{itemize}
+\item Total time output where:
+\begin{itemize}
+\item Blue shows the delayed bypassed signal.
+\item Yellow shows the output of the signal.
+\end{itemize}
+\item Spectrum analyzer where:
+\begin{itemize}
+\item Blue shows the delayed bypassed signal.
+\item Yellow shows the output of the signal.
+\end{itemize}
+\item RMS output of (RMSBand5)(RMSBand6)(RMSBand7)(RMSBand8)(RMSBass) where:
 \begin{itemize}
 \item Blue shows the gain applied in each band
 \item Red shows the RMS value calculated in the band
 \item Black shows the output which is feed to the up-sampling system.
+\end{itemize} 
 \end{itemize}
+
+
+As seen on \autoref{fig:SimulationComparisson}. As described above, the signal is a sweep from 0 Hz to 500 Hz in a 10 seconds duration. Every band attenuates 
+
 
 \begin{figure}[H]
 \centering
