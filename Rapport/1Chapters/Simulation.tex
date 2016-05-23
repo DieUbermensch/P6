@@ -58,7 +58,8 @@ In the simulation the following subsystem depicted on \autoref{fig:SubsystemSimu
 During the simulation the following settings has been applied to the subsystems:
 \begin{itemize}
 \item The filters, both up and downsampling has been fitted with quantisized filter coefficients corresponding with a 16-bit fixed point architecture.
-\item The RMS limiter is fitted with a threshold of 0.2. 
+\item The RMS limiter has a threshold of 0.2. 
+\item The peak limiter has a threshold of 0.3
 \item The up and downsamplings factor is 2.
 \end{itemize}
 
@@ -75,17 +76,12 @@ The simulation file and needed scripts are found at \path{CD://something } \todo
 
 In the following a 10 second simulation is showed with a graphical output of the following:
 \begin{itemize}
-\item Total time output where:
+\item Total output of the system where:
 \begin{itemize}
-\item Blue shows the delayed bypassed signal.
-\item Yellow shows the output of the signal.
+\item Blue is the delayed input.
+\item Orange is the output of the system.
 \end{itemize}
-\item Spectrum analyzer where:
-\begin{itemize}
-\item Blue shows the delayed bypassed signal.
-\item Yellow shows the output of the signal.
-\end{itemize}
-\item RMS output of (RMSBand5)(RMSBand6)(RMSBand7)(RMSBand8)(RMSBass) where:
+\item RMS output of (RMSBand1)(RMSBand2)(RMSBand3)(RMSBand4)(RMSBass) where:
 \begin{itemize}
 \item Blue shows the gain applied in each band
 \item Red shows the RMS value calculated in the band
@@ -93,9 +89,7 @@ In the following a 10 second simulation is showed with a graphical output of the
 \end{itemize} 
 \end{itemize}
 
-
-As seen on \autoref{fig:SimulationComparisson}. As described above, the signal is a sweep from 0 Hz to 500 Hz in a 10 seconds duration. Every band attenuates 
-
+As described above, the signal is a sweep from 0 Hz to 500 Hz in a 10 seconds duration. Every band should attenuate the signal down to 0.2, while a RMS limiter afterwards limits the signal if it should not be attenuate enough in the individual bands. If this RMS limiter does not attenuate fast enough a peak limiter is applied afterwards. Snapshots of the individual RMS limiters are seen on \autoref{fig:SimulationComparisson}.    
 
 \begin{figure}[H]
 \centering
@@ -131,7 +125,9 @@ As seen on \autoref{fig:SimulationComparisson}. As described above, the signal i
 \label{fig:SimulationComparisson}
 \end{figure} 
 
-\begin{figure}
+The simulation shows that each band attenuates the signal when the sweep reaches the different individual bands, however when the sweep is in between two individual bands the RMSBass limiter has to attenuate the signal as seen on \autoref{fig:BandTopSimulation}. It should be noted that the attack and release time is practically zero in the simulation, so it is difficult to determine if the implementation of the system will behave in the same way. 
+
+\begin{figure}[H]
     \centering
     \tikzsetnextfilename{BandTopSimulation}
     \input{figures/BandTopSimulation.tex}
@@ -139,25 +135,28 @@ As seen on \autoref{fig:SimulationComparisson}. As described above, the signal i
     \label{fig:BandTopSimulation}
 \end{figure}
 
+The total ouput as seen on \autoref{fig:TotalOutputSimulation} shows how the signal is limited when in the frequency range of the RMS limiters, while not being limited when outside their frequency range. Because a sweep was performed the RMS limiters are attenuating fast enough, for the peak limiter not having to clip the signal which should always be preffered.
 
-\begin{figure}
-	\centering
-	\tikzsetnextfilename{OutputSimulation}
-	\input{figures/OutputSimulation.tex}
-	\caption{Output of the entire spectrum during the 10 second simulation}
-	\label{fig:TotalOutputSimulation}
+\begin{figure}[H]
+    \centering
+    \tikzsetnextfilename{OutputSimulation}
+    \input{figures/OutputSimulation.tex}
+    \caption{Output of the entire spectrum during the 10 second simulation}
+    \label{fig:TotalOutputSimulation}
 \end{figure}
 
-\begin{figure}
-	\centering
-	\tikzsetnextfilename{Output3Zoom}
-	\input{figures/Output3.tex}
-	\caption{Output of the entire spectrum with a zoom on 9.468s to 9.478s}
-	\label{fig:TotalOutputZoomSimulation}
+It is seen on \autoref{fig:TotalOutputZoomSimulation} that if no limiter is applied to the signal, the output is be a delayed version of the input. Because the input in the simulation is delayed as much of the total delay of the system only one signal can be seen on \autoref{fig:TotalOutputZoomSimulation}. This means that the summed up signal is in perfect phase when summed up because of the linear FIR filters and the interpolation does not affect the bandwidth of the decimated signal in any way.      
+
+\begin{figure}[H]
+    \centering
+    \tikzsetnextfilename{Output3Zoom}
+    \input{figures/Output3.tex}
+    \caption{Output of the entire spectrum with a zoom on 9.468s to 9.478s}
+    \label{fig:TotalOutputZoomSimulation}
 \end{figure}
 
+From the simulation it can be concluded that the system works as intended which leads to the actual implemtation of the system on the hardware platform. 
 
-The simulations shows that each band from \autoref{fig:Band1Simulation} through \autoref{fig:Band4Simulation} functions as promised. The bands are attenuating as needed and functions all individually. It should be noted that the attack and release time is practically zero in the simulation. Furthermore it was not possible to show the output vs input in a logical way to show the system being linear. But it can be concluded that it is linear.
 
 
  
