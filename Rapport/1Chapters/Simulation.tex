@@ -76,15 +76,10 @@ The simulation file and needed scripts are found at \path{CD://something } \todo
 
 In the following a 10 second simulation is showed with a graphical output of the following:
 \begin{itemize}
-\item Total time output where:
+\item Total output of the system where:
 \begin{itemize}
-\item Blue shows the delayed bypassed signal.
-\item Yellow shows the output of the signal.
-\end{itemize}
-\item Spectrum analyzer where:
-\begin{itemize}
-\item Blue shows the delayed bypassed signal.
-\item Yellow shows the output of the signal.
+\item Blue is the delayed input.
+\item Yellow is the output of the system.
 \end{itemize}
 \item RMS output of (RMSBand5)(RMSBand6)(RMSBand7)(RMSBand8)(RMSBass) where:
 \begin{itemize}
@@ -130,9 +125,19 @@ As described above, the signal is a sweep from 0 Hz to 500 Hz in a 10 seconds du
 \label{fig:SimulationComparisson}
 \end{figure} 
 
-The simulations shows that each band from \autoref{fig:Band1Simulation} through \autoref{fig:Band4Simulation} functions as promised. The bands are attenuating as needed and functions all individually. It should be noted that the attack and release time is practically zero in the simulation. Furthermore it was not possible to show the output vs input in a logical way to show the system being linear. But it can be concluded that it is linear.
+The simulation shows that each band attenuates the signal when the sweep reaches the different individual bands, however when the sweep is in between two individual bands the RMSBass limiter has to attenuate the signal as seen on \textbf{XX}. It should be noted that the attack and release time is practically zero in the simulation, so it is difficult to determine if the implementation of the system will behave in the same way. 
 
-The simulation shows that each band attenuates the signal when the sweep reaches the different individual bands, however when the sweep is in between two individual bands the RMSBass limiter has to attenuate the signal. The total ouput has been  
+
+
+The total ouput as seen on \textbf{XX} shows how the signal is limited when in the frequency range of the RMS limiters, while not being limited when outside their frequency range. Because a sweep was performed the RMS limiters are attenuating fast enough, for the peak limiter not having to clip the signal which should always be preffered.
+
+
+It is seen on \textbf{XX} that if no limiter is applied to the signal, the output is be a delayed version of the input. Because the input in the simulation is delayed as much of the total delay of the system only one signal can be seen on \textbf{XX}. This means that the summed up signal is in perfect phase when summed up because of the linear FIR filters and the interpolation does not affect the bandwidth of the decimated signal in any way.      
+
+
+
+From the simulation it can be concluded that the system works as intended which leads to the actual implemtation of the system on the hardware platform. 
+   
 
  
 
