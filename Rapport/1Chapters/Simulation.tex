@@ -58,7 +58,8 @@ In the simulation the following subsystem depicted on \autoref{fig:SubsystemSimu
 During the simulation the following settings has been applied to the subsystems:
 \begin{itemize}
 \item The filters, both up and downsampling has been fitted with quantisized filter coefficients corresponding with a 16-bit fixed point architecture.
-\item The RMS limiter is fitted with a threshold of 0.2. 
+\item The RMS limiter has a threshold of 0.2. 
+\item The peak limiter has a threshold of 0.3
 \item The up and downsamplings factor is 2.
 \end{itemize}
 
@@ -93,9 +94,7 @@ In the following a 10 second simulation is showed with a graphical output of the
 \end{itemize} 
 \end{itemize}
 
-
-As seen on \autoref{fig:SimulationComparisson}. As described above, the signal is a sweep from 0 Hz to 500 Hz in a 10 seconds duration. Every band attenuates 
-
+As described above, the signal is a sweep from 0 Hz to 500 Hz in a 10 seconds duration. Every band should attenuate the signal down to 0.2, while a RMS limiter afterwards limits the signal if it should not be attenuate enough in the individual bands. If this RMS limiter does not attenuate fast enough a peak limiter is applied afterwards. Snapshots of the individual RMS limiters are seen on \autoref{fig:SimulationComparisson}.    
 
 \begin{figure}[H]
 \centering
@@ -132,6 +131,8 @@ As seen on \autoref{fig:SimulationComparisson}. As described above, the signal i
 \end{figure} 
 
 The simulations shows that each band from \autoref{fig:Band1Simulation} through \autoref{fig:Band4Simulation} functions as promised. The bands are attenuating as needed and functions all individually. It should be noted that the attack and release time is practically zero in the simulation. Furthermore it was not possible to show the output vs input in a logical way to show the system being linear. But it can be concluded that it is linear.
+
+The simulation shows that each band attenuates the signal when the sweep reaches the different individual bands, however when the sweep is in between two individual bands the RMSBass limiter has to attenuate the signal. The total ouput has been  
 
  
 
