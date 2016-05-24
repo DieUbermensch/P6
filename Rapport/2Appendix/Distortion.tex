@@ -51,7 +51,7 @@ Generally speaking it is desirable to have even harmonics since they are perceiv
 
 Looking at \autoref{fig:OddTHD} where a lot of odd harmonics have been introduced there are no direct connection. Should a odd harmonic be of equal magnitude to the fundamental a entirely  new tone will be introduced. This is usually not desirable, but can in certain musics genres still be the goal. This is why you can not directly say you want even or odd harmonics, but in most cases the goal is even harmonics if any.
 
-\subsection{Total Harmonic Distortion (THD)}
+\subsection{Total Harmonic Distortion (THD)}\label{subsec:THDmath}
 
 A way to specify the total amount harmonic distortion created by a system is  the term Total Harmonic Distortion (THD). A common system that creates harmonic distortions when a signal is passed through, is an analog audio amplifier. Because of non-linearity in active analog components used in an amplifier such as a transistor, harmonics will always appear. THD is therefore a way to indirectly specify the total amount of non-linearity of the system. Although harmonic distortion may affect the audio undesirably, some amplifiers, such as a tube amplifier, creates desirable harmonic distortions when the amplifier is overloaded sometimes referred as "tube sound", where a strong 2nd harmonic is present. 
 
@@ -68,10 +68,9 @@ H\!D_n = \frac{v_n}{v_1} =\frac{A_n}{A_1}
 \end{where}
 
 To determine the THD i.e. the total amount of distortion following expression is used:
-
-\begin{equation}
+$$
 T\!H\!D = \sqrt{\sum_{n=2}^{\infty}H\!D_n^2} = \sqrt{\sum_{n=2}^{\infty}\frac{A_n^2}{A_1^2}}
-\end{equation}
+$$
 
 From the equation it is seen that THD is the ratio between the amplitude of fundamental frequency and the amplitude of all its even and uneven harmonics. Therefore a greater THD means that the ratio between the amplitude of the fundamental frequency and amplitude of the harmonics are smaller.
 
@@ -84,13 +83,13 @@ A speaker is supplied from the manufacture with a sensitivity rating. This tells
 \end{align}  
 The 112 dB in \autoref{eq:speaker_sensitivty} is added to the sensitivity since this 1 watt compared to the $10^{-12}$ watt which is the threshold for audible sound. At 1 watt it will yield 120 dB. The reason for 8 dB difference is due to the assumption of infinite baffle in a reflection free room. When the sound is dispersed at a radius of $2\pi=r^2$, where r is 1 meter it creates a reduction in \gls{SPL} by 8 dB.
 
-The sensitivity of a loudspeaker can be used to calculate the sound pressure level by the amount of dissipated power by following equation:
+The sensitivity of a loudspeaker can be used to calculate the sound pressure level by the amount of dissipated power by \autoref{eq:sound_pressure_level}.
 
 \begin{align}\label{eq:sound_pressure_level}
 L_\text{p}(P)=\text{dB}_\text{sensitivity} + 10\cdot \log_{10} \left(\frac{P}{1 \text{W}}\right)
 \end{align} 
 
-By using \autoref{eq:sound_pressure_level} it is possible to calculate either the sound pressure level or the power. %In later test the equation might prove useful to calculate the amount of dissipated power in an amplifier if the sound pressure level is measured from a microphone.
+ %In later test the equation might prove useful to calculate the amount of dissipated power in an amplifier if the sound pressure level is measured from a microphone.
 
 
 

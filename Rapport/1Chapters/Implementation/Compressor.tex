@@ -93,7 +93,7 @@ When the value has been determined it is multiplied with the MSB of sum. This yi
 
 \section{Release time}
 
-If no release time is implied to the compressor the compression will be too aggressive, which will result in a distorted sound. The release time is basically the time span for the compressor to release the gain reduction. Implementing a release time also ensures that the compression is not constantly switch between two different gains. The release time will be implemented as a first order IIR filter where the release time will be the time constant $\tau$. The release time is chosen to be 5 seconds, as 5 seconds is estimated to be sufficient.
+If no release time is implied to the compressor the compression will be too aggressive, which will result in a distorted sound. The release time is basically the time span for the compressor to release the gain reduction. Implementing a release time also ensures that the compression is not constantly switch between two different gains. The release time will be implemented as a first order IIR filter where the release time will be the time constant $\tau$. The general design and implementation procedure for IIR filters are described in \autoref{ch:IIR}. The release time is chosen to be 5 seconds, as 5 seconds is estimated to be sufficient.
 
 It is commonly known that an analog first order filter can be designed as following expression:
 \begin{equation}
@@ -155,7 +155,7 @@ To implement the release time, the transfer function from \autoref{eq:releaseTF}
 \begin{equation}
 H(z) = \frac{0.2T}{1-\text{e}^{-0.2T} z^{-1}}  \Leftrightarrow (1-\text{e}^{-0.2T} z^{-1})Y(z) = (0.2T)X(z) \Rightarrow Y(z) = 0.2TX(z) + \text{e}^{-0.2T} z^{-1}Y(z)
 \end{equation}
-Applying the inverse z-transformation reveals:
+Applying the inverse z-transformation (See \autoref{ch:IIR} for in debt explanation) reveals:
 \begin{align}
 y[n] = 0.2Tx[n] + {\rm e}^{- 0.2\,T}y[n-1]
 \label{eq:z_eq}

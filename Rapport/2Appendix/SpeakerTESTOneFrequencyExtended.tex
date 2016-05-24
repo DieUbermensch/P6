@@ -58,7 +58,8 @@ IEC 60268-5 standard.
 \section{Procedure}\label{sec:SpeakerTestProcedure3}
 
 The producer for this experiment is described as follows:
-\begin{enumerate}
+\vspace*{-5mm}
+\begin{enumerate}\addtolength{\itemsep}{-.35\baselineskip} 
 \item Adjust volume on the amplifier to +3 dB gain.
 \item Vacate the anechoic room and seal the room.
 \item Start recording in Adobe Audition for microphone and playback loop
@@ -73,41 +74,42 @@ The \path{test_signal.wav} can be found on:\\
 \scalebox{0.7}{
 \path{CD://Maalinger/Maalinger180416 - Single Frequency test 50 to 500/test_signal.wav}}\\
 
-\section{Data Extraction}
+\section{Raw Data \& Data Extraction}
 The volume was increase by 12 dB as it was concluded in \autoref{app:journal_speaker_test2} to be the maximum allowed gain.
 The recordings can be found on:\\
 \scalebox{0.7}{
 \path{CD://Maalinger/Maalinger180416 - Single Frequency test 50 to 500/}}
 And is indexed in folders \scalebox{0.8}{\path{Measure_X}}, where X corresponds to the test number. Every measurements is denoted as:
-\begin{itemize}
+\vspace*{-5mm}
+\begin{itemize}\addtolength{\itemsep}{-.35\baselineskip} 
 \item Microphone: \scalebox{0.8}{\path{Microphone_0XX}}
 \item Playback loop: \scalebox{0.8}{\path{Reference_0XX}}
 \end{itemize}
+The data from the microphone was analyzed using a THD command in MATLAB, which is further decribed in Appendix \ref{subsec:THDmath}. 
 
-
-\section{Raw data}
-
-\begin{figure}[H]
-\centering
-\begin{subfigure}[t]{0.45\textwidth}
-    \centering
-    \tikzsetnextfilename{raw_mic1}
-    \input{figures/raw_mic1.tex}
-    \caption{Sound pressure level from microphone.}
-    \label{fig:raw1t3_mic1}
-\end{subfigure}
-\begin{subfigure}[t]{0.45\textwidth}
-    \centering
-    \tikzsetnextfilename{raw_reference1}
-    \input{figures/raw_reference1.tex}
-    \caption{Reference signal.}
-    \label{fig:raw1t3_reference1}
-\end{subfigure}
-\caption{Raw data}
-\label{fig:raw1t3}
-\end{figure} 
-
-\todo[inline]{Lav nye billeder fra forsøget}
+%\section{Raw data}
+%
+%\begin{figure}[H]
+%\centering
+%\begin{subfigure}[t]{0.45\textwidth}
+%    \centering
+%    \tikzsetnextfilename{raw_mic1}
+%    \input{figures/raw_mic1.tex}
+%    \caption{Sound pressure level from microphone.}
+%    \label{fig:raw1t3_mic1}
+%\end{subfigure}
+%\begin{subfigure}[t]{0.45\textwidth}
+%    \centering
+%    \tikzsetnextfilename{raw_reference1}
+%    \input{figures/raw_reference1.tex}
+%    \caption{Reference signal.}
+%    \label{fig:raw1t3_reference1}
+%\end{subfigure}
+%\caption{Raw data}
+%\label{fig:raw1t3}
+%\end{figure} 
+%
+%\todo[inline]{Lav nye billeder fra forsøget}
 
 \section{Analysis}
 
@@ -167,4 +169,6 @@ Few errors could have occurred during trials, since then only variable adjusted 
 calibration was done using an visual equalizer where the output was shown with a bar chart. Hence the data should bee seen with a tolerance of +/- 0.5 dB.
 
 \section{Conclusion}
+
+From the test it can be concluded that the THD rises with the amplification of the system. It shows that the lower frequencies are much more prone to introduce THD when the SPL is increased. The test showed that frequencies around 132 Hz and down were the most critical and they should be subject to most limitation compared with the remaining bands.
 
