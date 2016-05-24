@@ -5,6 +5,7 @@
 \item[13] The limiters must apply to frequencies below 500 Hz.
 \end{enumerate}
 
+\vspace{-2mm}
 A filter for decimation will be designed which must meet requirement 12, and a filter for interpolation will be designed which must not influence the decimated signals bandwidth, because it would otherwise influence the frequency response of the system making it non linear. The decimation filter will be deigned first.
 
 Because the system is a multirate system with octave bands as mentioned in \autoref{ch:designRealization} only one filter needs to be designed because the sampling frequency is halved for every octave resulting in the same coefficients for all decimation and interpolation filters.
