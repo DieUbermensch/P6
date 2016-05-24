@@ -29,5 +29,14 @@ The final product has a delay of \textbf{XX} which was concluded to be to high a
 Another possibility of reducing the delay substantially is by converting the interpolation filter from FIR to IIR. It is not possible to convert the decimation filter to IIR because of an non constant group delay which would give an error when summing the signal, but the bandwidth of the interpolation filter is much higher than the bandwidth of decimated signal and therefore the group delay would not be a problem because it is constant approximately until the cutoff frequency of the filter. The IIR filter would have a much lower delay which would in term divide the delay by two.   
 
 \subsection*{RMS Limiter}
+The RMS limiters implemented have a small attack time, meaning fast transients will not be caught by the limiter. By implemented a delay as shown in \autoref{fig:optimizationDelay} the RMS limiter have time to detect transients and therefore protect the loudspeaker even better. 
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.4\textwidth]{figures/optimizationDelay.pdf}
+\caption{Adding a delay will make the system able to limit transients.}
+\label{fig:optimizationDelay}
+\end{figure}
+By implementing the delay, a peak-limiter is no longer needed to catch transients.
+
 
 
