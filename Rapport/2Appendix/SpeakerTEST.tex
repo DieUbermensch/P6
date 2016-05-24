@@ -1,4 +1,4 @@
-\chapter{Speaker Vibration \& Frequency Response}\label{app:journal_speaker_test}
+\chapter{Speaker Vibration and Frequency Response}\label{app:journal_speaker_test}
 
 The purpose of this test is to examine if there is a correlation between the amount of vibration of a speaker and an increased amount of harmonic distortion. The purpose is also to examined if it is possible to detect when the coil hits the backplate. 
 
@@ -17,7 +17,7 @@ The purpose of this test is to examine if there is a correlation between the amo
 The setup of this experiment are depicted in Figure \ref{figure:SpeakertestSetup}, where the equipment is catalogued in \autoref{tab:UsedEquipment1}, and described as follows:
 
 \begin{itemize}
-\item Distortion and \gls{SPL} will be measured by a microphone at a distance 1 meter in accordance with IEC 60268-5 Sound System Equipment - Part 5: Loudspeaker
+\item Distortion and \gls{SPL} will be measured by a microphone at a distance of 1 meter in accordance with IEC 60268-5 Sound System Equipment - Part 5: Loudspeaker
 \item Vibration will be measured by a Brüel \& Kjear Type 4344 accelerometer, placed at:
 \begin{itemize}
 \item The backplate of the lowest woofer
@@ -26,7 +26,7 @@ The setup of this experiment are depicted in Figure \ref{figure:SpeakertestSetup
 \item The speaker will be driven by a Crown Studio Reference I amplifier.
 \item The ADC/DAC will convert measurements from accelerometers and microphone and relay to a computer via SPDIF.
 \begin{itemize}
-\item Both Accelerometer and Microphone is calibrated into outputting -37 dB at respectively 1 G and 94 dB \gls{SPL}.
+\item Both accelerometer and microphone is calibrated into outputting -37 dB at respectively 1 G and 94 dB \gls{SPL}.
 \item All recordings are synchronised and timestamped with by looping the test file back into the converter.
 \end{itemize}
 \item The computer will be logging data with a RME HammerFall DIGI 96-PDST sound card and Adobe Audition.
@@ -399,7 +399,7 @@ The advantages of using a spectrogram is that it gives a good overview of the sp
 \label{fig:spec_mic}
 \end{figure} 
 
-The spectrograms of dataset 1 and 19 for the microphone, seen in \autoref{fig:spectrogram_mic1} and \autoref{fig:spectrogram_mic1}, show a prominent red line and three weak blue lines above the red line. It is seen that the red line is a linear decreasing function from 2.4 kHz to 10 Hz where the frequency is a function of time. This indicates that the red line is the fundamental frequency of the sine sweep from 2.4 kHz to 10 Hz. The blue and yellow line are linear functions of the harmonic distortions. The spectrograms clearly show that increasing the gain will increase the amount of harmonic distortion as well. An interesting observation is the spectral frequency leak that occurs at lower frequencies revealing large amount of distortion at low frequency and high gain. Since the power of the spectrum other than the harmonic frequencies increase, it could indicate that the coil hit the back plate of the driver at this point. From the analysis it can be concluded that the large amount of distortion can indicate that the coil is hitting the back plate of the driver.
+The spectrograms of dataset 1 and 19 for the microphone, seen in \autoref{fig:spectrogram_mic1} and \autoref{fig:spectrogram_mic1}, show a prominent orange line and three weak blue lines above the red line. It is seen that the orange line is a linear decreasing function from 2.4 kHz to 10 Hz where the frequency is a function of time. This indicates that the red line is the fundamental frequency of the sine sweep from 2.4 kHz to 10 Hz. The yellow line are linear functions of the harmonic distortions. The spectrograms clearly show that increasing the gain will increase the amount of harmonic distortion as well. An interesting observation is the spectral frequency leak that occurs at lower frequencies revealing large amount of distortion at low frequency and high gain. Since the power of the spectrum other than the harmonic frequencies increase, it could indicate that the coil hit the back plate of the driver at this point. From the analysis it can be concluded that the large amount of distortion can indicate that the coil is hitting the back plate of the driver.
 
 The next part will be to analyse if similar observation can be found in the spectrogram for vibration measurements on the driver and the enclosure. 
 
@@ -417,7 +417,7 @@ The next part will be to analyse if similar observation can be found in the spec
 	\caption{Driver dataset 19.}
 	\label{fig:spectrogram_driver19}
 \end{subfigure}
-\caption{The spectrograms of the driver dataset 1 and 19. The prominent red line is the sine sweep from 2.4 kHz to 10 Hz while the yellow and blue lines along the red line are harmonic distortion.}
+\caption{The spectrograms of the driver dataset 1 and 19. The prominent orange line is the sine sweep from 2.4 kHz to 10 Hz while the yellow lines are harmonic distortion.}
 \label{fig:spec_driver}
 \end{figure} 
 
@@ -437,7 +437,7 @@ The spectrograms of dataset 1 and 19 of the driver are seen in \autoref{fig:spec
 	\caption{Enclosure dataset 19}
 	\label{fig:spectrogram_enclosure19}
 \end{subfigure}
-\caption{The spectrograms of the enclosure dataset 1 and 19. The prominent red line is the sine sweep from 2.4 kHz to 10 Hz while the yellow and blue lines along the red line are harmonic distortion.}
+\caption{The spectrograms of the enclosure dataset 1 and 19. The prominent orange line is the sine sweep from 2.4 kHz to 10 Hz while the yellow lines are harmonic distortion.}
 \label{fig:spec_enclosure}
 \end{figure} 
 
@@ -451,7 +451,7 @@ This section concludes that amount of distortion increases significantly when th
 
 As previously stated, it is possible that the loudspeaker coil hits the back plate of the driver if the coil moves too far back. In the long run this will damage the loudspeaker, and should therefore be avoided. In this section an analysis on how to detect these hits, will be provided. 
 
-From \autoref{subsec:impulses} the frequency response of a mechanical frame of a loudspeaker has the same characteristics as a low-pass filter. This means, if the coil is hitting the back plate of the driver, it will result in a increase in energy in the low frequency spectrum. As most music and loudspeakers have some sort of a high-pass filter implemented to remove almost non-audible sound, it can be assumed that only a back plate hit will generate vibrations at very low frequencies between, for instance, 0 Hz to 20 Hz. To examine if this is true, a section of the dataset 19 of the driver, where a hit is suspected to have occurred, is analysed. The analysed section is seen in \autoref{fig:raw_driver19_windows}.
+The frequency response of a mechanical frame of a loudspeaker has the same characteristics as a low-pass filter. This means, if the coil is hitting the back plate of the driver, it will result in a increase in energy in the low frequency spectrum. As most music and loudspeakers have most of its energy above 50 Hz, it can be assumed that only a back plate hit will generate vibrations at very low frequencies between, for instance, 0 Hz to 20 Hz. To examine if this is true, a section of the dataset 19 of the driver, where a hit is suspected to have occurred, is analysed. The analysed section is seen in \autoref{fig:raw_driver19_windows}.
 
 
 \begin{figure}[H]
@@ -479,7 +479,7 @@ The same window is applied to all datasets for the driver and afterwards spectru
 \centering
 \tikzsetnextfilename{FFTFinal}
 \input{figures/Forsog1/FFTFinal.tex}
-\caption{The spectrum of the window. The yellow graph is dataset 1, red is 10 and blue is 19.}
+\caption{The FFT of the measurements at 80 Hz.}
 \label{fig:FFT_hit}
 \end{figure}
 
@@ -487,7 +487,7 @@ It is seen that the energy for non-harmonic frequencies is increased at very low
 
 \section{Error sources}
 
-Few errors could have occurred during trials, since then only variable adjusted during between measurements were the gain of the amplifier. There were however problems with moving the setup from the control room were it was calibrated and then moved into the anechoic room. The calibration was done using an visual equalizer where the output was shown with a bar chart Hence the data should bee seen with a tolerance of +/- 0.5 dB.
+Few errors could have occurred during trials, since the only variable adjusted during between measurements was the gain of the amplifier. There were however problems with moving the setup from the control room were it was calibrated and then moved into the anechoic room. The calibration was done using an visual equalizer where the output was shown with a bar chart hence the data should bee seen with a tolerance of +/- 0.5 dB.
 
 \section{Conclusion}
-From the trials it showed it was possible to detect a hit against the back plate. The draw back of using an accelerometer was however that it was not possible to determine a hit before it happened. It was possible to determine a specific power consumption at which the hit will occur which can be used for determining a model usable in a feedforward system.
+The test concludes that is possible to detect a hit against the back plate. The draw back of using an accelerometer is however that it is not possible to determine a hit before it happens. 
