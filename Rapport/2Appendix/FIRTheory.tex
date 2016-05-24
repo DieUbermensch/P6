@@ -1,4 +1,4 @@
-\chapter{Finite Impulse Response Theory} \label{app:FIR_theory}
+\chapter{Finite Impulse Response} \label{app:FIR_theory}
 This appendix will describe the theory of the FIR filter design method, which includes the Kaiser window method and calculating the b coefficients.
 
 \section{Designing FIR Filters}
@@ -6,7 +6,7 @@ This appendix will describe the theory of the FIR filter design method, which in
 Finite Impulse Response filters are a type of digital filter that can be implemented in a DSP. Opposite to the IIR filter the FIR, the impulse response of a FIR filter is only of finite length, because the FIR filter samples the impulse response by a finite number of samples, while the IIR is a recursive filter resulting in an infinite length. Another difference between IIR and FIR filters is the starting point of the design. The starting point of IIR filters is by designing an analog filter and then transforming it, while designing FIR do not require any analog filter design. This chapter will focus on two design methods for FIR filters which are the window method and Kaiser window method.
 
 \subsection*{Impulse Response of Low-pass Filter}
-The starting point for both design methods is the derivation of the impulse response of an ideal brick wall low-pass filter. The expression of the impulse response is used to determine the coefficients for the filter. The derivation of the impulse response is done by using the ideal frequency response as seen on \autoref{fig:IdealFilterApp}.
+The starting point for both design methods is the derivation of the impulse response of an ideal brick wall low-pass filter. The expression of the impulse response is used to determine the coefficients for the filter. The derivation of the impulse response is done by using the ideal frequency response as seen on \autoref{fig:IdealFilterApp} \citep{sou:FIRpart4}. 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.6\textwidth]{figures/Ideal_filter.png}
@@ -30,7 +30,6 @@ By using Eulers rule the expression is reduced to:
 \begin{equation}
 h_d[n]=\frac{1}{2\pi}\int_{-\omega_c}^{\omega_c}cos\Big((n-\frac{M}{2})\omega\Big)+jsin\Big((n-\frac{M}{2})\omega\Big) d\omega
 \end{equation}
-\textbf{Explanation} (Sin is an odd function)
 \begin{equation}
 h_d[n]=\frac{1}{2\pi(n-\frac{M}{2})}\bigg[sin\Big((n-\frac{M}{2})\omega\Big)\bigg]_{-\omega_{c}}^{\omega_{c}}
 \end{equation}
@@ -50,7 +49,18 @@ Which means that the numenator is doubled equaling:
 \begin{equation}
 h_d[n]=\frac{sin\Big(\omega_c(n-\frac{M}{2})\Big)}{\pi(n-\frac{M}{2})}\qquad-\infty<n<\infty
 \end{equation}
-The impulse response is now symmetric around M/2 and the phase is therefore linear. The impulse response is still infinite and non-causal so the impulse response must be truncated.
+The impulse response is now symmetric around M/2 and the phase is therefore linear. There are four types of FIR filters \citep{sou:FIRpart4}. These are:
+\begin{enumerate}
+\item[•] Type 1 FIR filters have a even order and a symmetric impulse response.
+\item[•] Type 2 FIR filters have a uneven order and a symmetric impulse response.
+\item[•] Type 3 FIR filters have a even order and an asymmetric impulse response.
+\item[•] Type 4 FIR filters have a uneven order and an asymmetric impulse response.
+\end{enumerate}
+
+To achieve linear phase the impulse response needs to be symmetric. To achieve an realizable constant group delay an even order FIR filters is needed. This is because an uneven order FIR filter will give a non-integer group delay which cannot be realized.
+
+
+The impulse response is still infinite and non-causal so the impulse response must be truncated.
 
 % Samples the impulse response of an ideal brick-wall filter
 
