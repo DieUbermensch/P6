@@ -1,6 +1,6 @@
 \chapter{Speaker Single Tone Test} \label{app:journal_speaker_test2}
 
-This test examines multiple single tones at different sound pressure levels until the loudspeaker distorts the sound by a significant amount. By only playing at one frequency, a high resolution graph of the frequency response can be achieved because of the large sample size, to determine if there is a correlation between the fundamental frequency and the second and third harmonic wave at different sound levels.
+This test examines multiple single tones at different sound pressure levels until the loudspeaker distorts the sound by a significant amount. By only playing at one frequency, a high resolution graph of the frequency response can be achieved because of the large sample size, to determine if there is a correlation between the fundamental frequency and the second and third harmonic wave at different sound levels. In this test following single tones of 50 Hz to 100 Hz with a step of 5 Hz is played back.
 
 
 \section{Setup}
@@ -105,8 +105,7 @@ And is indexed in folders \scalebox{0.8}{\path{Measure_X}}, where X corresponds 
 
 
 \section{Raw data}
-For each of the test six measurements was taken. These are the accelerometers placed on the
-driver and enclosure, the microphone and a reference to synchronize the measurements.
+For each of the test six measurements were taken. These are the accelerometers placed on the driver and enclosure, the microphone and a reference to synchronize the measurements.
 
 As previously stated there are in total 13 datasets each containing six measurements. The amount of data is therefore large and only
 relevant datasets will be presented. The first dataset from the test is shown in \autoref{fig:raw1t2}.
@@ -162,12 +161,12 @@ relevant datasets will be presented. The first dataset from the test is shown in
 \label{fig:raw1t2}
 \end{figure} 
 
-Looking at the first dataset it reveals that the outputs of the B\&K accelerometeres are very different from the SF accelerometers therefore for analyzing purposes the raw data the tones (50 Hz, 55 Hz, 60 Hz, 65 Hz, 70 Hz, 75 Hz, 80 Hz, 85 Hz, 90 Hz, 95 Hz, 100 Hz) is cropped into seperate files so they can be analysed seperately.
+Looking at the first dataset it reveals that the outputs of the B\&K accelerometers are very different from the SF accelerometers therefore for analysing purposes the raw data the tones (50 Hz, 55 Hz, 60 Hz, 65 Hz, 70 Hz, 75 Hz, 80 Hz, 85 Hz, 90 Hz, 95 Hz, 100 Hz) is cropped into separate files so they can be analysed separately.
 
-By examining the raw data it was concluded that measurement three was not conducted correctly and is therefore not analyzable because no sound was played, therefore measurement three is not used further. 
+By examining the raw data it can be concluded that dataset three was not conducted correctly and is therefore not analysable because no sound was played. Therefore measurement three is discarded. 
 
 \section{Analysis}
-To analyze if there is a correlation between the keynote and the second and third harmonic the analyzis will consist of making a spectrum analyzis to locate the amplitude of the keynote, second harmonic and third harmonic, and examine if there is a correlation between the different amplitudes. An example of three different frequency spectrum plots for 50 Hz measured with the microphone at different amplitudes, respectively measurement 1, 6 and 12 is therefore given in \autoref{fig:FFT_mic1612}, to give an insight in how the second and third harmonic increases with the increase in amplitude.
+To analyse if there is a correlation between the fundamental frequency and the second and third harmonic, the analysis will consist of making a spectral analysis to locate the amplitude of the fundamental frequency, second harmonic and third harmonic, and examine if there is a correlation between the different amplitudes. An example of three different frequency responses for the 50 Hz microphone at different amplitudes (respectively measurement 1, 6 and 12), is therefore given in \autoref{fig:FFT_mic1612}, to give an insight in how the second and third harmonic increases when the amplitude is increased.
 
 \begin{figure}[H]
 \centering
@@ -193,10 +192,10 @@ To analyze if there is a correlation between the keynote and the second and thir
 \label{fig:FFT_mic1612}
 \end{figure}   
 
-If the amplitudes of the keynote, second harmonic and third harmonic is located at every soundlevel a comparison can be made between the amplitude of:
+If the amplitudes of the fundamental frequency, second harmonic and third harmonic are located at every sound level a comparison can be made between the amplitude of:
 \begin{itemize}
-\item Keynote / Second harmonic
-\item Keynote / Third harmonic
+\item Fundamental frequency / Second harmonic
+\item Fundamental frequency / Third harmonic
 \end{itemize}
 This should be done for every frequency, but as an example the comparison for 50 Hz is shown in \autoref{fig:com_mic1213}.
 
@@ -214,11 +213,11 @@ This should be done for every frequency, but as an example the comparison for 50
     \caption{1.harmonic / 3.harmonic pr. measurement.}
     \label{fig:comp_mic13}
 \end{subfigure}
-\caption{comparison of keynote (1.harmonic), second harmoni and third harmonic (a) 1.harmonic [mag] / 2.harmonic [mag] and (b) 1.harmonic [mag] / 3.harmonic [mag]. Test 2.}
+\caption{Comparison of fundamental frequency (1.harmonic), second harmonic and third harmonic (a) 1.harmonic [mag] / 2.harmonic [mag] and (b) 1.harmonic [mag] / 3.harmonic [mag]. Test 2.}
 \label{fig:com_mic1213}
 \end{figure}   
 
-It can be derived from \autoref{fig:com_mic1213} that the relation between the keynote and the second harmonic as seen in \autoref{fig:comp_mic12} goes torward 1 at a slower pace than the keynote in relationship to the thirdharmonic as seen in \autoref{fig:comp_mic13} goes torward 1. This corresponds to the theory that when the loudspeaker starts to distort the third harmonic rises quicker than the second harmonic. To control that every frequency has the same pattern as 50 Hz they are all plotted into a singe figure as seen on \autoref{fig:com_mic12All} and \autoref{fig:com_mic13All}
+It can be derived from \autoref{fig:com_mic1213} that the relation between the fundamental frequency and the second harmonic as seen in \autoref{fig:comp_mic12} goes toward 1 at a slower pace than the fundamental frequency in relationship to the third harmonic as seen in \autoref{fig:comp_mic13} goes toward 1. This corresponds to the theory that when the loudspeaker starts to distort the third harmonic grows faster than the second harmonic. To control that, every frequency has the same pattern as 50 Hz they are all plotted into a singe figure as seen on \autoref{fig:com_mic12All} and \autoref{fig:com_mic13All}
 
 \begin{figure}[H]
     \centering
@@ -235,13 +234,12 @@ It can be derived from \autoref{fig:com_mic1213} that the relation between the k
 \label{fig:com_mic13All}
 \end{figure}  
 
-It can be seen on the figures that a pattern can be seen as in figure \autoref{fig:com_mic1213} which goes toward 1. An error in \autoref{fig:com_mic13All} can be seen where the 85 Hz measurement does not follow the pattern of the other frequency which is deemed an error. From \autoref{fig:com_mic12All} and \autoref{fig:com_mic13All} it can be derived that a model can be derived because there is a correlation between the keynote and the second and third harmonic in the frequency spectrum 50 Hz - 100 Hz. The figures shown in the analysis is only based on the microphone measurements. The derived data from the acceloremeters can be found on \textbf{TBD}. The reason for not showing them in this analysis is because they show approximately the same as the microphone but with larger error margin. 
+It can be seen in the figures that a pattern can be recognized as in figure \autoref{fig:com_mic1213} which goes towards 1. An error in \autoref{fig:com_mic13All} can be seen where the 85 Hz measurement does not follow the pattern of the other frequency which is deemed an error. From \autoref{fig:com_mic12All} and \autoref{fig:com_mic13All} it can be concluded that a model can be derived, because there is a correlation between the fundamental frequency and the second and third harmonic in the frequency spectrum between 50 Hz - 100 Hz. The figures shown in the analysis is only based on the microphone measurements. The derived data from the accelerometers can be found on \textbf{TBD}. The reason for not showing them in this analysis, is because they show approximately the same pattern as the microphone but with larger error margin. 
 
 
 \section{Error sources}
-Few errors could have occurred during trials, since then only variable adjusted during between measurements were the gain of the amplifier. There were however problems with moving the setup from the control room were it was calibrated and then moved into the anechoic room. The
-calibration was done using an visual equalizer where the output was shown with a bar chart. Hence the data should bee seen with a tolerance of +/- 0.5 dB.
+Few errors could have occurred during trials, since the only variable adjusted during between measurements was the gain of the amplifier. There were however problems with moving the setup from the control room were it was calibrated and then moved into the anechoic room. The calibration was done using an visual equalizer where the output was shown with a bar chart. Hence the data should bee seen with a tolerance of +/- 0.5 dB.
 
 \section{Conclusion}
 
-From these test it can be concluded that the speaker dose not create any significant ''hit pattern'' when different tones a played. It can however be concluded that the speaker has an increase in THD when the amplification is increased. This creates basis for determination of model to predict how the speaker will react to a specific amplification at a specific frequency.  Futhermore it shows that less precise sparkfun accelerometer can not create a usable output. 
+From these test it can be concluded that the speaker does not create any significant "hit pattern" when different tones are played. It can however be concluded that the speaker has an increase in THD when the gain is increased. This creates basis for determination of a model to predict how the speaker will react to a specific gain at a specific frequency. Furthermore it shows that less precise SparkFun accelerometer cannot create an usable measurement. 

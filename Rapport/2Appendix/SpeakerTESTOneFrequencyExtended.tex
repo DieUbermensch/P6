@@ -1,6 +1,6 @@
-\chapter{Speaker single frequency Lab test from 50 to 500 Hz} \label{app:journal_speaker_test3}
+\chapter{Speaker Single Tone Test from 50 to 500 Hz} \label{app:journal_speaker_test3}
 
-This test is made as an extended of the test done in \autoref{app:journal_speaker_test2}. This test is done with a larger frequency interval and is made in order to create a reliable model for the compressor bands. The frequency range was determine from subjective analysis made from previous test.
+This test is made as an extended of the test done in \autoref{app:journal_speaker_test2}. This test is done with a larger frequency interval (steps of 10 Hz instead of 5 Hz) and is made in order to create a reliable model for the limiter bands. The frequency range was determine from subjective analysis made from previous test.
 
 
 \section{Setup}
@@ -113,7 +113,7 @@ The data from the microphone was analyzed using a THD command in MATLAB, which i
 
 \section{Analysis}
 
-As in \autoref{app:journal_speaker_test2} an analysis of the data is performed. The trails of this experiment is plotted according to the THD in correlation with the input gain. The behaviour should resemble the same characteristic as on \autoref{fig:com_mic13All}. The Difference between the graphs lies in instead of measuring difference between the fundamental tone and the $\text{2}^{\text{nd}}$ harmonic, is \autoref{fig:THDComparisson} shows the total harmonic distortion according to the RMS value of the input. It should be noted that the RMS value is calculated based on 1 being at 13 dBu from which is specified in the manual of the DAC.
+As in \autoref{app:journal_speaker_test2} an analysis of the data is performed. The trails of this experiment is plotted according to the THD in correlation with the input gain. The difference between the graphs lies in instead of measuring difference between the fundamental tone and the 2nd harmonic, is \autoref{fig:THDComparisson} shows the total harmonic distortion according to the RMS value of the input. It should be noted that the RMS value is calculated based on 1 being at 13 dBu from which is specified in the manual of the DAC. The different colors in \autoref{fig:THDComparisson} are different frequency in the given band. For each band, the measurement with the highest THD percent is used to make a model of the worst case THD in the given band.
 
 
 \begin{figure}[H]
@@ -150,25 +150,20 @@ As in \autoref{app:journal_speaker_test2} an analysis of the data is performed. 
 \label{fig:THDComparisson}
 \end{figure} 
 
+\autoref{fig:CombinedModel} shows all the THD models for each band. All model are worst case THD in the given band.
 
 \begin{figure}[H]
     \centering
     \tikzsetnextfilename{BandModelCombine}
     \input{figures/BandModelCombine.tex}
-    \caption{4 Interpolated model describing the worst case THD in each band.}
+    \caption{4 Interpolated models describing the worst case THD in each band.}
     \label{fig:CombinedModel}
 \end{figure}
 
-
-
-
-
-
 \section{Error sources}
-Few errors could have occurred during trials, since then only variable adjusted during between measurements were the gain of the amplifier. There were however problems with moving the setup from the control room were it was calibrated and then moved into the anechoic room. The
-calibration was done using an visual equalizer where the output was shown with a bar chart. Hence the data should bee seen with a tolerance of +/- 0.5 dB.
+Few errors could have occurred during trials, since the only variable adjusted during between measurements was the gain of the amplifier. There were however problems with moving the setup from the control room were it was calibrated and then moved into the anechoic room. The calibration was done using an visual equalizer where the output was shown with a bar chart. Hence the data should bee seen with a tolerance of +/- 0.5 dB.
 
 \section{Conclusion}
 
-From the test it can be concluded that the THD rises with the amplification of the system. It shows that the lower frequencies are much more prone to introduce THD when the SPL is increased. The test showed that frequencies around 132 Hz and down were the most critical and they should be subject to most limitation compared with the remaining bands.
+From the test it can be concluded that the THD increases with the gain of the system. It shows that lower frequencies are much more prone to introduce THD when the SPL is increased. The test shows that frequencies around 132 Hz and down were the most critical and they should be subject to most limitation compared with the remaining bands.
 
