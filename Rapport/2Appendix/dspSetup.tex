@@ -118,7 +118,7 @@ To setup the UART module in the TMS320C5515 following procedure is used:
 \item The line control register UART\_LCR to 0x80 in order to setup the baud rate. 
 \item The baud rate is set up by using following expression:
 \begin{equation}
-\text{DIVISOR} = \frac{f_{\text{UARTCLK}}}{16 \text{BAUDRATE}}
+\text{DIVISOR} = \frac{f_{\text{UARTCLK}}}{16\cdot \text{BAUDRATE}}
 \end{equation} 
 \item The divisor is now split up into LSB and MSB which are written to the registers UART\_DLL and UART\_DLL.
 \item The line control register UART\_LCR is changed back to 0x00 as the baud rate is now set up.
