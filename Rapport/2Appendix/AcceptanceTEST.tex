@@ -123,19 +123,15 @@ And is indexed in folders \scalebox{0.8}{\path{Measure_X}}, where X corresponds 
 \vspace*{-5mm}
 The Script used to create all graphs are located at:\\
 \scalebox{0.7}{
-\path{CD://Maalinger/Maalinger030316 - Loudspeaker test/Measurements030316/downsampling_graph.m}}\\
-Figures used in the following \ref{subsec:Raw_data_1} and Dataset 1 though 20 can be found compiled in a combined file at:
-\scalebox{0.7}{
-\path{CD://Maalinger/Maalinger030316 - Loudspeaker test/Measurements030316/AlleSamlet.pdf}}
-
+\path{CD://Maalinger/Maalinger030316 - Loudspeaker test/Measurements030316/downsampling_graph.m} and \path{FFT.m}}\\
 
 \subsection{Raw Data}
-
+The raw data is plotted showing the amplitude according to the time. It shows the characteristic of the same signal recorded in \autoref{app:journal_speaker_test}. Only three trials are showed to give an illustration of the increase in amplitude.
 \begin{figure}[H]
 	\centering
 	\tikzsetnextfilename{Driver2}
 	\input{figures/Driver2.tex}
-	\caption{Caption }
+	\caption{Amplitude output from the accelerometer played at -7 dB into the DSP}
 	\label{fig:Driver2Test}
 \end{figure}
 
@@ -143,7 +139,7 @@ Figures used in the following \ref{subsec:Raw_data_1} and Dataset 1 though 20 ca
 	\centering
 	\tikzsetnextfilename{Driver5}
 	\input{figures/Driver5.tex}
-	\caption{Caption }
+	\caption{Amplitude output from the accelerometer played at -4 dB into the DSP}
 	\label{fig:Driver5Test}
 \end{figure}
 
@@ -152,13 +148,14 @@ Figures used in the following \ref{subsec:Raw_data_1} and Dataset 1 though 20 ca
 	\centering
 	\tikzsetnextfilename{Driver10}
 	\input{figures/Driver10.tex}
-	\caption{Caption }
-	\label{fig:Driver10Test}
+	\caption{Amplitude output from the accelerometer played at 0 dB into the DSP}
+	\label{fig:Driver10TestAcc}
 \end{figure}
 
 
-
 \section{Analysis}
+
+The signals can be analyzed directly from the raw data. It shows, compared with the outputs from \autoref{app:journal_speaker_test}, the same signal but without the impulses at the end of the trial. The signals are analyzed even further. An FFT shows the frequency contents of the signal. This is shown on figure \autoref{fig:FFTAcceptTest}. It shows that the 80 Hz area no longer contains an rather large increase in amplitude which was present before as shown on figure \ref{fig:FFT_hit}
 
 \begin{figure}[H]
 	\centering
@@ -168,9 +165,11 @@ Figures used in the following \ref{subsec:Raw_data_1} and Dataset 1 though 20 ca
 	\label{fig:FFTAcceptTest}
 \end{figure}
 
-
-\section{Conclusion}
-
 \section{Error sources}
 
 Few errors could have occurred during trials, since then only variable adjusted during between measurements were the gain of the amplifier. There were however problems with moving the setup from the control room were it was calibrated and then moved into the anechoic room. The calibration was done using an visual equalizer where the output was shown with a bar chart Hence the data should bee seen with a tolerance of +/- 0.5 dB.
+
+
+\section{Conclusion}
+
+It can be concluded that the signal no longer creates a hit against the back plate. This was present before at the same amplitudes. The signal has now been attenuate enough to suppress these spikes. however the characteristics of the signal remains the same, even at higher amplitudes. It should however be noted that the trials were conducted in a scaled scenario where the gain of the amplifier was dampen by 3 dB, which would make the system activate at a lower threshold than 150 watts.  
