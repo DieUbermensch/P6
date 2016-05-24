@@ -27,6 +27,8 @@ ymax=250,
 ymajorgrids,
 ylabel={1.harmonic / 2.harmonic},
 xlabel={Measurement nr.},
+legend style={legend cell align=left,align=left,draw=white!15!black},
+every axis legend/.code={\let\addlegendentry\relax},
 axis background/.style={fill=white}
 ]
 \addplot [color=mycolor1,solid]

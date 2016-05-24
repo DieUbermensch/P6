@@ -8,9 +8,9 @@ The purpose of these tests is to test the designed decimation filter to verify t
 \section{Setup}
 The setup of this test are depicted in \autoref{fig:AcceptDec}, where the equipment is catalogued in \autoref{tab:UsedEquipmentDecimation}, and described as follows:
 
-\begin{itemize}
+\begin{itemize}\addtolength{\itemsep}{-.35\baselineskip} 
 \item Magnitude response and phase response will be measured with a NI-4461 based audio analyser. 
-\begin{itemize}
+\begin{itemize}\addtolength{\itemsep}{-.35\baselineskip} 
 \item Sampling frequency: 48000 Hz.
 \item Generator amplitude: 0.50000 V.
 \item Frequency sweep: 20 Hz - 20000 Hz.
@@ -47,7 +47,7 @@ The setup of this test are depicted in \autoref{fig:AcceptDec}, where the equipm
 \section{Procedure}
 The procedure for this experiment is described as follows:
 \vspace{-5mm}
-\begin{enumerate}
+\begin{enumerate}\addtolength{\itemsep}{-.35\baselineskip} 
 \item Setup the NI-4461 based audio analyser with the mentioned settings.
 \item Setup the system with the correct software as described based on which filter is tested.
 \item Start the sine sweep test.
@@ -58,7 +58,8 @@ The procedure for this experiment is described as follows:
 The raw data can be found on CD for decimation filter data, and interpolation filter data on CD, \\
 \path{CD://Maalinger/Maalinger220516 - Acceptance test for Interpolation and Decimation}   \\ 
 The following raw data logged during the experiment:
-\begin{itemize}
+\vspace{-5mm}
+\begin{itemize}\addtolength{\itemsep}{-.35\baselineskip} 
 \item Frequency [Hz]
 \item Amplitude [dB]
 \item Phase 	[deg]
@@ -72,10 +73,10 @@ Which is extracted using the matlab script found on CD, \\
 \path{CD://Maalinger/Maalinger220516 - Acceptance test for Interpolation and Decimation/File.mat},  \\
 and gives the magnitude and phase reponse of the filter.
 \section{Analysis}
-The analysis will verify the demands for both filters.
+To analyze the result, both phase an gain is plotted along with the needed requirements. It can be seen on figure \ref{fig:acceptDecMag} through figure \ref{fig:AcceptIntPhase}. It should be noted that the phase makes a shit at every 180 degrees. This is automatically done in the NI-4461. With this is mind is shows a linear phase
 
 \subsection*{Decimation filter}
-It is seen on \autoref{fig:AcceptDec} that the filter meets the requirements. It is also seen on figure \autoref{fig:AcceptDecPhase} that the filter has linear phase until the stopband which gives a constant groupdelay in up until the stopband which meet requirement \textbf{XX}. 
+It is seen on \autoref{fig:AcceptDec} that the filter meets the requirements. It is also seen on figure \autoref{fig:AcceptDecPhase} that the filter has linear phase until the stopband which gives a constant groupdelay in up until the stopband which meet with the desired requirements. 
 \begin{figure}[H]
 	\centering
 	\tikzsetnextfilename{acceptDecMag}
@@ -117,4 +118,4 @@ It is seen on \autoref{fig:AcceptDec} that the filter meets the requirements. It
 The generator on the NI-4461 card has a deviation of $\pm$ 0,008 dB from 20 Hz - 20 kHz. The analyzer on the NI-4461 card has a deviation of : $\pm$ 0,08 dB from 20 Hz - 92 kHz. 
 
 \section{Conclusion}
-It can be concluded from the two test that both filters meet their respective requirements.
+It can be concluded from the two test that both filters meet their respective requirements. They both attenuate enough and have a linear phase with a constant group delay.
