@@ -92,12 +92,9 @@ The producer for this experiment is described as follows:
 \end{enumerate}
 \item After sweep, stop recording all channels
 \item Save recordings as \path{.wav} file
-\item Repeat step 2 through 7 until the speaker breaks.
+\item Repeat step 2 through 6 for the different gain levels in the dsp.
 \end{enumerate}
 
-The \path{chirp.wav} are located at:\\
-\scalebox{0.7}{
-\path{CD://Maalinger/Maalinger210516}}\\
 
 
 %\begin{figure}[H]
@@ -109,26 +106,24 @@ The \path{chirp.wav} are located at:\\
 %\end{figure}
 
 
-
 \section{Data Extraction}
 
-
-It was possible to increase the volume by 19 dB until the loudspeaker unit got to damaged. The gain was linear increased by 1 dB, starting at 3 dB, until the 20th test were the loudspeaker unit failed. This results in 20 usable data sets.
+8 Different measurements were taken with different amplification levels.
 
 The recordings can be found on:\\
 \scalebox{0.7}{
-\path{CD://Maalinger/Maalinger030316 - Loudspeaker test/Measurements030316/}}
+\path{CD://Maalinger/Maalinger230516 - Acceptance Test/}}
 And is indexed in folders \scalebox{0.8}{\path{Measure_X}}, where X corresponds to the test number. Every measurements inside is denoted as:
 \begin{itemize}
-\item Accelerometer on driver: \scalebox{0.8}{\path{Acc driver_0XX}}
-\item Accelerometer in enclosure: \scalebox{0.8}{\path{Acc enclosure_0XX}}
-\item Microphone: \scalebox{0.8}{\path{Mic_0XX}}
-\item Playback loop: \scalebox{0.8}{\path{Reference_0XX}}
+\item Accelerometer on driver: \scalebox{0.8}{\path{Accelerometer_0XX}}
+\item Input Signal: \scalebox{0.8}{\path{Input_0XX}}
+\item Microphone: \scalebox{0.8}{\path{Microphone_0XX}}
+\item DPS Output signal: \scalebox{0.8}{\path{DSP_Output_0XX}}
 \end{itemize}
-
+\vspace*{-5mm}
 The Script used to create all graphs are located at:\\
 \scalebox{0.7}{
-\path{CD://Maalinger/Maalinger030316 - Loudspeaker test/Measurements030316/MeasurementAnalysis.m}}\\
+\path{CD://Maalinger/Maalinger030316 - Loudspeaker test/Measurements030316/downsampling_graph.m}}\\
 Figures used in the following \ref{subsec:Raw_data_1} and Dataset 1 though 20 can be found compiled in a combined file at:
 \scalebox{0.7}{
 \path{CD://Maalinger/Maalinger030316 - Loudspeaker test/Measurements030316/AlleSamlet.pdf}}
@@ -136,7 +131,43 @@ Figures used in the following \ref{subsec:Raw_data_1} and Dataset 1 though 20 ca
 
 \subsection{Raw Data}
 
+\begin{figure}[H]
+	\centering
+	\tikzsetnextfilename{Driver2}
+	\input{figures/Driver2.tex}
+	\caption{Caption }
+	\label{fig:Driver2Test}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\tikzsetnextfilename{Driver5}
+	\input{figures/Driver5.tex}
+	\caption{Caption }
+	\label{fig:Driver5Test}
+\end{figure}
+
+
+\begin{figure}[H]
+	\centering
+	\tikzsetnextfilename{Driver10}
+	\input{figures/Driver10.tex}
+	\caption{Caption }
+	\label{fig:Driver10Test}
+\end{figure}
+
+
+
 \section{Analysis}
+
+\begin{figure}[H]
+	\centering
+	\tikzsetnextfilename{FFTAccept}
+	\input{figures/FFTFAccept.tex}
+	\caption{Caption }
+	\label{fig:FFTAcceptTest}
+\end{figure}
+
 
 \section{Conclusion}
 
