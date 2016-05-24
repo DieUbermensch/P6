@@ -21,9 +21,10 @@ xmajorgrids,
 ymin=-80,
 ymax=10,
 ymajorgrids,
+legend style={legend cell align=left,align=left,draw=white!15!black},
 axis background/.style={fill=white}
 ]
-\addplot [color=mycolor1,solid,forget plot]
+\addplot [color=mycolor1,solid]
   table[row sep=crcr]{%
 0	-2.72268775884611\\
 8.14940577249576	-6.26988319208873\\
@@ -89,7 +90,9 @@ axis background/.style={fill=white}
 497.113752122241	-32.0034956949837\\
 505.263157894737	-33.3669402365593\\
 };
-\addplot [color=mycolor2,solid,forget plot]
+\addlegendentry{0 dB (168 Watt)};
+
+\addplot [color=mycolor2,solid]
   table[row sep=crcr]{%
 0	-32.1957485536602\\
 8.16048962937776	-36.9378667791654\\
@@ -155,7 +158,9 @@ axis background/.style={fill=white}
 497.789867392044	-33.9523443293345\\
 505.950357021421	-36.492157579368\\
 };
-\addplot [color=mycolor3,solid,forget plot]
+\addlegendentry{-4 dB (49 Watt)};
+
+\addplot [color=mycolor3,solid]
   table[row sep=crcr]{%
 0	-40.9386532536309\\
 8.42253026846815	-44.4944933967671\\
@@ -219,5 +224,8 @@ axis background/.style={fill=white}
 496.929285839621	-42.6724931603654\\
 505.351816108089	-57.4173187030205\\
 };
+\addlegendentry{-7 dB (14 Watt)};
 \end{axis}
+
+
 \end{tikzpicture}%
