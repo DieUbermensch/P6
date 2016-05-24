@@ -1,8 +1,12 @@
 \chapter{Accepttest of decimation and interpolation filter}\label{app:journal_decimationFilter}
-The purpose of these tests is to test the designed decimation filter to verify the magnitude response and the phase response to verify demand \textbf{XX}, verify the interpolation filter in relation to demand \textbf{XX} and verify that the interpolation filter does not affect the bandwidth of the decimation signal.
+The purpose of these tests is to test the designed decimation filter to verify the magnitude response and the phase response to verify The bands of the limiter complies with class 2 of IEC 6964 standard (2001). furthermore to verify the interpolation filter in relation to demand \textbf{XX} and verify that the interpolation filter does not affect the bandwidth of the decimation signal.
+
+
+
+
 
 \section{Setup}
-The setup of this test are depicted in \textbf{XX}, where the equipment is catalogued in \textbf{XX}, and described as follows:
+The setup of this test are depicted in \autoref{fig:AcceptDec}, where the equipment is catalogued in \autoref{tab:UsedEquipmentDecimation}, and described as follows:
 
 \begin{itemize}
 \item Magnitude response and phase response will be measured with a NI-4461 based audio analyser. 
@@ -11,9 +15,8 @@ The setup of this test are depicted in \textbf{XX}, where the equipment is catal
 \item Generator amplitude: 0.50000 V.
 \item Frequency sweep: 20 Hz - 20000 Hz.
 \end{itemize}
-\item The software of the system used for the  decimation test is found at CD. \todo[inline]{CD}
-\item The software of the system used for the  interpolation test is found at CD. \todo[inline]{CD}
-\item The software of the system used for the  comparison test is found at CD. \todo[inline]{CD}
+\item The software of the system used for the test is found at CD. \path{CD://Software/SystemFinal}
+\item The software is modified to only run the first decimation and interpolation filter.
 \end{itemize}
 
 
@@ -21,8 +24,8 @@ The setup of this test are depicted in \textbf{XX}, where the equipment is catal
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.9\textwidth]{AcceptDec.png}
+\caption{Test setup for decimation and interpolation filters}
 \label{fig:AcceptDec}
-\caption{Test setup.}
 \end{figure}
 
 \subsection*{Equipment used and AAU-no.}
@@ -33,7 +36,7 @@ The setup of this test are depicted in \textbf{XX}, where the equipment is catal
 \begin{tabular}{S[table-format=1]ccc} \toprule
     {Item} & {Description} & {AAU-no} \\ \bottomrule 
     1      &  NI-4461 based audio analyser  & 64640  \\ 
-    2      &  System  & x  \\  \bottomrule 
+    2      &  TMS320C5515 eZdsp  & NaN  \\  \bottomrule 
 \end{tabular}
 \caption{Table over equipment used in the test}
 \label{tab:UsedEquipmentDecimation}
@@ -52,18 +55,22 @@ The procedure for this experiment is described as follows:
 \end{enumerate}
 
 \section{Data Extraction}
-The raw data can be found on CD for decimation filter data, and interpolation filter data on CD. \todo[inline]{CD} The following raw data is given:
+The raw data can be found on CD for decimation filter data, and interpolation filter data on CD, \\
+\path{CD://Maalinger/Maalinger220516 - Acceptance test for Interpolation and Decimation}   \\ 
+The following raw data logged during the experiment:
 \begin{itemize}
 \item Frequency [Hz]
 \item Amplitude [dB]
 \item Phase 	[deg]
 \item THD 		[dB]
-\item HD 2 		[dB ref fund]
-\item HD 3		[dB ref fund]
-\item HD 4      [dB ref fund]
-\item HD 5      [dB ref fund]
+%\item HD 2 		[dB ref fund]
+%\item HD 3		[dB ref fund]
+%\item HD 4      [dB ref fund]
+%\item HD 5      [dB ref fund]
 \end{itemize} 
-Which is extracted using the matlab script found on CD \todo[inline]{CD}, and gives the magnitude and phase reponse of the filter.
+Which is extracted using the matlab script found on CD, \\
+\path{CD://Maalinger/Maalinger220516 - Acceptance test for Interpolation and Decimation/File.mat},  \\
+and gives the magnitude and phase reponse of the filter.
 \section{Analysis}
 The analysis will verify the demands for both filters.
 
