@@ -1,4 +1,4 @@
-\chapter{DSP setup}
+\chapter{DSP setup} \label{app:DSPSetup}
 
 The initialization is performed in a function called system\_init, which is shown in \autoref{listingSystemInit}. The first two lines of the function is the setup of the clock. SYS\_PCGCR1 and SYS\_PCGCR2 are defined as IO-ports to the registers namely 0x1c02 and 0x1c03. By setting SYS\_PCGCR1 and SYS\_PCGCR2 (Peripheral Clock Gating Configuration Registers) to 0 the clock is activated on all peripherals needing a clock. The next line SYS\_EXBUSSEL, which has the IO register address 0x1c00, is the external bus selector. The register determine which of the external peripheral IO unit is selected. By setting the register to 0x1100, SPI, GPIO, UART, I2S2 and I2S0 and, are activated. The system only uses the I2S0 and UART ports. The I$^2$C is afterwards initialized. The I$^2$C bus is used for communication between the TMS320C5515 and TLV320AIC3204.
 
