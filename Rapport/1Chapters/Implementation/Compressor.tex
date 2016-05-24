@@ -1,45 +1,45 @@
-\chapter{Compressor}
+\chapter{RMS Limiter}
 
-The compressor algorithm is implemented using an assembler routine. This is done to as conservative as possible regarding the amount of instructions used to perform the calculation. From \ref{cha:CompressorDesign} is was determined that a sample size of 16 samples were needed in order to detect every frequency in the specific band. In order to save calculation, the algorithm will be implemented as a running mean. Meaning a the oldest sample will be subtracted and the newest value will be added. The concept is graphically shown on \autoref{fig:RMSCompressorBlockImplmentation} where a sample is loaded and added to the sum, followed by the oldest sample being subtracted.
+The limiter algorithm is implemented using an Assembler routine. From \ref{cha:CompressorDesign} is was determined that a sample size of 16 samples were needed in order to detect every frequency in the specific band, while the 0 Hz to 530 Hz needs 128 samples. In order to save calculation, the algorithm will be implemented as a running mean. Meaning a the oldest sample will be subtracted and the newest value will be added. The concept is graphically shown on \autoref{fig:RMSCompressorBlockImplmentation} where a sample is loaded and added to the sum, followed by the oldest sample being subtracted.
 
 
 \begin{figure}[H]
     \centering
 \includegraphics[width=\textwidth]{Compressor}
-    \caption{Block diagram of the compressor algorithm}
+    \caption{Block diagram of the limiter algorithm}
     \label{fig:RMSCompressorBlockImplmentation}
 \end{figure}
 
-As mentioned the algorithm is written in assembler by the use of a circular buffer for the samples used in the mean. This size will determine indirectly determine the attack and release time. Both will increase simultaneously when enlarged in sample size. An RMS value is calculated as stated in \autoref{eq:RMScalculation}. This equation can become expensive in instruction time due to both a division and square root. These are both calculated iteratively and hence the computation time is determined by the wanted precision.
+As mentioned the algorithm is written in Assembler by the use of a circular buffer for the samples used in the mean. %This size will determine indirectly determine the attack and release time. Both will increase simultaneously when enlarged in sample size. 
+An RMS value is calculated as stated in \autoref{eq:RMScalculation}. This equation can become expensive in instruction time due to both a division and square root. These are both calculated iteratively in a processor and hence the computation time is determined by the wanted precision. \todo{kilde}
 
 \begin{equation}\label{eq:RMScalculation}
 \text{RMS}=\sqrt{\frac{1}{n}\cdot(x_1^2+x_2^2+\cdots+x_n^2)}
 \end{equation}
 
-When implemented the sample size is a value of $2^n$ since it is then possible to bit shift the value n times to create the division. This reduces the instructions drastically from a possible three digit number to one. In order to handle the square root term in the expression, the value calculated will be squared. This eliminates the need for the square root term. The expression is now reduced to addition and multiplication. This is shown in equation \ref{eq:RMScalculationUSED}.
+When implemented the sample size is a value of $2^n$ which means it is then possible to bit shift the value n times to create the division. This reduces the instructions drastically. In order to handle the square root term in the expression, the value calculated will be squared. This eliminates the need for the square root term. The expression is now reduced to addition and multiplication. This is shown in equation \ref{eq:RMScalculationUSED}.
 
 \begin{equation}\label{eq:RMScalculationUSED}
 RMS^2=(\frac{1}{n}\cdot(x_1^2+x_2^2+\cdots+x_n^2))^2
 \end{equation}
 
-\subsubsection*{Resolution}
-
-The system will be using a lookup table to determined the correct gain when the RMS is calculated. The RMS values will hence need to be quantized in order to reduce the amount of memory cells used. When the the steps are calculated it is important to determine the jumps size of the steps. The steps are not to be hearable. It is determined to use steps of 0.01 since it is subjectively seen as below the audible threshold when changing gain level. The reason for choosing a linear steps size rather than dB lies in the RMS value being of a linear scale. The RMS value will be changing linearly hence the lookup tables needs to be as well. The tables are constructed with by the use of \autoref{eq:Threslookup}. The equation calculates the needed attenuation when the threshold is exceeded and does so with a predefined step resolution. 
+The algorithm will therefore be using a lookup table to determined the correct gain when the RMS$^2$ is calculated. The RMS$^2$ values of the lookup table will hence need to be quantized in order to reduce the amount of memory cells used. The steps are not to be hearable so it is determined to use steps of 0.01 since it is subjectively seen as below the audible threshold when changing gain level. The RMS$^2$ value will be changing linearly hence the lookup table values needs to be as well. The table is constructed by the use of \autoref{eq:Threslookup}. The equation calculates the needed attenuation when the threshold is exceeded and does so with a predefined step resolution. 
 \vspace{-2mm}
 \begin{equation}\label{eq:Threslookup}
-\text{Threshold}=\frac{\text{Treshold}}{\text{Threshold}+((n-1) \cdot \text{Resolution}}\enhed{.}
+\text{Gain}=\frac{\text{Treshold}}{\text{Threshold}+((n-1) \cdot \text{Resolution}}\enhed{.}
 \end{equation}
-Where:\\
-N is the Index number in the lookup table$\enhed{rad/sample}$\\
+\begin{where}
+\va{$n$}{is the index number in the lookup table going from 0 to 1024}{.}
+\end{where}
 
 \vspace{2mm}
-When the equation has calculated for 1024 values, these are stored in a array and converted to Q15 written in hexadecimals for implementation into the DSP.
+When the equation has calculated for 1024 values, the are stored in a array and converted to Q15 written in hexadecimals for implementation into the DSP.
 The script for creating the values are located on a MATLAB script at: \\
-\path{CD://CD/Something Somethin}
+\path{CD://CD/Something Somethin} \todo{PATH}
 
 In the following listing \ref{listingCompressorMain} is a snippet of the entire RMS algorithm. Each line is commented for better overview.
 
-\begin{lstlisting}[language={[x86masm]Assembler}, caption = {Compressor Algorithm},label={listingCompressorMain}]
+\begin{lstlisting}[language={[x86masm]Assembler}, caption = {limiter Algorithm},label={listingCompressorMain}]
 _RMSband
 	; "Circular" data in Buffer
 	MOV #dataIn4,AC0				; Load address of input data into AC0
@@ -93,7 +93,7 @@ When the value has been determined it is multiplied with the MSB of sum. This yi
 
 \section{Release time}
 
-If no release time is implied to the compressor the compression will be too aggressive, which will result in a distorted sound. The release time is basically the time span for the compressor to release the gain reduction. Implementing a release time also ensures that the compression is not constantly switch between two different gains. The release time will be implemented as a first order IIR filter where the release time will be the time constant $\tau$. The general design and implementation procedure for IIR filters are described in \autoref{ch:IIR}. The release time is chosen to be 5 seconds, as 5 seconds is estimated to be sufficient.
+If no release time is implied to the limiter the compression will be too aggressive, which will result in a distorted sound. The release time is basically the time span for the limiter to release the gain reduction. Implementing a release time also ensures that the compression is not constantly switch between two different gains. The release time will be implemented as a first order IIR filter where the release time will be the time constant $\tau$. The general design and implementation procedure for IIR filters are described in \autoref{ch:IIR}. The release time is chosen to be 5 seconds, as 5 seconds is estimated to be sufficient.
 
 It is commonly known that an analog first order filter can be designed as following expression:
 \begin{equation}

@@ -1,4 +1,4 @@
-\chapter{Multirate implementation}
+\chapter{Multirate Implementation}
 The chapter will describe the three functions which is used in the multirate stages.
 \begin{itemize}
 \item void downFuncX(int16 dataIn);
@@ -8,7 +8,7 @@ The chapter will describe the three functions which is used in the multirate sta
 Where downFuncX is used to decimate and spectral invert the input sample, delayBX is used to delay a sample by number of samples and upFuncX is used interpolate the input sample (dataIn) and add the input sample (band) to the interpolated signal. In both downFuncX and upFuncX a filter function is used called FIR1 which runs a FIR filter on a data array, which will also be decribed in this chapter. 
 
 
-\section{Decimation and spectral subtraction implementation}
+\section{Decimation and Spectral Inversion implementation}
 The decimation block is seen on \autoref{fig:DownsamplingSimulationCopy}.
 \begin{figure}[H]
     \centering
@@ -127,7 +127,7 @@ where: \\
 
 DownOut1 is called, when "k1" equals 0, a new output is given in "down1" which holds the downsampled output. If "k1" is not 0 a new output is not given, and when "k1" equals 2 it is resets. The reason then for running the FIR routine every sample is because of the spectral inversion which requires a new output every sample. This concludes the implementation of the decimation block.
 
-\section{delay implemetation}
+\section{Delay Implemetation}
 The delay block delays a sample x times which is done by implementing a circular buffer with a pointer. The input bandX which is one of the outputs from the decimation block is read into a buffer which is the size of the delay the same way as data is read into the decimation buffer as seen on \autoref{ls:delay}.  
 
 \begin{lstlisting}[language={[x86masm]Assembler}, caption = {Delay algorithm.},label={ls:delay}]
@@ -145,7 +145,7 @@ The delay block delays a sample x times which is done by implementing a circular
 
 The pointer "D1" always points to the oldest sample which has been delayed x samples, so before it is overwritten it is moved to "TO" which is the output register of the function. When the sample has been moved the new sample can overwrite and it can thereby be delayed x times before it is outputted again.
 
-\section{Interpolation implementation}
+\section{Interpolation Implementation}
 The interpolation block is seen on \autoref{fig:upsamplingSimulationCopy}.
 \begin{figure}[H]
     \centering
