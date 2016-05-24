@@ -164,18 +164,26 @@ y[n] = 0.2Tx[n] + {\rm e}^{- 0.2\,T}y[n-1]
 The b-coefficients and a-coefficients from \autoref{eq:z_eq} be found as:
 \begin{align}
 b_{\text{IIR}} &= 0.2T \\
-a_{\text{IIR}} &= 0{\rm e}^{- 0.2\,T}
+a_{\text{IIR}} &= {\rm e}^{- 0.2\,T}
 \label{eq:Coef}
 \end{align}
 
+As IIR filter have a feedback loop, noise will be added because of the quantized output. To avoid this, double precision or noise shaping can be applied to overcome this problem. Since the accumulators are 40-bits, implementing a double precision algorithm requires splitting the IIR calculation up into two. Therefore noise shaping is used as it is simpler implement. Noise shaping works by feeding the lowest 16-bit of the output y[n] back into the next filter calculation before the quantization. The filter structure with noise shaping is shown in \autoref{fig:IIRFilterReleaseTime}. The coefficient can now be calculated by \autoref{eq:Coef} and then implemented using \autoref{eq:z_eq}. The coefficient are before implementation rewritten into Q15 format.
 
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{IIRFilterReleaseTime}
+\caption{Filter structure of IIR filter for release.}
+\label{fig:IIRFilterReleaseTime}
+\end{figure}
 
+The IIR filter is implemented in assembly and is seen in \autoref{listingCompressorMain}. 
 
 \begin{lstlisting}[language={[x86masm]Assembler}, caption = {Release time algorithm.},label={listingCompressorMain}]
 _IIRFilter
 	MOV #0, AC3				; Clear AC3
 	MOV *(#OutPrev), T1		; Load T1 with the previous calculated RMS gain
-	ADD *(#ErrorQ), AC3		; Add the quantatized bits from the previous calculation (Noise shaping)
+	ADD *(#ErrorQ), AC3		; Add the quantized bits from the previous calculation (Noise shaping)
 	MACM *(#bIIR),AC0,AC3	; Multiply and accumulate b coef and RMS gain from LUT
 	MACM *(#aIIR),T1,AC3	; Multiply and accumulate a coef and Previous filtered RMS gain
 	MOV AC3, *(#ErrorQ)		; Save lowest 16-bit as the quantation noise
@@ -203,6 +211,8 @@ checkGain:
 	CALLCC releaseOn, TC1
 	RET
 \end{lstlisting}
+
+The filter is executed when the routine for the RMS limiter is called. The filter is only applied when ever the previous output is lower than the current. This is to only apply the filter on the release and not attack.
 
 
 
