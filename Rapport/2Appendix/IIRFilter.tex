@@ -29,7 +29,7 @@ H(s) = \frac{G}{s-p} \Rightarrow h(t) = L^{-1}\left\lbrace \frac{G}{s-p} \right\
 \va{$p$}{is the pole location}{-}\\
 \end{where}
 
-Sampling the impulse response with the the sample period $T$ the impulse response may be expressed as $h[n] = Th(nT)$ where $t = nT$. The z-transformation is then applied on the impulse response h(t). The z-transformation is defined as:
+Sampling the impulse response with the the sample period $T$ the impulse response may be expressed as $h[n] = Th(nT)$ where $t = nT$. The z-transformation is then applied on the impulse response h(t). The z-transformation is defined as \citep{Oppenheim}:
 \begin{equation}
 X(z) = Z \left\lbrace x[n] \right\rbrace = \sum_{n=0}^{\infty}x[n]z^{-n}
 \end{equation}
@@ -59,7 +59,7 @@ By using the impulse invariant method the exact impulse response of the system i
 
 \subsection{Bilinear Transform}
 
-The bilinear transformation is another method to transform a transfer function in s-domain into the z-domain. Opposite to the impulse invariant method, which maps the imaginary axis of the s-plane into the unit circle of the z-domain linearly, the mapping of the imaginary axis by using bilinear transformation is non-linear. The non-linearity is caused by mapping the imaginary axis from $-\infty$ to $\infty$ of the s-plane into the unit circle of the z-domain from $-\pi$ to $\pi$. The relation between between the frequency axis in s-plane and unit circle in z-domain is defined as:
+The bilinear transformation is another method to transform a transfer function in s-domain into the z-domain. Opposite to the impulse invariant method, which maps the imaginary axis of the s-plane into the unit circle of the z-domain linearly, the mapping of the imaginary axis by using bilinear transformation is non-linear. The non-linearity is caused by mapping the imaginary axis from $-\infty$ to $\infty$ of the s-plane into the unit circle of the z-domain from $-\pi$ to $\pi$. The relation between between the frequency axis in s-plane and unit circle in z-domain is defined as \citep{Oppenheim}:
 
 \begin{equation} \label{eq:frequencyRelationS2Z}
 \omega = 2 \cdot \arctan \left( \frac{\Omega T_s}{2} \right) \Leftrightarrow \Omega = \frac{2}{T_s} \tan \left( \frac{\omega}{2} \right)
@@ -76,7 +76,7 @@ The mapping of the s-plane into the unit circle in z-domain is illustrated in \a
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.6\textwidth]{figures/IIR_s2zBil}
-\caption{Mapping the s-plane into z-domain.}
+\caption{Mapping the s-plane into z-domain \citep{Oppenheim}.}
 \label{fig:IIR_s2zBil}
 \end{figure}
 
@@ -96,11 +96,11 @@ Because of the non-linear relation between the imaginary axis in continuous-time
 	\caption{Frequency response of system in z-domain by using impulse invariant method.}
 	\label{fig:IIR_imp}
 \end{subfigure}
-\caption{Comparison of the frequency response by using bilinear transformation and impulse invariant method.}
+\caption{Comparison of the frequency response by using bilinear transformation and impulse invariant method \citep{Oppenheim}.}
 \label{fig:IIR_transforms}
 \end{figure}
 
-Because the impulse invariant method imitates the frequency response of the analog filter, the consequence is aliasing if the attenuation at $\frac{f_s}{2}$ is not high enough. If the attenuation is high enough at $\frac{f_s}{2}$ e.g. -60 dB the aliasing may be neglected. By using bilinear transformation aliasing will not arise since the attenuation at $\pi$ in theory is $-\infty$. To apply the bilinear transform following expression is used:
+Because the impulse invariant method imitates the frequency response of the analog filter, the consequence is aliasing if the attenuation at $\frac{f_s}{2}$ is not high enough. If the attenuation is high enough at $\frac{f_s}{2}$ e.g. -60 dB the aliasing may be neglected. By using bilinear transformation aliasing will not arise since the attenuation at $\pi$ in theory is $-\infty$. To apply the bilinear transform following expression is used \citep{Oppenheim}:
 \begin{align}
 s = \frac{2}{T_s}\frac{z-1}{z+1}
 \label{eq:bilinear_trans2}
@@ -110,12 +110,12 @@ All s-component is substituted with an expression consisting of z-component and 
 \section{Designing and implementing IIR filters}
 There are many different types of filters that can be designed. Therefore this section will mainly focus on some of the methods and procedures that can be used to design an IIR filter. An example of designing a low-pass Butterworth filter is thus provided.
 
-For a Butterworth filter the magnitude-squared function is given as:
+For a Butterworth filter the magnitude-squared function is given as \citep{Oppenheim}:
 \begin{align}
 |H(j\Omega)|^2 = \frac{1}{1+(\frac{\Omega}{\Omega_c})^{2N}}
 \label{eq:mag_sq}
 \end{align}
-From the requirements the order and cutoff frequency are determined. When the order is know the pole location can be determined. For a Butterworth filter, the pole location can be found with following expression.
+From the requirements the order and cutoff frequency are determined. When the order is know the pole location can be determined. For a Butterworth filter, the pole location can be found with following expression \citep{Oppenheim}.
 \begin{align}
 p_k = \Omega_c \cdot e^{\frac{j\pi}{2N}\cdot (2k+N-1)}, \quad k=0,1, ..., 2N-1
 \label{eq:det_poles}
@@ -137,7 +137,7 @@ To implement the digital filter the transfer function must be transformed back i
 Y(z) = \sum\limits_{k=0}^{M}b_kz^{-k}X(z) -\sum\limits_{k=1}^{N}a_kz^{-k}Y(z)
 \label{eq:z_domain_trans}
 \end{align}
-The time-shifting property is used as a part of the inverse z-transformation and is given as:
+The time-shifting property is used as a part of the inverse z-transformation and is given as \citep{Oppenheim}:
 \begin{align}
 x[n-k] \xleftrightarrow{Z} z^{-k} X(z)
 \label{eq:time_shifting}
