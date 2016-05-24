@@ -22,6 +22,21 @@ When implemented the sample size is a value of $2^n$ since it is then possible t
 RMS^2=(\frac{1}{n}\cdot(x_1^2+x_2^2+\cdots+x_n^2))^2
 \end{equation}
 
+\subsubsection*{Resolution}
+
+The system will be using a lookup table to determined the correct gain when the RMS is calculated. The RMS values will hence need to be quantized in order to reduce the amount of memory cells used. When the the steps are calculated it is important to determine the jumps size of the steps. The steps are not to be hearable. It is determined to use steps of 0.01 since it is subjectively seen as below the audible threshold when changing gain level. The reason for choosing a linear steps size rather than dB lies in the RMS value being of a linear scale. The RMS value will be changing linearly hence the lookup tables needs to be as well. The tables are constructed with by the use of \autoref{eq:Threslookup}. The equation calculates the needed attenuation when the threshold is exceeded and does so with a predefined step resolution. 
+\vspace{-2mm}
+\begin{equation}\label{eq:Threslookup}
+\text{Threshold}=\frac{\text{Treshold}}{\text{Threshold}+((n-1) \cdot \text{Resolution}}\enhed{.}
+\end{equation}
+Where:\\
+N is the Index number in the lookup table$\enhed{rad/sample}$\\
+
+\vspace{2mm}
+When the equation has calculated for 1024 values, these are stored in a array and converted to Q15 written in hexadecimals for implementation into the DSP.
+The script for creating the values are located on a MATLAB script at: \\
+\path{CD://CD/Something Somethin}
+
 In the following listing \ref{listingCompressorMain} is a snippet of the entire RMS algorithm. Each line is commented for better overview.
 
 \begin{lstlisting}[language={[x86masm]Assembler}, caption = {Compressor Algorithm},label={listingCompressorMain}]
