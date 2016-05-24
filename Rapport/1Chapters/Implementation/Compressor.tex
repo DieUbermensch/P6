@@ -23,10 +23,10 @@ When implemented the sample size is a value of $2^n$ which means it is then poss
 RMS^2=(\frac{1}{n}\cdot(x_1^2+x_2^2+\cdots+x_n^2))
 \end{equation}
 
-The algorithm will therefore be using a lookup table to determined the correct gain when the RMS$^2$ is calculated. The RMS$^2$ values of the lookup table will hence need to be quantized in order to reduce the amount of memory cells used. The steps are not to be hearable so it is determined to use steps of 0.01 since it is subjectively seen as below the audible threshold when changing gain level. The RMS$^2$ value will be changing linearly hence the lookup table values needs to be as well. The table is constructed by the use of \autoref{eq:Threslookup}. The equation calculates the needed attenuation when the threshold is exceeded and does so with a predefined step resolution. 
+The algorithm will therefore be using a lookup table to determined the correct gain when the RMS$^2$ is calculated. The RMS$^2$ values of the lookup table will hence need to be quantized in order to reduce the amount of memory cells used. The table is constructed by the use of \autoref{eq:Threslookup}. The equation calculates the needed attenuation and does so with a predefined step resolution. 
 \vspace{-2mm}
 \begin{equation}\label{eq:Threslookup}
-\text{Gain}=\frac{\text{Treshold}}{\text{Threshold}+((n-1) \cdot \text{Resolution}}\enhed{.}
+\text{Gain}=\frac{\text{Treshold}^2}{\frac{n}{1024}}\enhed{.}
 \end{equation}
 \begin{where}
 \va{$n$}{is the index number in the lookup table going from 0 to 1024}{.}
@@ -36,14 +36,14 @@ The algorithm will therefore be using a lookup table to determined the correct g
 \vspace{2mm}
 When the equation has calculated 1024 values, they are stored in a array and converted to Q15 written in hexadecimals for implementation into the DSP.
 The script for creating the values are located on a MATLAB script at: \\
-\path{CD://CD/Something Somethin} \todo{PATH}
+\path{CD://CD/Something Somethin}\todo{PATH}. \autoref{fig:LookUptableCal} shows the lookup table values plotted.
 
 \begin{figure}[H]
 	\centering
 	\tikzsetnextfilename{LookUP}
 	\input{figures/LookUp.tex}
-	\caption{Caption }
-	\label{fig:Driver10Test}
+	\caption{Values of the look up table.}
+	\label{fig:LookUptableCal}
 \end{figure}
 
 
@@ -71,7 +71,7 @@ _RMSband
 	ADD #1,*(#ptrBuff4)				; Increment the data pointer
 	CMP *(#ptrBuff4)==#16,TC1		; Check if the data pointer should reset to 0
 	CALLCC resetptrBuff4, TC1		; If data pointer should be reset, call reset routine
-	SFTL AC1, #-9					; Divide by X to get mean
+	SFTL AC1, #-10					; Divide by X to get mean
 	MOV AC1,*(#RMS3)				; Save value for GUI output
 	ADD #lookUpBand4, AC1			; Adjust the value to correct loaction in memory
 	MOV AC1, AR0					; Move gain value addr into AR0
@@ -93,14 +93,19 @@ Where: \\
 
 The algorithm starts by subtracting the oldest 16-bit squared sample from the sum. The new 16-bit sample in T0 is then squared and added to the sum. The 32-bit value is saved in sumHigh and sumLow. The pointer which keeps track of the samples is then incremented and checked if has reached 16 samples. If 16 samples has been calculated it will reset.
 
-The MSB of the sum is then used to locate the desired gain value in the look up table. The value calculated will act as an offset to the start address in the lookup table. Meaning if the input is so low it yields 0, it will take the first value in the table which is 1. Should the input be high enough to produce a number it will use that number as an offset to determine the prober address. This means that when the value is to be divided it should be shifted 4 times due to the amount of samples. Next it should shifted 5 times before added to the lookup tables start value. The reason of the last 5 shifts is due to the size of the lookup table, which is of 128 values. This corresponds with 7 bits. This removes the chance of overflow, since the possible maximum value will now take the 128'th place in the table. The complete Look up table can be found at \autoref{app:LookupTables}. 
+When the sum (20-bit) is calculated it is shifted by 5 because of the sample size of 16. It is shifted further by 5 because of the resolution of the look up table, which means that sum is shifted a total of 10 times while the band 0 Hz to 530 Hz is shifted 12 times because of a sample size of 128. 
 
-When the value has been determined it is multiplied with the MSB of sum. This yields again a 32-bit where the MSB is stored in T0, which is used as output of the function.
+The result will act as an offset to the start address in the lookup table, which gives a specific gain which should be multiplied with the input sample of the function.
+
+It should be noted that the actual threshold used in the implementation is not 0.6 but 0.3. This is due to an error discovered just before deadline which could not be fixed because of time constraints.
+%The MSB of the sum is then used to locate the desired gain value in the look up table. The value calculated will act as an offset to the start address in the lookup table. Meaning if the input is so low it yields 0, it will take the first value in the table which is 1. Should the input be high enough to produce a number it will use that number as an offset to determine the prober address. This means that when the value is to be divided it should be shifted 4 times due to the amount of samples. Next it should shifted 5 times before added to the lookup tables start value. The reason of the last 5 shifts is due to the size of the lookup table, which is of 128 values. This corresponds with 7 bits. This removes the chance of overflow, since the possible maximum value will now take the 128'th place in the table. The complete Look up table can be found at \autoref{app:LookupTables}. 
+
+%When the value has been determined it is multiplied with the MSB of sum. This yields again a 32-bit where the MSB is stored in T0, which is used as output of the function.
 
 
 \section{Release Time}
 
-If no release time is applied to the limiter the compression will be too aggressive, which will result in a distorted sound. The release time is basically the time span for the limiter to release the gain reduction. Implementing a release time also ensures that the compression is not constantly switch between two different gains. The release time will be implemented as a first order IIR filter where the release time will be the time constant $\tau$. The general design and implementation procedure for IIR filters are described in \autoref{ch:IIR}. The release time is chosen to be 5 seconds, as 5 seconds is estimated to be sufficient.
+If no release time is applied to the limiter the compression will be too aggressive, which will result in a distorted sound. The release time is basically the time span for the limiter to release the gain reduction. Implementing a release time also ensures that the compression is not constantly switching between two different gains. The release time will be implemented as a first order IIR filter where the release time will be the time constant $\tau$. The general design and implementation procedure for IIR filters are described in \autoref{ch:IIR}. The release time is chosen to be 5 seconds, as 5 seconds is estimated to be sufficient.
 
 It is commonly known that an analog first order filter can be designed as following expression:
 \begin{equation}
@@ -130,11 +135,11 @@ A pole is located at -0.2 and the cutoff frequency can be calculated as $f = \fr
 \label{fig:releaseTimeAnalog}
 \end{figure}
 
-It is seen that the -3 dB cutoff frequency is located at 0,0318 Hz in \autoref{fig:releaseTimeAnalogFreq} and the release time is 5 seconds as the 66\% rise time is located at 5 seconds. To implement the filter on a DSP, the transfer function is now transformed into z-domain. The chosen transformation is the impulse invariant. An explanation of the impulse invariant and bilinear transformation is provided in \autoref{ch:IIR}. By using the impulse invariant method following transfer function is obtained.
+It is seen that the -3 dB cutoff frequency is located at 0,0318 Hz in \autoref{fig:releaseTimeAnalogFreq} and the release time is 5 seconds as the 66\% rise time is located at 5 seconds. To implement the filter on a DSP, the transfer function is now transformed into z-domain. The chosen transformation is the impulse invariant. An explanation of the impulse invariant and bilinear transformation is provided in \autoref{ch:IIR}. By using the impulse invariant method the following transfer function is obtained.
 \begin{equation} \label{eq:releaseTF}
 H(z) = T\frac{0.2}{1-\text{e}^{-0.2T} z^{-1}}
 \end{equation} 
-The Sampling period, T, varies as it depends on which octave band it is implemented into. In the following example, the sampling period is $T = 2.667$ ms or $f_s = 375$ which corresponds to the sampling rate for the lowest octave band. The filter coefficient is obtained to quantized them in order to examine if the frequency response and step response of the filter still has the desired characteristic when implementing the filter in DSP. To apply quantization, the coefficients are first multiplied with $2^{15}$ (Q15 format) and then rounded. Afterwards the coefficients are divided by $2^{15}$ to obtain a floating point number. After the quantization, the frequency response and step response is now plotted to examine the filter.
+The Sampling period, T, varies as it depends on which octave band it is implemented into. In the following example, the sampling period is $T = 2.667$ ms or $f_s = 375$ which corresponds to the sampling rate for the lowest octave band. The filter coefficient is obtained and quantisized in order to examine if the frequency response and step response of the filter still has the desired characteristic when implementing the filter in DSP. To apply quantization, the coefficients are first multiplied with $2^{15}$ (Q15 format) and then rounded. Afterwards the coefficients are divided by $2^{15}$ to obtain a floating point number. After the quantization, the frequency response and step response is now plotted to examine the filter.
 
 \begin{figure}[H]
 \centering
@@ -150,7 +155,7 @@ The Sampling period, T, varies as it depends on which octave band it is implemen
 	\caption{Step response.}
 	\label{fig:releaseTimeDigitalStep}
 \end{subfigure}
-\caption{Frequency response and step response of the quantized digital filter. The sampling rate for the filter in this example is $f_s = 375$ Hz.}
+\caption{Frequency response and step response of the quantisized digital filter. The sampling rate for the filter in this example is $f_s = 375$ Hz.}
 \label{fig:releaseTime}
 \end{figure}
 
@@ -175,7 +180,7 @@ a_{\text{IIR}} &= {\rm e}^{- 0.2\,T}
 \label{eq:Coef}
 \end{align}
 
-As IIR filter have a feedback loop, noise will be added because of the quantized output. To avoid this, double precision or noise shaping can be applied to overcome this problem. Since the accumulators are 40-bits, implementing a double precision algorithm requires splitting the IIR calculation up into two. Therefore noise shaping is used as it is simpler implement. Noise shaping works by feeding the lowest 16-bit of the output y[n] back into the next filter calculation before the quantization. The filter structure with noise shaping is shown in \autoref{fig:IIRFilterReleaseTime}. The coefficient can now be calculated by \autoref{eq:Coef} and then implemented using \autoref{eq:z_eq}. The coefficient are before implementation rewritten into Q15 format.
+As IIR filter has a feedback loop, noise will be added because of the quantisized output. To avoid this, double precision or noise shaping can be applied to overcome the problem. Since the accumulators are 40-bits, implementing a double precision algorithm requires splitting the IIR calculation up into two. Therefore noise shaping is used as it is simpler to implement. Noise shaping works by feeding the lowest 16-bit of the output y[n] back into the next filter calculation before the quantization. The filter structure with noise shaping is shown in \autoref{fig:IIRFilterReleaseTime}. The coefficient can now be calculated by \autoref{eq:Coef} and implemented using \autoref{eq:z_eq}. The coefficient are before implementation rewritten into Q15 format.
 
 \begin{figure}[H]
 \centering
@@ -184,7 +189,7 @@ As IIR filter have a feedback loop, noise will be added because of the quantized
 \label{fig:IIRFilterReleaseTime}
 \end{figure}
 
-The IIR filter is implemented in assembly and is seen in \autoref{listingCompressorMain}. 
+The IIR filter is implemented in Assembly and is seen in \autoref{listingCompressorMain}. 
 
 \begin{lstlisting}[language={[x86masm]Assembler}, caption = {Release time algorithm.},label={listingCompressorMain}]
 _IIRFilter
@@ -219,7 +224,7 @@ checkGain:
 	RET
 \end{lstlisting}
 
-The filter is executed when the routine for the RMS limiter is called. The filter is only applied when ever the previous output is lower than the current. This is to only apply the filter on the release and not attack.
+The filter is executed when the routine for the RMS limiter is called. The filter is only applied when ever the previous output is lower than the current. This is to only apply the filter on the release and not attack. 
 
 
 
