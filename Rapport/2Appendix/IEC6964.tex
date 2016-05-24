@@ -1,7 +1,7 @@
 \chapter{IEC 6964 (2001): ELECTROACOUSTICS - OCTAVE-BAND AND FRACTIONAL-OCTAVE-BAND FILTERS} \label{app:IEC6964}
 This appendix will explain the main points of the standard IEC 6964 (2001) which are used to specify the requirements for the filters used in the octave-band and fractional-octave-band filters.
 
-The standard provides perfomance requirements for bandpass filters which comprises a spectrum analyzer. These requirements are relative attenuation to a center frequencies for a given filter set and bandwidth. This gives means that a spectrum analyzer may contain any numer of bandpass filters covering a desired frequency ranged as long as the requirements are upheld. 
+The standard provides performance requirements for bandpass filters which comprises a spectrum analyser. These requirements are relative attenuation to a center frequencies for a given filter set and bandwidth. This gives means that a spectrum analyzer may contain any number of bandpass filters covering a desired frequency ranged as long as the requirements are upheld. 
 
 There are three filter classes named class 0, class 1 and class 2 which sets the tolerances of the filter requirements where a higher class equals higher tolerances.  
 
@@ -11,7 +11,7 @@ b: Bandwidth designator (How many bands per octave) \\
 $f_r$: Highest filter center frequency \\
 $f_m$: Exact center frequency of all bandpass filters
 
-To calculate the exact midband frequencies of the bandpass filters the following equation is used
+To calculate the exact mid-band frequencies of the bandpass filters the following equation is used
 \begin{equation}
 f_m=(G^{x/b})(f_r) \enhed{Hz}
 \end{equation}
@@ -29,7 +29,7 @@ To calculate some higher normalized frequencies to the center frequency,  where 
 \Omega_{high}(k) = 1+\Big[(G^{1/(2b)}-1)/(G^{1/2}-1)\Big](\Omega-1)
 \end{equation}
 \begin{where}
-\va{$\Omega$}{eqauls $f/f_m$}{.}
+\va{$\Omega$}{equals $f/f_m$}{.}
 \end{where}
 
 To calculate the lower normalized frequencies of the band the reciprocal values are found by:
@@ -48,7 +48,7 @@ For calculating the attenuations of these calculated frequencies the following e
 \va{$\Omega_b$}{equals $\Omega_{high}$}{.}
 \end{where}
 
-A table can then be set up with relative frequencies and attenuations. The calculations of these numbers are done using the function StandardFunction2 in matlab explained in \autoref{app:FIR_Matlab}. A normalized frequency table for the requirements is as seen on \autoref{tb:IEC6964_att_freq}. 
+A table can then be set up with relative frequencies and attenuations. The calculations of these numbers are done using the function StandardFunction2 in matlab. A normalized frequency table for the requirements is as seen on \autoref{tb:IEC6964_att_freq}. 
 
 % Please add the following required packages to your document preamble:
 % \usepackage{multirow}

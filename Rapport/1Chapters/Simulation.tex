@@ -147,13 +147,13 @@ The total ouput as seen on \autoref{fig:TotalOutputSimulation} shows how the sig
 
 It is seen on \autoref{fig:TotalOutputZoomSimulation} that if no limiter is applied to the signal, the output is be a delayed version of the input. Because the input in the simulation is delayed as much of the total delay of the system only one signal can be seen on \autoref{fig:TotalOutputZoomSimulation}. This means that the summed up signal is in perfect phase when summed up because of the linear FIR filters and the interpolation does not affect the bandwidth of the decimated signal in any way.      
 
-\begin{figure}[H]
-    \centering
-    \tikzsetnextfilename{Output3Zoom}
-    \input{figures/Output3.tex}
-    \caption{Output of the time signal from 9.468s to 9.478s}
-    \label{fig:TotalOutputZoomSimulation}
-\end{figure}
+% \begin{figure}[H]
+%     \centering
+%     \tikzsetnextfilename{Output3Zoom}
+%     \input{figures/Output3.tex}
+%     \caption{Output of the time signal from 9.468s to 9.478s}
+%     \label{fig:TotalOutputZoomSimulation}
+% \end{figure}
 
 From the simulation it can be concluded that the system works as intended which leads to the actual implemtation of the system on the hardware platform. 
 
