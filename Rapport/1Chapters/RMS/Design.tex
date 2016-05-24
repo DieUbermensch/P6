@@ -17,17 +17,21 @@ From the equation it is possible to determine exactly the needed attenuation fac
 The attenuation values can the be adjusted according to the threshold desired. It is again important to know that every value above 1 will in the system be seen as 1, since a value lower than the threshold should always be sent through the system with no intervention.  
 
 
-\subsubsection{Sample Size}
+\subsection*{Sample Size}
 The system will indirectly be introducing an attack and release time which is determined through the sample time/size of the RMS algorithm. Increasing the samples size used for the RMS calculation will increase attack and release time since an increased sample size decreases every sample's influence on the RMS value. Hence it is important to determine the minimum needed sample size in order for the system to analyze properly. The minimum amount of samples used in the algorithm will be determined by looking at the lowest frequency in each band and determine how many samples needed to represent an entire period. The first band has a lower common audible frequency of 30 Hz. From equation \ref{eq:Minsample} it is possible to determine the minimum needed samples:
 \begin{equation}\label{eq:Minsample}
 \text{Needed samples} = \frac{f_s}{\text{Desired frequency}} = \frac{375 \text{ Hz}}{30 \text{ Hz}} = 12.5 \enhed{.}
 \end{equation} 
-In order to implement this most efficiently it is set to 16 samples which makes the division possible by bit-shifting 4 times.
+In order to implement this most efficiently it is set to 16 samples which makes the division possible by bit-shifting 4 times. Because the bands are octave bands the sample size is the same for every band accept 0 Hz to 530 Hz which is as follows:
+\begin{equation}
+\text{Needed samples} = \frac{3000 \text{ Hz}}{30 \text{ Hz}} = 100 \enhed{.}
+\end{equation} 
+The sample size is adjusted again in order to avoid division in the DSP which results in a sample size of 128 samples. 
 
-\section{Parameter Determination}
+\subsection*{Threshold}
 From \autoref{app:journal_speaker_test} it is assumed that the gain throughout the system will be 37 dB, however the maximum output from the DSP is 0.5 $\text{V}_\text{RMS}$ which means the gain should be 40 dB. With this gain it is possible to achieve sound pressures of upwards of 105 dB with a maximum input of 0.5 $\text{V}_\text{RMS}$. The limiters are only going to be activated when the power goes above the recommended 150 W. With a gain of 40 dB the linear gain is 100.
 
-Now it is possible to determine threshold in the DSP. From requirement 10 the threshold should be 150 W.  This means effectively that the threshold in the DSP is governed by equation \ref{eq:Thresgain} and determined in equation \ref{eq:Threscalculated}.
+It is now possible to determine the threshold in the DSP. From requirement 10 the threshold should be 150 W.  This means effectively that the threshold in the DSP is governed by equation \ref{eq:Thresgain} and determined in equation \ref{eq:Threscalculated}.
 \vspace{-3mm}
 \begin{align}
 \text{P}&=\frac{(\text{Threshold} \cdot \text{G})^2}{\text{R}} \enhed{W}\label{eq:Thresgain}
@@ -37,20 +41,20 @@ Now it is possible to determine threshold in the DSP. From requirement 10 the th
 
 %Now that the Threshold is determined for the entire system it is suitable to place the threshold lower for first and second band. Since the combined threshold will be larger than the individual bands. 
 
-\subsubsection*{Resolution}
+% \subsubsection*{Resolution}
 
-The system will be using a lookup table to determined the correct gain when the RMS is calculated. The RMS values will hence need to be quantized in order to reduce the amount of memory cells used. When the the steps are calculated it is important to determine the jumps size of the steps. The steps are not to be hearable. It is determined to use steps of 0.01 since it is subjectively seen as below the audible threshold when changing gain level. The reason for choosing a linear steps size rather than dB lies in the RMS value being of a linear scale. The RMS value will be changing linearly hence the lookup tables needs to be as well. The tables are constructed with by the use of \autoref{eq:Threslookup}. The equation calculates the needed attenuation when the threshold is exceeded and does so with a predefined step resolution. 
-\vspace{-2mm}
-\begin{equation}\label{eq:Threslookup}
-\text{Threshold}=\frac{\text{Treshold}}{\text{Threshold}+((n-1) \cdot \text{Resolution}}\enhed{.}
-\end{equation}
-Where:\\
-N is the Index number in the lookup table$\enhed{rad/sample}$\\
+% The system will be using a lookup table to determined the correct gain when the RMS is calculated. The RMS values will hence need to be quantized in order to reduce the amount of memory cells used. When the the steps are calculated it is important to determine the jumps size of the steps. The steps are not to be hearable. It is determined to use steps of 0.01 since it is subjectively seen as below the audible threshold when changing gain level. The reason for choosing a linear steps size rather than dB lies in the RMS value being of a linear scale. The RMS value will be changing linearly hence the lookup tables needs to be as well. The tables are constructed with by the use of \autoref{eq:Threslookup}. The equation calculates the needed attenuation when the threshold is exceeded and does so with a predefined step resolution. 
+% \vspace{-2mm}
+% \begin{equation}\label{eq:Threslookup}
+% \text{Threshold}=\frac{\text{Treshold}}{\text{Threshold}+((n-1) \cdot \text{Resolution}}\enhed{.}
+% \end{equation}
+% Where:\\
+% N is the Index number in the lookup table$\enhed{rad/sample}$\\
 
-\vspace{2mm}
-When the equation has calculated for 1024 values, these are stored in a array and converted to Q15 written in hexadecimals for implementation into the DSP.
-The script for creating the values are located on a MATLAB script at: \\
-\path{CD://CD/Something Somethin}
+% \vspace{2mm}
+% When the equation has calculated for 1024 values, these are stored in a array and converted to Q15 written in hexadecimals for implementation into the DSP.
+% The script for creating the values are located on a MATLAB script at: \\
+% \path{CD://CD/Something Somethin}
 
 
 
