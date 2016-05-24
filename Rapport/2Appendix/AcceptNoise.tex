@@ -1,29 +1,23 @@
-\chapter{Accepttest of RMS compressor}\label{app:journal_Frequency_Response}
-The purpose of this test is verify requirement \textbf{XX} concerning RMS compressor.
+\chapter{Accepttest of SNR}\label{app:journal_Frequency_Response_Noise}
+The purpose of this test is verify requirement 9 of the hardware platform, stating that the DSP must comply with IEC 60268-15 and 581-6 standard \citep{IEC60268}. This demands the DSP to have an SNR of > 58 dB. 
 
 \section{Setup}
-The setup of this test are depicted in \textbf{XX}, where the equipment is catalogued in \textbf{XX}, and described as follows:
+The setup of this test are depicted in \autoref{fig:AcceptNoise}, where the equipment is catalogued in \autoref{tab:UsedEquipmentAcceptNoise}, and described as follows:
 
 \begin{itemize}
-\item Frequency reponse will be measured by a Harmonie analyzer.
-\item A noise generator will generate the following for the test. 
-\begin{itemize}
-\item Sampling frequency: 48000 Hz.
-\item Generator amplitude: \textbf{X} V.
-\item Pink noise.
-\end{itemize}
-\item The software of the system used for the bypass test is found at CD. \todo[inline]{CD}
-\item The software of the system used for the stage1 test is found at CD. \todo[inline]{CD}
-\item The software of the system used for the full system test is found at CD. \todo[inline]{CD}
+\item Frequency reponse will be measured by a Harmonie 01dB analyzer.
+\item No signal we be applied in order to determine the amplitude of the noise which is directly translated as the SNR
+\item The software of the system test is found at \path{CD://Software/SystemFinal}
+\item The measurements are averaged over a period of 20 seconds.
 \end{itemize}
 
 
 \subsection*{Test Setup}
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.9\textwidth]{FreqReponseSetup.png}
-\label{fig:AcceptFreqResponse}
+\includegraphics[width=0.9\textwidth]{FreqReponseSetup1.png}
 \caption{Test setup.}
+\label{fig:AcceptNoise}
 \end{figure}
 
 \subsection*{Equipment used and AAU-no.}
@@ -33,12 +27,12 @@ The setup of this test are depicted in \textbf{XX}, where the equipment is catal
 \ra{1.3}
 \begin{tabular}{S[table-format=1]ccc} \toprule
     {Item} & {Description} & {AAU-no} \\ \bottomrule 
-    1      &  Harmonie  & 60923  \\ 
-    2      &  Harmonie PC  & 56524  \\ 
-    3      &  Sine/Noise generator type 1049  & 08233  \\  \bottomrule 
+    1      &  Harmonie 01dB  & 60923  \\ 
+    2      &  Fujitsu Siemens LifeBook with Harmonie software  & 56524  \\ 
+    3      &  TMS320C5515 eZdsp USB stick  & NaN  \\  \bottomrule 
 \end{tabular}
 \caption{Table over equipment used in the test}
-\label{tab:UsedEquipmentFreqResponse}
+\label{tab:UsedEquipmentAcceptNoise}
 \end{table}
 \vspace{-5mm}
 
@@ -47,16 +41,16 @@ The setup of this test are depicted in \textbf{XX}, where the equipment is catal
 The procedure for this experiment is described as follows:
 \vspace{-5mm}
 \begin{enumerate}
-\item Setup the noise generator with the mentioned settings.
 \item Setup the Harmonie and the Harmonie PC
-\item Start recording on the PC
+\item Start recording on the PC with an average of 20 seconds on each recording
 \item When finished save the results of the test.
+\item Run trials for both the developed system and a Looped signal
 \end{enumerate}
 
 \section{Data Extraction}
-The raw dat for the Bypass can be found at the CD \todo[inline]{CD}
-The raw dat for the Full system can be found at the CD \todo[inline]{CD}
-There are 30 bands from 20 Hz to 20 kHz, see \autoref{tb:freqBandsAppendix}, where a magnitude is given in dB for each band. 10 different measurements have been taken for both bypass and the full system. The mean and standard deviation (std) have been found for each band as has been plotted. The two bands 25 Hz and 20000 Hz has been removed from the plots because of large deviation and therefore not deemed usefull.
+The raw data the system can be found at the CD, \\
+ \path{CD://Maalinger/Maalinger200516 - Acceptance test for SNR}\\
+There are 30 bands from 20 Hz to 20 kHz, see \autoref{tb:freqBandsAppendixNoise}, where a magnitude is given in dB for each band. 1 measurement have been taken for both the bypass and the full system. The value was sampled over a period of 20 seconds. The mean for each measurement has been calculated. The two bands 25 Hz and 20000 Hz has been removed from the plots because of large deviation and therefore not deemed useful. 
 
 \begin{table}[H]
 \centering
@@ -68,11 +62,11 @@ There are 30 bands from 20 Hz to 20 kHz, see \autoref{tb:freqBandsAppendix}, whe
 2500 & 3150 & 4000 & 5000 & 6300 & 8000 & 10000 & 12500 & 16000 & 20000 \\ \hline
 \end{tabular}
 \caption{Frequency bands.}
-\label{tb:freqBandsAppendix}
+\label{tb:freqBandsAppendixNoise}
 \end{table}
 
 \section{Analysis}
-
+The discrete values from the test are plotted according to their frequency and showed in figure \ref{fig:FFreqNoiseComp}.
 \begin{figure}[H]
 	\centering
 	\tikzsetnextfilename{FreqNoiseComp}
@@ -81,9 +75,15 @@ There are 30 bands from 20 Hz to 20 kHz, see \autoref{tb:freqBandsAppendix}, whe
 	\label{fig:FFreqNoiseComp}
 \end{figure}
 
+From the measurements a mean for both the bypassed system and the full system is derived to be,
+\begin{itemize}
+	\item Mean bypass=-93.5633 dB
+	\item Mean system=-88.98 dB
+\end{itemize}
 
 \section{Error sources}
 
+Due to large deviations in the 25 Hz and 20 kHz region, the measurements for these bands have been discarded. However since the IEC 581-6 demands only and effective frequency spectrum of 40 Hz to 16 kHz, the measurements are still deemed valid.
 
 \section{Conclusion}
-From the test of bypass and fulle system it can be concluded that 
+From the test of the bypass and full system it can be concluded that the SNR is sufficiently high to accept the demands of the IEC 581-6 and 268-3 Standards. 
