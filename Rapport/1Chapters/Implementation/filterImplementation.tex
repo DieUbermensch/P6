@@ -34,14 +34,14 @@ A FIFO buffer is the simple of the two buffer types but it also requires more co
 \begin{subfigure}[t]{0.49\textwidth}
     \centering
 	\includegraphics[width=0.6\textwidth]{FIFO.png}
-	\label{fig:FIFO}
 	\caption{FIFO buffer.}
+	\label{fig:FIFO}
 \end{subfigure}
 \begin{subfigure}[t]{0.49\textwidth}
     \centering
 	\includegraphics[width=0.4\textwidth]{Circular.png}
-	\label{fig:Circular}
 	\caption{Circular buffer.}
+	\label{fig:Circular}
 \end{subfigure}
 \caption{Buffer types.}
 \label{fig:bufTypes}
@@ -71,8 +71,8 @@ When data is read the FIR routine is called which runs the FIR filter on the dat
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.9\textwidth]{FIRImp.png}
-\label{fig:FirImp}
 \caption{FIR implementation.}
+\label{fig:FirImp}
 \end{figure}
 \todo[inline]{Skal billedet laves selv?}
 Every tap is a coefficient which is multiplied with a sample and all multiplications are there after accumulated which gives the output of the filter. This is done with the MAC instruction, as seen in \autoref{ls:FIRimp}.
