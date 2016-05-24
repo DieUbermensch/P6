@@ -1,27 +1,27 @@
-\chapter{Main program implementation}
-The implementation is done using a main program which controls scheduling of the program while assembler functions are called to run critical algorithms. Therefore this chapter will go through the schedueling of the code, the different functions implemented, and how they are called in C to Assembler to get an overview of the implemented program. There are four function which can be called from the main program:
+\chapter{Main Program Implementation}
+The implementation is done using a main program which controls scheduling of the program while Assembler functions are called to run critical computation algorithms. Therefore this chapter will go through the schedueling of the code, the different functions implemented, and how they are called in C to Assembler to get an overview of the implemented program. There are four functions which can be called from the main program:
 \begin{itemize}
-\item downFunc, which is a decimation block showed in figure \textbf{XX}.
-\item upFunc, which is a interpolation block showed in figure \textbf{XX}.
+\item downFunc, which is a decimation block showed in \autoref{fig:DownsamplingSimulation}.
+\item upFunc, which is a interpolation block showed in \autoref{fig:UpsamplingSimulation}.
 \item delay, which is a delay block used to delay a sample by X samples.
-\item RMS, which is a RMS block showed in figure \textbf{XX}. 
+\item RMS, which is a RMS limiter block showed in figure \autoref{fig:RMSCompressorSimulation}. 
 \end{itemize}
-These blocks will be described in detail in later chapters while this chapter will only focus on the main program. The main code is implemented in C and not assembler because C code is a high language while Assembler is a low language. Assembler is much better computational wise because the programmer has much more control over the processor, but it is much harder to get an overview of a large software, therefore the main program is made in C and Assembler is used to run the critical algorithms which if made in C would result in an increased number of instructions which is not desired. 
+These blocks will be described in detail in later chapters while this chapter will only focus on the main program. The main code is implemented in C and not Assembler because C code is a high level language while Assembler is a low level language. Assembler is much better computational wise because the programmer has much more control over the processor, but it is much harder to get an overview of a large software, therefore the main program is made in C and Assembler is used to run the critical algorithms which if made in C would result in an increased number of instructions which is not desired. 
 
-The main program is first and foremost used to initialize all components of the program such as memory, registers and functions, refer to appendix \textbf{XX} for a detailed description of the setup of the audiocodec. 
+The main program is primarily used to initialize all components of the program such as memory, registers and functions, refer to appendix \autoref{app:DSPSetup} for a detailed description of the setup of the audiocodec and UART (Used for the GUI). 
 
-Memory for assembler is initialized using a big array in C called "array[20000]" where all variables, coefficients and data buffers etc is placed in. This is done by knowing the start adress of array and setting the variable in assembler relative to the start adress or initializing coefficient using for loops. An example of adressing variables in assembler is seen in \autoref{tb:schedueling}.
+Memory for Assembler is initialized using a big array in C called "array[20000]" where all variables, coefficients and data buffers etc. is placed in. This is done by knowing the start adress of array and setting the variable in Assembler relative to the start adress or initializing coefficient using for loops. An example of adressing variables in Assembler is seen in \autoref{listingAdressing}.
 
-\begin{lstlisting}[language={[x86masm]Assembler}, caption = {Adressing assembler},label={listingAdressing}]
+\begin{lstlisting}[language={[x86masm]Assembler}, caption = {Adressing Assembler},label={listingAdressing}]
 startAddr	.set	0x001860
 bCoeff		.set	0+startAddr
 dataIn1		.set	101+startAddr
 firOut1		.set	160+startAddr
 \end{lstlisting}
 
-The start adress of "array" is 0x001860 and from this start adress the different variales are given a memory slot relative to that start adress. C variables are either initialized into the array using foor loops or if they have no relation to the assembler files, they are just placed outside "array".
+The start adress of "array" is 0x001860 and from this start adress the different variales are given a memory slot relative to this start adress. C variables are either initialized into the array using foor loops or if they have no relation to the Assembler files, they are just placed outside "array".
 
-The main program handles the overall system described in \textbf{XX}. The multirate stages consisting of decimating and interpolating by two, results in a geometric series, where the first stage of decimation and interpolation runs every sample, the first decimated stage runs every second sample and so fourth. If all of the seven multistages are schedueled the following scheduele is obtained as seen on \autoref{tb:schedueling}.    
+The main program handles the overall system described in \autoref{sec:CompleteSystem}. The multirate stages consisting of decimating and interpolating by two, results in a geometric series, where the first stage of decimation and interpolation runs every sample, the first decimated stage runs every second sample and so fourth. If all of the seven multistages are schedueled the following scheduele is obtained for the multistage, as seen on \autoref{tb:schedueling}.    
 
 
 
@@ -79,7 +79,7 @@ Using this schedueling a sample consist of the following parts:
 \item RMS function if decimation is runned at stage 5, 6 or 7.
 \end{itemize}
 
-A listing example of a sample is given in \textbf{XX} 
+A listing example of a sample is given in \autoref{listingSample}. 
 
 \begin{lstlisting}[language=C, caption = {Sample 1},label={listingSample}]
 /////// SAMPLE 1 ///////
@@ -109,9 +109,9 @@ Where: \\
 - int16 delayVarX, contains a delayed output of a band. \\
 - int16 RMSXbandValue, contains a calculated RMS value of a band.
 
-The listing shows how a sample 1 of the schedueling in \autoref{tb:schedueling} is processed in the main program. A sample starts by waiting until a new sample has arrived which happens if "Rcv" and "I2S0\_IR" is equal to 1. The sample is then read into "audioIn" where a volume control is applied in line 4. Decimation is then done using downFunc1 with the input "audioIn" for the first stage. From downFunc1 two outputs "band1" and "down1" is read directly from. If decimation was done in the second stage the input for downFunc2 is the decimated signal "down1" and the output would be "band2" and "down2".
+The listing shows how a sample 1 of the schedueling in \autoref{tb:schedueling} is processed in the main program. A sample starts by waiting until a new sample has arrived which happens if "Rcv" and "I2S0\_IR" is equal to 1. The sample is then read into "audioIn" where a user controlled volume control is applied in line 4. Decimation is then done using downFunc1 with the input "audioIn" for the first stage. From downFunc1 two outputs "band1" and "down1" is read directly from their respective memory adress. If decimation was done in the second stage the input for downFunc2 is the decimated signal "down1" and the output would be "band2" and "down2".
 
-"Band1" is read into delayB1 which delays the sample X time dependent on which band it is, where the output is "delayVar1". The delayed sample is the read into the interpolation functions upFuncX. In this sample upFunc16, upFunc2 and upFunc1 runs. The input for the function is both a specific band and the upsampled signal. After the signal has been upsampled a sample has to be outputted, which is done in the same way as reading in an input. A while loop is repeated until the sample is ready to be outputtet, here either a bypassed signal or the upsampled can be ouputtet dependent on the variable "byPass". The sample is inputted in mono but outputtet as stereo. 
+"Band1" is read into delayB1 which delays the sample 5309 samples, where the output is "delayVar1". The delayed sample is then read into the interpolation functions upFuncX. In this sample upFunc16, upFunc2 and upFunc1 runs. The input for the function is both a specific band and the upsampled signal. After the signal has been upsampled a sample has to be outputted to the audio codec, which is done in the same way as reading in an input. A while loop is repeated until the sample is ready to be outputtet, here either a bypassed signal or the upsampled can be ouputtet dependent on the variable "byPass". %The sample is inputted in mono but outputtet as stereo. 
 
 
 
