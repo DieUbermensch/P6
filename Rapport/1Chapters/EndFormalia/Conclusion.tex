@@ -1,14 +1,20 @@
 \chapter{Conclusion}\label{cha:conclusion}
 This project has revolved around creating a loudspeaker protection system for a loudspeaker system in cooperation with DALI. DALI provided the platform and desired requirements for the system. The goal of this project was to develop a system which would reduce the chance of the coil hitting the back plate.
 
-The initial solution consisted of a feedback system utilizing accelerometer inputs to correct the signal according to the movement of the driver. It was possible to measure the response of the driver with precise accelerometers but the signals became too distorted and noisy when cheaper accelerometers were used. Another solution examined was measuring harmonic distortion with accelerometers. This proved to be problematic as distortion is hard to measurement when music is played. Due to complexity and time constraints a system build upon feedback was discarded.
+The initial solution consisted of a feedback system utilizing accelerometer inputs to correct the signal according to the movement of the driver. It was possible to measure the response of the driver with precise accelerometers but the signals became too distorted and noisy when cheaper accelerometers were used. Another solution examined was measuring harmonic distortion with accelerometers. This proved to be problematic as distortion is hard to measure when music is played. Due to complexity and time constraints a system build upon feedback was discarded.
 
 %Further analysis of the measured data showed that analyzing continuous multi-tone signals were problematic since every signal were of a random nature. Furthermore using a specific frequency could resolve in false positives and negatives since out of phase signals could change the signal which were to be feed back. 
 
-It was decided to base the solution on a feedforward system. Due to the fact that a feedback cannot detect a back plate hit before it has occurred a feedback system can determine whether a hit is about to occur. Microphone measurements and accelerometer data were used to determine a model for THD according to a given RMS value. With the models and recorded scenarios of back plate hits, it was possible to determine parameters for RMS limiters.
+It was decided to base the solution on a feedforward system. Due to the fact that a feedback cannot detect a back plate hit before it has occurred. A feedforward system can determine whether a hit is about to occur. Microphone measurements and accelerometer data were used to determine a model for THD according to a given RMS value. With the models and recorded scenarios of backplate hits, it was possible to determine parameters for RMS limiters.
 
 %limiting the signal fed to the speaker. 
 
-The system was implemented with FIR filters to reduce noise and utilize the constant group delay for spectral inversion. The spectral inversion along with a multi-rate system made it possible to realize a 4 band octave RMS limiter in the low frequency area of 500 Hz and downwards. The RMS limiter ensured that the signal did not exceed a desired threshold. The threshold was determined such that the speaker would not be exposed to high power at lower frequencies, which increases the chance of a hit. A first order IIR filter was then implemented to add a release time such that the limiter would be less audible.
+The system was implemented with FIR filters to reduce noise and utilize the constant group delay for spectral inversion. The spectral inversion along with a multi-rate system made it possible to realize a 4 band octave RMS limiter in the low frequency area of 500 Hz and downwards. The RMS limiter ensured that the signal did not exceed a desired threshold. The threshold was determined such that the loudspeaker would not be exposed to high power at lower frequencies, which increases the chance of a hit. A first order IIR filter was then implemented to add a release time such that the limiter would be less audible.
  
 The system was however not implemented correctly which resulted in gain variation in the RMS limiter. Combined with the resolution of the look up table not being scaled properly, it resulted in audible attenuation and incorrect attenuation of the signal. It was however possible to create a RMS limiter which attenuated the signal enough to avoid a backplate hit at 150 W.
+
+The problem statement was as follows:
+\begin{center}
+\textit{How can a real-time signal processing system in an active loudspeaker prevent the coil from hitting the backplate of the woofer and reduce distortion compared to peak limitation?}
+\end{center}
+It can be concluded from the above that the problem was solved with the implemented solution. 

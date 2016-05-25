@@ -12,11 +12,11 @@ This chapter governs the acceptance test of the requirements from \autoref{ch:re
 1			& The coil must not hit the backplate. 			& Appendix 								&	$\surd$ 		\\ 
  			&												& \ref{app:acceptance_test}				&	 				\\ \hline
 %
-2			& The system must run in real time	 			& Appendix								& 	$\surd$			\\ 
+2			& The system must run in real time.	 			& Appendix								& 	$\surd$			\\ 
 			& 												& \ref{app:acceptance_test}				&					\\ \hline
 %
 3			& The system must not have a total delay bigger & Section								&  $\times$			\\ 
-			& than 100 ms			 						& \ref{sec:Bypass}						&					\\ \hline
+			& than 100 ms.			 						& \ref{sec:Bypass}						&					\\ \hline
 %
 4			& The sample rate of the audio codec must   	& Appendix								& 	$\surd$			\\ 
 			& be at least 48 kHz.							&	CD									&					\\ \hline
@@ -27,18 +27,18 @@ This chapter governs the acceptance test of the requirements from \autoref{ch:re
 			&  be supported by the audio codec. 	 	 	&	CD					 				&					\\ \hline
 
 7			&  A bit resolution of 24 bit must supported 	& Appendix								&	$\surd$			\\ 
-			&  by the audio codec			 	 	 		&	CD					 				&					\\ \hline
+			&  by the audio codec.			 	 	 		&	CD					 				&					\\ \hline
 %
 8			& The DSP must have at least two I2S ports 		& Appendix								&	$\surd$			\\ 
-			& for interfacing with audio codec  			& 	CD		 					 		&					\\ \hline
+			& for interfacing with audio codec.  			& 	CD		 					 		&					\\ \hline
 %
 9			& Must comply with IEC 60268-15 and 581-6		& Appendix								&	$\times$		\\ 
-			& Standard								  	 	& \ref{app:journal_Frequency_Response}	&					\\ \hline
+			& Standard.								  	 	& \ref{app:journal_Frequency_Response}	&					\\ \hline
 %
-10			& The limiter must have a threshold at 150 W 	& Appendix								&	$\times$		\\ 
+10			& The limiter must have a threshold at 150 W. 	& Appendix								&	$\times$		\\ 
 			& 										        & \ref{app:journal_Frequency_Response}	&					\\ \hline
 
-11			& The limiter must have 4 bands 				& Chapter								&	$\surd$			\\ 
+11			& The limiter must have 4 bands. 				& Chapter								&	$\surd$			\\ 
 			& 												& \ref{ch:mainprogram}			 		&					\\ \hline
 
 12			& The bands of the limiter  must comply with 	& Appendix								&	$\surd$			\\ 
@@ -76,12 +76,12 @@ In section \ref{sec:Bypass} the delay of the system is determined to be 5333 sam
 
 \subsubsection*{Requirement 4}
 
-The Audio coded was initialized as 48 kHz, by writing to a specific register during boot-up. The TLV320AIC3204 are compatible with 44.1,48,96 and 192 kHz. Which is sufficient for the system. Further details are can be found at:
+The Audio coded was initialized as 48 kHz, by writing to a specific register during boot-up. Which is sufficient for the , hence the requirement is met. Further details are can be found at:
 \path{CD://Datasheet/tlv320aic3204.pdf}
 
 
 \subsubsection*{Requirement 5}
-From DALI it was desired to have at least 96 kHz. It is stated in the audio codec datasheet from the manufacturer, that the system is able of working at upwards of 192 kHz, which is sufficient, since this is double the wanted sampling frequency. Therefor the requirement is met. Further details are found at,\path{CD://Datasheet/tlv320aic3204.pdf}.
+From DALI it was desired to have at least 96 kHz. It is stated in the audio codec datasheet from the manufacturer, that the system is able of working at upwards of 192 kHz, which is sufficient, since this is double the wanted sampling frequency. Therefore the requirement is met. Further details are found at,\path{CD://Datasheet/tlv320aic3204.pdf}.
 
 
 \subsubsection*{Requirement 6}
@@ -89,7 +89,7 @@ The system was implemented with a bit resolution of 16 bit. The resolution is na
 
 \vspace*{-5mm}
 \subsubsection*{Requirement 7}
-From DALI it was desired to have at least 24-bit. It is stated in the audio codec datasheet from the manufacture that the system is able of running with a bit resolution of 32-Bit. The DSP is equipped with two ALU where only one has been implemented. Hence it is possible two run approximately the same algorithm with double precision. From the datasheet it is documented that the ALU's are 40-Bit, which should be sufficient to use. The datasheet for the codec and DSP can be found at: \\
+From DALI it was desired to have at least 24-bit resolution. It is stated in the audio codec datasheet from the manufacture that the system is able of running with a bit resolution of 32-Bit. The DSP is equipped with two ALU where only one has been used. Hence it is possible too run approximately the same algorithm with double precision. From the datasheet it is documented that the ALU's are 40-Bit, which should be sufficient to use. The datasheet for the codec and DSP can be found at: \\
 \path{CD://Datasheet/tms320C5515.pdf}\\
 \path{CD://Datasheet/tlv320aic3204.pdf}
 
@@ -114,14 +114,14 @@ The system complies with every requirements besides the maximum output of 2V RMS
 
 
 \subsubsection*{Requirement 10}
-The system was designed to have a threshold of 150 W. Since the look up table was not implemented correctly, it was not possible to perform a full scale test with destroying the speaker. Hence a scaled experiment was performed. The trials could not clearly show the 150 W threshold being withheld the requirement is not met.
+The system was designed to have a threshold of 150 W. Since the look up table was not implemented correctly, it was not possible to perform a full scale test with destroying the loudspeaker. Hence a scaled experiment was performed. The trials could not clearly show the 150 W threshold being withheld therefore the requirement is not met.
 \vspace*{-5mm}
 \subsubsection*{Requirement 11}
 
 From \autoref{cha:mainprogram} it was determined that the scheduling will be able to implement 5 bands with an RMS algorithm and limitation possibilities. This means that the requirement for at least four bands are met. 
 \vspace*{-5mm}
 \subsubsection*{Requirement 12}
-\autoref{fig:Acceptancetest4pic} shows that the amplitude response of the interpolation and decimation filters uphold the required filter response. The figures are depicted in greater detail in \autoref{app:journal_decimationFilter}. The filters also uphold a linear phase response, which can be seen in figure \ref{fig:AcceptIntPhase2} and \ref{fig:AcceptDecPhase2}
+\autoref{fig:Acceptancetest4pic} shows that the amplitude response of the interpolation and decimation filters uphold the required filter response. The figures are depicted in greater detail in \autoref{app:journal_decimationFilter}. The filters also upheld a linear phase response, which can be seen in figure \ref{fig:AcceptIntPhase2} and \ref{fig:AcceptDecPhase2}
 \begin{figure}[H]
 \centering
 \begin{subfigure}[t]{0.45\textwidth}
@@ -164,9 +164,9 @@ From \autoref{app:journal_Frequency_Response2} it is possible to see that the li
 \vspace*{-5mm}
 \subsubsection*{Requirement 14}
 
-Since the look up table table was not implemented correctly and the final test was made in scale, it was not possible to determine how much THD it ultimately would produce. The System was not measured against possible soft clipping hence no reference is made. It should however be mentioned that from Appendix \ref{app:acceptance_test} it was possible to show the output only adjusted in the critical area. The minimum correction of the signal would have a large chance of distorting less than soft clipping. But since this is not tested, the requirement is not met.
+Since the look up table was not implemented correctly and the final test was made in scale, it was not possible to determine how much THD it ultimately would produce. The system was not measured against possible soft clipping hence no reference is made. It should however be mentioned that from Appendix \ref{app:acceptance_test} it was possible to show the output only adjusted in the critical area. The minimum correction of the signal would have a large chance of distorting less than soft clipping. But since this is not tested, the requirement is not met.
 
-Concluding on the Acceptance test, the system was able to comply with 10 out of 14 requirements. The most problematic area was located in the RMS compressor. 
+Concluding on the acceptance test, the system was able to comply with 10 out of 14 requirements. The most problematic area was located in the RMS limiter. 
 
 
 
