@@ -1,4 +1,4 @@
-\chapter{Overall system design}
+\chapter{Overall System Design}
 The purpose of this chapter is to give an outline of the design ideas considered for the system. As the problem statement pointed out, the system will consist of a processing system which will allow for adjustment when in use, such that the speaker will not suffer from the coil hitting the backplate. As shown in \autoref{fig:speaker_block2} the system will be integrated within an active speaker where it will act as the processing system between the external audio source and the amplifier.
 
 \begin{figure}[H]
@@ -23,7 +23,7 @@ The purpose of this chapter is to give an outline of the design ideas considered
 The starting point of the design concept is to determine what type of processing system is going to be developed. Different plausible solution will be reviewed and evaluated in order to determine what solution would be optimally. 
 
 
-\section{Analog versus digital}
+\section{Analog Versus Digital}
 It is important to clarify if the processing system is going to be designed as an analog or digital system. Both types have their own advantages and disadvantages and the purposes of this section is to determine which platform will suit the system most. 
 
 The main difference between an analog and digital system is that the analog system works in continuous-time while the digital system works in discrete-time. For a analog system, values of a continuous signal at any given time is defined. For a digital system, values of a signal are only defined at specific points in time with a fixed resolution. The time difference between each point is defined through a sampling period $T_s$ and the resolution of each point is defined by the Analogue-to-Digital Converter (ADC).
