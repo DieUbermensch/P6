@@ -1,7 +1,7 @@
 \chapter{Signal Processing Tools}
 Generally speaking, any signal can be analysed and processed in time domain or frequency domain. If analysed in time domain, the analysis can for instance be extracting signal features and calculating the signal's RMS value. Analysing the signal in frequency domain will reveal the spectral content of the signal. Processing the signal in time domain could be e.g. filtering or gain control, while processing the signal in frequency domain could be multiplication in frequency domain. So the following sections will cover different relevant techniques for extracting and processing information from an audio signal in both time and frequency domain. A conclusion at the end will determine which analyzing and process methods should be used in the system.
 
-\section{Analysis in time} \label{sec:SignalTime}
+\section{Analysis in Time} \label{sec:SignalTime}
 The purpose of analysing in time domain is to analyse thresholds of a given signal so when analysing in time domain there are two main ways of analysing, peak or RMS which will be examined.
 \subsection*{Root-mean-square}
 RMS can be used as a tool to estimate the "mean" value of a signal. The problem with calculating a regular mean value for an audio signal is that the result will be 0 as the signal is approximately evenly distributed on both side of the amplitude axis. By using RMS this problem is avoided. The RMS is calculated as the square root of the mean value of the signal squared as shown in following equation:
@@ -17,7 +17,7 @@ In analog electronics, the RMS value of a AC voltage can be used to calculate th
 \subsection*{Signal threshold}
 A signal threshold can be used to detect whenever the amplitude of a signal is above a certain level. This can for instance help identify if the signal will result in a too loud playback. The threshold can be used to detect peaks above the threshold or be used to detect if the RMS values of the signal is above a level.
 
-\section{Analysis in frequency} \label{sec:SignalFreq}
+\section{Analysis in Frequency} \label{sec:SignalFreq}
 The purpose of analysing in frequency domain is to analyse the spectral content of a signal so when analysing in frequency domain there are two main ways of analysing, spectrum analyzer and fast fourier transform (FFT) which will be examined.
 
 \subsection*{Spectrum analyzer}
@@ -66,7 +66,7 @@ So if the sample frequency is high it requires a large number of samples to get 
 
 
 
-\section{Processing in time}
+\section{Processing in Time}
 The reason for processing a signal in time is its simplicity. A continous signal is a time signal so there is no need for an FFT and IFFT when processing in time. There are two common ways of processing a signal in time, dynamic gain control and equalizing  
 
 
@@ -200,7 +200,7 @@ Another type of parametric equalizer is the high- and low-shelf filters. They ha
 
 One of the advantages of implementing shelf filters is that they are good at applying a gain to a wide region. For instance if a attenuation of the bass region is desired, it may be more convient to bass attenuate the whole bass region including the subbass region, rather than only apply a gain centered around a center frequency in the bass.
 
-\section{Processing in frequency}
+\section{Processing in Frequency}
 The reason for processing a signal in frequency is its flexibility. When the signal is transformed from time to frequency no convolution is needed because convolution in time domain equals multiplication in frequency domain. This results in no addition is needed when filtering the signal in frequency domain, which means an algorithm can be parallelized which gives a much faster computation time. 
 
 Another advantage of processing in frequency domain is how easy it is to change the frequency response of a filter for example. This makes the implementation of a filter very simple. The disadvantage of processing in frequency domain is the transformation from time domain to frequency domain and back which could take op a lot of computation time in its own. 

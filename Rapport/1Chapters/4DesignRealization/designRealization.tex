@@ -17,7 +17,7 @@ Before designing the band-pass filters, RMS analysis, and RMS limiter, practical
 \end{itemize}
 
 
-\section{Phase response and group delay}
+\section{Phase Response and Group Delay}
 As the signal needs to be reconstructed in the end of the system, it is desirable that the reconstructed signal do not have frequency bands which are out of phase compared to the other bands. If the bands are out of phase the resulting sound may be unpleasant to listen to. Therefore a design requirement to the system is to ensure that the signals from each band are added together without changing the relative phase between each band.
 
 One of the properties in non-statical filters such as low-pass and band-pass filters are the phase shift. For filters such as the Butterworth low-pass filter, the phase shift begins at the frequency at one decade below the cutoff frequency and ends one decade above. The phase shift in-between for most analog filter except Bessel filter, have a non-linear phase response. Because the phase response is non-linear, the group-delay will likewise not be linear as seen on \autoref{fig:groupDelayIirPrev}.
