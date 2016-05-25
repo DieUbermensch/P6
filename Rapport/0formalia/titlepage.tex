@@ -44,7 +44,7 @@
 \pdfbookmark[0]{Titelblad}{label:titelblad}
 \aautitlepage{%
   \danishprojectinfo{
-    Flexible Equalizer for use in active speaker systems%title
+    Multi Band Limiter For Loudspeaker Protection%title
   }{%
     Digital Real-Time Signal Processing  %theme
   }{%
@@ -62,7 +62,7 @@
     }{
     
     }{%
-    5 % number of printed copies
+    4 % number of printed copies
   }
   {%
     May 26, 2016%\today % date of completion
@@ -72,5 +72,9 @@
   Fredrik Bajers Vej 7\\
   DK-9220 Aalborg Ø\\}
  }{
- This project concerns the development of a active loudspeaker protective system which prevents the loudspeaker coil from hitting the backplate. The implemented system is a feedforward system with five RMS limiters are implemented in a multi-rate system to distribute the limitation over multiple bands. The system were implemented into a TMS320C5515 EZDSP and most requirements were fulfilled. 
+ This project concerns the development of a real-time signal processing system in an active loudspeaker to prevent the coil from hitting the backplate of the woofer and reduce distortion compared to peak limitation. A DALI Zensor 5 AX acitve speaker was used to benchmark the speakers performance. \\
+ 
+ From the measurements several models and behavior could be determined. Through subjective listening test a multi-band limitation could be determined for protection. The implemented system resulted in a feedforward system with five RMS limiters implemented in a multi-rate system to distribute the limitation over multiple bands. The system were implemented into a TMS320C5515 EZDSP with a frequency response deviating only $\pm$ 0.4dB. \\
+ 
+ The system was implemented using C for the main code and Assembler for the instruction critical areas. The systems RMS limiter was however faulty implemented and did not limit properly. The system was ultimately able to attenuate the signal enough to keep the voice coil from hitting the backplate. 
 }
