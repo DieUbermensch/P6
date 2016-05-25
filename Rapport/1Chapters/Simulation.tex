@@ -1,5 +1,5 @@
 \chapter{Simulation}
-All components for the subsystems have now been designed, which leads to a simulation of the full system to make sure the system will be performing as expected when implemented in the DSP. The full system has 7 downsampling stages, which mean that the Fs will be $Fs/128=375 Hz$ in the last band. The decimation filter has a delay of 25 samples while the interpolation filter has a delay of 17 samples, therefore the band after the different downsampling stages must be delayed correctly so the bands can be summed up in phase. 
+All components for the subsystems have now been designed, which leads to a simulation of the full system to make sure the system will be performing as expected when implemented in the DSP. The full system has 7 downsampling stages, which means that the $f_S$ will be $f_s/128=375 Hz$ in the last band. The decimation filter has a delay of 25 samples while the interpolation filter has a delay of 17 samples, therefore the band after the different downsampling stages must be delayed correctly so the bands can be summed up in phase. 
 
 To calculate the delays the following formula is used for every band:
 \begin{equation}
@@ -12,11 +12,11 @@ Band 4: 605 sample delay (n going from 1 to 3). \\
 Band 5: 269 sample delay (n going from 1 to 2). \\
 Band 6: 101 sample delay (n going from 1 to 1). 
 
-While the last delay in band 8 is only the delay of the interpolation filter which equals 17: \\
+While the last delay in band 7 is only the delay of the interpolation filter which equals 17: \\
 Band 7: 17 sample delay.
 
 
-On \autoref{fig:OverallSimulation} an outline of the entire system is depicted. It shows how a signal is applied to the first downsampling and then applied to the following consecutive downsamplings. When the signal has reached the four lowest band, a RMS limiter is applied. Each band is delayed according to the calculated delays, upsampled and summed together, which is outputted. When upsampled three times a RMS limiter which covers the frequency range 0 to 530 Hz is applied, and afterwards a peak limiter is applied to make sure no transients are let through if the RMS limiter does not apply fast enough.  
+On \autoref{fig:OverallSimulation} an outline of the entire system is depicted. It shows how a signal is applied to the first downsampling and then applied to the following consecutive downsamplings. When the signal has reached the four lowest band, an RMS limiter is applied. Each band is delayed according to the calculated delays, upsampled and summed together, which is outputted. When upsampled three times an RMS limiter which covers the frequency range 0 to 530 Hz is applied, and afterwards a peak limiter is applied to make sure no transients are let through if the RMS limiter does not apply fast enough.  
 
 \begin{figure}[H]
 \centering
@@ -25,17 +25,17 @@ On \autoref{fig:OverallSimulation} an outline of the entire system is depicted. 
 \label{fig:OverallSimulation}
 \end{figure}
 
-In the simulation the following subsystem depicted on \autoref{fig:SubsystemSimulation}, are used. On \autoref{fig:DownsamplingSimulation} the downsampling system is shown. It shows how the signal is first filtered followed by subtracting it from the original signal and finally downsampled. 
+In the simulation the following subsystem depicted on \autoref{fig:SubsystemSimulation}, are used. On \autoref{fig:DownsamplingSimulation} the downsampling system is shown. It shows how the signal is firstly filtered followed by subtracting it from the original signal and finally downsampled. 
 
-\autoref{fig:UpsamplingSimulation} shows the upsampling system where it shows how the upsampling flow of the signal is. Namely how the signal is zero-padded followed by an lowpass filtering and then applied a gain of 2 corresponding with the up-samplings factor. It should be noted that the delay of the upsampler is incorporated into the delays calculated using \autoref{eq:delays}.  
+\autoref{fig:UpsamplingSimulation} shows the upsampling system where it shows how the upsampling flow of the signal is. Namely how the signal is zero-padded followed by an lowpass filtering and then applied a gain of 2 corresponding with the upsampling factor. It should be noted that the delay of the upsampler is incorporated into the delays calculated using \autoref{eq:delays}.  
 
-\autoref{fig:RMSCompressorSimulation} shows the limiter algorithm applied in the simulation. The limiter calculates the RMS where an if statement determined whether a gain of 1 or the model should be used. When the gain has been determined it is multiplied on before being ready for upsampling. 
+\autoref{fig:RMSCompressorSimulation} shows the RMS limiter algorithm applied in the simulation. The limiter calculates the RMS where an if statement determined whether a gain of 1 or the model should be used. When the gain has been determined it is multiplied on before being ready for upsampling. 
 \begin{figure}[H]
 \centering
 \begin{subfigure}[t]{0.49\textwidth}
     \centering
 \includegraphics[width=\textwidth, page=2]{Simulation}
-    \caption{Decimaation subsystem.}
+    \caption{Decimation subsystem.}
     \label{fig:DownsamplingSimulation}
 \end{subfigure}
 \begin{subfigure}[t]{0.49\textwidth}
@@ -59,7 +59,7 @@ During the simulation the following settings has been applied to the subsystems:
 \begin{itemize}
 \item The filters, both up and downsampling has been fitted with quantisized filter coefficients corresponding with a 16-bit fixed point architecture.
 \item The RMS limiter has a threshold of 0.6. 
-\item The peak limiter has a threshold of 0.9
+\item The peak limiter has a threshold of 0.9 peak.
 \item The up and downsamplings factor is 2.
 \end{itemize}
 
@@ -67,7 +67,7 @@ During the simulation the following settings has been applied to the subsystems:
 Under the simulation, the following settings are set/applied:
 \begin{itemize}
 \item The sampling frequency is 48 kHz.
-\item The test signal played with an amplitude of 1.
+\item The test signal played with an amplitude of 1 peak.
 \item The test signal is a logarithmic sweep from 30 Hz to 750 Hz during a 10 second period.
 \end{itemize}
 
@@ -83,13 +83,13 @@ In the following a 10 second simulation is showed with a graphical output of the
 \end{itemize}
 \item RMS output of (RMSBand1)(RMSBand2)(RMSBand3)(RMSBand4)(RMSBass) where:
 \begin{itemize}
-\item Blue shows the gain applied in each band
-\item Red shows the RMS value calculated in the band
-\item Black shows the output which is feed to the up-sampling system.
+\item Blue shows the gain applied in each band.
+\item Red shows the RMS value calculated in the band.
+\item Black shows the output which is feed to the upsampling system.
 \end{itemize} 
 \end{itemize}
 
-As described above, the signal is a sweep from 0 Hz to 530 Hz in a 10 seconds duration. Every band should attenuate the signal down to 0.6, while a RMS limiter afterwards limits the signal if it should not be attenuate enough in the individual bands. If this RMS limiter does not attenuate fast enough a peak limiter is applied afterwards. Snapshots of the individual RMS limiters are seen on \autoref{fig:SimulationComparisson}.    
+As described above, the signal is a sweep from 0 Hz to 530 Hz in a 10 seconds duration. Every band should attenuate the signal down to 0.6, while an RMS limiter afterwards limits the signal, if it should not be attenuate enough in the individual bands. If this RMS limiter does not attenuate fast enough a peak limiter is applied afterwards. Snapshots of the individual RMS limiters are seen on \autoref{fig:SimulationComparisson}.    
 
 \begin{figure}[H]
 \centering
@@ -131,7 +131,7 @@ The simulation shows that each band attenuates the signal when the sweep reaches
     \centering
     \tikzsetnextfilename{BandTopSimulation}
     \input{figures/BandTopSimulation.tex}
-    \caption{Top covering entire 500 Hz spectrum}
+    \caption{Top covering entire 530 Hz spectrum}
     \label{fig:BandTopSimulation}
 \end{figure}
 
@@ -141,20 +141,20 @@ The total ouput as seen on \autoref{fig:TotalOutputSimulation} shows how the sig
     \centering
     \tikzsetnextfilename{OutputSimulation}
     \input{figures/OutputSimulation.tex}
-    \caption{Output of the entire output in time during the 10 second simulation}
+    \caption{Output of the entire system during the 10 second simulation}
     \label{fig:TotalOutputSimulation}
 \end{figure}
 
-It is seen on \autoref{fig:TotalOutputZoomSimulation} that if no limiter is applied to the signal, the output is be a delayed version of the input. Because the input in the simulation is delayed as much of the total delay of the system only one signal can be seen on \autoref{fig:TotalOutputZoomSimulation}. This means that the summed up signal is in perfect phase when summed up because of the linear FIR filters and the interpolation does not affect the bandwidth of the decimated signal in any way.      
+It is seen on \autoref{fig:TotalOutputZoomSimulation} that if no limiter is applied to the signal, the output is a delayed version of the input. Because the input in the simulation is delayed as much of the total delay of the system only one signal can be seen on \autoref{fig:TotalOutputZoomSimulation}. This means that the summed up signal is in perfect phase when summed up because of the linear phase FIR filters and the interpolation does not affect the bandwidth of the decimated signal in any way.      
 
 \begin{figure}[H]
     \centering
     \tikzsetnextfilename{Output3Zoom}
     \input{figures/Output3.tex}
-    \caption{Output of the time signal from 9.468s to 9.478s}
+    \caption{Output of the time signal from 9.66s to 9.67s}
     \label{fig:TotalOutputZoomSimulation}
 \end{figure}
-
+\vspace*{-5mm}
 From the simulation it can be concluded that the system works as intended which leads to the actual implemtation of the system on the hardware platform. 
 
 
