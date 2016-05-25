@@ -18,11 +18,11 @@ An RMS value is calculated as stated in \autoref{eq:RMScalculation}. This equati
 \end{equation}
 
 When implemented the sample size is a value of $2^n$ which means it is then possible to bit shift the value n times to create the division. This reduces the instructions drastically. In order to handle the square root term in the expression, the value calculated will be squared. This eliminates the need for the square root term. The expression is now reduced to addition and multiplication. This is shown in equation \ref{eq:RMScalculationUSED}.
-
+\vspace*{-2mm}
 \begin{equation}\label{eq:RMScalculationUSED}
 RMS^2=(\frac{1}{n}\cdot(x_1^2+x_2^2+\cdots+x_n^2))
 \end{equation}
-
+\vspace*{-2mm}
 The algorithm will therefore be using a lookup table to determine the correct gain when the RMS$^2$ is calculated. The RMS$^2$ values of the lookup table will hence need to be quantisized in order to reduce the amount of memory cells used. The table is constructed by the use of \autoref{eq:Threslookup}. The equation calculates the needed attenuation and does so with a predefined step resolution. 
 \vspace{-2mm}
 \begin{equation}\label{eq:Threslookup}
@@ -46,7 +46,7 @@ The script for creating the values are located on a MATLAB script at: \\
 	\label{fig:LookUptableCal}
 \end{figure}
 
-
+\vspace*{-5mm}
 In the following listing \ref{listingCompressorMain} is a snippet of the entire RMS algorithm. Each line is commented for better overview.
 
 \begin{lstlisting}[language={[x86masm]Assembler}, caption = {limiter Algorithm},label={listingCompressorMain}]
@@ -82,7 +82,7 @@ _RMSband
 	MOV AC1, T0						; Move AC1 to T0 for function return
 	RET								; Return
 \end{lstlisting}
-
+\vspace*{-5mm}
 Where: \\
 - dataIn4, contains the input sample from the buffer. \\
 - ptrBuff4, is the circular buffer pointer. \\
@@ -90,6 +90,7 @@ Where: \\
 - sumHigh4, is a 16-bit value for storing MSB \\
 - sumLow4, is a 16-bit value for storing LSB \\
 - RMS3, is an address used for GUI output. \\
+\vspace*{-5mm}
 
 The algorithm starts by subtracting the oldest 16-bit squared sample from the sum. The new 16-bit sample in T0 is then squared and added to the sum. The 32-bit value is saved in sumHigh and sumLow. The pointer which keeps track of the samples is then incremented and checked if it has reached 16 samples. If 16 samples has been calculated it will reset.
 
@@ -160,9 +161,9 @@ The Sampling period, T, varies as it depends on which octave band it is implemen
 \caption{Frequency response and step response of the quantisized digital filter. The sampling rate for the filter in this example is $f_s = 375$ Hz.}
 \label{fig:releaseTime}
 \end{figure}
-
+\vspace*{-5mm}
 It is seen in \autoref{fig:releaseTime} that the frequency response and step response remains intact after quantization.
-
+\vspace*{-5mm}
 \subsection*{Implementation of Release Time}
 
 To implement the release time, the transfer function from \autoref{eq:releaseTF} is first reduced:
@@ -183,14 +184,14 @@ a_{\text{IIR}} &= {\rm e}^{- 0.2\,T}
 \end{align}
 
 As IIR filter has a feedback loop, noise will be added because of the quantisized output. To avoid this, double precision or noise shaping can be applied to overcome the problem. Since the accumulators are 40-bits, implementing a double precision algorithm requires splitting the IIR calculation up into two instructions. Therefore noise shaping is used as it is simpler to implement. Noise shaping works by feeding the lowest 16-bit of the output y[n] back into the next filter calculation before the quantization. The filter structure with noise shaping is shown in \autoref{fig:IIRFilterReleaseTime}. The coefficient can now be calculated by \autoref{eq:Coef} and implemented using \autoref{eq:z_eq}.
-
+\vspace*{-5mm}
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.7\textwidth]{IIRFilterReleaseTime}
 \caption{Filter structure of IIR filter for release.}
 \label{fig:IIRFilterReleaseTime}
 \end{figure}
-
+\vspace*{-5mm}
 The IIR filter is implemented in Assembly and is seen in \autoref{listingCompressorMain}. 
 
 \begin{lstlisting}[language={[x86masm]Assembler}, caption = {Release time algorithm.},label={listingCompressorMain}]
@@ -205,8 +206,7 @@ _IIRFilter
 	MOV *(#prevGain), T2
 	MOV HI(AC0),T3
 	CMP T3==T2, TC1
-	CALLCC checkGain, !TC1
-	
+	CALLCC checkGain, !TC1	
 	SFTL AC3, #-15
 	MOV AC3, *(#OutPrev)
 	MOV AC3, *(#prevGain)
@@ -216,12 +216,10 @@ releaseOn:
 	MOV AC3,AC0
 	SFTL AC0, #-15
 	SFTL AC0, #16
-	RET
-	
-
+	RET	
 checkGain:
-	MAX T3, T2				; if previous gain (T2) is less(RMS was bigger) than new gain (high bits of AC0), set CARRY = 1
-	CMP T3==T2, TC1
+	MAX T3, T2				; if previous gain (T2) is less(RMS was bigger) 
+	CMP T3==T2, TC1			; than new gain (high bits of AC0), set CARRY = 1
 	CALLCC releaseOn, TC1
 	RET
 \end{lstlisting}
