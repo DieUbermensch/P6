@@ -90,8 +90,6 @@ A DGC is also seen in more detail on \autoref{fig:limiter_block}.
 \label{fig:limiter_block}
 \end{figure}   
 
-\todo[inline]{Ref til Digital Audio Signal Processing bogen kapitel syv} 
-
 The level measurement block measures the RMS or peak value of the signal, the static curve applies a specific gain and the Attack/Release, where the attack determines how fast the DGC should react to inputs that are above the threshold and the release time determines how fast the DGC should release the gain variation after the signal level is under the threshold again. A high attack/release time means that the DGC is slow-reacting to inputs changes, thus the DGC will not apply gain variation if the input is only above or below the threshold for a short time.
 %time determines when the limiter should apply and stop applying to the signal.
 The static curve, more detailed described, is the curve which determines at which the noise gate threshold (NT), expander threshold (ET), compressor threshold (CT) and limiter threshold (LT) should apply as seen on \autoref{fig:limiter_static}. 
