@@ -1,4 +1,4 @@
-\section{Multi-rate signal processing}
+\section{Multi-rate Signal Processing}
 
 A multi-rate processing system is a system that takes advantages of having multiple sample rates of the original signal. For instance a 48 kHz sample rate may be downsampled to 24 kHz. This also means that the highest frequency component that fulfills the Nyquist criterion is maximum 12 kHz. To avoid loss of data a highpass filter must be applied to the original signal such that the signal is split into two bands between 0 Hz to 24 kHz. The advantage of having a multi-rate system, is that the filter order for a filter is decreased for a downsampled subsystem. By doing so, the amount of computation is thus also decreased, but the disadvantage is an increase in delay from the filter. 
 
