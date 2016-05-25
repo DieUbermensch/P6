@@ -47,7 +47,7 @@ A PC program is designed in C\# in Visual Studio as it is easy and straightforwa
 There are two tabs available for the user to use. Under settings the user must select the COM port in which the DSP is connected to. After establishing the connection the user can use the user controls in the application tab. From this tab the user can adjust the volume, equalize, bypass the system and observe the RMS value for each band. The next sections will discuss the communication protocol and implementation of each feature.
 
 
-\section{Volume Controller, Equalizer and Bypass}
+\section{Volume Controller, Equalizer and Bypass}\label{sec:Bypass}
 
 The data that is received by the DSP are parameters for the volume controller, equalizer or bypass. In order for the DSP to differentiate between each parameter a communication protocol is needed. The design of the communication protocol can be seen in \autoref{fig:communicationProtocolUART} and consist of a header-byte, a data-byte, and lastly a check-byte. 
 \begin{figure}[H]

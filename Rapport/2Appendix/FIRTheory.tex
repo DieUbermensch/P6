@@ -1,12 +1,12 @@
-\chapter{Finite Impulse Response} \label{app:FIR_theory}
-This appendix will describe the theory of the FIR filter design method, which includes the Kaiser window method and calculating the b coefficients.
+\chapter{Finite Impulse Response Filter} \label{app:FIR_theory}
+This appendix will describe the theory of the FIR filter design method, which includes the window methods, the Kaiser window method, and calculation of the filter coefficients.
 
 \section{Designing FIR Filters}
 
-Finite Impulse Response filters are a type of digital filter that can be implemented in a DSP. Opposite to the IIR filter the FIR, the impulse response of a FIR filter is only of finite length, because the FIR filter samples the impulse response by a finite number of samples, while the IIR is a recursive filter resulting in an infinite length. Another difference between IIR and FIR filters is the starting point of the design. The starting point of IIR filters is by designing an analog filter and then transforming it, while designing FIR do not require any analog filter design. This chapter will focus on two design methods for FIR filters which are the window method and Kaiser window method.
+Finite Impulse Response filters are a type of digital filter that can be implemented in a DSP. Opposite to the IIR filter, the impulse response of a FIR filter is only of finite length, because the FIR filter samples the impulse response by a finite number of samples, while the IIR is a recursive filter resulting in an infinite length. Another difference between IIR and FIR filters is the starting point of the design. The starting point of IIR filters is by designing an analog filter and then transforming it, while designing FIR do not require any starting point in the analog domain.
 
-\subsection*{Impulse Response of Low-pass Filter}
-The starting point for both design methods is the derivation of the impulse response of an ideal brick wall low-pass filter. The expression of the impulse response is used to determine the coefficients for the filter. The derivation of the impulse response is done by using the ideal frequency response as seen on \autoref{fig:IdealFilterApp} \citep{sou:FIRpart4}. 
+\subsection*{Impulse Response of Ideal Low-pass Filter}
+The starting point for FIR filters is the derivation of the impulse response of an ideal brick wall low-pass filter. The expression of the impulse response is used to determine the coefficients for the FIR filter. The derivation of the impulse response is done by using the ideal frequency response as seen on \autoref{fig:IdealFilterApp} \citep{sou:FIRpart4}. 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.6\textwidth]{figures/Ideal_filter.png}
@@ -65,12 +65,10 @@ The impulse response is still infinite and non-causal so the impulse response mu
 % Samples the impulse response of an ideal brick-wall filter
 
 \section{Window Method}
-The impulse response needs to be truncated. To truncate the impulse response a window function is applied. The most basic window function that can be applied is an rectangular window which basically cuts of the ends of the impulse response. After applying the window function the impulse response can be expressed as:
-
+The impulse response needs to be truncated. To truncate the impulse response a window function is applied. The most basic window function that can be applied is a rectangular window which cuts of the ends of the impulse response. After applying the window function the impulse response can be expressed as:
 \begin{equation}
 h[n]=h_d[n]\cdot w[n]\qquad\textrm{ where } w[n]\neq0 \textrm{ for } 0<n<M
 \end{equation}
-
 An example is shown in \autoref{fig:FIRWindow}, where a Hamming window is applied to the truncated impulse response of a order of 40. The Hamming window prevents the impulse response from stopping abruptly.
 
 \begin{figure}[H]
@@ -92,7 +90,6 @@ An example is shown in \autoref{fig:FIRWindow}, where a Hamming window is applie
 \caption{Applying a Hamming window to a truncated impulse response.}
 \label{fig:FIRWindow}
 \end{figure} 
-
 If no window function is applied the truncated impulse response, the window function is per default a rectangular window. The rectangular window attenuates fast as the main lope but the attenuation at the first side is not high. Applying the Hamming window reduces the steepness but the attenuation at the first side lope is bigger. Also the pass-band ripple is reduced. This is illustrated in \autoref{fig:FIRFrequencyResp}.
 
 \begin{figure}[H]
@@ -103,7 +100,7 @@ If no window function is applied the truncated impulse response, the window func
 \label{fig:FIRFrequencyResp}
 \end{figure}  
 
-A disadvantages of using the window method is it is hard to design a FIR filter from requirements i.e. stop-band and pass-band requirements. Another FIR design method which is similar to the window method is the Kaiser window method. As the window function of the Kaiser window depends on a beta-value, the beta-value can be interchanged in order to obtained the desired frequency response. The requirements for a lowpass filter should be stated as on \autoref{fig:filter_req}.
+A disadvantages of using the window method is, it is hard to design a FIR filter from requirements i.e. stop-band and pass-band are defined. Another FIR design method which is similar to the window method is the Kaiser window method. As the window function of the Kaiser window depends on a beta-value, the beta-value can be changed in order to obtain the desired frequency response which fulfils the requirements. The requirements for a low-pass filter should be stated as on \autoref{fig:filter_req}.
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{figures/filter_req.png}
@@ -121,11 +118,11 @@ From these the following conversion are made:
 To obtain a transfer function for a filter fulfilling the requirement the Kaiser window method is used.
 
 \section{Kaiser Window Method}
-The kaiser window method calculates the order of the filter and the beta value of the Kaiser window which is will be used to calculating the coefficients of the filter.
+The Kaiser window method calculates the order of the filter and the beta value of the Kaiser window which is be used to calculating the coefficients of the filter.
 
-First the specification of the filter must be established: $\omega_p$, $\omega_s$, $\delta_p$ and $\delta_s$. For the kaiser window method the peak error $\delta$ will be the same in both the passband and stopband. which means: $\delta_p = \delta_s$ and the $\delta$ used is the lowest.
+First the specification of the filter must be established: $\omega_p$, $\omega_s$, $\delta_p$ and $\delta_s$. For the Kaiser window method the peak error $\delta$ will be the same in both the pass-band and stop-band which means: $\delta_p = \delta_s$ and the $\delta$ used is the lowest.
 
-With the specifications established the cutoff frequency of the filter is found:
+With the specifications established, the cutoff frequency of the filter is found:
 \begin{equation}
 \omega_c=\frac{\omega_p+\omega_s}{2}
 \end{equation}
@@ -142,7 +139,7 @@ The $\beta$ can the be calculated from:
     0,0, & A<21.
 \end{array}\right.
 \end{equation}
-and the order M can be calculated from:
+And the order M can be calculated from:
 \begin{equation}
 M=\frac{A-8}{2,285\triangle\omega}
 \end{equation}
@@ -154,7 +151,7 @@ w[n]=\left\{
     0, & \textrm{otherwise},
 \end{array}\right.
 \end{equation}
-Where $I_0$ is the zeroth-order modified Bessel function. The order of the FIR filter and the coefficients of the kaiser window can now be calculated and applied to the coefficients of the FIR filter which are derived below.
+Where $I_0$ is the zeroth-order modified Bessel function. The order of the FIR filter and the coefficients of the Kaiser window can now be calculated and applied to the coefficients of the FIR filter.
 
 \subsection*{Implementation of FIR Filters}
 
@@ -162,7 +159,7 @@ The transfer function of a FIR filter is expressed as:
 \begin{equation}
 H(z) = \sum_{k=0}^{M} b_k z^{-k}
 \end{equation}
-The $b_k$ coefficients can be found by sampling the impulse response by M samples and afterwards applying a window function. The FIR only have zeros, thus cannot be unstable. To implement the filter the transfer function must be transformed into discrete time domain. First the transfer function is rewritten into following form:
+The $b_k$ coefficients can be found by sampling the impulse response by M samples and afterwards apply the sampled impulse response a window function. The FIR only have zeros, thus cannot be unstable. To implement the filter the transfer function must be transformed into discrete time domain. Firstly, the transfer function is rewritten into following form:
 \begin{equation}
 H(z) = \frac{Y(z)}{X(z)} = \sum_{k=0}^{M} b_k z^{-k} \Leftrightarrow Y(z) = \sum_{k=0}^{M} b_k z^{-k} X(z) 
 \end{equation}

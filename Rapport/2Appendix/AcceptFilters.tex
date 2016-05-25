@@ -1,8 +1,5 @@
 \chapter{Accepttest of decimation and interpolation filter}\label{app:journal_decimationFilter}
-The purpose of these tests is to test the designed decimation filter to verify the magnitude response and the phase response to verify The bands of the limiter complies with class 2 of IEC 6964 standard (2001). furthermore to verify the interpolation filter in relation to demand \textbf{XX} and verify that the interpolation filter does not affect the bandwidth of the decimation signal.
-
-
-
+The purpose of these tests is to test the designed decimation filter to verify if the magnitude response and the phase response of the bands complies with class 2 of IEC 6964 standard (2001). The requirement for the interpolation filter is that it must not affect the bandwidth of the decimation signal.
 
 
 \section{Setup}
@@ -12,7 +9,7 @@ The setup of this test are depicted in \autoref{fig:AcceptDec}, where the equipm
 \item Magnitude response and phase response will be measured with a NI-4461 based audio analyser. 
 \begin{itemize}\addtolength{\itemsep}{-.35\baselineskip} 
 \item Sampling frequency: 48000 Hz.
-\item Generator amplitude: 0.50000 V.
+\item Generator amplitude: 0.5 V.
 \item Frequency sweep: 20 Hz - 20000 Hz.
 \end{itemize}
 \item The software of the system used for the test is found at CD. \path{CD://Software/SystemFinal}
@@ -51,7 +48,6 @@ The procedure for this experiment is described as follows:
 \item Setup the NI-4461 based audio analyser with the mentioned settings.
 \item Setup the system with the correct software as described based on which filter is tested.
 \item Start the sine sweep test.
-\item When finished save the results of the test.
 \end{enumerate}
 
 \section{Data Extraction}
@@ -69,14 +65,14 @@ The following raw data logged during the experiment:
 %\item HD 4      [dB ref fund]
 %\item HD 5      [dB ref fund]
 \end{itemize} 
-Which is extracted using the matlab script found on CD, \\
+Which is extracted using the MATLAB script found on CD, \\
 \path{CD://Maalinger/Maalinger220516 - Acceptance test for Interpolation and Decimation/File.mat},  \\
-and gives the magnitude and phase reponse of the filter.
+and gives the magnitude and phase response of the filter.
 \section{Analysis}
-To analyze the result, both phase an gain is plotted along with the needed requirements. It can be seen on figure \ref{fig:acceptDecMag} through figure \ref{fig:AcceptIntPhase}. It should be noted that the phase makes a shit at every 180 degrees. This is automatically done in the NI-4461. With this is mind is shows a linear phase
+To analyse the result, both phase and gain is plotted along with the needed requirements. It should be noted that the phase makes a shift at every 180 degrees. This is automatically done in the NI-4461. With this is mind is shows a linear phase.
 
 \subsection*{Decimation filter}
-It is seen on \autoref{fig:AcceptDec} that the filter meets the requirements. It is also seen on figure \autoref{fig:AcceptDecPhase} that the filter has linear phase until the stopband which gives a constant groupdelay in up until the stopband which meet with the desired requirements. 
+It is seen in \autoref{fig:AcceptDec} that the filter meets the requirements. It is also seen in figure \autoref{fig:AcceptDecPhase} that the filter has linear phase which gives a constant group delay in up until the stop-band which meets the requirement of linear phase. 
 \begin{figure}[H]
 	\centering
 	\tikzsetnextfilename{acceptDecMag}
@@ -88,7 +84,7 @@ It is seen on \autoref{fig:AcceptDec} that the filter meets the requirements. It
 	\centering
 	\tikzsetnextfilename{acceptDecPhase}
 	\input{figures/acceptDecPhase.tex}
-	\caption{Decimation Phase response .}
+	\caption{Decimation phase response.}
 	\label{fig:AcceptDecPhase}
 \end{figure}
 
@@ -110,12 +106,8 @@ It is seen on \autoref{fig:AcceptDec} that the filter meets the requirements. It
 	\label{fig:AcceptIntPhase}
 \end{figure}
 
-
-\subsection*{Compare test}
-
-
 \section{Error sources}
-The generator on the NI-4461 card has a deviation of $\pm$ 0,008 dB from 20 Hz - 20 kHz. The analyzer on the NI-4461 card has a deviation of : $\pm$ 0,08 dB from 20 Hz - 92 kHz. 
+The generator on the NI-4461 card has a deviation of $\pm$ 0,008 dB from 20 Hz - 20 kHz. The analyser on the NI-4461 card has a deviation of : $\pm$ 0,08 dB from 20 Hz - 92 kHz. If the delayed input signal is not completely in phase with the output signal from the system, the frequency response will not be measured correct.
 
 \section{Conclusion}
 It can be concluded from the two test that both filters meet their respective requirements. They both attenuate enough and have a linear phase with a constant group delay.

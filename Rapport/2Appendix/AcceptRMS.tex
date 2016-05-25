@@ -1,8 +1,8 @@
-\chapter{Accepttest of RMS Limiter}\label{app:journal_Frequency_Response}
-The purpose of this test is verify requirement \textbf{XX} concerning RMS compressor.
+\chapter{Accepttest of RMS Limiter}\label{app:journal_Frequency_Response2}
+The purpose of this test is verify requirement 10, 11, 12, 13, and 14 concerning the RMS limiter.
 
 \section{Setup}
-The setup of this test are depicted in \textbf{XX}, where the equipment is catalogued in \textbf{XX}, and described as follows:
+The setup of this test are depicted in \autoref{fig:AcceptFreqResponse}, where the equipment is catalogued in \autoref{tab:UsedEquipmentFreqResponse}, and described as follows:
 
 \begin{itemize}
 	\item Frequency response will be measured by a Harmonie analyzer.
@@ -88,5 +88,10 @@ Plotting the RMS values of the different bands stated in \autoref{tb:freqBands4}
 Due to large deviations in the 25 Hz and 20 kHz region, the measurements for these bands have been discarded. However since the IEC 581-6 demands only and effective frequency spectrum of 40 Hz to 16 kHz, the measurements are still deemed valid.
 
 \section{Conclusion}
+
+From \autoref{fig:RMSlimiter} it is hard to conclude whether the RMS limiter works or not. Under the development of the RMS limiter, the RMS limiter showed good results when lower thresholds where used. By using lower thresholds the system where able to keep the RMS value below 500 Hz under the threshold. In the acceptance test where the threshold was changed to the calculated threshold, it seen like RMS limiter is never activated. 
+
+
+% showed that the RMS limiter works as es can be concluded that the RMS limiter does not attenuate as intended.
 
 %From the test it can be concluded that the RMS limiter does not functions as expected. The gain values for the lowest frequencies are not correct since they are not attenuated equally. A not is created in the begin which can not be accounted for. There is however a slight attenuation of the lower frequencies present.  

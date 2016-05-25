@@ -1,13 +1,12 @@
 \section{Distortion} \label{app:distortion}
-
-Lastly it is important to know what type of sound is wanted in the system. What is desirable and what is unwanted. This is known as distortion. This section covers only the fundamentals of distortion, particular harmonic distortion, and describes what this project will be trying to achieve and avoid. Harmonic distortion is usually negative and unwanted. Distortion however, comes in two categories:
+This section covers the fundamentals of distortion, particular harmonic distortion, and describes what types of distortion should be avoided. Harmonic distortion is in hi-fi systems usually unwanted. Distortion however, comes in two categories:
 \vspace{-2mm}
 \begin{itemize}
 \item Odd Distortion
 \item Even Distortion
 \end{itemize}
 \vspace{-2mm}
-These are classified by looking at the fundamental frequency and is then categorized by how far away, indexed by whole integers, they are from the fundamental frequency. Looking at an ordinary tone, such as $A_4$ which is a tone at 440 Hz the concept is easier to describe. This tone is usually used to tune audio equipment such as guitars and alike. Conforming \autoref{fig:ODDevenTHD} a spectral analysis of $A_4$ tone is shown. \autoref{fig:EvenTHD} shows the 440 Hz tone with even harmonics and \autoref{fig:OddTHD} with odd harmonics. 
+These are classified by looking at the fundamental frequency and is then categorized by how far away, indexed by whole integers, they are from the fundamental frequency. Looking at an ordinary tone, such as $A_4$ which is a tone at 440 Hz the concept is easier to describe. This tone is usually used to tune music instruments. Conforming \autoref{fig:ODDevenTHD} a spectral analysis of $A_4$ tone is shown. \autoref{fig:EvenTHD} shows the 440 Hz tone with even harmonics and \autoref{fig:OddTHD} with odd harmonics. 
 
 \begin{figure}[H]
 \centering
@@ -28,7 +27,7 @@ These are classified by looking at the fundamental frequency and is then categor
 \label{fig:ODDevenTHD}
 \end{figure}
 
-Generally speaking it is desirable to have even harmonics since they are perceived as "warm and full" sound. Odd harmonics are perceived as "cold and metallic". The reason why it usually is most desirable, is due to the fact that all even harmonics represent the same tone but at one octave higher in frequency. This can be seen in \autoref{tab:NoteA4}, where the tones $A_5$, $A_6$, $A_7$ corresponds to the second, fourth and eight harmonic.
+Generally speaking it is desirable to have even harmonics since they are perceived as "warm and full" in sound. Odd harmonics are perceived as "cold and metallic". The reason why even harmonics is desirable, is due to the fact that the 2nd and 4th harmonics represent the same tone but at one octave higher in frequency. This can be seen in \autoref{tab:NoteA4}, where the tones $A_5$, $A_6$, $A_7$ corresponds to the second, fourth and eight harmonic.
 
 \begin{table}[H]
 \centering
@@ -49,11 +48,11 @@ Generally speaking it is desirable to have even harmonics since they are perceiv
 \label{tab:NoteA4}
 \end{table}
 
-Looking at \autoref{fig:OddTHD} where a lot of odd harmonics have been introduced there are no direct connection. Should a odd harmonic be of equal magnitude to the fundamental a entirely  new tone will be introduced. This is usually not desirable, but can in certain musics genres still be the goal. This is why you can not directly say you want even or odd harmonics, but in most cases the goal is even harmonics if any.
+%Looking at \autoref{fig:OddTHD} where a lot of odd harmonics have been introduced there are no direct connection. Should a odd harmonic be of equal magnitude to the fundamental a entirely new tone will be introduced. This is usually not desirable, but can in certain musics genres still be the goal. This is why you can not directly say you want even or odd harmonics, but in most cases the goal is even harmonics if any.
 
 \subsection{Total Harmonic Distortion (THD)}\label{subsec:THDmath}
 
-A way to specify the total amount harmonic distortion created by a system is  the term Total Harmonic Distortion (THD). A common system that creates harmonic distortions when a signal is passed through, is an analog audio amplifier. Because of non-linearity in active analog components used in an amplifier such as a transistor, harmonics will always appear. THD is therefore a way to indirectly specify the total amount of non-linearity of the system. Although harmonic distortion may affect the audio undesirably, some amplifiers, such as a tube amplifier, creates desirable harmonic distortions when the amplifier is overloaded sometimes referred as "tube sound", where a strong 2nd harmonic is present. 
+A way to specify the total amount harmonic distortion created by a system is the term Total Harmonic Distortion (THD). A common system that creates harmonic distortions when a signal is passed through, is an analog audio amplifier. Because of non-linearity in active analog components used in an amplifier such as a transistor, harmonics will always appear. THD is therefore a way to indirectly specify the total amount of non-linearity of the system. Although harmonic distortion may affect the audio undesirably, some amplifiers, such as a tube amplifier, creates desirable harmonic distortions when the amplifier is overloaded sometimes referred as "tube sound", where a strong 2nd harmonic is present. 
 
 The amount of THD is given in percentage. A low THD indicates a low amount of harmonic distortion while a high THD indicates the opposite. To determine the THD the definition of Harmonic Distortion (HD) is needed and is given as:
 

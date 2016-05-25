@@ -1,5 +1,5 @@
 \chapter{Accepttest of Frequency response}\label{app:journal_Frequency_Response}
-The purpose of this test is verify requirement 9 concerning the linearity of the frequence responce of the system. The system must comply with IEC 60268-15 and 581-6 standard \citep{IEC60268}. Meaning the frequency must not deviate more than $\pm$ 1.5 dB
+The purpose of this test is verify requirement 9 concerning the linearity of the frequency response of the system. The system must comply with IEC 60268-15 and 581-6 standard \citep{IEC60268}. Meaning the frequency must not deviate more than $\pm$ 1.5 dB
 
 \section{Setup}
 The setup of this test are depicted in \autoref{fig:AcceptFreqResponseActual}, where the equipment is catalogued in \autoref{tab:UsedEquipmentFreqResponseActual}, and described as follows:
@@ -55,7 +55,7 @@ The procedure for this experiment is described as follows:
 \section{Data Extraction}
 The raw date from the test can be found at the CD, \\ 
 \path{CD://Maalinger/Maalinger210516 - Acceptance test for Frequency response}\\
-There are 30 bands from 20 Hz to 20 kHz, see \autoref{tb:freqBands2}, where a magnitude is given in dB for each band. 10 different measurements have been taken for both bypass and the full system. The mean and standard deviation (std) have been found for each band as has been plotted. The two bands 25 Hz and 20000 Hz has been removed from the plots because of large deviation and therefore not deemed useful.
+There are 30 bands from 20 Hz to 20 kHz, see \autoref{tb:freqBands2}, where a magnitude is given in dB for each band. 10 different measurements have been taken for both bypass and the full system. The mean and standard deviation (std) have been found for each band and has been plotted. The two bands 25 Hz and 20000 Hz has been removed from the plots because of large deviation and therefore not deemed useful.
 
 \begin{table}[H]
 \centering
@@ -76,7 +76,7 @@ The data is plotted according to their frequency. Each point is plotted with the
 	\centering
 	\tikzsetnextfilename{FreqRespBypass}
 	\input{figures/FreqRespBypass.tex}
-	\caption{Frequency reposnse of bypassed signal with std´s. Mean=-55.264 dB (red line). Std=$\pm$0.121 dB (dashed red line).}
+	\caption{Frequency response of bypassed signal with std´s. Mean=-55.264 dB (red line). Std=$\pm$0.121 dB (dashed red line).}
 	\label{fig:FreqRespBypass}
 \end{figure}
 
@@ -84,7 +84,7 @@ The data is plotted according to their frequency. Each point is plotted with the
 	\centering
 	\tikzsetnextfilename{FreqRespSystem}
 	\input{figures/FreqRespSystem.tex}
-	\caption{Frequency reposnse of full system signal with std´s. Mean=-55.677 dB (red line). Std=$\pm$0.205 dB (dashed red line).}
+	\caption{Frequency response of full system signal with std´s. Mean=-55.677 dB (red line). Std=$\pm$0.205 dB (dashed red line).}
 	\label{fig:FreqRespSystem}
 \end{figure}
 
@@ -92,15 +92,14 @@ The data is plotted according to their frequency. Each point is plotted with the
 	\centering
 	\tikzsetnextfilename{FreqRespComp}
 	\input{figures/FreqRespComp.tex}
-	\caption{Frequency reposnse of bypassed and full system signal. Bypass (blue), Full system (Orange), mean difference = 0.4130 dB}
+	\caption{Frequency response of bypassed and full system signal. Bypass (blue), Full system (Orange), mean difference = 0.4130 dB}
 	\label{fig:FreqRespComp}
 \end{figure}
 
 
-
 \section{Error sources}
 
-Due to large deviations in the 25 Hz and 20 kHz region, the measurements for these bands have been discarded. However since the IEC 581-6 demands only and effective frequency spectrum of 40 Hz to 16 kHz, the measurements are still deemed valid.
+Due to large deviations in the 25 Hz and 20 kHz region, the measurements for these bands have been discarded. However since the IEC 581-6 demands only and effective frequency spectrum of 40 Hz to 16 kHz, the measurements are still valid.
 
 \section{Conclusion}
 From the test of both the bypassed and full system it can be concluded that the frequency response is linear and comply with the IEC 581-6 withhold a maximum deviation of $\pm$1.5 dB.
