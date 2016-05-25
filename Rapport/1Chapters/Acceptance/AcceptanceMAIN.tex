@@ -1,6 +1,6 @@
 \chapter{Acceptance test}
 
-This chapter governs the acceptance test of the requirements listed in \autoref{ch:requirements}. The requirements are listed in \autoref{table:acceptancetest}. The table shows both reference number and the correlating appendix which documents the results.  
+This chapter governs the acceptance test of the requirements from \autoref{ch:requirements}. The requirements are listed in \autoref{table:acceptancetest}. The table shows both reference number and the correlating appendix which documents the results.  
 
 \renewcommand{\arraystretch}{0.95}
 \begin{table}[H]
@@ -39,7 +39,7 @@ This chapter governs the acceptance test of the requirements listed in \autoref{
 			& 										        & \ref{app:journal_Frequency_Response}	&					\\ \hline
 
 11			& The limiter must have 4 bands 				& Chapter								&	$\surd$			\\ 
-			& 												& \ref{cha:mainprogram}			 		&					\\ \hline
+			& 												& \ref{ch:mainprogram}			 		&					\\ \hline
 
 12			& The bands of the limiter  must comply with 	& Appendix								&	$\surd$			\\ 
 			& the class 2 of IEC 6964 standard (2001).		& \ref{app:journal_decimationFilter}	&					\\ \hline
@@ -47,8 +47,8 @@ This chapter governs the acceptance test of the requirements listed in \autoref{
 13			& The limiter must apply to frequencies from	& Appendix								&	$\surd$			\\ 
 			& and below 500 Hz. 						 	& \ref{app:journal_Frequency_Response2}	&					\\ \hline
 %
-14			& The system must distort less than soft  		& Appendix								&	$\times$		\\ 
-			& clipping.										& \ref{app:journal_speaker_test}	 	&					\\ \hline								
+14			& The system must distort less than soft  		& Not								&	$\times$		\\ 
+			& clipping.										& Tested	&					\\ \hline								
 \end{tabular}	
 \caption{Requirements for the entire system}
 \label{table:acceptancetest}
@@ -56,7 +56,7 @@ This chapter governs the acceptance test of the requirements listed in \autoref{
 
 \subsubsection*{Requirement 1}
 
-The system was from appendix \ref{app:acceptance_test} able to suppress the signal enough not to introduce a hits to the backplate. Hence this requirement is fulfilled. It can on \autoref{fig:FFTAcceptTestreport} be seen that at a 168 Watts the system no longer shows signs of back plate hits.
+The system is from appendix \ref{app:acceptance_test} able to suppress the signal enough to prevent the coil from hitting the backplate. Hence this requirement is fulfilled. In \autoref{fig:FFTAcceptTestreport} it is seen that the system at a 168 W no longer shows signs of backplate hits.
 \begin{figure}[H]
 	\centering
 	\tikzsetnextfilename{FFTAccept}
@@ -67,12 +67,12 @@ The system was from appendix \ref{app:acceptance_test} able to suppress the sign
 
 \subsubsection*{Requirement 2}
 
-It was again showed in appendix \ref{app:acceptance_test} that the system was able to process the information in real time. There was not at any given point lack of processing power. Hence the requirement for the system to run in real time is fulfilled.
+It is shown in appendix \ref{app:acceptance_test} that the system is able to process the information in real time. No samples were missed and all deadlines in the system are met. Hence the requirement for the system to run in real time is fulfilled.
 
 
 \subsubsection*{Requirement 3}
 
-In section \ref{sec:Bypass} the delay of the system was determined to be 5333 samples which translate into 111 ms when used in a 48 kHz system. This delay is above the required time and hence the requirement is not met.
+In section \ref{sec:Bypass} the delay of the system is determined to be 5333 samples which translate into 111 ms when used in a 48 kHz system. This delay is above the required time and hence the requirement is not met.
 
 \subsubsection*{Requirement 4}
 
