@@ -1,5 +1,5 @@
 \chapter{RMS Limiter}\label{cha:CompressorDesign}
-The RMS limiter will be used to suppress large amplitude levels in the lower frequencies. From \autoref{app:journal_speaker_test2} the trials showed the difference between the fundamental tone and the harmonics decreasing as the amplification throughout the test setup increased. This behavior correlates directly with an increase in THD. Following up on the test, new trials were run with single sinusoids of different amplitudes. In figure \ref{fig:THDComparissonRMS} the different bands are showed in four individual graphs. Each color describes specific single sinusoids where the THD is compared to RMS value of the input. The graphs shows different frequencies plotted with 10 Hz intervals in the specific bands. From these graphs it should be possible to determine the needed parameters for the limiter.
+The RMS limiter will be used to suppress large amplitude levels in the lower frequencies. From \autoref{app:journal_speaker_test2} the trials showed the difference between the fundamental tone and the harmonics decreasing as the amplification throughout the test setup increased. This behavior correlates directly with an increase in THD. Following up on the test, new trials were run with single sinusoids of different amplitudes. In figure \ref{fig:THDComparissonRMS} the different bands are showed in four individual graphs. Each color describes specific single sinusoids where the THD is compared to RMS value of the input. The graphs shows different frequencies plotted with 10 Hz intervals in the specific bands.
 %It can be shown from figure \autoref{fig:com_micALLRMS} that the amplitude difference of the second and third harmonic has a decay correlating with an exponential decay. From these measurements it is possible to determine a given threshold were the speaker will perform with optimum conditions. 
 
 \begin{figure}[H]
@@ -36,7 +36,7 @@ The RMS limiter will be used to suppress large amplitude levels in the lower fre
 	\label{fig:THDComparissonRMS}
 \end{figure} 
 
-In each figure the worst case scenario is chosen as basis for creating a model to describe the THD level according the RMS value. The RMS value in the graphs should seen as 0 dBFS according to the DSP, meaning 1.0 RMS value correspond to a input of 0.5 $\text{V}_\text{RMS}$ \todo{?}. The Preceding section will be covering the determination of the most suitable parameters based on the requirements from \autoref{ch:requirements} and the models. The requirements are as follows:
+In each figure the worst case scenario is chosen as basis for creating a model to describe the THD level according the RMS value. The RMS value in the graphs should be seen as 0 dBFS according to the DSP, meaning 1.0 $\text{V}_\text{RMS}$ value correspond to a input of 0.5 $\text{V}_\text{RMS}$. The Preceding section will be covering the determination of the most suitable parameters based on the requirements from \autoref{ch:requirements} and the models. The requirements are as follows:
 
 \begin{enumerate}
 \item[1] The coil must not hit the backplate.
