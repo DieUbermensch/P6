@@ -8,7 +8,7 @@ The chapter will describe the three functions which is used in the multirate sta
 Where downFuncX is used to decimate and spectral invert the input sample, delayBX is used to delay a sample by number of samples and upFuncX is used interpolate the input sample (dataIn) and add the input sample (band) to the interpolated signal. In both downFuncX and upFuncX a filter function is used called FIR1 which runs a FIR filter on a data array, which will also be decribed in this chapter. 
 
 
-\section{Decimation and Spectral Inversion implementation}
+\section{Decimation and Spectral Inversion implementation} \label{sec:ImpFilterDEC}
 The decimation block is seen on \autoref{fig:DownsamplingSimulationCopy}.
 \begin{figure}[H]
     \centering
