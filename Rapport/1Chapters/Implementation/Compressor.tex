@@ -1,6 +1,6 @@
 \chapter{RMS Limiter}
 
-The limiter algorithm is implemented using an Assembler routine. From \ref{cha:CompressorDesign} is was determined that a sample size of 16 samples were needed in order to detect every frequency in the specific band, while the 0 Hz to 530 Hz needs 128 samples. In order to save calculation, the algorithm will be implemented as a running mean. Meaning a the oldest sample will be subtracted and the newest value will be added. The concept is graphically shown on \autoref{fig:RMSCompressorBlockImplmentation} where a sample is loaded and added to the sum, followed by the oldest sample being subtracted.
+The limiter algorithm is implemented using an Assembler routine. From \autoref{cha:CompressorDesign} is was determined that a sample size of 16 samples were needed in order to detect every frequency in the specific band, while the 0 Hz to 530 Hz needs 128 samples. In order to save calculation, the algorithm will be implemented as a running mean. Meaning that the oldest sample will be subtracted and the newest value will be added. The concept is graphically shown on \autoref{fig:RMSCompressorBlockImplmentation} where a sample is loaded and added to the sum, followed by the oldest sample being subtracted.
 
 
 \begin{figure}[H]
@@ -10,8 +10,8 @@ The limiter algorithm is implemented using an Assembler routine. From \ref{cha:C
     \label{fig:RMSCompressorBlockImplmentation}
 \end{figure}
 
-As mentioned the algorithm is written in Assembler by the use of a circular buffer for the samples used in the mean. %This size will determine indirectly determine the attack and release time. Both will increase simultaneously when enlarged in sample size. 
-An RMS value is calculated as stated in \autoref{eq:RMScalculation}. This equation can become expensive in instruction time due to both a division and square root. These are both calculated iteratively in a processor and hence the computation time is determined by the wanted precision. \todo{kilde}
+As mentioned the algorithm is written in Assembler by the use of a circular buffer for the samples used in the algorithm. %This size will determine indirectly determine the attack and release time. Both will increase simultaneously when enlarged in sample size. 
+An RMS value is calculated as stated in \autoref{eq:RMScalculation}. This equation can become expensive in instruction time due to both a division and square root. These are both calculated iteratively in a processor and hence the computation time is determined by the wanted precision.
 
 \begin{equation}\label{eq:RMScalculation}
 \text{RMS}=\sqrt{\frac{1}{n}\cdot(x_1^2+x_2^2+\cdots+x_n^2)}
@@ -23,7 +23,7 @@ When implemented the sample size is a value of $2^n$ which means it is then poss
 RMS^2=(\frac{1}{n}\cdot(x_1^2+x_2^2+\cdots+x_n^2))
 \end{equation}
 
-The algorithm will therefore be using a lookup table to determined the correct gain when the RMS$^2$ is calculated. The RMS$^2$ values of the lookup table will hence need to be quantized in order to reduce the amount of memory cells used. The table is constructed by the use of \autoref{eq:Threslookup}. The equation calculates the needed attenuation and does so with a predefined step resolution. 
+The algorithm will therefore be using a lookup table to determine the correct gain when the RMS$^2$ is calculated. The RMS$^2$ values of the lookup table will hence need to be quantisized in order to reduce the amount of memory cells used. The table is constructed by the use of \autoref{eq:Threslookup}. The equation calculates the needed attenuation and does so with a predefined step resolution. 
 \vspace{-2mm}
 \begin{equation}\label{eq:Threslookup}
 \text{Gain}=\frac{\text{Treshold}^2}{\frac{n}{1024}}\enhed{.}
@@ -89,9 +89,9 @@ Where: \\
 - lookUpBand4, is start address for the lookup table\\
 - sumHigh4, is a 16-bit value for storing MSB \\
 - sumLow4, is a 16-bit value for storing LSB \\
-- RMS3, is an address used for GUI output \\
+- RMS3, is an address used for GUI output. \\
 
-The algorithm starts by subtracting the oldest 16-bit squared sample from the sum. The new 16-bit sample in T0 is then squared and added to the sum. The 32-bit value is saved in sumHigh and sumLow. The pointer which keeps track of the samples is then incremented and checked if has reached 16 samples. If 16 samples has been calculated it will reset.
+The algorithm starts by subtracting the oldest 16-bit squared sample from the sum. The new 16-bit sample in T0 is then squared and added to the sum. The 32-bit value is saved in sumHigh and sumLow. The pointer which keeps track of the samples is then incremented and checked if it has reached 16 samples. If 16 samples has been calculated it will reset.
 
 When the sum (20-bit) is calculated it is shifted by 5 because of the sample size of 16. It is shifted further by 5 because of the resolution of the look up table, which means that sum is shifted a total of 10 times while the band 0 Hz to 530 Hz is shifted 12 times because of a sample size of 128. 
 
@@ -107,7 +107,7 @@ It should be noted that the actual threshold used in the implementation is not 0
 
 If no release time is applied to the limiter the compression will be too aggressive, which will result in a distorted sound. The release time is basically the time span for the limiter to release the gain reduction. Implementing a release time also ensures that the compression is not constantly switching between two different gains. The release time will be implemented as a first order IIR filter where the release time will be the time constant $\tau$. The general design and implementation procedure for IIR filters are described in \autoref{ch:IIR}. The release time is chosen to be 5 seconds, as 5 seconds is estimated to be sufficient.
 
-It is commonly known that an analog first order filter can be designed as following expression:
+It is commonly known that an analog first order filter can be designed with the following expression:
 \begin{equation}
 H(s) = \frac{\omega_c}{s+\omega_c}
 \end{equation}
@@ -115,7 +115,7 @@ As $\tau = 5\, s$ and the natural frequency is $\omega_c = \frac{1}{\tau}$ then 
 \begin{equation}
 H(s) = \frac{0.2}{s+0.2}
 \end{equation} 
-A pole is located at -0.2 and the cutoff frequency can be calculated as $f = \frac{0.2}{2\pi} = 0.0318 \text{Hz}$. The frequency response of the transfer function and the step response of the filter are now plotted to examine if the filter has the desired response:
+A pole is located at -0.2 and the cutoff frequency can be calculated as $f = \frac{0.2}{2\pi} = 0.0318 \text{ Hz}$. The frequency response of the transfer function and the step response of the filter are now plotted to examine if the filter has the desired response:
 
 \begin{figure}[H]
 \centering
@@ -136,11 +136,11 @@ A pole is located at -0.2 and the cutoff frequency can be calculated as $f = \fr
 \label{fig:releaseTimeAnalog}
 \end{figure}
 
-It is seen that the -3 dB cutoff frequency is located at 0,0318 Hz in \autoref{fig:releaseTimeAnalogFreq} and the release time is 5 seconds as the 66\% rise time is located at 5 seconds. To implement the filter on a DSP, the transfer function is now transformed into z-domain. The chosen transformation is the impulse invariant. An explanation of the impulse invariant and bilinear transformation is provided in \autoref{ch:IIR}. By using the impulse invariant method the following transfer function is obtained.
+It is seen that the -3 dB cutoff frequency is located at 0,0318 Hz in \autoref{fig:releaseTimeAnalogFreq} and the release time is 5 seconds as the 66\% rise time is located at 5 seconds. To implement the filter on a DSP, the transfer function is now transformed into z-domain. The chosen transformation is the impulse invariant method. An explanation of the impulse invariant method. By using the impulse invariant method the following transfer function is obtained.
 \begin{equation} \label{eq:releaseTF}
 H(z) = T\frac{0.2}{1-\text{e}^{-0.2T} z^{-1}}
 \end{equation} 
-The Sampling period, T, varies as it depends on which octave band it is implemented into. In the following example, the sampling period is $T = 2.667$ ms or $f_s = 375$ which corresponds to the sampling rate for the lowest octave band. The filter coefficient is obtained and quantisized in order to examine if the frequency response and step response of the filter still has the desired characteristic when implementing the filter in DSP. To apply quantization, the coefficients are first multiplied with $2^{15}$ (Q15 format) and then rounded. Afterwards the coefficients are divided by $2^{15}$ to obtain a floating point number. After the quantization, the frequency response and step response is now plotted to examine the filter.
+The Sampling period, T, varies as it depends on which octave band it is implemented into. In the following example, the sampling period is $T = 2.667$ ms or $f_s = 375$ which corresponds to the sampling rate for the lowest octave band. The filter coefficient is obtained and quantisized in order to examine if the frequency response and step response of the filter still has the desired characteristic when implementing the filter in the DSP. To apply quantization, the coefficients are first multiplied with $2^{15}$ (Q15 format) and then rounded. Afterwards the coefficients are divided by $2^{15}$ to obtain a floating point number. After the quantization, the frequency response and step response is now plotted to examine the filter.
 
 \begin{figure}[H]
 \centering
@@ -161,7 +161,7 @@ The Sampling period, T, varies as it depends on which octave band it is implemen
 \label{fig:releaseTime}
 \end{figure}
 
-In it is seen in \autoref{fig:releaseTime} that the frequency response and step response remains intact after quantization.
+It is seen in \autoref{fig:releaseTime} that the frequency response and step response remains intact after quantization.
 
 \subsection*{Implementation of Release Time}
 
@@ -182,7 +182,7 @@ a_{\text{IIR}} &= {\rm e}^{- 0.2\,T}
 \label{eq:Coef}
 \end{align}
 
-As IIR filter has a feedback loop, noise will be added because of the quantisized output. To avoid this, double precision or noise shaping can be applied to overcome the problem. Since the accumulators are 40-bits, implementing a double precision algorithm requires splitting the IIR calculation up into two. Therefore noise shaping is used as it is simpler to implement. Noise shaping works by feeding the lowest 16-bit of the output y[n] back into the next filter calculation before the quantization. The filter structure with noise shaping is shown in \autoref{fig:IIRFilterReleaseTime}. The coefficient can now be calculated by \autoref{eq:Coef} and implemented using \autoref{eq:z_eq}. The coefficient are before implementation rewritten into Q15 format.
+As IIR filter has a feedback loop, noise will be added because of the quantisized output. To avoid this, double precision or noise shaping can be applied to overcome the problem. Since the accumulators are 40-bits, implementing a double precision algorithm requires splitting the IIR calculation up into two instructions. Therefore noise shaping is used as it is simpler to implement. Noise shaping works by feeding the lowest 16-bit of the output y[n] back into the next filter calculation before the quantization. The filter structure with noise shaping is shown in \autoref{fig:IIRFilterReleaseTime}. The coefficient can now be calculated by \autoref{eq:Coef} and implemented using \autoref{eq:z_eq}.
 
 \begin{figure}[H]
 \centering
