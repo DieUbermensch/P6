@@ -1,0 +1,478 @@
+\documentclass[10pt,aspectratio=169]{beamer}
+\usetheme[
+%%% options passed to the outer theme
+%    hidetitle,           % hide the (short) title in the sidebar
+%    hideauthor,          % hide the (short) author in the sidebar
+%    hideinstitute,       % hide the (short) institute in the bottom of the sidebar
+%    shownavsym,          % show the navigation symbols
+%    width=2cm,           % width of the sidebar (default is 2 cm)
+%    hideothersubsections,% hide all subsections but the subsections in the current section
+%    hideallsubsections,  % hide all subsections
+    left               % right of left position of sidebar (default is right)
+%%% options passed to the color theme
+%    lightheaderbg,       % use a light header background
+  ]{AAUsidebar}
+
+% If you want to change the colors of the various elements in the theme, edit and uncomment the following lines
+% Change the bar and sidebar colors:
+%\setbeamercolor{AAUsidebar}{fg=red!20,bg=red}
+%\setbeamercolor{sidebar}{bg=red!20}
+% Change the color of the structural elements:
+%\setbeamercolor{structure}{fg=red}
+% Change the frame title text color:
+%\setbeamercolor{frametitle}{fg=blue}
+% Change the normal text color background:
+%\setbeamercolor{normal text}{bg=gray!10}
+% ... and you can of course change a lot more - see the beamer user manual.
+
+\usepackage{schemabloc}
+\usetikzlibrary{shapes,arrows}
+\usepackage{pgfplots}
+\usetikzlibrary{plotmarks}
+\pgfplotsset{compat=newest}
+\pgfplotsset{filter discard warning=false}
+\usepackage[utf8]{inputenc}
+\usepackage[Danish]{babel}
+\usepackage[T1]{fontenc}
+% Or whatever. Note that the encoding and the font should match. If T1
+% does not look nice, try deleting the line with the fontenc.
+\usepackage{helvet}
+
+% colored hyperlinks
+\newcommand{\chref}[2]{%
+  \href{#1}{{\usebeamercolor[bg]{AAUsidebar}#2}}%
+}
+
+\title[Multi-band RMS compressor]% optional, use only with long paper titles
+{Multi-band compressor}
+
+\subtitle{Til undertrykkelse af forvrængning ved højt SPL}  % could also be a conference name
+
+\date{\today}
+
+\author[Gruppe 640] % optional, use only with lots of authors
+{
+  Kasper Kiis Jensen\\
+  Poul Hoang \\
+  Mikkel Krogh Simonsen \\
+  \href{mailto:16gr640@es.aau.dk}{{\tt 16gr640@es.aau.dk}}
+}
+% - Give the names in the same order as they appear in the paper.
+% - Use the \inst{?} command only if the authors have different
+%   affiliation. See the beamer manual for an example
+
+\institute[
+%  {\includegraphics[scale=0.2]{aau_segl}}\\ %insert a company, department or university logo
+  Dept.\ of Electronic Systems\\
+  Aalborg University\\
+  Denmark
+] % optional - is placed in the bottom of the sidebar on every slide
+{% is placed on the title page
+  Department of Electronic Systems\\
+  Aalborg University\\
+  Denmark
+  
+  %there must be an empty line above this line - otherwise some unwanted space is added between the university and the country (I do not know why;( )
+}
+
+
+% specify a logo on the titlepage (you can specify additional logos an include them in 
+% institute command below
+\pgfdeclareimage[height=1.5cm]{titlepagelogo}{AAUgraphics/aau_logo_new} % placed on the title page
+%\pgfdeclareimage[height=1.5cm]{titlepagelogo2}{graphics/aau_logo_new} % placed on the title page
+\titlegraphic{% is placed on the bottom of the title page
+  \pgfuseimage{titlepagelogo}
+%  \hspace{1cm}\pgfuseimage{titlepagelogo2}
+}
+\usepackage{subfloat}
+\usepackage{subcaption}
+\begin{document}
+% the titlepage
+{\aauwavesbg%
+\begin{frame}[plain,noframenumbering] % the plain option removes the sidebar and header from the title page
+  \titlepage
+\end{frame}}
+%%%%%%%%%%%%%%%%
+
+% TOC
+\begin{frame}{Agenda}{}
+\tableofcontents
+\end{frame}
+%%%%%%%%%%%%%%%%
+
+\section{Introduktion}
+% motivation for creating this theme
+\begin{frame}{Introduktion}{}
+  Målet med dette projekt er at:
+  \begin{itemize}
+    \item Beskytte bas enhederne
+    \begin{itemize}
+    \item Begrænse slag mod bagpladen
+\end{itemize}
+\item Minimal komprimering/limitering       
+  \end{itemize}
+  \vspace{5mm}
+  Samtidigt med at følgende krav kunne realiseres:
+  \begin{itemize}
+  	\item Mindre end 1024 Instruktioner pr. sample
+  	\item Mulighed for sampling rate på 96 kHz
+  	\item Mulighed for at køre med 24-Bit
+  \end{itemize}
+\end{frame}
+%%%%%%%%%%%%%%%%
+
+\section{Feedback system}
+% the license
+\begin{frame}{Feedback system}{Første antagelse}
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.75\textwidth]{Feedback_Acc2}
+\end{figure}
+\end{frame}
+
+\subsection{Analyse}
+\begin{frame}{Feedback system}{Analyse}
+Lineært sweep fra 2400 til 0 Hz
+\begin{figure}
+\centering
+\begin{subfigure}[t]{0.45\textwidth}
+\centering
+%\includegraphics[width=\textwidth]{raw_driver10}
+\input{Driver10.tex}
+\caption{Accelerometer på driver - Måling 10}
+\end{subfigure}
+\begin{subfigure}[t]{0.45\textwidth}
+\centering
+%\includegraphics[width=\textwidth]{raw_driver19}
+\input{Driver19.tex}
+\caption{Accelerometer på driver - Måling 19}
+\end{subfigure}
+\end{figure}
+\end{frame}
+
+
+\begin{frame}{Feedback system}{Analyse}
+\begin{figure}
+\centering
+\includegraphics[width=0.6\textwidth]{FFT_hit}
+\end{figure}
+\begin{itemize}
+\item Sort: 0.005 Watt (81 dB SPL)
+\item Blå:  22 Watt (100 dB SPL)
+\item Rød:  294 Watt (105 dB SPL)
+
+\end{itemize}
+\end{frame}
+
+
+\subsection{Problemerne}
+\begin{frame}{Feedback system}{Problemerne}
+Følgende problemer ved feedback systemet:
+\begin{itemize}
+\item For dårlige sensorer
+\begin{itemize}
+\item Ikke præcise
+\item For meget støj
+\item For dyrer 
+\item Fejlmålinger
+\end{itemize}
+\item Ingen tendenser at spotte indtil et slag ramte = for sent
+\begin{itemize}
+\item Feedback tager for lang tid
+\end{itemize}
+\item Upraktisk at måle harmoniske toner 
+\begin{itemize}
+\item Ingen superpositions muligheder
+\item Fasen på signalerne passer ikke nødvendigvis
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%
+
+\section{Feedforward system}
+
+\begin{frame}{Feedforward system}{Konceptet}
+
+\begin{figure}
+\centering
+\includegraphics[width=0.9\textwidth]{Feedforward_Acc2}
+\end{figure}
+
+\end{frame}
+
+\begin{frame}{Feedforward system}{Overview}
+
+\begin{columns}
+  \begin{column}{0.70\textwidth}
+\begin{figure}
+\centering
+\includegraphics[width=0.85\textwidth]{Mainsystemoverview}
+\end{figure}
+  \end{column}
+  \begin{column}{0.30\textwidth}
+  \textbf{Systemet Overordnet}
+\begin{itemize}
+\item Grafisk Equalizer
+\item 4 Bånd i Bassen
+\begin{enumerate}
+\item 0   -   66 Hz
+\item 66  -  132 Hz
+\item 132 -  265 Hz
+\item 265 -  530 Hz
+\end{enumerate}
+\item RMS kompressor i 4 bånd
+\item RMS/Peak Limiter
+\item GUI til løbende justering
+\end{itemize}
+  \end{column}
+\end{columns}
+\end{frame}
+
+\subsection{Design Overvejelser}
+\begin{frame}{Feedforward system}{Design Overvejelser}
+\begin{columns}[t]
+  \begin{column}{0.50\textwidth}
+\textbf{Systemet skal:}
+\begin{itemize}
+\item Fungere ved lave frekvenser
+\item Have bånd til at måle frekvensområder
+\item Lineær fase
+\end{itemize}
+  \end{column}
+  \begin{column}{0.50\textwidth}
+  \textbf{Opnåes ved:}
+\begin{itemize}
+\item Realiseres som multi-rate
+\item Spektral subtraktion til at lave båndpas
+\item Opbygges af FIR filter
+\end{itemize}
+  \end{column}
+\end{columns}
+\vspace{5mm}
+\begin{block}{Overordnet set:}
+\begin{itemize}
+\item Downsampling til center frekvens på 3 kHz ved et 50-tap FIR filter
+\item x2 Downsampling 7 gange (x4,x8,x16,x32,x64)
+\item Indivudel kompressor i fire nederste bånd
+\end{itemize}
+\end{block}
+\end{frame}
+
+
+
+
+\subsection{Overordnet system}
+\begin{frame}{Feedforward system}{Systemet}
+
+\begin{columns}
+  \begin{column}{0.75\textwidth}
+\begin{figure}
+\includegraphics[width=\textwidth]{designRealBlock1}
+\end{figure}
+  \end{column}
+
+  \begin{column}{0.25\textwidth}
+  \textbf{Flow gennem system:}
+     \begin{enumerate}
+        \item Sample
+        \item Decimate
+        \item Spektral inversion
+        \item Påfør gain
+        \item Mål RMS
+        \item Påfør dæmpning
+        \item Interpolate
+        \item Summation
+     \end{enumerate}
+  \end{column}
+\end{columns}
+\end{frame}
+
+
+
+\subsection{Decimation}
+\begin{frame}{Feedforward system}{Decimator}
+
+\begin{columns}
+  \begin{column}{0.4\textwidth}
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{Bands}
+\end{figure}
+  \end{column}
+
+  \begin{column}{0.6\textwidth}
+\begin{itemize}
+\item 1 lavpas filter til båndpas
+\begin{itemize}
+\item Spektral subtraktion
+\end{itemize}
+\item 50. orden FIR
+\item Overholder IEC 6964 - Class 2 
+\end{itemize}
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{designRealDecimator}
+\end{figure}
+  \end{column}
+\end{columns}
+\end{frame}
+%%%%%%%%%%%%%%%%
+
+
+
+\subsection{RMS Compressor}
+\begin{frame}{Feedforward system}{RMS Compressor}
+
+\begin{columns}
+  \begin{column}{0.5\textwidth}
+\begin{figure}
+\centering
+\includegraphics[width=0.7\textwidth]{comp_mic12All}
+\end{figure}
+\vspace{-5mm}
+\begin{figure}
+\includegraphics[width=0.8\textwidth]{BandModelCombine}
+\end{figure}
+  \end{column}
+  \begin{column}{0.5\textwidth}
+\begin{itemize}
+\item Dæmpning på op til 60 dB
+\item Opløsning på 1024 Steps
+\item Udskiftelig modeller
+\end{itemize}
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{designRealRMS}
+\end{figure}
+  \end{column}
+\end{columns}
+
+\end{frame}
+
+
+
+
+\subsection{Interpolation}
+\begin{frame}{Feedforward system}{Interpolation}
+
+\begin{columns}
+  \begin{column}{0.4\textwidth}
+%\begin{figure}
+%\includegraphics[width=0.9\textwidth]{designRealBlock1}
+%\end{figure}
+\begin{itemize}
+\item Zero-padding
+\item 48. Orden FIR
+\item Gain x2
+\end{itemize}
+  \end{column}
+
+  \begin{column}{0.6\textwidth}
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{designRealInterpolator}
+\end{figure}
+  \end{column}
+\end{columns}
+
+\end{frame}
+
+
+
+\subsection{Simulering}
+\begin{frame}{Feedforward system}{Simulering}
+
+\begin{center}
+Simulering i MATLAB
+\end{center}
+
+\end{frame}
+
+\subsection{Opsumering}
+\begin{frame}{Feedforward system}{Opsumering}
+
+\begin{columns}[t]
+\begin{column}{0.40\textwidth}
+\textbf{Decimation/Interpolation:}
+\begin{itemize}
+\item Få instruktioner / Lav orden
+\item Billige FIR filter
+\item Mulighed for mere optimering
+\end{itemize}
+  \end{column}
+  \begin{column}{0.3\textwidth}
+\textbf{RMS Compressor:}
+\begin{itemize}
+\item Fleksible modeller
+\item Minimere hård limitering
+\item Fungere som både Peak og RMS
+\end{itemize}
+  \end{column}
+    \begin{column}{0.3\textwidth}
+\textbf{Overall:}
+\begin{itemize}
+\item Ingen støj
+\item Flat respons (+/- 1 dB)
+\end{itemize}
+  \end{column}
+\end{columns}
+
+\begin{block}{Kan Realiseres med:}
+\begin{itemize}
+\item Mulighed for 32-bit og 192 kHz
+\begin{itemize}
+\item Kun en ALU brugt
+\item 192 kHz vil kræve (x128,x256)
+\end{itemize}
+\end{itemize}
+\end{block}
+\vspace{-3mm}
+\begin{block}{Er Realiseret med:}
+\begin{itemize}
+\item Ca. 800 instruktioner.
+\item 16-bit og 48 kHz
+\item Peak limiter, RMS compressor og grafisk equalizer.
+\end{itemize}
+\end{block}
+
+\end{frame}
+
+
+\section{Demonstration}
+\begin{frame}{Feedforward system}{DEMO}
+
+\begin{center}
+DEMO\\
+\textit{Med forbehold}
+\end{center}
+\end{frame}
+
+\section{Spørgsmål og Evt.}
+% contact information
+\begin{frame}{Spørgsmål og Evt.}
+  \begin{center}
+Spørgsmål og Evt.
+  \end{center}
+\end{frame}
+
+
+
+
+
+{\aauwavesbg
+\begin{frame}[plain,noframenumbering]
+  \finalpage{}
+\end{frame}}
+%%%%%%%%%%%%%%%%
+
+\end{document}
+
+
+%  \begin{block}{Global Installation}
+%  \begin{itemize}
+%     \item If you wish to make the theme globally available, you must put the files in your local latex directory tree. The location of the root of the local directory tree depends on the operating system and the latex distribution. On the following slides, you can read the instructions for some common setups.
+%    \item When you download the theme, the four theme files are embedded in a directory structure (in the {\tt global} folder) ready to be copied directly to the root of your local directory tree.
+%    \item On the following slides, we refer to this directory structure as {\tt <dirstruct>}. \alert{Note} that some parts of the directory may already exist if you have installed other packages in your local latex directory tree. If this is the case, you simply merge {\tt <dirstruct>} with your existing setup.
+%  \end{itemize}
+%  \end{block}
