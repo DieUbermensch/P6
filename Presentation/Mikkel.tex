@@ -1,29 +1,186 @@
 
 \section{Opbygning}
 \begin{frame}{Opbygning}{Undertitel}
-	Something new and awesome
+\begin{columns}
+  \begin{column}{0.70\textwidth}
+\begin{figure}
+\centering
+\includegraphics[width=0.85\textwidth]{Mainsystemoverview}
+\end{figure}
+  \end{column}
+  \begin{column}{0.30\textwidth}
+  \textbf{Systemet Overordnet}
+\begin{itemize}
+\item Grafisk Equalizer
+\item 4 Bånd i Bassen
+\begin{enumerate}
+\item 0   -   66 Hz
+\item 66  -  132 Hz
+\item 132 -  265 Hz
+\item 265 -  530 Hz
+\end{enumerate}
+\item RMS limiter i 4 bånd
+\item RMS/Peak Limiter
+\item GUI til løbende justering
+\end{itemize}
+  \end{column}
+\end{columns}
 \end{frame}
 
 \subsection{Multi-Rate/stage}
 \begin{frame}{Opbygning}{Multi-Rate/stage}
-	Something new and awesome
+\begin{columns}
+  \begin{column}{0.75\textwidth}
+\begin{figure}
+\includegraphics[width=\textwidth]{designRealBlock1}
+\end{figure}
+  \end{column}
+
+  \begin{column}{0.25\textwidth}
+  \textbf{Flow gennem system:}
+     \begin{enumerate}
+        \item Sample
+        \item Decimate
+        \item Spektral inversion
+        \item Påfør gain
+        \item Mål RMS
+        \item Påfør dæmpning
+        \item Interpolate
+        \item Summation
+     \end{enumerate}
+  \end{column}
+\end{columns}
 \end{frame}
 
 
-\subsection{Filter Design}
-\begin{frame}{Opbygning}{Filter Design}
-	Something new and awesome
+
+
+\subsection{Decimation}
+\begin{frame}{Opbygning}{Decimator}
+
+\begin{columns}
+  \begin{column}{0.4\textwidth}
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{Bands}
+\end{figure}
+  \end{column}
+
+  \begin{column}{0.6\textwidth}
+\begin{itemize}
+\item 1 lavpas filter til båndpas
+\begin{itemize}
+\item Spektral subtraktion
+\end{itemize}
+\item 50. orden FIR
+\item Overholder IEC 6964 - Class 2 
+\end{itemize}
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{designRealDecimator}
+\end{figure}
+  \end{column}
+\end{columns}
 \end{frame}
 
-\subsection{Limiter}
-\begin{frame}{Opbygning}{Limiter}
-	Something new and awesome
+\subsection{RMS Limiter}
+\begin{frame}{Opbygning}{RMS Limiter}
+
+\begin{columns}
+  \begin{column}{0.5\textwidth}
+\begin{figure}
+\centering
+\includegraphics[width=0.7\textwidth]{releaseTimeDigitalStep}
+\end{figure}
+\vspace{-5mm}
+\begin{figure}
+\includegraphics[width=0.8\textwidth]{BandModelCombine}
+\end{figure}
+  \end{column}
+  \begin{column}{0.5\textwidth}
+\begin{itemize}
+\item Dæmpning på op til 60 dB
+\item Opløsning på 1024 Steps
+\item Udskiftelig modeller
+\end{itemize}
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{designRealRMS}
+\end{figure}
+  \end{column}
+\end{columns}
+
 \end{frame}
+
+
+
+\subsection{Interpolation}
+\begin{frame}{Opbygning}{Interpolation}
+
+\begin{columns}
+  \begin{column}{0.4\textwidth}
+%\begin{figure}
+%\includegraphics[width=0.9\textwidth]{designRealBlock1}
+%\end{figure}
+\begin{itemize}
+\item Zero-padding
+\item 48. Orden FIR
+\item Gain x2
+\end{itemize}
+  \end{column}
+
+  \begin{column}{0.6\textwidth}
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{designRealInterpolator}
+\end{figure}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.8\textwidth]{DecIntCompMirror}
+\end{figure}
+
+  \end{column}
+\end{columns}
+
+\end{frame}
+
+
+%\subsection{Limiter}
+%\begin{frame}{Opbygning}{Limiter}
+%	Something new and awesome
+%\end{frame}
+
+%\subsection{Filter Design}
+%\begin{frame}{Opbygning}{Filter Design}
+%	Something new and awesome
+%\end{frame}
+
 
 \section{Resultat \& Konklusion}
 \begin{frame}{Resultat \& Konklusion}{...}
 	Something new and awesome
 \end{frame}
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%
+%
+%
+%
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -128,33 +285,6 @@
 %
 %\end{frame}
 %
-%\begin{frame}{Feedforward system}{Overview}
-%
-%\begin{columns}
-%  \begin{column}{0.70\textwidth}
-%\begin{figure}
-%\centering
-%\includegraphics[width=0.85\textwidth]{Mainsystemoverview}
-%\end{figure}
-%  \end{column}
-%  \begin{column}{0.30\textwidth}
-%  \textbf{Systemet Overordnet}
-%\begin{itemize}
-%\item Grafisk Equalizer
-%\item 4 Bånd i Bassen
-%\begin{enumerate}
-%\item 0   -   66 Hz
-%\item 66  -  132 Hz
-%\item 132 -  265 Hz
-%\item 265 -  530 Hz
-%\end{enumerate}
-%\item RMS kompressor i 4 bånd
-%\item RMS/Peak Limiter
-%\item GUI til løbende justering
-%\end{itemize}
-%  \end{column}
-%\end{columns}
-%\end{frame}
 %
 %\subsection{Design Overvejelser}
 %\begin{frame}{Feedforward system}{Design Overvejelser}
@@ -188,122 +318,10 @@
 %
 %
 %
-%
-%\subsection{Overordnet system}
-%\begin{frame}{Feedforward system}{Systemet}
-%
-%\begin{columns}
-%  \begin{column}{0.75\textwidth}
-%\begin{figure}
-%\includegraphics[width=\textwidth]{designRealBlock1}
-%\end{figure}
-%  \end{column}
-%
-%  \begin{column}{0.25\textwidth}
-%  \textbf{Flow gennem system:}
-%     \begin{enumerate}
-%        \item Sample
-%        \item Decimate
-%        \item Spektral inversion
-%        \item Påfør gain
-%        \item Mål RMS
-%        \item Påfør dæmpning
-%        \item Interpolate
-%        \item Summation
-%     \end{enumerate}
-%  \end{column}
-%\end{columns}
-%\end{frame}
+
 %
 %
-%
-%\subsection{Decimation}
-%\begin{frame}{Feedforward system}{Decimator}
-%
-%\begin{columns}
-%  \begin{column}{0.4\textwidth}
-%\begin{figure}
-%\centering
-%\includegraphics[width=\textwidth]{Bands}
-%\end{figure}
-%  \end{column}
-%
-%  \begin{column}{0.6\textwidth}
-%\begin{itemize}
-%\item 1 lavpas filter til båndpas
-%\begin{itemize}
-%\item Spektral subtraktion
-%\end{itemize}
-%\item 50. orden FIR
-%\item Overholder IEC 6964 - Class 2 
-%\end{itemize}
-%\begin{figure}
-%\centering
-%\includegraphics[width=\textwidth]{designRealDecimator}
-%\end{figure}
-%  \end{column}
-%\end{columns}
-%\end{frame}
-%%%%%%%%%%%%%%%%%
-%
-%
-%
-%\subsection{RMS Compressor}
-%\begin{frame}{Feedforward system}{RMS Compressor}
-%
-%\begin{columns}
-%  \begin{column}{0.5\textwidth}
-%\begin{figure}
-%\centering
-%\includegraphics[width=0.7\textwidth]{comp_mic12All}
-%\end{figure}
-%\vspace{-5mm}
-%\begin{figure}
-%\includegraphics[width=0.8\textwidth]{BandModelCombine}
-%\end{figure}
-%  \end{column}
-%  \begin{column}{0.5\textwidth}
-%\begin{itemize}
-%\item Dæmpning på op til 60 dB
-%\item Opløsning på 1024 Steps
-%\item Udskiftelig modeller
-%\end{itemize}
-%\begin{figure}
-%\centering
-%\includegraphics[width=\textwidth]{designRealRMS}
-%\end{figure}
-%  \end{column}
-%\end{columns}
-%
-%\end{frame}
-%
-%
-%
-%
-%\subsection{Interpolation}
-%\begin{frame}{Feedforward system}{Interpolation}
-%
-%\begin{columns}
-%  \begin{column}{0.4\textwidth}
-%%\begin{figure}
-%%\includegraphics[width=0.9\textwidth]{designRealBlock1}
-%%\end{figure}
-%\begin{itemize}
-%\item Zero-padding
-%\item 48. Orden FIR
-%\item Gain x2
-%\end{itemize}
-%  \end{column}
-%
-%  \begin{column}{0.6\textwidth}
-%\begin{figure}
-%\centering
-%\includegraphics[width=\textwidth]{designRealInterpolator}
-%\end{figure}
-%  \end{column}
-%\end{columns}
-%
-%\end{frame}
+
 %
 %
 %

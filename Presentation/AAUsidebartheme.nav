@@ -35,42 +35,45 @@
 \headcommand {\beamer@subsectionentry {0}{4}{1}{10}{Multi-Rate/stage}}\headcommand {\beamer@subsectionpages {9}{9}}
 \headcommand {\slideentry {4}{1}{1}{10/10}{Multi-Rate/stage}{0}}
 \headcommand {\beamer@framepages {10}{10}}
-\headcommand {\beamer@subsectionentry {0}{4}{2}{11}{Filter Design}}\headcommand {\beamer@subsectionpages {10}{10}}
-\headcommand {\slideentry {4}{2}{1}{11/11}{Filter Design}{0}}
+\headcommand {\beamer@subsectionentry {0}{4}{2}{11}{Decimation}}\headcommand {\beamer@subsectionpages {10}{10}}
+\headcommand {\slideentry {4}{2}{1}{11/11}{Decimation}{0}}
 \headcommand {\beamer@framepages {11}{11}}
-\headcommand {\beamer@subsectionentry {0}{4}{3}{12}{Limiter}}\headcommand {\beamer@subsectionpages {11}{11}}
-\headcommand {\slideentry {4}{3}{1}{12/12}{Limiter}{0}}
+\headcommand {\beamer@subsectionentry {0}{4}{3}{12}{RMS Limiter}}\headcommand {\beamer@subsectionpages {11}{11}}
+\headcommand {\slideentry {4}{3}{1}{12/12}{RMS Limiter}{0}}
 \headcommand {\beamer@framepages {12}{12}}
-\headcommand {\sectionentry {5}{Resultat \& Konklusion}{13}{Resultat \& Konklusion}{0}}
-\headcommand {\beamer@sectionpages {9}{12}}
-\headcommand {\beamer@subsectionpages {12}{12}}
-\headcommand {\slideentry {5}{0}{1}{13/13}{}{0}}
+\headcommand {\beamer@subsectionentry {0}{4}{4}{13}{Interpolation}}\headcommand {\beamer@subsectionpages {12}{12}}
+\headcommand {\slideentry {4}{4}{1}{13/13}{Interpolation}{0}}
 \headcommand {\beamer@framepages {13}{13}}
-\headcommand {\sectionentry {6}{Optimering}{14}{Optimering}{0}}
-\headcommand {\beamer@sectionpages {13}{13}}
+\headcommand {\sectionentry {5}{Resultat \& Konklusion}{14}{Resultat \& Konklusion}{0}}
+\headcommand {\beamer@sectionpages {9}{13}}
 \headcommand {\beamer@subsectionpages {13}{13}}
-\headcommand {\slideentry {6}{0}{1}{14/14}{}{0}}
+\headcommand {\slideentry {5}{0}{1}{14/14}{}{0}}
 \headcommand {\beamer@framepages {14}{14}}
-\headcommand {\beamer@subsectionentry {0}{6}{1}{15}{Relevante optimerings muligheder}}\headcommand {\beamer@subsectionpages {14}{14}}
-\headcommand {\slideentry {6}{1}{1}{15/15}{Relevante optimerings muligheder}{0}}
+\headcommand {\sectionentry {6}{Optimering}{15}{Optimering}{0}}
+\headcommand {\beamer@sectionpages {14}{14}}
+\headcommand {\beamer@subsectionpages {14}{14}}
+\headcommand {\slideentry {6}{0}{1}{15/15}{}{0}}
 \headcommand {\beamer@framepages {15}{15}}
-\headcommand {\beamer@subsectionentry {0}{6}{2}{16}{Implementerede optimeringer}}\headcommand {\beamer@subsectionpages {15}{15}}
-\headcommand {\slideentry {6}{2}{1}{16/16}{Implementerede optimeringer}{0}}
+\headcommand {\beamer@subsectionentry {0}{6}{1}{16}{Relevante optimerings muligheder}}\headcommand {\beamer@subsectionpages {15}{15}}
+\headcommand {\slideentry {6}{1}{1}{16/16}{Relevante optimerings muligheder}{0}}
 \headcommand {\beamer@framepages {16}{16}}
-\headcommand {\sectionentry {7}{Konklusion}{17}{Konklusion}{0}}
-\headcommand {\beamer@sectionpages {14}{16}}
-\headcommand {\beamer@subsectionpages {16}{16}}
-\headcommand {\slideentry {7}{0}{1}{17/17}{}{0}}
+\headcommand {\beamer@subsectionentry {0}{6}{2}{17}{Implementerede optimeringer}}\headcommand {\beamer@subsectionpages {16}{16}}
+\headcommand {\slideentry {6}{2}{1}{17/17}{Implementerede optimeringer}{0}}
 \headcommand {\beamer@framepages {17}{17}}
-\headcommand {\sectionentry {8}{Demonstration}{18}{Demonstration}{0}}
-\headcommand {\beamer@sectionpages {17}{17}}
+\headcommand {\sectionentry {7}{Konklusion}{18}{Konklusion}{0}}
+\headcommand {\beamer@sectionpages {15}{17}}
 \headcommand {\beamer@subsectionpages {17}{17}}
-\headcommand {\slideentry {8}{0}{1}{18/18}{}{0}}
+\headcommand {\slideentry {7}{0}{1}{18/18}{}{0}}
 \headcommand {\beamer@framepages {18}{18}}
-\headcommand {\slideentry {8}{0}{2}{19/19}{}{0}}
+\headcommand {\sectionentry {8}{Demonstration}{19}{Demonstration}{0}}
+\headcommand {\beamer@sectionpages {18}{18}}
+\headcommand {\beamer@subsectionpages {18}{18}}
+\headcommand {\slideentry {8}{0}{1}{19/19}{}{0}}
 \headcommand {\beamer@framepages {19}{19}}
-\headcommand {\beamer@partpages {1}{19}}
-\headcommand {\beamer@subsectionpages {18}{19}}
-\headcommand {\beamer@sectionpages {18}{19}}
-\headcommand {\beamer@documentpages {19}}
-\headcommand {\def \inserttotalframenumber {17}}
+\headcommand {\slideentry {8}{0}{2}{20/20}{}{0}}
+\headcommand {\beamer@framepages {20}{20}}
+\headcommand {\beamer@partpages {1}{20}}
+\headcommand {\beamer@subsectionpages {19}{20}}
+\headcommand {\beamer@sectionpages {19}{20}}
+\headcommand {\beamer@documentpages {20}}
+\headcommand {\def \inserttotalframenumber {18}}
