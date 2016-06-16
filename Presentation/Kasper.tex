@@ -1,37 +1,273 @@
 
 
-\section{Introduktion}
-\begin{frame}{Introduktion}{Undertitel}
-	Something awesome
-\end{frame}
+%\section{Introduktion}
+%\begin{frame}{Introduktion}{Undertitel}
+	%Something awesome
+%\end{frame}
 
 
 \section{Problem}
-\begin{frame}{Problemet}{Ja nemli' Ja}
-	Something awesome
+\begin{frame}{Problemet}{Højtaleren}
+\begin{columns}[t]
+\begin{column}{0.3\textwidth}
+ Højtaleren
+	\begin{itemize}
+	\item Størrelse
+	\item Lydstyrke
+	\item Lydkvalitet
+	\end{itemize}
+    \vspace{5mm}
+    Musik
+    \begin{itemize}
+	\item Genre
+	\item Frekvensrespons
+	\end{itemize}
+	\vspace{5mm}
+	Brugsforvirring
+\end{column}
+\begin{column}{0.65\textwidth}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.8\textwidth]{zensor}
+	\end{figure}
+\end{column}
+\end{columns}
 \end{frame}
 
-\subsection{Foranalyse}
-\begin{frame}{Problemet}{Foranalyse}
-	Something awesome
+\subsection{Problemstilling}
+\begin{frame}{Problemet}{3 spørgsmål}
+	\begin{center}
+	Hvad er problemstillingen? \\
+	\vspace{5mm}
+	Hvordan analyseres problemet? \\
+	\vspace{5mm}
+	Hvad er løsningen? \\
+	\end{center}
+\end{frame}
+
+
+\begin{frame}{Problemet}{Problemstilling}
+\begin{columns}
+\begin{column}{0.3\textwidth}
+	Højtalerens fysiske begrænsning \\
+	\vspace{5mm}
+	Spolen (coil) rammer bagplade (backplate)
+\end{column}
+\begin{column}{0.65\textwidth}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.9\textwidth]{Speaker-cross-section}
+	\end{figure}
+\end{column}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}{Problemet}{Problemstilling}
+\begin{columns}
+\begin{column}{0.3\textwidth}
+	Er der tegn på at de fysiske begrænsninger? \\
+	\vspace{5mm}
+	Forvrængning opstår inden spolen rammer bagpladen \\
+	\vspace{5mm}
+	Forvrængning i musik
+\end{column}
+\begin{column}{0.65\textwidth}
+\begin{figure}[H]
+	\centering
+	\tikzsetnextfilename{excursion_graph}
+	\input{excursion_graph.tex}
+\end{figure}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Problemet}{Analyse}
+\begin{columns}
+\begin{column}{0.3\textwidth}
+Designmetode\\
+\vspace{5mm}
+Feedback
+\begin{itemize}
+\item Forsøg for udledning af mønstrer 
+\item Svær løsning pga. sensorer 
+\item Generel løsning
+\item Tidskrævende løsning
+\end{itemize}
+\vspace{5mm}
+Feedforward
+\begin{itemize}
+\item Modeller
+\item Ikke generel løsning
+\end{itemize}
+\end{column}
+\begin{column}{0.65\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\textwidth]{Feedback_Acc2}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\textwidth]{feedforward}
+\end{figure}
+
+\end{column}
+\end{columns}
 \end{frame}
 
 \subsection{Problemformulering}
 \begin{frame}{Problemet}{Problemformulering}
-	Something awesome
+\begin{center}
+\textit{How can a real-time signal processing system in an active loudspeaker prevent the coil from hitting the backplate of the woofer and reduce distortion compared to peak limitation?}
+\end{center}
+
 \end{frame}
 
-\section{Løsning \& Design realization}
-\begin{frame}{Design Realization}{Løsningen}
-	Something awesome
+\section{Løsning}
+\begin{frame}{Løsning}{Overordnet}
+\begin{columns}
+\begin{column}{0.45\textwidth}
+Multibånds RMS limiter (0 - 530 Hz)
+\begin{itemize}
+\item Fire limiter bånd
+\item Et overordnet bånd
+\end{itemize}
+\vspace{5mm}
+Baseret på lytteforsøg\\
+\vspace{5mm}
+Forskellige kombination
+\begin{itemize}
+\item Vægtning
+\item Lydforskel
+\end{itemize}
+\vspace{5mm}
+Ikke muligt at finde systemer at teste de forskellige konstellationer
+\end{column}
+\begin{column}{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{roundChart}
+\end{figure}
+\end{column}
+\end{columns}
+
 \end{frame}
 
-\subsection{Blokdiagram}
-\begin{frame}{Blokdiagram}{hold nu kæft et overblik!}
-	Something awesome
+\subsection{System}
+\begin{frame}{System}{Overordnet}
+	System
+	\begin{itemize}
+	\item Fem RMS limiters
+	\end{itemize}
+	GUI
+	\begin{itemize}
+	\item Volumekontroller
+	\item Otte bånd equalizer
+	\item Otte bånd spectrum analyzer
+	\end{itemize}
+	Platform
+	\begin{itemize}
+	\item Development Board TMDX5515EZDSP
+	\item Dali Zensor 5
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{System}{Overordnet}
+\begin{columns}
+\begin{column}{0.35\textwidth}
+Multirate system
+\begin{itemize}
+\item Decimation
+\item Interpolation
+\end{itemize}
+\vspace{5mm}
+Samplingsfrekvenser
+\begin{itemize}
+\item 48.000 Hz
+\item 24.000 Hz
+\item 12.000 Hz
+\item 6.000 Hz
+\item 3.000 Hz
+\item 1.500 Hz
+\item 750 Hz
+\item 375 Hz
+\end{itemize}
+\end{column}
+\begin{column}{0.6\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{designRealFullFinalProduct.pdf}
+\end{figure}
+\end{column}
+\end{columns}
 \end{frame}
 
 
+\begin{frame}{System}{GUI}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{GUIApp}
+\end{figure}
+\end{frame}
+
+\subsection{Resultater}
+\begin{frame}{Resultater}{Gennemgang}
+Frekvensrepons \\
+\vspace{5mm}
+RMS limiter \\
+\vspace{5mm}
+Støjgulv \\
+\end{frame}
+
+\begin{frame}{Resultater}{Frekvensreposns}
+Bypassed frekvensrespons
+\begin{figure}[H]
+	\centering
+	\tikzsetnextfilename{FreqRespBypass}
+	\input{FreqRespBypass.tex}
+\end{figure}
+\end{frame}
+
+
+\begin{frame}{Resultater}{Frekvensreposns}
+System Frekvensrespons
+\begin{figure}[H]
+	\centering
+	\tikzsetnextfilename{FreqRespSystem}
+	\input{FreqRespSystem.tex}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Resultater}{Frekvensreposns}
+Sammenligning af frekvensresponser
+\begin{figure}[H]
+	\centering
+	\tikzsetnextfilename{FreqRespComp}
+	\input{FreqRespComp.tex}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Resultater}{Limiter}
+Frekvensrepons med limiter slået til ved forskellige amplituder
+\begin{figure}[H]
+	\centering
+	\tikzsetnextfilename{AcceptRMS}
+	\input{AcceptRMS.tex}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Resultater}{Limiter}
+\end{frame}
+
+\begin{frame}{Resultater}{Støjgulv}
+Støj med og uden system
+\begin{figure}[H]
+	\centering
+	\tikzsetnextfilename{FreqNoiseComp}
+	\input{FreqNoiseComp.tex}
+\end{figure}
+\end{frame}
 
 
 %\section{Introduktion}
