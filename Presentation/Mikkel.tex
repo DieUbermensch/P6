@@ -33,7 +33,7 @@
 			\textbf{Funktionalitet:}
 			\begin{itemize}
 				\item Lavpas filter til Anti-Aliasing
-				\item Spektral subtraktion til højpas filtrering 
+				\item Spektral inversion til højpas filtrering 
 			\end{itemize}
 			
 			\textbf{Krav:}
@@ -77,7 +77,7 @@
   \textbf{Funktionalitet:}
 \begin{itemize}
 \item Lavpas filter til Anti-Aliasing
-\item Spektral subtraktion til højpas filtrering 
+\item Spektral inversion til højpas filtrering 
 \end{itemize}
 
 \textbf{Krav:}
@@ -113,8 +113,12 @@
 \end{itemize}
 \textbf{Første Downsampling}:
 \begin{itemize}
-	\item Første downsampling til 3.000 Hz
-	\item Dekade sampling efterfølgende
+	\item Første downsampling til
+	\begin{itemize}
+		\item $f_s=24 kHz$
+		\item $f_c=3 kHz$
+	\end{itemize} 
+	\item Octave sampling efterfølgende
 \end{itemize}
   \end{column}
   \begin{column}{0.6\textwidth}
@@ -252,8 +256,8 @@
 %\end{itemize}
 \begin{block}{Grænseværdien bestemmes ved at:}
 Sammenhæng mellem output fra dsp og effekt afsat:\\
-$$ \frac{(\text{Threshold} \cdot \text{V})^2}{\Omega} = W $$
-Grænseværdien findes ved $$\text{Threshold} = \frac{\sqrt{\text{W} \cdot \Omega}}{\text{V}}$$
+$$ \frac{(\text{Threshold} \cdot \text{U})^2}{R} = P $$
+Grænseværdien findes ved $$\text{Threshold} = \frac{\sqrt{\text{P} \cdot R}}{\text{U}}$$
 \end{block}
 
 \begin{block}{\alert{Fejlkilder}}
@@ -279,25 +283,27 @@ Grænseværdien findes ved $$\text{Threshold} = \frac{\sqrt{\text{W} \cdot \Omeg
 \begin{frame}{Opbygning}{Dæmpning af input til $\geq$ grænseværdien}
 	\begin{block}{Look up tabellen laves:}
 	Nødvendig dæmpning hvis input er over threshold bestemmes ved:
-	$$ \text{A} = \frac{\text{Threshold}}{\text{V}}$$
+	$$ \text{G} = \frac{\text{Threshold}}{\text{U}}$$
 	Værdien tilpasses DSP algoritme:
-	\alert{$$ \text{A} = \sqrt{\frac{\text{Threshold}^2}{\text{V}^2}}$$}
+	\alert{$$ \text{G} = \sqrt{\frac{\text{Threshold}^2}{\text{U}^2}}$$}
 	Værdierne fordeles mellem 0.0V til 1.0V over n steps, hvor n = 1,2,3,...,1024
-	$$ \text{A} = \sqrt{\frac{\text{Threshold}^2}{(\frac{n}{1024})^2}}$$
+	$$ \text{G} = \sqrt{\frac{\text{Threshold}^2}{(\frac{n}{1024})^2}}$$
 	\end{block}	
 \end{frame}
 
 \begin{frame}{Opbygning}{Dæmpning af input til $\geq$ grænseværdien}
 	\begin{block}{Look up tabellen laves:}
-	$$ \text{A} = \sqrt{\frac{\text{Threshold}^2}{(\frac{n}{1024})^2}}$$
-		Værdien tilpasses DSP / codec skalerings problemer. 0x1FFF = Max udstyring = 2 bit mindre end 0x7FFF
-	\alert{$$ \text{A} = \sqrt{\frac{\frac{\text{Threshold}^2}{5}}{(\frac{\frac{n}{1024}}{5})^2}}$$}
+	$$ \text{G} = \sqrt{\frac{\text{Threshold}^2}{(\frac{n}{1024})^2}}$$
+		Værdien tilpasses DSP / codec. Output er en faktor 5 lavere
+	\alert{$$ \text{G} = \sqrt{\frac{\frac{\text{Threshold}^2}{5}}{(\frac{\frac{n}{1024}}{5})^2}}$$}
 		Værdierne konverteres til Q15 format ved $\cdot 2^{15}$
 	\end{block}	
 \begin{block}{\alert{Fejlkilder}}
+\vspace*{-3mm}
 	\begin{itemize}
 		\item Forkerte grænseflader
 		\item Forkert threshold
+		\item skalerings problemer. 0x1FFF = Max udstyring = 2 bit mindre end 0x7FFF
 	\end{itemize}	
 \end{block}
 \end{frame}
@@ -433,7 +439,7 @@ Grænseværdien findes ved $$\text{Threshold} = \frac{\sqrt{\text{W} \cdot \Omeg
 \textbf{Krav:}
 \begin{itemize}
 \item Må ikke interfere med signal bandwidth
-\item \alert{60 dB dæmpning ved $\frac{fs}{2L}$}
+\item 60 dB dæmpning ved $\frac{fs}{2L}$
 \end{itemize}
   \end{column}
 
@@ -453,40 +459,40 @@ Grænseværdien findes ved $$\text{Threshold} = \frac{\sqrt{\text{W} \cdot \Omeg
 
 \end{frame}
 
-\begin{frame}{Opbygning}{Må ikke interfere med signal bandwidth}
-\begin{columns}
-  \begin{column}{0.4\textwidth}
-%\begin{figure}
-%\includegraphics[width=0.9\textwidth]{designRealBlock1}
-%\end{figure}
-%  \textbf{Funktionalitet:}
+%\begin{frame}{Opbygning}{Må ikke interfere med signal bandwidth}
+%\begin{columns}
+%  \begin{column}{0.4\textwidth}
+%%\begin{figure}
+%%\includegraphics[width=0.9\textwidth]{designRealBlock1}
+%%\end{figure}
+%%  \textbf{Funktionalitet:}
+%%\begin{itemize}
+%%\item Lavpas filter til rekonstruktion
+%%\item Zero-padding til upsampling
+%%\item Forstærkning med faktor $L$
+%%\end{itemize}
+%\textbf{Krav:}
 %\begin{itemize}
-%\item Lavpas filter til rekonstruktion
-%\item Zero-padding til upsampling
-%\item Forstærkning med faktor $L$
+%\item Må ikke interfere med signal bandwidth
+%\begin{itemize}
+%\item over 0.3 $\frac{\pi rad}{sample}$
+%\item under 0.7 $\frac{\pi rad}{sample}$
 %\end{itemize}
-\textbf{Krav:}
-\begin{itemize}
-\item Må ikke interfere med signal bandwidth
-\begin{itemize}
-\item over 0.3 $\frac{\pi rad}{sample}$
-\item under 0.7 $\frac{\pi rad}{sample}$
-\end{itemize}
-\item \alert{60 dB dæmpning ved $\frac{fs}{2L}$}
-\end{itemize}
-  \end{column}
-  \begin{column}{0.6\textwidth}
+%\item \alert{60 dB dæmpning ved $\frac{fs}{2L}$}
+%\end{itemize}
+%  \end{column}
+%  \begin{column}{0.6\textwidth}
+%%\begin{figure}
+%%\centering
+%%\includegraphics[width=\textwidth]{designRealInterpolator}
+%%\end{figure}
 %\begin{figure}
-%\centering
-%\includegraphics[width=\textwidth]{designRealInterpolator}
+%	\centering
+%	\includegraphics[width=1\textwidth]{DecIntCompMirror}
 %\end{figure}
-\begin{figure}
-	\centering
-	\includegraphics[width=1\textwidth]{DecIntCompMirror}
-\end{figure}
-  \end{column}
-\end{columns}
-\end{frame}
+%  \end{column}
+%\end{columns}
+%\end{frame}
 
 \begin{frame}{Opbygning}{60 dB dæmpning ved $\frac{fs}{2L}$}
 \begin{columns}
@@ -503,7 +509,7 @@ Grænseværdien findes ved $$\text{Threshold} = \frac{\sqrt{\text{W} \cdot \Omeg
 \textbf{Krav:}
 \begin{itemize}
 \item[$\surd$] Må ikke interfere med signal bandwidth
-\item[$\surd$] \alert{60 dB dæmpning ved $\frac{fs}{2L}$}
+\item[$\surd$] 60 dB dæmpning ved $\frac{fs}{2L}$
 \begin{itemize}
 \item 34. Orden FIR
 \item Type 1

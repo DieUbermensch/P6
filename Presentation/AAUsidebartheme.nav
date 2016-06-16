@@ -47,72 +47,73 @@
 \headcommand {\beamer@framepages {18}{18}}
 \headcommand {\slideentry {2}{2}{7}{19/19}{Resultater}{0}}
 \headcommand {\beamer@framepages {19}{19}}
-\headcommand {\beamer@subsectionentry {0}{2}{3}{20}{Multi-Rate/stage}}\headcommand {\beamer@subsectionpages {13}{19}}
-\headcommand {\slideentry {2}{3}{1}{20/20}{Multi-Rate/stage}{0}}
+\headcommand {\sectionentry {3}{Opbygning}{20}{Opbygning}{0}}
+\headcommand {\beamer@sectionpages {9}{19}}
+\headcommand {\beamer@subsectionpages {13}{19}}
+\headcommand {\beamer@subsectionentry {0}{3}{1}{20}{Multi-Rate/stage}}\headcommand {\beamer@subsectionpages {20}{19}}
+\headcommand {\slideentry {3}{1}{1}{20/20}{Multi-Rate/stage}{0}}
 \headcommand {\beamer@framepages {20}{20}}
-\headcommand {\beamer@subsectionentry {0}{2}{4}{21}{Decimation}}\headcommand {\beamer@subsectionpages {20}{20}}
-\headcommand {\slideentry {2}{4}{1}{21/21}{Decimation}{0}}
+\headcommand {\beamer@subsectionentry {0}{3}{2}{21}{Decimation}}\headcommand {\beamer@subsectionpages {20}{20}}
+\headcommand {\slideentry {3}{2}{1}{21/21}{Decimation}{0}}
 \headcommand {\beamer@framepages {21}{21}}
-\headcommand {\slideentry {2}{4}{2}{22/22}{Decimation}{0}}
+\headcommand {\slideentry {3}{2}{2}{22/22}{Decimation}{0}}
 \headcommand {\beamer@framepages {22}{22}}
-\headcommand {\slideentry {2}{4}{3}{23/23}{Decimation}{0}}
+\headcommand {\slideentry {3}{2}{3}{23/23}{Decimation}{0}}
 \headcommand {\beamer@framepages {23}{23}}
-\headcommand {\beamer@subsectionentry {0}{2}{5}{24}{RMS Limiter}}\headcommand {\beamer@subsectionpages {21}{23}}
-\headcommand {\slideentry {2}{5}{1}{24/24}{RMS Limiter}{0}}
+\headcommand {\slideentry {3}{2}{4}{24/24}{Decimation}{0}}
 \headcommand {\beamer@framepages {24}{24}}
-\headcommand {\beamer@subsectionentry {0}{2}{6}{25}{RMS Limiter}}\headcommand {\beamer@subsectionpages {24}{24}}
-\headcommand {\slideentry {2}{6}{1}{25/25}{RMS Limiter}{0}}
+\headcommand {\beamer@subsectionentry {0}{3}{3}{25}{RMS Limiter}}\headcommand {\beamer@subsectionpages {21}{24}}
+\headcommand {\slideentry {3}{3}{1}{25/25}{RMS Limiter}{0}}
 \headcommand {\beamer@framepages {25}{25}}
-\headcommand {\slideentry {2}{6}{2}{26/26}{RMS Limiter}{0}}
+\headcommand {\slideentry {3}{3}{2}{26/26}{RMS Limiter}{0}}
 \headcommand {\beamer@framepages {26}{26}}
-\headcommand {\slideentry {2}{6}{3}{27/27}{RMS Limiter}{0}}
+\headcommand {\slideentry {3}{3}{3}{27/27}{RMS Limiter}{0}}
 \headcommand {\beamer@framepages {27}{27}}
-\headcommand {\slideentry {2}{6}{4}{28/28}{RMS Limiter}{0}}
+\headcommand {\slideentry {3}{3}{4}{28/28}{RMS Limiter}{0}}
 \headcommand {\beamer@framepages {28}{28}}
-\headcommand {\beamer@subsectionentry {0}{2}{7}{29}{Interpolation}}\headcommand {\beamer@subsectionpages {25}{28}}
-\headcommand {\slideentry {2}{7}{1}{29/29}{Interpolation}{0}}
+\headcommand {\slideentry {3}{3}{5}{29/29}{RMS Limiter}{0}}
 \headcommand {\beamer@framepages {29}{29}}
-\headcommand {\slideentry {2}{7}{2}{30/30}{Interpolation}{0}}
+\headcommand {\slideentry {3}{3}{6}{30/30}{RMS Limiter}{0}}
 \headcommand {\beamer@framepages {30}{30}}
-\headcommand {\slideentry {2}{7}{3}{31/31}{Interpolation}{0}}
+\headcommand {\beamer@subsectionentry {0}{3}{4}{31}{Interpolation}}\headcommand {\beamer@subsectionpages {25}{30}}
+\headcommand {\slideentry {3}{4}{1}{31/31}{Interpolation}{0}}
 \headcommand {\beamer@framepages {31}{31}}
-\headcommand {\sectionentry {3}{Optimering}{32}{Optimering}{0}}
-\headcommand {\beamer@sectionpages {9}{31}}
-\headcommand {\beamer@subsectionpages {29}{31}}
-\headcommand {\slideentry {3}{0}{1}{32/32}{}{0}}
+\headcommand {\slideentry {3}{4}{2}{32/32}{Interpolation}{0}}
 \headcommand {\beamer@framepages {32}{32}}
-\headcommand {\beamer@subsectionentry {0}{3}{1}{33}{Relevante optimerings muligheder}}\headcommand {\beamer@subsectionpages {32}{32}}
-\headcommand {\slideentry {3}{1}{1}{33/33}{Relevante optimerings muligheder}{0}}
+\headcommand {\slideentry {3}{4}{3}{33/33}{Interpolation}{0}}
 \headcommand {\beamer@framepages {33}{33}}
-\headcommand {\slideentry {3}{1}{2}{34/34}{Relevante optimerings muligheder}{0}}
+\headcommand {\beamer@subsectionentry {0}{3}{5}{34}{Relevante optimerings muligheder}}\headcommand {\beamer@subsectionpages {31}{33}}
+\headcommand {\slideentry {3}{5}{1}{34/34}{Relevante optimerings muligheder}{0}}
 \headcommand {\beamer@framepages {34}{34}}
-\headcommand {\slideentry {3}{1}{3}{35/35}{Relevante optimerings muligheder}{0}}
+\headcommand {\slideentry {3}{5}{2}{35/35}{Relevante optimerings muligheder}{0}}
 \headcommand {\beamer@framepages {35}{35}}
-\headcommand {\slideentry {3}{1}{4}{36/36}{Relevante optimerings muligheder}{0}}
+\headcommand {\slideentry {3}{5}{3}{36/36}{Relevante optimerings muligheder}{0}}
 \headcommand {\beamer@framepages {36}{36}}
-\headcommand {\slideentry {3}{1}{5}{37/37}{Relevante optimerings muligheder}{0}}
+\headcommand {\slideentry {3}{5}{4}{37/37}{Relevante optimerings muligheder}{0}}
 \headcommand {\beamer@framepages {37}{37}}
-\headcommand {\slideentry {3}{1}{6}{38/38}{Relevante optimerings muligheder}{0}}
+\headcommand {\slideentry {3}{5}{5}{38/38}{Relevante optimerings muligheder}{0}}
 \headcommand {\beamer@framepages {38}{38}}
-\headcommand {\sectionentry {4}{Perspektivering}{39}{Perspektivering}{0}}
-\headcommand {\beamer@sectionpages {32}{38}}
-\headcommand {\beamer@subsectionpages {33}{38}}
-\headcommand {\slideentry {4}{0}{1}{39/39}{}{0}}
+\headcommand {\slideentry {3}{5}{6}{39/39}{Relevante optimerings muligheder}{0}}
 \headcommand {\beamer@framepages {39}{39}}
-\headcommand {\sectionentry {5}{Diskussion og afsluttende ord}{40}{Diskussion og afsluttende ord}{0}}
-\headcommand {\beamer@sectionpages {39}{39}}
-\headcommand {\beamer@subsectionpages {39}{39}}
-\headcommand {\slideentry {5}{0}{1}{40/40}{}{0}}
+\headcommand {\sectionentry {4}{Perspektivering}{40}{Perspektivering}{0}}
+\headcommand {\beamer@sectionpages {20}{39}}
+\headcommand {\beamer@subsectionpages {34}{39}}
+\headcommand {\slideentry {4}{0}{1}{40/40}{}{0}}
 \headcommand {\beamer@framepages {40}{40}}
-\headcommand {\sectionentry {6}{Demonstration}{41}{Demonstration}{0}}
+\headcommand {\sectionentry {5}{Diskussion og afsluttende ord}{41}{Diskussion og afsluttende ord}{0}}
 \headcommand {\beamer@sectionpages {40}{40}}
 \headcommand {\beamer@subsectionpages {40}{40}}
-\headcommand {\slideentry {6}{0}{1}{41/41}{}{0}}
+\headcommand {\slideentry {5}{0}{1}{41/41}{}{0}}
 \headcommand {\beamer@framepages {41}{41}}
-\headcommand {\slideentry {6}{0}{2}{42/42}{}{0}}
+\headcommand {\sectionentry {6}{Demonstration}{42}{Demonstration}{0}}
+\headcommand {\beamer@sectionpages {41}{41}}
+\headcommand {\beamer@subsectionpages {41}{41}}
+\headcommand {\slideentry {6}{0}{1}{42/42}{}{0}}
 \headcommand {\beamer@framepages {42}{42}}
-\headcommand {\beamer@partpages {1}{42}}
-\headcommand {\beamer@subsectionpages {41}{42}}
-\headcommand {\beamer@sectionpages {41}{42}}
-\headcommand {\beamer@documentpages {42}}
-\headcommand {\def \inserttotalframenumber {40}}
+\headcommand {\slideentry {6}{0}{2}{43/43}{}{0}}
+\headcommand {\beamer@framepages {43}{43}}
+\headcommand {\beamer@partpages {1}{43}}
+\headcommand {\beamer@subsectionpages {42}{43}}
+\headcommand {\beamer@sectionpages {42}{43}}
+\headcommand {\beamer@documentpages {43}}
+\headcommand {\def \inserttotalframenumber {41}}
