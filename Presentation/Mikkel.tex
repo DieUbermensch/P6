@@ -1,4 +1,6 @@
 
+\section{Opbygning}
+
 \subsection{Multi-Rate/stage}
 \begin{frame}{Opbygning}{Multi-Rate/stage}
 \begin{columns}
@@ -24,6 +26,50 @@
 \end{frame}
 
 \subsection{Decimation}
+
+\begin{frame}{Opbygning}{Decimator}	
+	\begin{columns}
+		\begin{column}{0.4\textwidth}
+			\textbf{Funktionalitet:}
+			\begin{itemize}
+				\item Lavpas filter til Anti-Aliasing
+				\item Spektral subtraktion til højpas filtrering 
+			\end{itemize}
+			
+			\textbf{Krav:}
+			\begin{itemize}
+				\item Overholde IEC 6964 - Class 2
+				\item Lineær fase
+				\item 60 dB dæmpning ved $\frac{fs}{2L}$
+			\end{itemize}
+		\end{column}
+		\begin{column}{0.3\textwidth}
+			%\begin{figure}
+			%\centering
+			%\includegraphics[width=0.5\textwidth]{Bands}
+			%\end{figure}
+			\begin{figure}
+				\centering
+				\includegraphics[width=\textwidth]{aliasing1}
+			\end{figure}
+			\begin{figure}
+				\centering
+				\includegraphics[width=\textwidth]{aliasing3}
+			\end{figure}									
+		\end{column}
+		\begin{column}{0.3\textwidth}
+			\begin{figure}
+				\centering
+				\includegraphics[width=\textwidth]{aliasing2}
+			\end{figure}
+			\begin{figure}
+				\centering
+				\includegraphics[width=\textwidth]{aliasing4}
+			\end{figure}
+		\end{column}
+	\end{columns}
+\end{frame}
+
 \begin{frame}{Opbygning}{Decimator}
 
 \begin{columns}
@@ -54,6 +100,7 @@
 \end{columns}
 \end{frame}
 
+
 \begin{frame}{Opbygning}{IEC 6964 - Class 2}
 
 \begin{columns}
@@ -63,6 +110,11 @@
 \item[$\surd$] Overholde IEC 6964 - Class 2 
 \item Lineær fase
 \item 60 dB dæmpning ved $\frac{fs}{2L}$
+\end{itemize}
+\textbf{Første Downsampling}:
+\begin{itemize}
+	\item Første downsampling til 3.000 Hz
+	\item Dekade sampling efterfølgende
 \end{itemize}
   \end{column}
   \begin{column}{0.6\textwidth}
@@ -75,7 +127,7 @@
 \vspace*{-8mm} 
 \begin{figure}
 \centering
-\includegraphics[width=0.9\textwidth]{allBands}
+\includegraphics[width=0.9\textwidth]{allBandsExtended}
 \end{figure}
   \end{column}
 \end{columns}
@@ -92,7 +144,7 @@
 \item[$\surd$] Lineær fase
 \begin{itemize}
 \item[$\surd$] 50. Orden FIR
-\item[$\surd$] Type 1
+\item[$\surd$] Type 1 (Type 2?)
 \begin{itemize}
 \item[$\surd$] Symmetrisk
 \item[$\surd$] Lige orden
@@ -136,6 +188,11 @@
 %\begin{figure}
 %\includegraphics[width=0.9\textwidth]{designRealBlock1}
 %\end{figure}
+\textbf{To Veje:}
+\begin{itemize}
+	\item THD modeller
+	\item Målt grænseværdier
+\end{itemize}
   \textbf{Funktionalitet:}
 \begin{itemize}
 \item Beregn RMS værdi i bånd
@@ -144,46 +201,9 @@
 \end{itemize}
 \textbf{Krav:}
 \begin{itemize}
-\item Løbende Gennemsnit
-\item \alert{Dæmpning til grænseværdi ved input på $\geq$ grænseværdien}
-\item 0 s attack time
-\item 5 s release time
-\end{itemize}
-  \end{column}
-
-  \begin{column}{0.6\textwidth}
-\begin{figure}
-\centering
-\includegraphics[width=\textwidth]{designRealRMS}
-\end{figure}
-
-%\begin{figure}
-%	\centering
-%	\includegraphics[width=0.8\textwidth]{DecIntCompMirror}
-%\end{figure}
-
-  \end{column}
-\end{columns}
-\end{frame}
-
-\subsection{RMS Limiter}
-\begin{frame}{Opbygning}{RMS Limiter}
-\begin{columns}
-  \begin{column}{0.4\textwidth}
-%\begin{figure}
-%\includegraphics[width=0.9\textwidth]{designRealBlock1}
-%\end{figure}
-  \textbf{Funktionalitet:}
-\begin{itemize}
-\item Beregn RMS værdi i bånd
-\item Bestem gain passende gain værdier
-\item Påfører gain
-\end{itemize}
-\textbf{Krav:}
-\begin{itemize}
-\item Løbende Gennemsnit
-\item \alert{Dæmpning til grænseværdi ved input på $\geq$ grænseværdien}
-\item 0 s attack time
+\item Løbende $\text{RMS}^2$
+\item Dæmpning af input til $\geq$ grænseværdien
+\item $\geq$0 s attack time
 \item 5 s release time
 \end{itemize}
   \end{column}
@@ -204,10 +224,10 @@
 \end{frame}
 
 
-\begin{frame}{Opbygning}{Løbende Gennemsnit}
+\begin{frame}{Opbygning}{Løbende $\text{RMS}^2$}
 \textbf{Krav:}
 \begin{itemize}
-\item[$\surd$] Løbende Gennemsnit
+\item[$\surd$] Løbende $\text{RMS}^2$
 \begin{itemize}
 \item Nødvendige samples: $n = \frac{fs}{f_{lowest}}$
 \begin{itemize}
@@ -222,7 +242,7 @@
 \end{frame}
 
 
-\begin{frame}{Opbygning}{Dæmpning til grænseværdi ved input på $\geq$ grænseværdien}
+\begin{frame}{Opbygning}{Dæmpning af input til $\geq$ grænseværdien}
 %\textbf{Krav:}
 %\begin{itemize}
 %\item[$\surd$] Løbende Gennemsnit
@@ -230,24 +250,59 @@
 %\item 0 s attack time
 %\item 5 s release time
 %\end{itemize}
-\begin{block}{Grænseværdier bestemmes ved at:}
-Finde Maksimalt gennem hele systemet = 40 dB \\
-Grænseværdien findes ved $\text{Threshold} = \frac{\sqrt{150 \text{W} \cdot 5 \Omega}}{100}=0.3 V$
+\begin{block}{Grænseværdien bestemmes ved at:}
+Sammenhæng mellem output fra dsp og effekt afsat:\\
+$$ \frac{(\text{Threshold} \cdot \text{V})^2}{\Omega} = W $$
+Grænseværdien findes ved $$\text{Threshold} = \frac{\sqrt{\text{W} \cdot \Omega}}{\text{V}}$$
 \end{block}
 
-\begin{block}{Look up tabellen laves:}
-Opdele funktionen $\sqrt{\frac{Threshold^2}{RMS^2}}$ i 1024 steps \\
-
-Beregn en Lookup tabel ved brug af formlen $\sqrt{\frac{\text{Threshold}^2}{(\frac{n}{1024})^2}}$
+\begin{block}{\alert{Fejlkilder}}
+\begin{itemize}
+	\item Konstant impedans
+	\item Forkert effekt
+	\item Ukendt spændings forstærkning
+\end{itemize}
 \end{block}
-\begin{figure}
-\centering
-\includegraphics[width=0.5\textwidth]{LookUP}
-\end{figure}
 
-
+%\begin{block}{Look up tabellen laves:}
+%Opdele funktionen $\sqrt{\frac{Threshold^2}{RMS^2}}$ i 1024 steps \\
+%
+%Beregn en Lookup tabel ved brug af formlen $\sqrt{\frac{\text{Threshold}^2}{(\frac{n}{1024})^2}}$
+%\end{block}
+%\begin{figure}
+%\centering
+%\includegraphics[width=0.5\textwidth]{LookUP}
+%\end{figure}
 
 \end{frame}
+
+\begin{frame}{Opbygning}{Dæmpning af input til $\geq$ grænseværdien}
+	\begin{block}{Look up tabellen laves:}
+	Nødvendig dæmpning hvis input er over threshold bestemmes ved:
+	$$ \text{A} = \frac{\text{Threshold}}{\text{V}}$$
+	Værdien tilpasses DSP algoritme:
+	\alert{$$ \text{A} = \sqrt{\frac{\text{Threshold}^2}{\text{V}^2}}$$}
+	Værdierne fordeles mellem 0.0V til 1.0V over n steps, hvor n = 1,2,3,...,1024
+	$$ \text{A} = \sqrt{\frac{\text{Threshold}^2}{(\frac{n}{1024})^2}}$$
+	\end{block}	
+\end{frame}
+
+\begin{frame}{Opbygning}{Dæmpning af input til $\geq$ grænseværdien}
+	\begin{block}{Look up tabellen laves:}
+	$$ \text{A} = \sqrt{\frac{\text{Threshold}^2}{(\frac{n}{1024})^2}}$$
+		Værdien tilpasses DSP / codec skalerings problemer. 0x1FFF = Max udstyring = 2 bit mindre end 0x7FFF
+	\alert{$$ \text{A} = \sqrt{\frac{\frac{\text{Threshold}^2}{5}}{(\frac{\frac{n}{1024}}{5})^2}}$$}
+		Værdierne konverteres til Q15 format ved $\cdot 2^{15}$
+	\end{block}	
+\begin{block}{\alert{Fejlkilder}}
+	\begin{itemize}
+		\item Forkerte grænseflader
+		\item Forkert threshold
+	\end{itemize}	
+\end{block}
+\end{frame}
+
+
 
 
 \begin{frame}{Opbygning}{Attack \& Release time}
@@ -258,9 +313,10 @@ Beregn en Lookup tabel ved brug af formlen $\sqrt{\frac{\text{Threshold}^2}{(\fr
 \begin{itemize}
 %\item[$\surd$] Løbende Gennemsnit
 %\item[$\times$] \alert{Dæmpning til grænseværdi ved input på $\geq$ grænseværdien}
-\item 0 s attack time
+\item $\geq$ 0 s attack time
 \begin{itemize}
 \item Påfør gain med det samme
+\item Sample size bestemmer attacktime
 \end{itemize}
 \item 5 s release time
 \begin{itemize}
@@ -273,7 +329,7 @@ Beregn en Lookup tabel ved brug af formlen $\sqrt{\frac{\text{Threshold}^2}{(\fr
 \end{itemize}
 \item Impuls Invariant metode
 \begin{itemize}
-\item $H(s) = T\frac{0.2}{1-\text{e}^{-0.2T} z^{-1}}$
+\item $H(z) = T\frac{0.2}{1-\text{e}^{-0.2T} z^{-1}}$
 \end{itemize}
 \end{itemize}
 
@@ -315,6 +371,52 @@ Beregn en Lookup tabel ved brug af formlen $\sqrt{\frac{\text{Threshold}^2}{(\fr
 
 
 \subsection{Interpolation}
+
+\begin{frame}{Opbygning}{Interpolation}
+	
+	\begin{columns}
+		\begin{column}{0.4\textwidth}
+			%\begin{figure}
+			%\includegraphics[width=0.9\textwidth]{designRealBlock1}
+			%\end{figure}
+			\textbf{Upsampling/Interpolation:}
+			\begin{itemize}
+				\item Konvertering fra fs til $\frac{fs}{2}$
+				\item Zero-padding til upsampling
+				\item Lavpasfiltrering
+			\end{itemize}
+			\textbf{Krav:}
+			\begin{itemize}
+				\item Må ikke interfere med signal bandwidth
+				\item 60 dB dæmpning ved $\frac{fs}{2L}$
+			\end{itemize}
+		\end{column}
+		
+		\begin{column}{0.3\textwidth}
+			\begin{figure}
+				\centering
+				\includegraphics[width=\textwidth]{upsampling1}
+			\end{figure}
+			\begin{figure}
+				\centering
+				\includegraphics[width=\textwidth]{upsampling3}
+			\end{figure}									
+		\end{column}
+		\begin{column}{0.3\textwidth}
+			\begin{figure}
+				\centering
+				\includegraphics[width=\textwidth]{upsampling2}
+			\end{figure}
+			\begin{figure}
+				\centering
+				\includegraphics[width=\textwidth]{upsampling4}
+			\end{figure}
+		\end{column}
+	\end{columns}
+	
+\end{frame}
+
+
 \begin{frame}{Opbygning}{Interpolation}
 
 \begin{columns}
@@ -330,7 +432,7 @@ Beregn en Lookup tabel ved brug af formlen $\sqrt{\frac{\text{Threshold}^2}{(\fr
 \end{itemize}
 \textbf{Krav:}
 \begin{itemize}
-\item Må ikke interfere med decimation filter bandwidth
+\item Må ikke interfere med signal bandwidth
 \item \alert{60 dB dæmpning ved $\frac{fs}{2L}$}
 \end{itemize}
   \end{column}
@@ -351,7 +453,7 @@ Beregn en Lookup tabel ved brug af formlen $\sqrt{\frac{\text{Threshold}^2}{(\fr
 
 \end{frame}
 
-\begin{frame}{Opbygning}{Må ikke interfere med decimation filter bandwidth}
+\begin{frame}{Opbygning}{Må ikke interfere med signal bandwidth}
 \begin{columns}
   \begin{column}{0.4\textwidth}
 %\begin{figure}
@@ -365,7 +467,7 @@ Beregn en Lookup tabel ved brug af formlen $\sqrt{\frac{\text{Threshold}^2}{(\fr
 %\end{itemize}
 \textbf{Krav:}
 \begin{itemize}
-\item Må ikke interfere med decimation filter bandwidth
+\item Må ikke interfere med signal bandwidth
 \begin{itemize}
 \item over 0.3 $\frac{\pi rad}{sample}$
 \item under 0.7 $\frac{\pi rad}{sample}$
@@ -400,7 +502,7 @@ Beregn en Lookup tabel ved brug af formlen $\sqrt{\frac{\text{Threshold}^2}{(\fr
 %\end{itemize}
 \textbf{Krav:}
 \begin{itemize}
-\item[$\surd$] Må ikke interfere med decimation filter bandwidth
+\item[$\surd$] Må ikke interfere med signal bandwidth
 \item[$\surd$] \alert{60 dB dæmpning ved $\frac{fs}{2L}$}
 \begin{itemize}
 \item 34. Orden FIR
@@ -420,3 +522,41 @@ Beregn en Lookup tabel ved brug af formlen $\sqrt{\frac{\text{Threshold}^2}{(\fr
   \end{column}
 \end{columns}
 \end{frame}
+
+
+%\subsection{RMS Limiter}
+%\begin{frame}{Opbygning}{RMS Limiter}
+%\begin{columns}
+%  \begin{column}{0.4\textwidth}
+%%\begin{figure}
+%%\includegraphics[width=0.9\textwidth]{designRealBlock1}
+%%\end{figure}
+%  \textbf{Funktionalitet:}
+%\begin{itemize}
+%\item Beregn RMS værdi i bånd
+%\item Bestem gain passende gain værdier
+%\item Påfører gain
+%\end{itemize}
+%\textbf{Krav:}
+%\begin{itemize}
+%\item Løbende Gennemsnit
+%\item \alert{Dæmpning til grænseværdi ved input på $\geq$ grænseværdien}
+%\item 0 s attack time
+%\item 5 s release time
+%\end{itemize}
+%  \end{column}
+%
+%  \begin{column}{0.6\textwidth}
+%\begin{figure}
+%\centering
+%\includegraphics[width=\textwidth]{designRealRMS}
+%\end{figure}
+%
+%%\begin{figure}
+%%	\centering
+%%	\includegraphics[width=0.8\textwidth]{DecIntCompMirror}
+%%\end{figure}
+%
+%  \end{column}
+%\end{columns}
+%\end{frame}
