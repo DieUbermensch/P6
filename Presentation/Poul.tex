@@ -1,7 +1,7 @@
 
 \section{Optimering}
 \begin{frame}{Optimering}{}
-	
+Pouk Hoang	
 \end{frame}
 
 \subsection{Relevante optimerings muligheder}
@@ -28,28 +28,102 @@
 	\end{itemize}
 \end{frame}
 
-
-
-
-
-
-\subsection{Implementerede optimeringer}
-\begin{frame}{Optimering}{Implementerede optimeringer}
-	Now it goes real crazy
+\begin{frame}{Optimering}{Reducering af anvendte instruktioner}
+Generel reducering af anvendte instruktioner
+\begin{itemize}
+\item Dobbelt initialisering af buffere. (30 – 40 instruktioner) 
+\item Reservering af cirkulære buffere
+\begin{itemize}
+\item TMS320C5515 kan initialisere frem cirkulære buffere
+\item Fire kan reseveres til udvalgte filtre
+\item Færre instruktioner på initialisering (10 - 20 instruktioner)
+\end{itemize}
+\item Færre funktionskald
+\item Multirate algoritme til schedulering frigør program memory
+\end{itemize}
 \end{frame}
 
-\section{Perspektivering \& Konklusion}
-\begin{frame}{Perspektivering/Konklusion}{}
-	\begin{itemize}
-		\item something
-	\end{itemize}
-	
-	
+
+\begin{frame}{Optimering}{Reducering af anvendte instruktioner}
+Zero-padding anvendes i interpolation\\
+\vspace{5mm}
+Halvdelen af udregningerne giver nul\\
+\vspace{5mm}
+Polyphase filter i interpolation halvere filter algoritmen
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\textwidth]{polyFilter}
+\end{figure}
 \end{frame}
+
+\begin{frame}{Optimering}{Mindre delay gennem systemet}
+Færre trin/bånd (stages) i systemet \\
+\vspace{5mm}
+IIR filter i interpolation
+\begin{itemize}
+\item Mindre delay
+\item Lille ulinearitet ved signalbåndbredde
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Optimering}{Mindre delay gennem systemet}
+Butterworth IIR filter
+\begin{itemize}
+\item N = 8
+\item Cutoff = 0.5$\pi$
+\end{itemize}
+\begin{columns}
+\begin{column}{0.45\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{IIRFrekvens}
+\end{figure}
+\end{column}
+\begin{column}{0.45\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{IIRdelay}
+\end{figure}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Optimering}{Optimeret RMS limiter design}
+Delay i RMS limiter design for at beskytte mod transiente signaler
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\textwidth]{RMSoptimering}
+\end{figure}
+\end{frame}
+
+\section{Perspektivering}
+\begin{frame}{Perspektivering}{Perspektivering/Konklusion}
+Systemet er velegnet til mindre højttalere \\
+\begin{itemize}
+\item Mere effekt kan afsættes uden at ødelægge wooferen
+\end{itemize}	
+\vspace{5mm}
+Forstærkningen for en aktiv højtaler kan øges \\
+\begin{itemize}
+\item Systemet sørger for at bassen holdes under en threshold
+\end{itemize}	
+\end{frame}
+
+\section{Diskussion og afsluttende ord}
+\begin{frame}{Diskussion og afsluttende ord}
+Projekt uden konkrete fortilfælde \\
+\vspace{5mm}
+Projektet har undersøgt både feedback og feedforward som løsning \\
+\vspace{5mm}
+Størstedelen af projektet har været konceptudvikling \\
+\vspace{5mm}
+Projektet omhandler en aktuel problemstilling
+\end{frame}
+
 
 \section{Demonstration}
-\begin{frame}{Demonstration}{Jamen hva' ska' æ kost, Tonni?}
-	Now it goes real crazy
+\begin{frame}{Demonstration}
+	Lad os alle gå mod lab
 \end{frame}
 
 %\section{Introduktion}
